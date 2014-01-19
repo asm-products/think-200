@@ -9,3 +9,14 @@
 
 <h1><%= @app.name %></h1>
 <%= link_to 'Edit', edit_app_path(@app) %>
+
+<h2 class="text-muted">Requirements</h2>
+
+<ul>
+    <% @app.requirements.each do |r| %>
+        <li>
+            <%= link_to r.name, r %>
+        </li>
+    <% end %>
+</ul>
+

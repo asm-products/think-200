@@ -3,10 +3,12 @@
   <li class="active"><%= @project.name %></li>
 </ol>
 
+<p id="notice"><%= notice %></p>
+
 <h1><%= @project.name %></h1>
 <p><%= link_to 'Edit', edit_project_path(@project) %></p>
 
-<p id="notice"><%= notice %></p>
+<h2 class="text-muted">Apps</h2>
 
 <ul>
     <% @project.apps.each do |app| %>

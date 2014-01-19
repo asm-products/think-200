@@ -6,9 +6,14 @@
   <tbody>
     <% @projects.each do |project| %>
       <tr>
-        <td><strong><%= link_to project.name, project %></strong>&nbsp;&nbsp;</td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <h2><%= link_to project.name, project %></h2>
+          <ul>
+            <% project.apps.each do |app| %>
+              <li><%= link_to app.name, app %></li>
+            <% end %>
+          </ul>
+        </td>
       </tr>
     <% end %>
   </tbody>

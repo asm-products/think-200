@@ -1,14 +1,14 @@
+<ol class="breadcrumb">
+  <li><%= link_to 'Projects', projects_path %></li>
+  <li><%= link_to @requirement.app.project.name, @requirement.app.project %></li>
+  <li><%= link_to @requirement.app.name, @requirement.app %></li>
+  <li class="active"><%= @requirement.name %></li>
+</ol>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
+<h1>
   <%= @requirement.name %>
-</p>
+</h1>
 
-<p>
-  <strong>App:</strong>
-  <%= @requirement.app_id %>
-</p>
-
-<%= link_to 'Edit', edit_requirement_path(@requirement) %> |
-<%= link_to 'Back', requirements_path %>
+<%= link_to 'Edit', edit_requirement_path(@requirement) %>
