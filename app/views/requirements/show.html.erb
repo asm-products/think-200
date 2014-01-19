@@ -10,5 +10,25 @@
 <h1>
   <%= @requirement.name %>
 </h1>
-
 <%= link_to 'Edit', edit_requirement_path(@requirement) %>
+
+
+<h2 class="text-muted">Expectations</h2>
+
+<ul>
+    <% @requirement.expectations.each do |expectation| %>
+        <li>
+            <strong>
+                <%= expectation.subject %>
+            </strong>
+            should
+            <%= expectation.matcher %>
+            <strong>
+                <%= expectation.expectation %>
+            </strong>            
+        </li>
+    <% end %>
+</ul>
+
+
+

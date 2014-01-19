@@ -12,4 +12,5 @@
 
 class Requirement < ActiveRecord::Base
   belongs_to :app
+  has_many   :expectations
 end

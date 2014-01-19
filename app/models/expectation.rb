@@ -14,4 +14,8 @@
 class Expectation < ActiveRecord::Base
   belongs_to :requirement
   belongs_to :matcher
+
+  def to_s
+    "#{subject} should #{matcher} #{expectation}"
+  end
 end

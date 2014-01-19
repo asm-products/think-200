@@ -50,7 +50,18 @@ listing   = App.create!(name: 'iTunes Listing', project: quisitive)
 is_fast   = Requirement.create!(name: 'is fast', app: website)
 root_dn   = Requirement.create!(name: 'serves from root domain', app: website)
 
-
+redirect1 = Expectation.create!(
+  subject:     'http://www.getquisitive.com', 
+  matcher:     Matcher.find_by_code('redirect_permanently_to'),
+  expectation: 'http://getquisitive.com/',
+  requirement: root_dn
+  )
+redirect2 = Expectation.create!(
+  subject:     'https://www.getquisitive.com', 
+  matcher:     Matcher.find_by_code('redirect_permanently_to'),
+  expectation: 'https://getquisitive.com/',
+  requirement: root_dn
+  )
 
 
 # Prompt for test data
