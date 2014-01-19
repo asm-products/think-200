@@ -1,0 +1,33 @@
+<%= form_for(@expectation) do |f| %>
+  <% if @expectation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@expectation.errors.count, "error") %> prohibited this expectation from being saved:</h2>
+
+      <ul>
+      <% @expectation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :subject %><br>
+    <%= f.text_field :subject %>
+  </div>
+  <div class="field">
+    <%= f.label :matcher_id %><br>
+    <%= f.number_field :matcher_id %>
+  </div>
+  <div class="field">
+    <%= f.label :expectation %><br>
+    <%= f.text_field :expectation %>
+  </div>
+  <div class="field">
+    <%= f.label :requirement_id %><br>
+    <%= f.number_field :requirement_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: MyString
+  matcher_id: 1
+  expectation: MyString
+  requirement_id: 1
+
+two:
+  subject: MyString
+  matcher_id: 1
+  expectation: MyString
+  requirement_id: 1

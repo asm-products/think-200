@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Subject:</strong>
+  <%= @expectation.subject %>
+</p>
+
+<p>
+  <strong>Matcher:</strong>
+  <%= @expectation.matcher_id %>
+</p>
+
+<p>
+  <strong>Expectation:</strong>
+  <%= @expectation.expectation %>
+</p>
+
+<p>
+  <strong>Requirement:</strong>
+  <%= @expectation.requirement_id %>
+</p>
+
+<%= link_to 'Edit', edit_expectation_path(@expectation) %> |
+<%= link_to 'Back', expectations_path %>

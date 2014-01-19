@@ -1,0 +1,33 @@
+<h1>Listing expectations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>Matcher</th>
+      <th>Expectation</th>
+      <th>Requirement</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @expectations.each do |expectation| %>
+      <tr>
+        <td><%= expectation.subject %></td>
+        <td><%= expectation.matcher_id %></td>
+        <td><%= expectation.expectation %></td>
+        <td><%= expectation.requirement_id %></td>
+        <td><%= link_to 'Show', expectation %></td>
+        <td><%= link_to 'Edit', edit_expectation_path(expectation) %></td>
+        <td><%= link_to 'Destroy', expectation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Expectation', new_expectation_path %>

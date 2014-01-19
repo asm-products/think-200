@@ -1,4 +1,6 @@
 Think200::Application.routes.draw do
+  resources :expectations
+
   resources :matchers
 
   resources :requirements
