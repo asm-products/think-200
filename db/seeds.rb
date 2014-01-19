@@ -39,7 +39,17 @@ end
 
 
 # Robb's data
-Project.create!(name: 'Quisitive', user: robb)
+puts 'Creating Quisitive data...'
+quisitive = Project.create!(name: 'Quisitive', user: robb)
+
+api       = App.create!(name: 'API', project: quisitive)
+website   = App.create!(name: 'Website', project: quisitive)
+listing   = App.create!(name: 'iTunes listing', project: quisitive)
+
+is_fast   = Requirement.create!(name: 'is fast', app: website)
+root_dn   = Requirement.create!(name: 'serves from root domain', app: website)
+
+
 
 
 # Prompt for test data
