@@ -1,9 +1,18 @@
+<ol class="breadcrumb">
+  <li><%= link_to 'Projects', projects_path %></li>
+  <li class="active"><%= @project.name %></li>
+</ol>
+
+<h1><%= @project.name %></h1>
+<p><%= link_to 'Edit', edit_project_path(@project) %></p>
+
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
+<ul>
+    <% @project.apps.each do |app| %>
+        <li>
+            <%= link_to app.name, app %>
+        </li>
+    <% end %>
+</ul>
 
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
