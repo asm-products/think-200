@@ -17,6 +17,8 @@ end
 group :development, :test do
   gem 'sqlite3', '1.3.8'    # test database
   gem 'figaro', '0.7.0'     # env variables
+  gem 'annotate'
+  gem 'rails-erd'
 end
 
 # production gems for heroku
