@@ -12,18 +12,34 @@ u = User.new(
 u.skip_confirmation!
 u.save!
 
-# The 'dogweather' user
-u = User.new(
-  username: 'dogweather',
+# The 'robb' user
+robb = User.new(
+  username: 'robb',
   email:    'robb@weblaws.org',
   password: '1234',
   password_confirmation: '1234',
   )
-u.skip_confirmation!
-u.save!
+robb.skip_confirmation!
+robb.save!
+
+# The matchers
+[
+  {code: 'be_status',                min_args: 0, max_args: 0},
+  {code: 'have_a_valid_cert',        min_args: 0, max_args: 0},
+  {code: 'enforce_https_everywhere', min_args: 0, max_args: 0},
+  {code: 'redirect_permanently_to',  min_args: 1, max_args: 1},
+  {code: 'redirect_temporarily_to',  min_args: 1, max_args: 1}
+].each do |m|
+  matcher = Matcher.new
+  matcher.code     = m[:code]
+  matcher.min_args = m[:min_args]
+  matcher.max_args = m[:max_args]
+  matcher.save!
+end
 
 
-
+# Robb's data
+Project.create!(name: 'Quisitive', user: robb)
 
 
 # Prompt for test data
