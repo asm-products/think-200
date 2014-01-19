@@ -21,6 +21,8 @@ group :development, :test do
   gem 'rails-erd'
 end
 
+gem 'quiet_assets', :group => :development
+
 # production gems for heroku
 group :production do
   gem 'pg'
