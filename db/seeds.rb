@@ -25,6 +25,7 @@ robb.save!
 # The matchers
 [
   {code: 'be_status',                min_args: 1, max_args: 1},
+  # {code: 'be_up',                    min_args: 0, max_args: 0},  # Coming soon
   {code: 'have_a_valid_cert',        min_args: 0, max_args: 0},
   {code: 'enforce_https_everywhere', min_args: 0, max_args: 0},
   {code: 'redirect_permanently_to',  min_args: 1, max_args: 1},
@@ -42,8 +43,8 @@ end
 puts 'Creating Quisitive data...'
 quisitive = Project.create!(name: 'Quisitive', user: robb)
 
-api       = App.create!(name: 'API', project: quisitive)
-website   = App.create!(name: 'Website', project: quisitive)
+api       = App.create!(name: 'API',            project: quisitive)
+website   = App.create!(name: 'Website',        project: quisitive)
 listing   = App.create!(name: 'iTunes Listing', project: quisitive)
 
 is_fast   = Requirement.create!(name: 'is fast', app: website)
