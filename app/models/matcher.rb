@@ -11,4 +11,5 @@
 #
 
 class Matcher < ActiveRecord::Base
+  has_many :expectations
 end
