@@ -12,17 +12,33 @@ u = User.new(
 u.skip_confirmation!
 u.save!
 
+# The 'dogweather' user
+u = User.new(
+  username: 'dogweather',
+  email:    'robb@weblaws.org',
+  password: '1234',
+  password_confirmation: '1234',
+  )
+u.skip_confirmation!
+u.save!
+
+
+
+
+
 # Prompt for test data
-STDOUT.puts
-STDOUT.print "Do you want to seed test data?(y/n):"
-result = STDIN.gets.chomp
+# STDOUT.puts
+# STDOUT.print "Do you want to seed test data?(y/n):"
+# result = STDIN.gets.chomp
+result = 'y'
 
 if result == "y"
   
   # Test user accounts
-  STDOUT.puts
-  STDOUT.print "How many test users?:"
-  users_amount = STDIN.gets.chomp.to_i
+  # STDOUT.puts
+  # STDOUT.print "How many test users?:"
+  # users_amount = STDIN.gets.chomp.to_i
+  users_amount = 20
   (1..users_amount).each do |i|
     u = User.new(
       username: "user#{i}",
