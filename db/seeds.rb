@@ -24,7 +24,7 @@ robb.save!
 
 # The matchers
 [
-  {code: 'be_status',                min_args: 0, max_args: 0},
+  {code: 'be_status',                min_args: 1, max_args: 1},
   {code: 'have_a_valid_cert',        min_args: 0, max_args: 0},
   {code: 'enforce_https_everywhere', min_args: 0, max_args: 0},
   {code: 'redirect_permanently_to',  min_args: 1, max_args: 1},
@@ -44,7 +44,7 @@ quisitive = Project.create!(name: 'Quisitive', user: robb)
 
 api       = App.create!(name: 'API', project: quisitive)
 website   = App.create!(name: 'Website', project: quisitive)
-listing   = App.create!(name: 'iTunes listing', project: quisitive)
+listing   = App.create!(name: 'iTunes Listing', project: quisitive)
 
 is_fast   = Requirement.create!(name: 'is fast', app: website)
 root_dn   = Requirement.create!(name: 'serves from root domain', app: website)
@@ -76,7 +76,6 @@ if result == "y"
     u.save!
     
     puts "#{i} test users created..." if (i % 10 == 0)
-    
   end
   
 end

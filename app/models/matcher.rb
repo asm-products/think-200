@@ -12,4 +12,6 @@
 
 class Matcher < ActiveRecord::Base
   has_many :expectations
+  validates :code, uniqueness: true
+  validates :code, :max_args, :min_args, presence: true
 end
