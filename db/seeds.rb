@@ -70,6 +70,43 @@ redirect3 = Expectation.create!(
   )
 
 
+# The 'My App' demo code
+think200   = Project.create!(name: 'Think 200', user: robb)
+myapp      = App.create!(name: 'My App', project: think200)
+
+is_online  = Requirement.create!(name: 'is online', app: myapp)
+valid_cert = Requirement.create!(name: 'is correctly configured for ssl', app: myapp)
+to_www     = Requirement.create!(name: 'redirects to www', app: myapp)
+https_only = Requirement.create!(name: 'forces visitors to use https', app: myapp)
+
+Expectation.create!(
+  subject:     'www.myapp.com',
+  matcher:     Matcher.find_by_code('be_status'),
+  expectation: '200',
+  requirement: is_online
+  )
+
+Expectation.create!(
+  subject:     'www.myapp.com',
+  matcher:     Matcher.find_by_code('have_a_valid_cert'),
+  requirement: valid_cert
+  )
+
+Expectation.create!(
+  subject:     'http://myapp.com',
+  matcher:     Matcher.find_by_code('redirect_permanently_to'),
+  expectation: 'http://www.myapp.com/',
+  requirement: to_www
+  )
+
+Expectation.create!(
+  subject:     'myapp.com',
+  matcher:     Matcher.find_by_code('enforce_https_everywhere'),
+  requirement: https_only
+  )
+
+
+
 
 
 # Prompt for test data
