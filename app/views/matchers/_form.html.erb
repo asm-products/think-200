@@ -1,0 +1,29 @@
+<%= form_for(@matcher) do |f| %>
+  <% if @matcher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@matcher.errors.count, "error") %> prohibited this matcher from being saved:</h2>
+
+      <ul>
+      <% @matcher.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :min_args %><br>
+    <%= f.number_field :min_args %>
+  </div>
+  <div class="field">
+    <%= f.label :max_args %><br>
+    <%= f.number_field :max_args %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @matcher.code %>
+</p>
+
+<p>
+  <strong>Min args:</strong>
+  <%= @matcher.min_args %>
+</p>
+
+<p>
+  <strong>Max args:</strong>
+  <%= @matcher.max_args %>
+</p>
+
+<%= link_to 'Edit', edit_matcher_path(@matcher) %> |
+<%= link_to 'Back', matchers_path %>
