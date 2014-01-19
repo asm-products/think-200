@@ -13,4 +13,6 @@
 class App < ActiveRecord::Base
   belongs_to :project
   has_many   :requirements
+
+  default_scope { order('name') }
 end
