@@ -1,4 +1,5 @@
 class MatchersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_matcher, only: [:show, :edit, :update, :destroy]
 
   # GET /matchers
