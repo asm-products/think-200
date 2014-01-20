@@ -1,31 +1,7 @@
-<h1>Listing matchers</h1>
+<h1>Matchers</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Code</th>
-      <th>Min args</th>
-      <th>Max args</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @matchers.each do |matcher| %>
-      <tr>
-        <td><%= matcher.code %></td>
-        <td><%= matcher.min_args %></td>
-        <td><%= matcher.max_args %></td>
-        <td><%= link_to 'Show', matcher %></td>
-        <td><%= link_to 'Edit', edit_matcher_path(matcher) %></td>
-        <td><%= link_to 'Destroy', matcher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Matcher', new_matcher_path %>
+<ul>
+  <% Matcher.all.each do |m| %>
+    <li><%= m %></li>
+  <% end %>
+</ul>

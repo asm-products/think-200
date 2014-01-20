@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140119051937) do
+ActiveRecord::Schema.define(version: 20140120072325) do
 
   create_table "apps", force: true do |t|
     t.string   "name"
@@ -44,11 +44,13 @@ ActiveRecord::Schema.define(version: 20140119051937) do
   add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
 
   create_table "matchers", force: true do |t|
-    t.string   "code",       null: false
-    t.integer  "min_args",   null: false
-    t.integer  "max_args",   null: false
+    t.string   "code",        null: false
+    t.integer  "min_args",    null: false
+    t.integer  "max_args",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "summary"
+    t.text     "description"
   end
 
   create_table "projects", force: true do |t|
