@@ -94,12 +94,6 @@ redirect1 = Expectation.create!(
   expectation: 'http://getquisitive.com/',
   requirement: root_dn
   )
-redirect2 = Expectation.create!(
-  subject:     'https://www.getquisitive.com', 
-  matcher:     Matcher.find_by_code('redirect_permanently_to'),
-  expectation: 'https://getquisitive.com/',
-  requirement: root_dn
-  )
 redirect3 = Expectation.create!(
   subject:     'http://www.getquisitive.com/press-kit/', 
   matcher:     Matcher.find_by_code('redirect_permanently_to'),
@@ -118,7 +112,13 @@ to_www     = Requirement.create!(name: 'redirects to www', app: myapp)
 https_only = Requirement.create!(name: 'forces visitors to use https', app: myapp)
 
 Expectation.create!(
-  subject:     'www.myapp.com',
+  subject:     'www.myapp.com/',
+  matcher:     Matcher.find_by_code('be_up'),
+  requirement: is_online
+  )
+
+Expectation.create!(
+  subject:     'www.myapp.com/about',
   matcher:     Matcher.find_by_code('be_status'),
   expectation: '200',
   requirement: is_online
