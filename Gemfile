@@ -30,7 +30,6 @@ gem 'quiet_assets', :group => :development
 # production gems for heroku
 group :production do
   gem 'pg'
-  gem 'rails_12factor'
 end
 
 # Paging
