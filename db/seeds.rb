@@ -24,17 +24,55 @@ robb.save!
 
 # The matchers
 [
-  {code: 'be_status',                min_args: 1, max_args: 1},
-  {code: 'be_up',                    min_args: 0, max_args: 0},
-  {code: 'have_a_valid_cert',        min_args: 0, max_args: 0},
-  {code: 'enforce_https_everywhere', min_args: 0, max_args: 0},
-  {code: 'redirect_permanently_to',  min_args: 1, max_args: 1},
-  {code: 'redirect_temporarily_to',  min_args: 1, max_args: 1}
+  {
+    code: 'be_status',                
+    min_args: 1, 
+    max_args: 1, 
+    summary: 'Pass if the domain/url has the given status.', 
+    description: 'Uses curl_lib.'
+    },
+  {
+    code: 'be_up',                    
+    min_args: 0, 
+    max_args: 0,
+    summary: 'Follows redirects if necessary and checks for 200',
+    description: 'Uses curl_lib.'
+    },
+  {
+    code: 'have_a_valid_cert',        
+    min_args: 0, 
+    max_args: 0,
+    summary: 'Serves HTTPS correctly.',
+    description: 'Uses curl_lib.'
+    },
+  {
+    code: 'enforce_https_everywhere', 
+    min_args: 0, 
+    max_args: 0,
+    summary: 'Forces visitors to use HTTPS.',
+    description: 'Uses curl_lib.'
+    },
+  {
+    code: 'redirect_permanently_to',  
+    min_args: 1, 
+    max_args: 1,
+    summary: 'Checks for a 301 redirect to a given location.',
+    description: 'Uses curl_lib.'
+    },
+  {
+    code: 'redirect_temporarily_to',  
+    min_args: 1, 
+    max_args: 1,
+    summary: 'Checks for either a 302 or 307 redirect to a given location.',
+    description: 'Uses curl_lib.'
+  }
 ].each do |m|
   matcher = Matcher.new
-  matcher.code     = m[:code]
-  matcher.min_args = m[:min_args]
-  matcher.max_args = m[:max_args]
+  matcher.code        = m[:code]
+  matcher.min_args    = m[:min_args]
+  matcher.max_args    = m[:max_args]
+  matcher.summary     = m[:summary]
+  matcher.description = m[:description]
   matcher.save!
 end
 

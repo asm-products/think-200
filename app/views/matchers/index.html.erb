@@ -2,6 +2,9 @@
 
 <ul>
   <% Matcher.all.each do |m| %>
-    <li><%= m %></li>
+    <li>
+      <strong><%= m %></strong><br>
+      <%= m.summary %>
+    </li>
   <% end %>
 </ul>
