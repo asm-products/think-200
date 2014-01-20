@@ -25,7 +25,7 @@ Think200::Application.configure do
   config.assets.debug = true
   
   # Mailer
-  config.action_mailer.default_options = {from: 'robb@think200.com'}
+  config.action_mailer.default_options = {from: ENV['SENDER_EMAIL']}
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { :host => ENV['DOMAIN'] }
   config.action_mailer.delivery_method = :smtp
