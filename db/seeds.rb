@@ -25,7 +25,7 @@ robb.save!
 # The matchers
 [
   {code: 'be_status',                min_args: 1, max_args: 1},
-  {code: 'be_up',                    min_args: 0, max_args: 0},  # Coming soon
+  {code: 'be_up',                    min_args: 0, max_args: 0},
   {code: 'have_a_valid_cert',        min_args: 0, max_args: 0},
   {code: 'enforce_https_everywhere', min_args: 0, max_args: 0},
   {code: 'redirect_permanently_to',  min_args: 1, max_args: 1},
