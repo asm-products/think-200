@@ -10,6 +10,7 @@ gem 'turbolinks', '2.1.0'
 gem 'jbuilder', '1.5.3'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'resque'
+gem 'resque-web', require: 'resque_web'
 gem 'newrelic_rpm'
 
 group :doc do

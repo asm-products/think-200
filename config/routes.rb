@@ -20,5 +20,7 @@ Think200::Application.routes.draw do
     root "base#index"
     resources :users
   end
-  
+
+  ResqueWeb::Engine.eager_load!
+  mount ResqueWeb::Engine => "/resque"
 end
