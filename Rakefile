@@ -5,3 +5,8 @@ require File.expand_path('../config/application', __FILE__)
 
 Think200::Application.load_tasks
 
+require 'resque/tasks'
+
+task "resque:setup" do
+  ENV['QUEUE'] = '*'
+end
