@@ -32,6 +32,6 @@ Think200::Application.routes.draw do
 
   constraints resque_constraint do
     # mount Resque::Server, :at => "/admin/resque"
-    mount ResqueWeb::Engine => "/beta/resque"
+    mount ResqueWeb::Engine => "/resque"
   end
 end
