@@ -1,6 +1,7 @@
 Think200::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-
+  config.relative_url_root = '/beta'
+  
   # Code is not reloaded between requests.
   config.cache_classes = true
 
