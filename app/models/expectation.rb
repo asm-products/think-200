@@ -15,7 +15,12 @@ class Expectation < ActiveRecord::Base
   belongs_to :requirement
   belongs_to :matcher
 
+
   def to_s
     "#{subject} should #{matcher} #{expected}"
+  end
+
+  def to_rspec
+    "expect('#{subject}').to #{matcher.code} '#{expected}'"
   end
 end

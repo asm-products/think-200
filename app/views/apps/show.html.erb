@@ -16,22 +16,21 @@
 <ul>
     <% @app.requirements.each do |r| %>
         <li>
-            it <strong><%= r.name %></strong>:
+            it <strong><%= r %></strong>:
             <ul>
                 <% r.expectations.each do |expectation| %>
-                        <li>
-            <strong>
-                <%= expectation.subject %>
-            </strong>
-            should
-            <span class="text-warning">
-              <%= expectation.matcher %>
-            </span>
-            <strong>
-                <%= expectation.expected %>
-            </strong>            
-        </li>
-
+                    <li>
+                        <strong>
+                            <%= expectation.subject %>
+                        </strong>
+                        should
+                        <span class="text-warning">
+                          <%= expectation.matcher %>
+                        </span>
+                        <strong>
+                            <%= expectation.expected %>
+                        </strong>      
+                    </li>
                 <% end %>
             </ul>
         </li>
