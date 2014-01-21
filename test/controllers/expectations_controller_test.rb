@@ -18,7 +18,7 @@ class ExpectationsControllerTest < ActionController::TestCase
 
   test "should create expectation" do
     assert_difference('Expectation.count') do
-      post :create, expectation: { expectation: @expectation.expectation, matcher_id: @expectation.matcher_id, requirement_id: @expectation.requirement_id, subject: @expectation.subject }
+      post :create, expectation: { expectation: @expectation.expected, matcher_id: @expectation.matcher_id, requirement_id: @expectation.requirement_id, subject: @expectation.subject }
     end
 
     assert_redirected_to expectation_path(assigns(:expectation))
@@ -35,7 +35,7 @@ class ExpectationsControllerTest < ActionController::TestCase
   end
 
   test "should update expectation" do
-    patch :update, id: @expectation, expectation: { expectation: @expectation.expectation, matcher_id: @expectation.matcher_id, requirement_id: @expectation.requirement_id, subject: @expectation.subject }
+    patch :update, id: @expectation, expectation: { expectation: @expectation.expected, matcher_id: @expectation.matcher_id, requirement_id: @expectation.requirement_id, subject: @expectation.subject }
     assert_redirected_to expectation_path(assigns(:expectation))
   end
 

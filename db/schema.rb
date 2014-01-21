@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140120072325) do
+ActiveRecord::Schema.define(version: 20140121121523) do
 
   create_table "apps", force: true do |t|
     t.string   "name"
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20140120072325) do
   create_table "expectations", force: true do |t|
     t.string   "subject",        null: false
     t.integer  "matcher_id",     null: false
-    t.string   "expectation"
+    t.string   "expected"
     t.integer  "requirement_id", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
