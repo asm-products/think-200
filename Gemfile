@@ -12,6 +12,7 @@ gem 'bcrypt-ruby', '3.1.2'
 gem 'resque'
 gem 'resque-web', require: 'resque_web'
 gem 'newrelic_rpm'
+gem 'figaro', '~> 0.7'     # env variables
 
 group :doc do
   gem 'sdoc', require: false
@@ -20,7 +21,6 @@ end
 # development gems
 group :development, :test do
   gem 'sqlite3', '1.3.8'    # test database
-  gem 'figaro', '0.7.0'     # env variables
   gem 'annotate'
   gem 'rails-erd'
 end

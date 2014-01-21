@@ -179,7 +179,7 @@ DEPENDENCIES
   bootstrap-sass (= 3.0.3.0)
   coffee-rails (= 4.0.1)
   devise (= 3.2.2)
-  figaro (= 0.7.0)
+  figaro (~> 0.7)
   font-awesome-sass (= 4.0.2)
   friendly_id (= 5.0.2)
   jbuilder (= 1.5.3)
