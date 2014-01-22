@@ -21,7 +21,7 @@ class Requirement < ActiveRecord::Base
 
   def to_rspec
     result = "it '#{name}' do\n"
-    expectations.each { |e| result += e.to_rspec + "\n" }
-    result += "end"
+    expectations.each { |e| result += e.to_rspec.indent(2) }
+    result += "end\n"
   end
 end

@@ -16,4 +16,10 @@ class Project < ActiveRecord::Base
 
   validates :user, presence: true
   default_scope { order('name') }
+
+  def to_rspec
+    result = "describe '#{name}' do\n"
+    apps.each { |e| result += e.to_rspec.indent(2) }
+    result += "end\n"
+  end
 end

@@ -15,4 +15,10 @@ class App < ActiveRecord::Base
   has_many   :requirements
 
   default_scope { order('name') }
+
+  def to_rspec
+    result = "context '#{name}' do\n"
+    requirements.each { |e| result += e.to_rspec.indent(2) }
+    result += "end\n"
+  end
 end
