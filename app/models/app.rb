@@ -19,6 +19,12 @@ class App < ActiveRecord::Base
   def to_rspec
     result = "context '#{name}' do\n"
     requirements.each { |e| result += e.to_rspec.indent(2) }
-    result += "end\n"
+    result + "end\n"
+  end
+
+  def to_plaintext
+    result = "App \"#{name}\":\n"
+    requirements.each { |e| result += e.to_plaintext.indent(2)}
+    result
   end
 end

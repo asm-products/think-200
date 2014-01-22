@@ -20,6 +20,12 @@ class Project < ActiveRecord::Base
   def to_rspec
     result = "describe '#{name}' do\n"
     apps.each { |e| result += e.to_rspec.indent(2) }
-    result += "end\n"
+    result + "end\n"
+  end
+
+  def to_plaintext
+    result = "Project \"#{name}\":\n"
+    apps.each { |e| result += e.to_plaintext.indent(2) }
+    result
   end
 end

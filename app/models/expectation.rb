@@ -24,4 +24,8 @@ class Expectation < ActiveRecord::Base
     expected_text = expected.blank? ? '' : "'#{expected}'"
     "expect('#{subject}').to #{matcher.code} #{expected_text}\n"
   end
+
+  def to_plaintext
+    "Expectation: " + self.to_s + "\n"
+  end
 end
