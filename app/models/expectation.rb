@@ -21,6 +21,11 @@ class Expectation < ActiveRecord::Base
   end
 
   def to_rspec
-    "expect('#{subject}').to #{matcher.code} '#{expected}'"
+    expected_text = expected.blank? ? '' : "'#{expected}'"
+    "expect('#{subject}').to #{matcher.code} #{expected_text}\n"
+  end
+
+  def to_plaintext
+    "Expectation: " + self.to_s + "\n"
   end
 end
