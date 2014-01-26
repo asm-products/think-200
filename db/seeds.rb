@@ -91,13 +91,13 @@ root_dn   = Requirement.create!(name: 'serves from root domain', app: website)
 redirect1 = Expectation.create!(
   subject:     'http://www.getquisitive.com', 
   matcher:     Matcher.find_by_code('redirect_permanently_to'),
-  expectation: 'http://getquisitive.com/',
+  expected:    'http://getquisitive.com/',
   requirement: root_dn
   )
 redirect3 = Expectation.create!(
   subject:     'http://www.getquisitive.com/press-kit/', 
   matcher:     Matcher.find_by_code('redirect_permanently_to'),
-  expectation: 'http://getquisitive.com/press-kit/',
+  expected: 'http://getquisitive.com/press-kit/',
   requirement: root_dn
   )
 
@@ -120,7 +120,7 @@ Expectation.create!(
 Expectation.create!(
   subject:     'www.myapp.com/about',
   matcher:     Matcher.find_by_code('be_status'),
-  expectation: '200',
+  expected:    '200',
   requirement: is_online
   )
 
@@ -133,7 +133,7 @@ Expectation.create!(
 Expectation.create!(
   subject:     'http://myapp.com',
   matcher:     Matcher.find_by_code('redirect_permanently_to'),
-  expectation: 'http://www.myapp.com/',
+  expected: 'http://www.myapp.com/',
   requirement: to_www
   )
 
