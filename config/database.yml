@@ -34,4 +34,4 @@ production:
   database: think200_production
   pool: 5
   username: think200
-  password:
+  password: ENV['DB_PASSWORD']
