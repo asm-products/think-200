@@ -37,14 +37,15 @@ class Project < ActiveRecord::Base
     self.user == user
   end
 
-  # Run this project's specs
-  def self.perform(project_id: nil, user_id: nil)
+  # Run this project's specs. Use like this:
+  # `Resque.enqueue_to('free', Project, 1, 2)`
+  def self.perform(project_id, user_id)
     user = User.find(user_id)
     proj = Project.find(project_id)
-    if !proj.owned_by(user)
-      raise "#{user} isn't authorized to run #{proj}"
-    end
+    raise "#{user} isn't authorized to run #{proj}" if !proj.owned_by(user)
     logger.debug("Performing test:\n#{proj.to_rspec}")
+
+    # Create an rspec file
     file = Tempfile.new('rspec')
     file.write(proj.to_rspec)
     file.close
@@ -54,9 +55,11 @@ class Project < ActiveRecord::Base
     json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.out)     
     reporter =  RSpec::Core::Reporter.new(json_formatter)
     config.instance_variable_set(:@reporter, reporter)
-     
+    
+    # Run the rspec
     RSpec::Core::Runner.run([file.path])
     file.unlink
     result = json_formatter.output_hash
+    SpecRun.create!(raw_data: result)
   end
 end
