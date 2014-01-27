@@ -19,6 +19,6 @@ class SpecRun < ActiveRecord::Base
   validates :raw_data, :project_id, presence: true
 
   def passed?
-    raw_data[:summary][:failure_count] == 0
+    # raw_data[:summary][:failure_count] == 0
   end
 end

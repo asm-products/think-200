@@ -29,4 +29,16 @@ class Expectation < ActiveRecord::Base
     "Expectation: " + self.to_s + "\n"
   end
 
+  def to_encapsulated_rspec
+    <<-here
+require 'rspec/webservice_matchers'
+
+describe 'encapsulated' do
+  it 'does this rspec' do
+    #{to_rspec.strip}
+  end
+end
+    here
+  end
+
 end
