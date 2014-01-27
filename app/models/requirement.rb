@@ -29,4 +29,8 @@ class Requirement < ActiveRecord::Base
     expectations.each { |e| result += e.to_plaintext.indent(2) }
     result + "\n"
   end
+
+  def passed?
+    true
+  end
 end

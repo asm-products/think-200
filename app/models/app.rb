@@ -25,4 +25,8 @@ class App < ActiveRecord::Base
     requirements.each { |e| result += e.to_plaintext.indent(2)}
     result
   end
+
+  def passed?
+    true
+  end
 end

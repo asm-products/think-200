@@ -39,6 +39,16 @@ class Project < ActiveRecord::Base
     self.user == user
   end
 
+  def passed?
+    true
+  end
+
+  def most_recent_test
+    spec_runs.last
+  end
+
+
+
   # Run this project's specs. Use like this:
   # `Resque.enqueue_to('free', Project, 1, 2)`
   def Project.perform(project_id, user_id)

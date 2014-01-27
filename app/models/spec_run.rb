@@ -24,6 +24,13 @@ class SpecRun < ActiveRecord::Base
     !statuses.include? STATUS_FAILED
   end
 
+  def status?(expectation: nil)
+    if raw_data[expectation.id][:examples][0][:status] == STATUS_FAILED
+      false
+    else
+      true
+    end
+  end
 
   private
   STATUS_FAILED = 'failed'

@@ -15,6 +15,11 @@ class Expectation < ActiveRecord::Base
   belongs_to :requirement
   belongs_to :matcher
 
+  def passed?
+    spec_run = self.requirement.app.project.most_recent_test
+    spec_run.status?(expectation: self)
+  end
+
 
   def to_s
     "#{subject} should #{matcher} #{expected}"

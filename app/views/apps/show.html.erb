@@ -7,11 +7,11 @@
 
 <p id="notice"><%= notice %></p>
 
-<h1><%= @app.project.name + ' ' + @app.name %></h1>
+<h1><%= @app.project.name + ' ' + @app.name %> <%= status_icon_for(@app) %></h1>
 
-<input type="button" value="Re-test" class="btn btn-primary" onclick="location.href='<%= retest_project_path(@app.project.id) %>';">
+<%= link_button 'Re-test', 'btn-primary', retest_project_path(@app.project.id) %>
+<%= link_button 'Edit',    'btn-default', edit_app_path(@app) %>
 
-<input type="button" value="Edit" class="btn btn-default" onclick="location.href='<%= edit_app_path(@app) %>';">
 
 <h2 class="text-muted">Requirements</h2>
 
@@ -19,7 +19,7 @@
 <ul>
     <% @app.requirements.each do |r| %>
         <li>
-            it <strong><%= r %></strong>:
+            it <strong><%= r %></strong>: <%= status_icon_for(r) %>
             <ul>
                 <% r.expectations.each do |expectation| %>
                     <li>
@@ -32,7 +32,8 @@
                         </span>
                         <strong>
                             <%= expectation.expected %>
-                        </strong>      
+                        </strong>     
+                        <%= status_icon_for(expectation) %>
                     </li>
                 <% end %>
             </ul>
