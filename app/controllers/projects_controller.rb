@@ -1,6 +1,15 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:retest, :show, :edit, :update, :destroy]
+
+  FREE_QUEUE    = 'free'
+  PREMIUM_QUEUE = 'premium'
+
+  # Queue the given project for retesting.
+  def retest
+    Resque.enqueue_to(FREE_QUEUE, Project, @project.id, current_user.id)
+    redirect_to :back
+  end
 
   # GET /projects
   # GET /projects.json
@@ -64,11 +73,13 @@ class ProjectsController < ApplicationController
     end
   end
 
+
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_project
       @project = Project.find(params[:id])
-      unless current_user.projects.include? @project
+      unless @project.owned_by? current_user
         @project = nil
       end
     end

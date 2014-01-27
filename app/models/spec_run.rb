@@ -18,10 +18,13 @@ class SpecRun < ActiveRecord::Base
   serialize :raw_data, Hash
   validates :raw_data, :project_id, presence: true
 
-  STATUS_FAILED = 'failed'
 
   def passed?
     statuses = raw_data.keys.map{ |k| raw_data[k][:examples][0][:status] }
     !statuses.include? STATUS_FAILED
   end
+
+
+  private
+  STATUS_FAILED = 'failed'
 end

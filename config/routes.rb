@@ -23,6 +23,8 @@ Think200::Application.routes.draw do
     resources :users
   end
 
+  get 'retest_project/:id', to: 'projects#retest', as: 'retest_project'
+
 
   # Resque ######################
 

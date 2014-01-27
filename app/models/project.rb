@@ -35,7 +35,7 @@ class Project < ActiveRecord::Base
     result
   end
 
-  def owned_by(user)
+  def owned_by?(user)
     self.user == user
   end
 
@@ -44,7 +44,7 @@ class Project < ActiveRecord::Base
   def Project.perform(project_id, user_id)
     user = User.find(user_id)
     proj = Project.find(project_id)
-    raise "#{user} isn't authorized to run #{proj}" if !proj.owned_by(user)
+    raise "#{user} isn't authorized to run #{proj}" if !proj.owned_by?(user)
     logger.debug("Performing test:\n#{proj.to_rspec}")
 
     collected_results = {}

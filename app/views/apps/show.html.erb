@@ -8,7 +8,10 @@
 <p id="notice"><%= notice %></p>
 
 <h1><%= @app.project.name + ' ' + @app.name %></h1>
-<%= link_to 'Edit', edit_app_path(@app) %>
+
+<input type="button" value="Re-test" class="btn btn-primary" onclick="location.href='<%= retest_project_path(@app.project.id) %>';">
+
+<input type="button" value="Edit" class="btn btn-default" onclick="location.href='<%= edit_app_path(@app) %>';">
 
 <h2 class="text-muted">Requirements</h2>
 
