@@ -16,6 +16,7 @@ require 'rspec/core/formatters/json_formatter'
 
 class Project < ActiveRecord::Base
   has_many :apps
+  has_many :spec_runs
   belongs_to :user
 
   validates :user, presence: true
@@ -39,7 +40,7 @@ class Project < ActiveRecord::Base
 
   # Run this project's specs. Use like this:
   # `Resque.enqueue_to('free', Project, 1, 2)`
-  def self.perform(project_id, user_id)
+  def Project.perform(project_id, user_id)
     user = User.find(user_id)
     proj = Project.find(project_id)
     raise "#{user} isn't authorized to run #{proj}" if !proj.owned_by(user)
@@ -60,6 +61,6 @@ class Project < ActiveRecord::Base
     RSpec::Core::Runner.run([file.path])
     file.unlink
     result = json_formatter.output_hash
-    SpecRun.create!(raw_data: result)
+    SpecRun.create!(raw_data: result, project: proj)
   end
 end

@@ -1,0 +1,31 @@
+<h1>Listing spec_runs</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Raw data</th>
+      <th>Passed</th>
+      <th>Project</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @spec_runs.each do |spec_run| %>
+      <tr>
+        <td><%= spec_run.raw_data %></td>
+        <td><%= spec_run.passed %></td>
+        <td><%= spec_run.project_id %></td>
+        <td><%= link_to 'Show', spec_run %></td>
+        <td><%= link_to 'Edit', edit_spec_run_path(spec_run) %></td>
+        <td><%= link_to 'Destroy', spec_run, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Spec run', new_spec_run_path %>

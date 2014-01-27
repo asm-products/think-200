@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  raw_data: MyText
+  passed: false
+  project_id: 1
+
+two:
+  raw_data: MyText
+  passed: false
+  project_id: 1

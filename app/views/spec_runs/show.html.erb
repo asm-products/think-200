@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Raw data:</strong>
+  <%= @spec_run.raw_data %>
+</p>
+
+<p>
+  <strong>Passed:</strong>
+  <%= @spec_run.passed %>
+</p>
+
+<p>
+  <strong>Project:</strong>
+  <%= @spec_run.project_id %>
+</p>
+
+<%= link_to 'Edit', edit_spec_run_path(@spec_run) %> |
+<%= link_to 'Back', spec_runs_path %>
