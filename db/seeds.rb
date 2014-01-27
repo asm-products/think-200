@@ -85,7 +85,7 @@ api       = App.create!(name: 'API',            project: quisitive)
 website   = App.create!(name: 'Website',        project: quisitive)
 listing   = App.create!(name: 'iTunes Listing', project: quisitive)
 
-is_fast   = Requirement.create!(name: 'is fast', app: website)
+is_online = Requirement.create!(name: 'is online', app: website)
 root_dn   = Requirement.create!(name: 'serves from root domain', app: website)
 
 redirect1 = Expectation.create!(
@@ -103,7 +103,7 @@ redirect1 = Expectation.create!(
 redirect3 = Expectation.create!(
   subject:     'getquisitive.com', 
   matcher:     Matcher.find_by_code('be_up'),
-  requirement: is_fast
+  requirement: is_online
   )
 
 

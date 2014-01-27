@@ -10,10 +10,10 @@
 
 <h2 class="text-muted">Apps</h2>
 
-<ul>
+<ul style="list-style-type: none; padding-left: 1em">
     <% @project.apps.each do |app| %>
         <li>
-            <%= link_to app.name, app %>
+            <%= status_icon_for(app) %> <%= link_to app.name, app %>
         </li>
     <% end %>
 </ul>
