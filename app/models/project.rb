@@ -16,11 +16,12 @@ require 'rspec/core/formatters/json_formatter'
 
 class Project < ActiveRecord::Base
   has_many :apps
+  has_many :requirements, through: :apps
+  has_many :expectations, through: :requirements
   has_many :spec_runs
   belongs_to :user
 
   validates :user, presence: true
-  default_scope { order('name') }
 
   def to_rspec
     result = "describe '#{name}' do\n"

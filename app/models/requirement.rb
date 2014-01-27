@@ -13,8 +13,7 @@
 class Requirement < ActiveRecord::Base
   belongs_to :app
   has_many   :expectations
-  default_scope { order('name') }
-
+  
   def to_s
     name
   end
