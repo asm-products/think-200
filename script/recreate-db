@@ -1,2 +1,3 @@
 #!/bin/bash
 rake db:drop ; rake db:create ; rake db:schema:load ; rake db:seed
+
