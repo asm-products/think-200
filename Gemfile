@@ -14,6 +14,7 @@ gem 'resque-web', require: 'resque_web'
 gem 'newrelic_rpm'
 gem 'figaro', '~> 0.7'     # env variables
 gem 'pg'
+gem 'rspec'
 
 group :doc do
   gem 'sdoc', require: false

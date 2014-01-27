@@ -28,4 +28,5 @@ class Expectation < ActiveRecord::Base
   def to_plaintext
     "Expectation: " + self.to_s + "\n"
   end
+
 end

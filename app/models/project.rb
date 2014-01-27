@@ -28,4 +28,18 @@ class Project < ActiveRecord::Base
     apps.each { |e| result += e.to_plaintext.indent(2) }
     result
   end
+
+  def owned_by(user)
+    self.user == user
+  end
+
+  def self.perform(project_id: nil, user_id: nil)
+    user = User.find(user_id)
+    proj = Project.find(project_id)
+    if !proj.owned_by(user)
+      raise "#{user} isn't authorized to run #{proj}"
+    end
+    logger.debug("Performing test: #{proj.to_rspec}")
+    result = eval(proj.to_rspec)
+  end
 end
