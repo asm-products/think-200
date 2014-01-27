@@ -31,6 +31,6 @@ class Requirement < ActiveRecord::Base
   end
 
   def passed?
-    true
+    ! expectations.all.map{|e| e.passed?}.include?(false)
   end
 end

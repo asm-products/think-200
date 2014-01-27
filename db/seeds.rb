@@ -94,6 +94,12 @@ redirect1 = Expectation.create!(
   expected:    'http://getquisitive.com/',
   requirement: root_dn
   )
+redirect1 = Expectation.create!(
+  subject:     'http://www.getquisitive.com/press-kit/', 
+  matcher:     Matcher.find_by_code('redirect_permanently_to'),
+  expected:    'http://getquisitive.com/press-kit/',
+  requirement: root_dn
+  )
 redirect3 = Expectation.create!(
   subject:     'getquisitive.com', 
   matcher:     Matcher.find_by_code('be_up'),

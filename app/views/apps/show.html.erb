@@ -7,7 +7,7 @@
 
 <p id="notice"><%= notice %></p>
 
-<h1><%= @app.project.name + ' ' + @app.name %> <%= status_icon_for(@app) %></h1>
+<h1><%= status_icon_for(@app) %> <%= @app.project.name + ' ' + @app.name %></h1>
 
 <%= link_button 'Re-test', 'btn-primary', retest_project_path(@app.project.id) %>
 <%= link_button 'Edit',    'btn-default', edit_app_path(@app) %>
@@ -16,13 +16,14 @@
 <h2 class="text-muted">Requirements</h2>
 
 
-<ul>
+<ul style="list-style-type: none; padding-left: 1em">
     <% @app.requirements.each do |r| %>
-        <li>
-            it <strong><%= r %></strong>: <%= status_icon_for(r) %>
-            <ul>
+        <li style="padding-top: 1em">
+            <%= status_icon_for(r) %> it <strong><%= r %></strong>: 
+            <ul style="list-style-type: none; padding-left: 1em">
                 <% r.expectations.each do |expectation| %>
                     <li>
+                        <%= status_icon_for(expectation) %>
                         <strong>
                             <%= expectation.subject %>
                         </strong>
@@ -33,7 +34,6 @@
                         <strong>
                             <%= expectation.expected %>
                         </strong>     
-                        <%= status_icon_for(expectation) %>
                     </li>
                 <% end %>
             </ul>
