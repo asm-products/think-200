@@ -55,11 +55,11 @@ class Project < ActiveRecord::Base
     user = User.find(user_id)
     proj = Project.find(project_id)
     raise "#{user} isn't authorized to run #{proj}" if !proj.owned_by?(user)
-    logger.debug("Performing test:\n#{proj.to_rspec}")
 
     collected_results = {}
     proj.expectations.each do |expectation|
       # Create an rspec file
+      logger.debug("Performing test:\n#{expectation.to_encapsulated_rspec}")
       file = Tempfile.new('rspec')
       file.write(expectation.to_encapsulated_rspec)
       file.close
