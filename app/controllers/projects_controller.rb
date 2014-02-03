@@ -1,13 +1,13 @@
+require 'think200_jobs'
+
+
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: [:retest, :show, :edit, :update, :destroy]
 
-  FREE_QUEUE    = 'free'
-  PREMIUM_QUEUE = 'premium'
-
   # Queue the given project for retesting.
   def retest
-    Resque.enqueue_to(FREE_QUEUE, Project, @project.id, current_user.id)
+    Resque.enqueue_to(Think200::FREE_QUEUE, Think200::ManualTest, @project.id, current_user.id)
     redirect_to :back
   end
 
