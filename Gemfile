@@ -27,6 +27,7 @@ end
 group :development, :test do
   gem 'annotate'
   gem 'rails-erd'
+  gem 'rspec-rails'
 end
 
 gem 'quiet_assets', :group => :development
