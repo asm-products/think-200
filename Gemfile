@@ -17,7 +17,7 @@ gem 'pg'
 gem 'pry-rails'
 
 gem 'rspec'
-gem 'rspec-webservice_matchers'
+gem 'rspec-webservice_matchers', git: 'git@github.com:dogweather/rspec-webservice_matchers.git', branch: 'mocks'
 
 group :doc do
   gem 'sdoc', require: false
