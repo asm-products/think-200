@@ -19,6 +19,12 @@ module Think200
     end
   end
 
+  # Enqueue all projects for testing in the premium queue. This is intended to be
+  # executed from a cron job / rake task.
+  def self.test_all_projects
+    Project.find_each { |p| Resque.enqueue_to(PREMIUM_QUEUE, ScheduledTest, p.id, p.user.id) }
+  end
+
 
   private
 
