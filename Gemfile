@@ -15,7 +15,7 @@ gem 'newrelic_rpm'
 gem 'figaro', '~> 0.7'     # env variables
 gem 'pg'
 gem 'pry-rails'
-
+gem 'whenever', :require => false
 gem 'rspec'
 gem 'rspec-webservice_matchers'
 
@@ -27,6 +27,7 @@ end
 group :development, :test do
   gem 'annotate'
   gem 'rails-erd'
+  gem 'rspec-rails'
 end
 
 gem 'quiet_assets', :group => :development
