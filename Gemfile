@@ -18,6 +18,7 @@ gem 'pry-rails'
 gem 'whenever', :require => false
 gem 'rspec'
 gem 'rspec-webservice_matchers'
+gem 'capistrano', '~> 3.1.0'
 
 group :doc do
   gem 'sdoc', require: false
