@@ -18,7 +18,6 @@ gem 'pry-rails'
 gem 'whenever', :require => false
 gem 'rspec'
 gem 'rspec-webservice_matchers'
-gem 'capistrano', '~> 3.1.0'
 
 group :doc do
   gem 'sdoc', require: false
@@ -29,9 +28,14 @@ group :development, :test do
   gem 'annotate'
   gem 'rails-erd'
   gem 'rspec-rails'
+  gem 'rails_layout', '~> 0.5'  # Bootstrap 3 layout generator
 end
 
-gem 'quiet_assets', :group => :development
+group :development do
+  gem 'quiet_assets'
+  gem 'capistrano-rails'
+  gem 'capistrano', '~> 3.1.0'
+end
 
 # Paging
 gem 'kaminari', '~> 0.15'
@@ -42,10 +46,5 @@ gem 'friendly_id', '~> 5.0'
 # font-awesome
 gem 'font-awesome-sass', '~> 4.0'# Devise
 gem 'devise', '3.2.2'
-
-# Bootstrap 3
-group :development, :test do
-  gem 'rails_layout', '~> 0.5'  # Bootstrap 3 layout generator
-end
 
 gem 'bootstrap-sass', '~> 3.0.3'
