@@ -13,7 +13,7 @@ role :web, %w{neptune.srsly.co}
 # definition into the server list. The second argument
 # something that quacks like a hash can be used to set
 # extended properties on the server.
-server 'neptune.srsly.co', user: 'deploy', roles: %w{web app}, my_property: :my_value
+# server 'neptune.srsly.co', user: 'deploy', roles: %w{web app}, my_property: :my_value
 
 # you can set custom ssh options
 # it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
@@ -25,14 +25,15 @@ server 'neptune.srsly.co', user: 'deploy', roles: %w{web app}, my_property: :my_
 #    auth_methods: %w(password)
 #  }
 # and/or per server
-# server 'example.com',
-#   user: 'user_name',
-#   roles: %w{web app},
-#   ssh_options: {
-#     user: 'user_name', # overrides user setting above
-#     keys: %w(/home/user_name/.ssh/id_rsa),
-#     forward_agent: false,
-#     auth_methods: %w(publickey password)
-#     # password: 'please use keys'
-#   }
+server 'neptune.srsly.co',
+  user: 'deploy',
+  roles: %w{web app},
+  ssh_options: {
+    user: 'deploy', # overrides user setting above
+    keys: %w(/Users/robb/.ssh/id_rsa_2014),
+    forward_agent: true,
+    auth_methods: %w(publickey),
+    port: 5953
+    # password: 'please use keys'
+  }
 # setting per server overrides global ssh_options
