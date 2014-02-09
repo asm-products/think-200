@@ -43,7 +43,9 @@ namespace :deploy do
       # Your restart mechanism here:
       within release_path do
         execute 'script/resque-stop'
-        execute 'script/resque-start'
+        with rails_env: :production do
+          execute 'script/resque-start'
+        end
         execute :touch, 'tmp/restart.txt'
       end
     end
