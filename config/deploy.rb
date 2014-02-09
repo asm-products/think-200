@@ -17,13 +17,13 @@ set :deploy_to, '/home/deploy/think200_capistrano'
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-# set :log_level, :info
+set :log_level, :info
 
 # Default value for :pty is false
 # set :pty, true
 
 # Default value for :linked_files is []
-# set :linked_files, %w{config/database.yml}
+set :linked_files, %w{ config/application.yml }
 
 # Default value for linked_dirs is []
 # set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
@@ -32,7 +32,7 @@ set :deploy_to, '/home/deploy/think200_capistrano'
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
 
 # Default value for keep_releases is 5
-# set :keep_releases, 5
+set :keep_releases, 3
 
 namespace :deploy do
 
@@ -52,6 +52,17 @@ namespace :deploy do
       # within release_path do
       #   execute :rake, 'cache:clear'
       # end
+    end
+  end
+
+  desc "Check that we can access everything"
+  task :check_write_permissions do
+    on roles(:all) do |host|
+      if test("[ -w #{fetch(:deploy_to)} ]")
+        info "#{fetch(:deploy_to)} is writable on #{host}"
+      else
+        error "#{fetch(:deploy_to)} is not writable on #{host}"
+      end
     end
   end
 

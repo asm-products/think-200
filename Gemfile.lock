@@ -44,6 +44,9 @@ GEM
     capistrano-rails (1.1.1)
       capistrano (~> 3.1)
       capistrano-bundler (~> 1.1)
+    capistrano-rvm (0.1.1)
+      capistrano (~> 3.0)
+      sshkit (~> 1.2)
     choice (0.1.6)
     chronic (0.10.2)
     coderay (1.1.0)
@@ -236,7 +239,9 @@ DEPENDENCIES
   bcrypt-ruby (~> 3.1)
   bootstrap-sass (~> 3.0.3)
   capistrano (~> 3.1.0)
+  capistrano-bundler
   capistrano-rails
+  capistrano-rvm
   coffee-rails (~> 4.0)
   devise (= 3.2.2)
   figaro (~> 0.7)

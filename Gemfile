@@ -33,8 +33,10 @@ end
 
 group :development do
   gem 'quiet_assets'
-  gem 'capistrano-rails'
   gem 'capistrano', '~> 3.1.0'
+  gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler'
 end
 
 # Paging
