@@ -42,12 +42,13 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here:
       within release_path do
-        execute 'script/resque-stop'
         with rails_env: :production do
+          execute 'script/resque-stop'
           execute 'script/resque-start'
+          execute :touch, 'tmp/restart.txt'
         end
-        execute :touch, 'tmp/restart.txt'
       end
+      
     end
   end
 
