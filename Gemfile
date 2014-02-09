@@ -18,6 +18,8 @@ gem 'pry-rails'
 gem 'whenever', :require => false
 gem 'rspec'
 gem 'rspec-webservice_matchers'
+gem 'annotate'
+
 
 group :doc do
   gem 'sdoc', require: false
@@ -25,7 +27,6 @@ end
 
 # development gems
 group :development, :test do
-  gem 'annotate'
   gem 'rails-erd'
   gem 'rspec-rails'
   gem 'rails_layout', '~> 0.5'  # Bootstrap 3 layout generator
