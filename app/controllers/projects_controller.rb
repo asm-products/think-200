@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
 
   # Queue the given project for retesting.
   def retest
-    Resque.enqueue_to(Think200::FREE_QUEUE, Think200::ManualTest, @project.id, current_user.id)
+    Resque.enqueue_to(Think200::STANDARD_QUEUE, Think200::ManualTest, @project.id, current_user.id)
     redirect_to :back
   end
 
