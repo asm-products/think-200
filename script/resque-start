@@ -4,10 +4,10 @@
 # 3 workers: premium queue
 #
 echo "Starting premium queue workers..."
-env BACKGROUND=yes QUEUES=premium TERM_CHILD=1 RESQUE_TERM_TIMEOUT=7 COUNT=3 ~/.rvm/bin/rvm default do bundle exec rake resque:workers
+env BACKGROUND=yes QUEUES=premium TERM_CHILD=1 RESQUE_TERM_TIMEOUT=7 COUNT=3 ~/.rvm/bin/rvm default do bundle exec rake environment resque:workers
 
 #
 # 1 worker: premium and standard queues
 #
 echo "Starting standard queue worker..."
-env BACKGROUND=yes QUEUES=premium,standard TERM_CHILD=1 RESQUE_TERM_TIMEOUT=7 ~/.rvm/bin/rvm default do bundle exec rake resque:work
+env BACKGROUND=yes QUEUES=premium,standard TERM_CHILD=1 RESQUE_TERM_TIMEOUT=7 ~/.rvm/bin/rvm default do bundle exec rake environment resque:work
