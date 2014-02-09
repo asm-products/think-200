@@ -1,5 +1,5 @@
 #!/bin/bash
-for p in `ps afx | grep resque | grep -v grep | awk '{ print $1 }'`
+for p in `ps afx | grep resque | egrep -v '(grep|resque-stop)' | awk '{ print $1 }'`
 do 
     echo "Stopping resque process $p..."
     kill $p
