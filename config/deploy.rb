@@ -1,6 +1,7 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 set :application, 'think200'
 set :repo_url, 'git@github.com:weblaws/think200.git'
 
