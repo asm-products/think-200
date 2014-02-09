@@ -18,7 +18,7 @@ set :deploy_to, '/home/deploy/think200_capistrano'
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-set :log_level, :info
+set :log_level, :debug
 
 # Default value for :pty is false
 # set :pty, true
@@ -41,8 +41,10 @@ namespace :deploy do
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here:
-      execute release_path.join('script/resque-stop')
-      execute release_path.join('script/resque-start')
+      within release_path do
+        execute release_path.join('script/resque-stop')
+        execute release_path.join('script/resque-start')
+      end
       execute :touch, release_path.join('tmp/restart.txt')
     end
   end

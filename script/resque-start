@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source "$HOME/.rvm/scripts/rvm"
+
 #
 # 3 workers: premium queue
 #
