@@ -1,11 +1,11 @@
 module Think200
 
-  FREE_QUEUE    = 'free'
+  STANDARD_QUEUE    = 'standard'
   PREMIUM_QUEUE = 'premium'
 
 
   # Run a project's specs. Use like this:
-  # `Resque.enqueue_to(FREE_QUEUE, ManualTest, project_id: 1, user_id: 2)`
+  # `Resque.enqueue_to(STANDARD_QUEUE, ManualTest, project_id: 1, user_id: 2)`
   class ManualTest
     def self.perform(project_id, user_id)
       Think200::run_test(project_id: project_id, user_id: user_id, manual: true)

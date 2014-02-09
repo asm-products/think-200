@@ -4,7 +4,7 @@ require 'spec_helper'
 require 'think200_jobs'
 
 describe 'Think200 library' do
-  describe Think200::FREE_QUEUE do
+  describe Think200::STANDARD_QUEUE do
     it { should be_a String }
   end
 

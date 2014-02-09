@@ -1,11 +1,12 @@
 # config valid only for Capistrano 3.1
 lock '3.1.0'
 
+set :whenever_identifier, ->{ "#{fetch(:application)}_#{fetch(:stage)}" }
 set :application, 'think200'
 set :repo_url, 'git@github.com:weblaws/think200.git'
 
 # Default branch is :master
-# ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
+ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
 
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/home/deploy/think200_capistrano'
@@ -17,7 +18,7 @@ set :deploy_to, '/home/deploy/think200_capistrano'
 # set :format, :pretty
 
 # Default value for :log_level is :debug
-set :log_level, :info
+set :log_level, :debug
 
 # Default value for :pty is false
 # set :pty, true
@@ -39,8 +40,12 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      # Your restart mechanism here, for example:
-      execute :touch, release_path.join('tmp/restart.txt')
+      # Your restart mechanism here:
+      within release_path do
+        execute 'script/resque-stop'
+        execute 'script/resque-start'
+        execute :touch, 'tmp/restart.txt'
+      end
     end
   end
 

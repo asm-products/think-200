@@ -7,6 +7,6 @@ Think200::Application.load_tasks
 
 require 'resque/tasks'
 
-task "resque:setup" do
+task "resque:setup" => :environment do
   ENV['QUEUE'] = '*'
 end
