@@ -42,10 +42,10 @@ namespace :deploy do
     on roles(:app), in: :sequence, wait: 5 do
       # Your restart mechanism here:
       within release_path do
-        execute release_path.join('script/resque-stop')
-        execute release_path.join('script/resque-start')
+        execute 'script/resque-stop'
+        execute 'script/resque-start'
+        execute :touch, 'tmp/restart.txt'
       end
-      execute :touch, release_path.join('tmp/restart.txt')
     end
   end
 
