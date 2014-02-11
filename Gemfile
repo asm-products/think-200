@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 1.5'
 gem 'bcrypt-ruby', '~> 3.1'
 gem 'resque'
 gem 'resque-web', require: 'resque_web'
+gem 'resque_solo'
 gem 'newrelic_rpm'
 gem 'figaro', '~> 0.7'     # env variables
 gem 'pg'

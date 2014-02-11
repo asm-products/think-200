@@ -1,12 +1,15 @@
 module Think200
 
-  STANDARD_QUEUE    = 'standard'
-  PREMIUM_QUEUE = 'premium'
+  STANDARD_QUEUE = :standard
+  PREMIUM_QUEUE  = :premium
 
 
   # Run a project's specs. Use like this:
   # `Resque.enqueue_to(STANDARD_QUEUE, ManualTest, project_id: 1, user_id: 2)`
   class ManualTest
+    include Resque::Plugins::UniqueJob
+    @queue = STANDARD_QUEUE
+
     def self.perform(project_id, user_id)
       Think200::run_test(project_id: project_id, user_id: user_id, manual: true)
     end
@@ -14,6 +17,9 @@ module Think200
 
   # Also run a project's tests, but intended to be done from a cron job.
   class ScheduledTest
+    include Resque::Plugins::UniqueJob
+    @queue = PREMIUM_QUEUE
+
     def self.perform(project_id, user_id)
       Think200::run_test(project_id: project_id, user_id: user_id, manual: false)
     end
@@ -22,7 +28,10 @@ module Think200
   # Enqueue all projects for testing in the premium queue. This is intended to be
   # executed from a cron job / rake task.
   def self.test_all_projects
-    Project.find_each { |p| Resque.enqueue_to(PREMIUM_QUEUE, ScheduledTest, p.id, p.user.id) }
+    Project.find_each do |p| 
+      puts "Enqueing ScheduledTest #{p.id}, user #{p.user_id}..."
+      Resque.enqueue(ScheduledTest, p.id, p.user_id) 
+    end
   end
 
 
