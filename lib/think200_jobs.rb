@@ -41,9 +41,11 @@ module Think200
     begin
       user = User.find(user_id)
       proj = user.projects.find(project_id)
+      return if proj.expectations.empty?
     rescue ActiveRecord::RecordNotFound
       raise "#{user} doesn't have a project number #{project_id}"
     end
+
 
     collected_results = {}
     proj.expectations.each do |expectation|
