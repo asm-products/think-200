@@ -1,3 +1,8 @@
+require 'tempfile'
+require 'rspec'
+require 'rspec/core/formatters/json_formatter'
+
+
 module Think200
 
   STANDARD_QUEUE = :standard
@@ -45,7 +50,6 @@ module Think200
     rescue ActiveRecord::RecordNotFound
       raise "#{user} doesn't have a project number #{project_id}"
     end
-
 
     collected_results = {}
     proj.expectations.each do |expectation|

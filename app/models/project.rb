@@ -10,10 +10,6 @@
 #  user_id    :integer
 #
 
-require 'tempfile'
-require 'rspec'
-require 'rspec/core/formatters/json_formatter'
-
 class Project < ActiveRecord::Base
   has_many :apps
   has_many :requirements, through: :apps
@@ -46,4 +42,13 @@ class Project < ActiveRecord::Base
   def most_recent_test
     spec_runs.last
   end
+
+  def passed?
+    if expectations.empty?
+      nil
+    else
+      ! expectations.map{|e| e.passed?}.include?(false)
+    end
+  end
+
 end

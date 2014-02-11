@@ -2,25 +2,18 @@
   <li class="active">Projects</li>
 </ol>
 
-<h1 class="text-muted">Projects</h1>
-
-<table>
-  <tbody>
+    <div class="row">
     <% @projects.each do |project| %>
-      <tr>
-        <td>
-          <h2><%= link_to project.name, project %></h2>
-          <ul style="list-style-type: none; padding-left: 1em">
-            <% project.apps.each do |app| %>
-              <li><%= status_icon_for(app) %> <%= link_to app.name, app %></li>
-            <% end %>
-          </ul>
-        </td>
-      </tr>
+        <div class="thumbnail" style="width: 300px; float: left; margin-left: 30px">
+          <img data-src="holder.js/300x200" alt="Generic placeholder thumbnail">
+          <div class="caption">
+            <h3><%= link_to project.name, project %></h3>
+            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+            <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
+          </div>
+        </div>
     <% end %>
-  </tbody>
-</table>
+    </div>
 
-<br>
 
 <%= link_to 'New Project', new_project_path %>
