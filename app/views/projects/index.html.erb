@@ -2,18 +2,12 @@
   <li class="active">Projects</li>
 </ol>
 
-
 <div class="row">
-  <% @projects.each do |project| %>
-      <div class="thumbnail" style="width: 225px; float: left; margin-left: 30px">
-        <img src="http://placehold.it/225x150">
-        <div class="caption">
-          <h1 class="thumbnail-title"><%= link_to project.name, project %></h1>
-          <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-          <p><a href="#" class="btn btn-primary" role="button">Button</a> <a href="#" class="btn btn-default" role="button">Button</a></p>
-        </div>
-      </div>
-  <% end %>
+  <%= render partial: 'tile', collection: @projects %>
 </div>
 
-<%= link_to 'New Project...', new_project_path %>
+<div class="row">
+  <div class="col-md-2">
+    <%= link_to 'New Project...', new_project_path %>
+  </div>
+</div>
