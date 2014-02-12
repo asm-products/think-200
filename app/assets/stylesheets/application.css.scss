@@ -17,11 +17,8 @@
     color: $alert-danger-text;
 }
 
-// .panel-muted {
-//     a {
-//         color: $text-muted;
-//     }
-//     .panel-body {
-//         color: $text-muted;
-//     }
-// }
+.panel-quiet {
+    h3, .panel-body {
+        color: #999999;
+    }
+}

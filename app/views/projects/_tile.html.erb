@@ -1,9 +1,9 @@
 <% 
   panel_class = case tile.passed?
   when nil  # No tests
-    'panel-default panel-muted'
+    'panel-default panel-quiet'
   when true # Tests all pass
-    'panel-default'
+    'panel-success'
   else
     'panel-danger' 
   end
@@ -21,7 +21,7 @@
   when nil  # No tests
     'question-sign'
   when true # Tests all pass
-    'ok-sign'
+    'ok'
   else
     'fire' 
   end
@@ -30,17 +30,22 @@
 <div class="<%= column_class %>">
   <div class="panel <%= panel_class %>">
     <div class="panel-heading">
-      <h3 class="panel-title"><%= glyphicon(glyph) %> <%= tile.name %></h3>
+      <h3 class="panel-title">
+        <%= glyphicon(glyph) %> <%= tile.name %> 
+        <% if tile.passed? == false %>
+          <span class="badge pull-right"><%= tile.failing_requirements.count %></span>
+        <% end %>
+      </h3>
     </div>
     <div class="panel-body">
       <% if tile.passed? %>
-        <%= image_tag 'logo-drawing.png', style: "opacity: 0.5; width: 132; height: 132; margin-left: auto; margin-right: auto" %>
+        <%= image_tag 'logo-drawing.png', style: "opacity: 0.3; width: 132; height: 132; margin-left: auto; margin-right: auto" %>
       <% elsif tile.passed? == false %>
         <% tile.failing_requirements.each do |r| %>
           <table>
             <tr>
               <td style="vertical-align: top"><%= failed_icon %></td>
-              <td><%= r.full_name_without_project %></td>
+              <td style="padding-bottom: 0.5em"><%= r.full_name_without_project %></td>
             </tr>
           </table>
         <% end %>
