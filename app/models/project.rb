@@ -35,14 +35,11 @@ class Project < ActiveRecord::Base
     self.user == user
   end
 
-  def passed?
-    true
-  end
-
   def most_recent_test
     spec_runs.last
   end
 
+  # Returns true, false, or nil.
   def passed?
     if expectations.empty?
       nil

@@ -1,5 +1,16 @@
+<% 
+  panel_class = case tile.passed?
+  when nil  # No tests
+    'panel-default panel-muted'
+  when true # Tests all pass
+    'panel-default'
+  else
+    'panel-danger' 
+  end
+%>
+
 <div class="col-md-3">
-  <div class="panel panel-default">
+  <div class="panel <%= panel_class %>">
     <div class="panel-heading">
       <h3 class="panel-title"><%= link_to tile.name, tile %></h3>
     </div>

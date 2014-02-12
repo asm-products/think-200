@@ -14,7 +14,10 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = current_user.projects
+    projects = current_user.projects
+    @passed_projects =     projects.select{ |p| p.passed? }
+    @failed_projects =     projects.select{ |p| p.passed? == false }
+    @unfinished_projects = projects.select{ |p| p.passed?.nil? }
   end
 
   # GET /projects/1
