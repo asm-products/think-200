@@ -18,6 +18,10 @@ class Requirement < ActiveRecord::Base
     name
   end
 
+  def full_name_without_project
+    "#{app.name} #{name}"
+  end
+
   def to_rspec
     result = "it '#{name}' do\n"
     expectations.each { |e| result += e.to_rspec.indent(2) }

@@ -7,15 +7,46 @@
   else
     'panel-danger' 
   end
+
+  column_class = case tile.passed?
+  when nil  # No tests
+    'col-md-3'
+  when true # Tests all pass
+    'col-md-3'
+  else
+    'col-md-3' 
+  end
+
+  glyph = case tile.passed?
+  when nil  # No tests
+    'question-sign'
+  when true # Tests all pass
+    'ok-sign'
+  else
+    'fire' 
+  end
 %>
 
-<div class="col-md-3">
+<div class="<%= column_class %>">
   <div class="panel <%= panel_class %>">
     <div class="panel-heading">
-      <h3 class="panel-title"><%= link_to tile.name, tile %></h3>
+      <h3 class="panel-title"><%= glyphicon(glyph) %> <%= tile.name %></h3>
     </div>
     <div class="panel-body">
-      Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.    
+      <% if tile.passed? %>
+        <%= image_tag 'logo-drawing.png', style: "opacity: 0.5; width: 132; height: 132; margin-left: auto; margin-right: auto" %>
+      <% elsif tile.passed? == false %>
+        <% tile.failing_requirements.each do |r| %>
+          <table>
+            <tr>
+              <td style="vertical-align: top"><%= failed_icon %></td>
+              <td><%= r.full_name_without_project %></td>
+            </tr>
+          </table>
+        <% end %>
+      <% else %>
+        Nothing here &mdash; add a test.
+      <% end %>
     </div>
   </div>
 </div>

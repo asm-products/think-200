@@ -48,4 +48,8 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def failing_requirements
+    requirements
+  end
+
 end

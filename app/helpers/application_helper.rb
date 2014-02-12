@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def failed_icon
-    '<span class="glyphicon glyphicon-remove" style="color: red"></span>'.html_safe
+    '<span class="glyphicon glyphicon-fire failed-icon"></span>'.html_safe
   end
 
   def passed_icon
