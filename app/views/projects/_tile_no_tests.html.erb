@@ -1,12 +1,5 @@
 <% 
-  panel_class = case tile.passed?
-  when nil  # No tests
-    'panel-default panel-quiet'
-  when true # Tests all pass
-    'panel-success'
-  else
-    'panel-danger' 
-  end
+  panel_class = 'panel-warning'
 
   column_class = case tile.passed?
   when nil  # No tests
