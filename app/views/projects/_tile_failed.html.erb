@@ -21,7 +21,7 @@
           </tr>
       <% end %>
       <% if tile.failing_requirements.count > limit %>
-        <tr><td></td><td><span class="text-muted">more...</span></td></tr>
+        <tr><td></td><td><small><%= tile.failing_requirements.count - limit %> more...</small></td></tr>
       <% end %>
     </table>
     </div>
