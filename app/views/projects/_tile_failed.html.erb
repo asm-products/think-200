@@ -1,0 +1,30 @@
+<% 
+  panel_class = 'panel-danger' 
+  column_class = 'col-md-3' 
+  glyph = 'fire' 
+  limit = 2
+%>
+
+<div class="<%= column_class %>">
+  <div class="panel <%= panel_class %>">
+    <div class="panel-heading">
+      <h3 class="panel-title">          
+        <span class="label label-danger"><%= tile.failing_requirements.count %></span>
+        <%= tile.name %>
+      </h3>
+    </div>
+    <div class="panel-body">
+    <table>
+      <% tile.failing_requirements.limit(limit).each do |r| %>
+          <tr>
+            <td style="vertical-align: top"><%= failed_icon %></td>
+            <td style="padding-bottom: 0.5em"><%= r.full_name_without_project %></td>
+          </tr>
+      <% end %>
+      <% if tile.failing_requirements.count > limit %>
+        <tr><td></td><td><%= link_to 'more...', project_path(tile) %></td></tr>
+      <% end %>
+    </table>
+    </div>
+  </div>
+</div>
