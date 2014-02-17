@@ -31,10 +31,13 @@
   <div class="panel <%= panel_class %>">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <%= glyphicon(glyph) %> <%= tile.name %> 
+          
         <% if tile.passed? == false %>
-          <span class="badge pull-right"><%= tile.failing_requirements.count %></span>
+          <span class="label label-danger"><%= tile.failing_requirements.count %></span>
+        <% else %>
+          <%= glyphicon(glyph) %>
         <% end %>
+        <%= tile.name %>
       </h3>
     </div>
     <div class="panel-body">
