@@ -31,7 +31,7 @@ GEM
     arel (4.0.2)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
-    bootstrap-sass (3.0.3.0)
+    bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
     builder (3.1.4)
     capistrano (3.1.0)
@@ -79,7 +79,7 @@ GEM
       activerecord (>= 4.0.0)
     hike (1.2.3)
     i18n (0.6.9)
-    jbuilder (1.5.3)
+    jbuilder (2.0.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
     jquery-rails (3.1.0)
@@ -238,20 +238,20 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
-  bcrypt-ruby (~> 3.1)
-  bootstrap-sass (~> 3.0.3)
+  bcrypt-ruby
+  bootstrap-sass
   capistrano (~> 3.1.0)
   capistrano-bundler
   capistrano-rails
   capistrano-rvm
-  coffee-rails (~> 4.0)
+  coffee-rails
   devise (= 3.2.2)
-  figaro (~> 0.7)
-  font-awesome-sass (~> 4.0)
-  friendly_id (~> 5.0)
-  jbuilder (~> 1.5)
-  jquery-rails (~> 3.0)
-  kaminari (~> 0.15)
+  figaro
+  font-awesome-sass
+  friendly_id
+  jbuilder
+  jquery-rails
+  kaminari
   newrelic_rpm
   pg
   pry-rails
@@ -265,8 +265,8 @@ DEPENDENCIES
   rspec
   rspec-rails
   rspec-webservice_matchers
-  sass-rails (~> 4.0)
+  sass-rails
   sdoc
-  turbolinks (~> 2.1)
-  uglifier (~> 2.4)
+  turbolinks
+  uglifier
   whenever
