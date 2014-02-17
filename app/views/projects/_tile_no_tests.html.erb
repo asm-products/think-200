@@ -1,0 +1,47 @@
+<% 
+  panel_class = case tile.passed?
+  when nil  # No tests
+    'panel-default panel-quiet'
+  when true # Tests all pass
+    'panel-success'
+  else
+    'panel-danger' 
+  end
+
+  column_class = case tile.passed?
+  when nil  # No tests
+    'col-md-3'
+  when true # Tests all pass
+    'col-md-3'
+  else
+    'col-md-3' 
+  end
+
+  glyph = case tile.passed?
+  when nil  # No tests
+    'question-sign'
+  when true # Tests all pass
+    'ok'
+  else
+    'fire' 
+  end
+%>
+
+<div class="<%= column_class %>">
+  <div class="panel <%= panel_class %> project-tile" data-url="<%= project_path(tile) %>">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+          
+        <% if tile.passed? == false %>
+          <span class="label label-danger"><%= tile.failing_requirements.count %></span>
+        <% else %>
+          <%= glyphicon(glyph) %>
+        <% end %>
+        <%= tile.name %>
+      </h3>
+    </div>
+    <div class="panel-body">
+        Add a test to get started
+    </div>
+  </div>
+</div>

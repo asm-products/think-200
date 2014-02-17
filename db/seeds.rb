@@ -108,7 +108,7 @@ redirect3 = Expectation.create!(
 
 
 # The 'My App' demo code
-think200   = Project.create!(name: 'Think 200', user: robb)
+think200   = Project.create!(name: 'Demo App', user: robb)
 myapp      = App.create!(name: 'My App', project: think200)
 
 is_online  = Requirement.create!(name: 'is online', app: myapp)
@@ -149,7 +149,15 @@ Expectation.create!(
   )
 
 
+# Projects in an unfinished state
+Project.create!(name: 'Best Korea',  user: robb)
+Project.create!(name: 'CodePage.io', user: robb)
 
+# Semi-finished
+think_200 = Project.create!(name: 'Think 200', user: robb)
+t200_api  = App.create!(name: 'API', project: think_200)
+t200_site = App.create!(name: 'website', project: think_200)
+Requirement.create!(name: 'is online', app: t200_site)
 
 
 # Prompt for test data
