@@ -2,18 +2,18 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 gem 'rails', '4.0.2'
-gem 'sass-rails', '~> 4.0'
-gem 'uglifier', '~> 2.4'
-gem 'coffee-rails', '~> 4.0'
-gem 'jquery-rails', '~> 3.0'
-gem 'turbolinks', '~> 2.1'
-gem 'jbuilder', '~> 1.5'
-gem 'bcrypt-ruby', '~> 3.1'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'jquery-rails'
+gem 'turbolinks'
+gem 'jbuilder'
+gem 'bcrypt-ruby'
 gem 'resque'
 gem 'resque-web', require: 'resque_web'
 gem 'resque_solo'
 gem 'newrelic_rpm'
-gem 'figaro', '~> 0.7'     # env variables
+gem 'figaro'
 gem 'pg'
 gem 'pry-rails'
 gem 'whenever', :require => false
@@ -42,13 +42,13 @@ group :development do
 end
 
 # Paging
-gem 'kaminari', '~> 0.15'
+gem 'kaminari'
 
 # Slugs and friendly id's
-gem 'friendly_id', '~> 5.0'
+gem 'friendly_id'
 
 # font-awesome
-gem 'font-awesome-sass', '~> 4.0'# Devise
+gem 'font-awesome-sass'
 gem 'devise', '3.2.2'
 
-gem 'bootstrap-sass', '~> 3.0.3'
+gem 'bootstrap-sass'
