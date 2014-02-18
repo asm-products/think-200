@@ -8,14 +8,7 @@
     'panel-danger' 
   end
 
-  column_class = case tile.passed?
-  when nil  # No tests
-    'col-md-2'
-  when true # Tests all pass
-    'col-md-3'
-  else
-    'col-md-3' 
-  end
+  column_class = 'col-md-3 col-sm-4'
 
   glyph = case tile.passed?
   when nil  # No tests

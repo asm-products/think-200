@@ -6,7 +6,7 @@
 <% else %>
 
     <li><%= link_to 'Projects', projects_path %></li>
-    <li><%= link_to "Edit your account", edit_user_registration_path %></li>
+    <li><%= link_to "Your account", edit_user_registration_path %></li>
     <% if current_user.admin? %>
         <li><%= link_to "Admin", admin_root_path %></li>
     <% end %>

@@ -1,6 +1,6 @@
 <% 
   panel_class = 'panel-danger' 
-  column_class = 'col-md-3' 
+  column_class = 'col-md-3 col-sm-4' 
   glyph = 'fire' 
   limit = 2
 %>
@@ -12,7 +12,7 @@
         <%= glyphicon('fire') %> <%= tile.name %>
       </h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body text-danger">
     <table>
       <% tile.failing_requirements.limit(limit).each do |r| %>
           <tr>
