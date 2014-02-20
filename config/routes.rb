@@ -9,7 +9,9 @@ Think200::Application.routes.draw do
 
   resources :apps
 
-  resources :projects
+  resources :projects do
+    get 'export'
+  end
 
   root "pages#home"    
   get "home", to: "pages#home", as: "home"

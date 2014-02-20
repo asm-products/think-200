@@ -149,11 +149,30 @@ Expectation.create!(
   )
 
 
+#
+# Project: CodePage.io
+#
+codepage    = Project.create!(name: 'CodePage.io', user: robb)
+website     = App.create!(name: 'website', project: codepage)
+on_assembly = Requirement.create!(name: 'is hosted by Assembly', app: website)
+Expectation.create!(
+  subject:     'http://codepage.io',
+  matcher:     Matcher.find_by_code('redirect_temporarily_to'),
+  expected:    'https://assemblymade.com/code-pagecodepageio',
+  requirement: on_assembly
+  )
+Expectation.create!(
+  subject:     'https://assemblymade.com/code-pagecodepageio',
+  matcher:     Matcher.find_by_code('be_status'),
+  expected:    '200',
+  requirement: on_assembly
+  )
+
+
 # Projects in an unfinished state
 Project.create!(name: 'Best Korea',  user: robb)
-Project.create!(name: 'CodePage.io', user: robb)
 
-# Semi-finished
+# Project in a Semi-finished state
 think_200 = Project.create!(name: 'Think 200', user: robb)
 t200_api  = App.create!(name: 'API', project: think_200)
 t200_site = App.create!(name: 'website', project: think_200)

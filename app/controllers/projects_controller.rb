@@ -11,6 +11,23 @@ class ProjectsController < ApplicationController
     redirect_to :back
   end
 
+  def export
+    project = current_user.projects.find(params[:project_id])
+    if params[:format] == 'txt'
+      send_data project.to_plaintext,
+        filename: project.text_filename,
+        type: 'text/plain',
+        disposition: 'inline'      
+    else
+      # This is how GitHub does the "raw" file view. See headers, e.g.
+      # https://raw.github.com/dogweather/naturally/master/spec/naturally_spec.rb
+      send_data project.to_rspec,
+        filename: project.rspec_filename,
+        type: 'text/plain',
+        disposition: 'inline'
+    end
+  end
+
   # GET /projects
   # GET /projects.json
   def index
@@ -79,16 +96,13 @@ class ProjectsController < ApplicationController
 
   private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_project
-      @project = Project.find(params[:id])
-      unless @project.owned_by? current_user
-        @project = nil
-      end
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_project
+    @project = current_user.projects.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def project_params
-      params.require(:project).permit(:name)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def project_params
+    params.require(:project).permit(:name)
+  end
 end

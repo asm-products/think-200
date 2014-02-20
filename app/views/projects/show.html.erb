@@ -5,8 +5,19 @@
 
 <p id="notice"><%= notice %></p>
 
+
 <h1><%= @project.name %></h1>
-<p><%= link_to 'Edit', edit_project_path(@project) %></p>
+<p>
+    <small>
+    <%= link_to 'Edit', edit_project_path(@project) %>
+    <span class="text-muted">|</span>
+    Export: 
+    <%= link_to 'RSpec', project_export_path(@project, format: 'rspec') %>
+    <%= link_to 'Text',  project_export_path(@project, format: 'txt') %>
+    </small>
+</p>
+
+
 
 <h2 class="text-muted">Apps</h2>
 
