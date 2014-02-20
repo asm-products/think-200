@@ -8,8 +8,13 @@
 
 <h1><%= @project.name %></h1>
 <p>
+    <small>
     <%= link_to 'Edit', edit_project_path(@project) %>
-    Download: <%= link_to 'RSpec', project_export_path(@project) %>
+    <span class="text-muted">|</span>
+    Export: 
+    <%= link_to 'RSpec', project_export_path(@project, format: 'rspec') %>
+    <%= link_to 'Text',  project_export_path(@project, format: 'txt') %>
+    </small>
 </p>
 
 

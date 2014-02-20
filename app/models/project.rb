@@ -23,48 +23,64 @@ class Project < ActiveRecord::Base
     result = <<-END.strip_heredoc
       #
       # #{rspec_filename}
-      # 
-      # Project: #{name}
-      # Generated #{Time.now} by Think200.com
+      #
+      # To run these tests;
+      #   1. Install Ruby >= 2.0.0
+      #   2. Install RSpec: $ gem install rspec-webservice_matchers
+      #   3. Save this page as "#{rspec_filename}"
+      #   4. Run RSpec:     $ rspec ./#{rspec_filename}
+      #
+      # Detailed instructions: http://think200.com/rspec-faq
+      # Generated on #{Time.zone.now.to_s(:db)}
       #
       require 'rspec/webservice_matchers'
 
       describe '#{name}' do
     END
-    # apps.each { |e| result += e.to_rspec.indent(2) }
-    contexts = apps.map { |a| a.to_rspec.indent(2) }
-    result + contexts.join("\n") + "end\n"
-  end
-
-  def to_plaintext
-    result = "Project \"#{name}\":\n"
-    apps.each { |e| result += e.to_plaintext.indent(2) }
-    result
-  end
-
-  def owned_by?(user)
-    self.user == user
-  end
-
-  def most_recent_test
-    spec_runs.last
-  end
-
-  # Returns true, false, or nil.
-  def passed?
-    if expectations.empty?
-      nil
-    else
-      ! expectations.map{|e| e.passed?}.include?(false)
+      # apps.each { |e| result += e.to_rspec.indent(2) }
+      contexts = apps.map { |a| a.to_rspec.indent(2) }
+      result + contexts.join("\n") + "end\n"
     end
-  end
 
-  def failing_requirements
-    requirements
-  end
+    def to_plaintext
+      result = "Project \"#{name}\":\n"
+      apps.each { |e| result += e.to_plaintext.indent(2) }
+      result
+    end
 
-  def rspec_filename
-    name.underscore + '_spec.rb'
-  end
+    def owned_by?(user)
+      self.user == user
+    end
 
-end
+    def most_recent_test
+      spec_runs.last
+    end
+
+    # Returns true, false, or nil.
+    def passed?
+      if expectations.empty?
+        nil
+      else
+        ! expectations.map{|e| e.passed?}.include?(false)
+      end
+    end
+
+    def failing_requirements
+      requirements
+    end
+
+    def rspec_filename
+      name_slug + '_spec.rb'
+    end
+
+    def text_filename
+      name_slug + '.txt'
+    end
+
+
+    private
+    def name_slug
+      name.underscore.gsub(/[\. ]/, '_')
+    end
+
+  end
