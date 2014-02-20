@@ -5,8 +5,14 @@
 
 <p id="notice"><%= notice %></p>
 
+
 <h1><%= @project.name %></h1>
-<p><%= link_to 'Edit', edit_project_path(@project) %></p>
+<p>
+    <%= link_to 'Edit', edit_project_path(@project) %>
+    Download: <%= link_to 'RSpec', project_export_path(@project) %>
+</p>
+
+
 
 <h2 class="text-muted">Apps</h2>
 

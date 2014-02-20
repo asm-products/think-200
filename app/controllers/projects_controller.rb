@@ -11,6 +11,11 @@ class ProjectsController < ApplicationController
     redirect_to :back
   end
 
+  def export
+    project = current_user.projects.find(params[:project_id])
+    send_data project.to_rspec, filename: "#{project.name}_spec.rb", type: 'text/plain'
+  end
+
   # GET /projects
   # GET /projects.json
   def index
@@ -81,10 +86,7 @@ class ProjectsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params[:id])
-      unless @project.owned_by? current_user
-        @project = nil
-      end
+      @project = current_user.projects.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
