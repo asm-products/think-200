@@ -13,7 +13,10 @@ class ProjectsController < ApplicationController
 
   def export
     project = current_user.projects.find(params[:project_id])
-    send_data project.to_rspec, filename: "#{project.name}_spec.rb", type: 'text/plain'
+    send_data project.to_rspec, 
+      filename: project.name.gsub(' ', '_') + '_spec.rb', 
+      type: 'text/plain',
+      disposition: 'inline'
   end
 
   # GET /projects
