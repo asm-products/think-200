@@ -13,6 +13,8 @@ class ProjectsController < ApplicationController
 
   def export
     project = current_user.projects.find(params[:project_id])
+    # This is how GitHub does the "raw" file view. See headers, e.g.
+    # https://raw.github.com/dogweather/naturally/master/spec/naturally_spec.rb
     send_data project.to_rspec, 
       filename: project.name.gsub(' ', '_') + '_spec.rb', 
       type: 'text/plain',
