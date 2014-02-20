@@ -24,7 +24,8 @@ class Project < ActiveRecord::Base
       #
       # #{rspec_filename}
       #
-      # To run these tests;
+      # To run these tests:
+      #
       #   1. Install Ruby >= 2.0.0
       #   2. Install RSpec: $ gem install rspec-webservice_matchers
       #   3. Save this page as "#{rspec_filename}"
