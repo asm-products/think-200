@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
     # This is how GitHub does the "raw" file view. See headers, e.g.
     # https://raw.github.com/dogweather/naturally/master/spec/naturally_spec.rb
     send_data project.to_rspec, 
-      filename: project.name.gsub(' ', '_') + '_spec.rb', 
+      filename: project.rspec_filename, 
       type: 'text/plain',
       disposition: 'inline'
   end

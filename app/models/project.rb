@@ -20,9 +20,20 @@ class Project < ActiveRecord::Base
   validates :user, presence: true
 
   def to_rspec
-    result = "describe '#{name}' do\n"
-    apps.each { |e| result += e.to_rspec.indent(2) }
-    result + "end\n"
+    result = <<-END.strip_heredoc
+      #
+      # #{rspec_filename}
+      # 
+      # Project: #{name}
+      # Generated #{Time.now} by Think200.com
+      #
+      require 'rspec/webservice_matchers'
+
+      describe '#{name}' do
+    END
+    # apps.each { |e| result += e.to_rspec.indent(2) }
+    contexts = apps.map { |a| a.to_rspec.indent(2) }
+    result + contexts.join("\n") + "end\n"
   end
 
   def to_plaintext
@@ -50,6 +61,10 @@ class Project < ActiveRecord::Base
 
   def failing_requirements
     requirements
+  end
+
+  def rspec_filename
+    name.underscore + '_spec.rb'
   end
 
 end
