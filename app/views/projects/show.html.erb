@@ -1,9 +1,6 @@
-<ol class="breadcrumb">
-  <li><%= link_to 'Projects', projects_path %></li>
-  <li class="active"><%= @project.name %></li>
-</ol>
-
-<p id="notice"><%= notice %></p>
+<% if notice %>
+    <p id="notice"><%= notice %></p>
+<% end %>
 
 
 <h1><%= @project.name %></h1>
@@ -16,7 +13,6 @@
     <%= link_to 'Text',  project_export_path(@project, format: 'txt') %>
     </small>
 </p>
-
 
 
 <h2 class="text-muted">Apps</h2>

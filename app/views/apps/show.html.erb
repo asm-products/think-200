@@ -1,11 +1,7 @@
-<ol class="breadcrumb">
-  <li><%= link_to 'Projects', projects_path %></li>
-  <li><%= link_to @app.project.name, @app.project %></li>
-  <li class="active"><%= @app.name %></li>
-</ol>
+<% if notice %>
+    <p id="notice"><%= notice %></p>
+<% end %>
 
-
-<p id="notice"><%= notice %></p>
 
 <h1><%= status_icon_for(@app) %> <%= @app.project.name + ' ' + @app.name %></h1>
 
