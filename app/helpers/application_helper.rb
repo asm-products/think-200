@@ -1,7 +1,15 @@
 module ApplicationHelper
+  def is_active?(link_path)
+    if current_page?(link_path)
+      "active"
+    else
+      ""
+    end
+  end
+
   def title(value)
     unless value.nil?
-      @title = "#{value} | Think200"      
+      @title = "#{value} | Think200"
     end
   end
 
