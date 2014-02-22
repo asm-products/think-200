@@ -27,6 +27,6 @@ class App < ActiveRecord::Base
   end
 
   def passed?
-    ! requirements.all.map{|e| e.passed?}.include?(false)
+    ! requirements.map{|e| e.passed?}.include?(false)
   end
 end
