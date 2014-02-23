@@ -20,6 +20,7 @@
         well as its API service.
       </span>
     </div>
+
     <% if @project.persisted? %>
       <%= link_to delete_icon + ' Delete', @project, 
         method: :delete, 
@@ -27,6 +28,7 @@
         class: 'btn btn-danger pull-right'
       %>
     <% end %>
+    
     <div class="actions">
       <%= f.submit class: 'btn btn-primary' %> or 
       <%= link_to 'cancel', cancel_dest %>
