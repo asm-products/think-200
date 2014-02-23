@@ -31,16 +31,16 @@ module ApplicationHelper
 
 
   def failed_icon
-    '<span class="glyphicon glyphicon-fire failed-icon"></span>'.html_safe
+    '<span class="fa fa-warning fa-fw failed-icon"></span>'.html_safe
   end
 
   def passed_icon
-    '<span class="glyphicon glyphicon-ok" style="color: green"></span>'.html_safe
+    '<span class="fa fa-check fa-fw" style="color: green"></span>'.html_safe
   end
 
   def status_icon_for(thing)
     if thing.passed?.nil?
-      ''
+      font_awesome('ellipsis-h', 'fa-fw text-muted')
     elsif thing.passed?
       passed_icon
     else
