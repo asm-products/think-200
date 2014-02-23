@@ -9,6 +9,11 @@ ready = ->
     $('.project-tile').hover ->
         $(@).toggleClass( 'project-tile-active' )
 
+    # A simple way to set the focus in the right input.
+    # Each page is responsible for adding the focus-here
+    # class to the appropriate element.
+    $('.focus-here').focus()
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
