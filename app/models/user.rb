@@ -52,7 +52,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
          
-  has_many :projects
+  has_many :projects, dependent: :destroy
 
   # Pagination
   paginates_per 100
