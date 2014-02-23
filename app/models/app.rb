@@ -14,6 +14,8 @@ class App < ActiveRecord::Base
   belongs_to :project
   has_many   :requirements, dependent: :destroy
 
+  default_scope { order(:name) }
+
   def to_rspec
     result = "context '#{name}' do\n"
     requirements.each { |e| result += e.to_rspec.indent(2) }

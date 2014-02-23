@@ -13,6 +13,8 @@
 class Requirement < ActiveRecord::Base
   belongs_to :app
   has_many   :expectations, dependent: :destroy
+
+  default_scope { order(:name) }
   
   def to_s
     name
