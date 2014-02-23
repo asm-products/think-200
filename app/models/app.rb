@@ -12,7 +12,7 @@
 
 class App < ActiveRecord::Base
   belongs_to :project
-  has_many   :requirements
+  has_many   :requirements, dependent: :destroy
 
   def to_rspec
     result = "context '#{name}' do\n"

@@ -13,7 +13,8 @@
 #
 
 class Matcher < ActiveRecord::Base
-  has_many :expectations
+  has_many :expectations, dependent: :restrict_with_exception
+
   validates :code, :summary, uniqueness: true
   validates :code, :max_args, :min_args, :summary, :description, presence: true
 

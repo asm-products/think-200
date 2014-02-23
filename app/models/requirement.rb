@@ -12,7 +12,7 @@
 
 class Requirement < ActiveRecord::Base
   belongs_to :app
-  has_many   :expectations
+  has_many   :expectations, dependent: :destroy
   
   def to_s
     name

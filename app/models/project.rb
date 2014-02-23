@@ -11,11 +11,13 @@
 #
 
 class Project < ActiveRecord::Base
-  has_many :apps
+  has_many :apps, dependent: :destroy
+  belongs_to :user
+
+  # Convenience functions
   has_many :requirements, through: :apps
   has_many :expectations, through: :requirements
   has_many :spec_runs
-  belongs_to :user
 
   validates :user, presence: true
   validates :name, presence: true
