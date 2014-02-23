@@ -173,7 +173,7 @@ Expectation.create!(
 Project.create!(name: 'Best Korea',  user: robb)
 
 # Project in a Semi-finished state
-think_200 = Project.create!(name: 'Think 200', user: robb)
+think_200 = Project.create!(name: APP_NAME, user: robb)
 t200_api  = App.create!(name: 'API', project: think_200)
 t200_site = App.create!(name: 'website', project: think_200)
 Requirement.create!(name: 'is online', app: t200_site)
