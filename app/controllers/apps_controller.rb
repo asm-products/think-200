@@ -2,12 +2,6 @@ class AppsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_app, only: [:show, :edit, :update, :destroy]
 
-  # GET /apps
-  # GET /apps.json
-  def index
-    @apps = App.all
-  end
-
   # GET /apps/1
   # GET /apps/1.json
   def show
@@ -65,7 +59,7 @@ class AppsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_app
-      @app = App.find(params[:id])
+      @app = current_user.apps.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

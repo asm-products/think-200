@@ -53,6 +53,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :confirmable
          
   has_many :projects, dependent: :destroy
+  has_many :apps, through: :projects
 
   # Pagination
   paginates_per 100

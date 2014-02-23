@@ -29,7 +29,7 @@
     box-shadow: 0 0 4px 1px #ddd;
 }
 
-.cards h1 {
+.cards h1, .cards h2 {
     color: $text-muted;
     font-size: $font-size-base - 2px;
     font-weight: normal;

@@ -1,17 +1,25 @@
-
 <div class="row">
     <div class="col-sm-9">
         <h1 style="margin-top: 0"><%= @project.name %></h1>
 
-        <h2 class="text-muted">Apps</h2>
+        <div class="row">
 
-        <ul style="list-style-type: none; padding-left: 1em">
-            <% @project.apps.each do |app| %>
-                <li>
-                    <%= status_icon_for(app) %> <%= link_to app.name, app %>
-                </li>
-            <% end %>
-        </ul>
+            <div class="col-sm-2">
+                <%= link_to(font_awesome('plus') + ' New App', new_app_path) %>
+            </div>
+
+            <div class="col-sm-7 cards"> 
+                <h2 class="text-muted">Apps</h2>
+                <ul style="list-style-type: none; padding-left: 0em">
+                    <% @project.apps.each do |app| %>
+                        <li>
+                            <%= status_icon_for(app) %> <%= link_to app.name, app %>
+                        </li>
+                    <% end %>
+                </ul>
+            </div>    
+
+        </div>  
     </div>
 
     <div class="col-sm-3">
@@ -21,5 +29,4 @@
         <%= link_to 'RSpec', project_export_path(@project, format: 'rspec') %>
         <%= link_to 'Text',  project_export_path(@project, format: 'txt') %>
     </div>
-
 </div>
