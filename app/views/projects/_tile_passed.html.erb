@@ -24,12 +24,7 @@
   <div class="panel <%= panel_class %> project-tile" data-url="<%= project_path(tile) %>" data-class="<%= panel_class %>">
     <div class="panel-heading">
       <h3 class="panel-title">
-          
-        <% if tile.passed? == false %>
-          <span class="label label-danger"><%= tile.failing_requirements.count %></span>
-        <% else %>
-          <%= glyphicon(glyph) %>
-        <% end %>
+        <%= font_awesome 'check-square' %>
         <%= tile.name %>
       </h3>
     </div>

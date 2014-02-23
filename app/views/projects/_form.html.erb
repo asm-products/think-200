@@ -18,11 +18,11 @@
       <%= f.text_field :name, class: 'form-control' %>
       <span class="help-block">
         A collection of apps which should all be tested together. For example,
-        a <i><%= APP_NAME %></i> project would contain apps such as its API and this web site.
+        a “<%= APP_NAME %>” project would contain apps such as its API and this web site.
       </span>
     </div>
     <% if @project.persisted? %>
-      <%= link_to 'Delete', @project, 
+      <%= link_to font_awesome('times') + ' Delete', @project, 
         method: :delete, 
         role: 'button', 
         class: 'btn btn-danger btn-xs pull-right',
@@ -30,7 +30,7 @@
       %>
     <% end %>
     <div class="actions">
-      <%= f.submit class: 'btn btn-default' %> or 
+      <%= f.submit class: 'btn btn-primary' %> or 
       <%= link_to 'cancel', cancel_dest %>
     </div>
 <% end %>

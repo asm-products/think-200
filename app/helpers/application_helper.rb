@@ -23,6 +23,13 @@ module ApplicationHelper
     "<span class=\"glyphicon glyphicon-#{name} #{extra_classes}\"></span>".html_safe
   end
 
+  # <%= font_awesome('remove') %>
+  def font_awesome(name, extra_classes='')
+    "<span class=\"fa fa-#{name} #{extra_classes}\"></span>".html_safe
+  end
+
+
+
   def failed_icon
     '<span class="glyphicon glyphicon-fire failed-icon"></span>'.html_safe
   end

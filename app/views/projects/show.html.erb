@@ -1,22 +1,25 @@
-<h1><%= @project.name %></h1>
-<p>
-    <small>
-        <%= link_to 'Edit this project', edit_project_path(@project) %>
-        <span class="text-muted">|</span>
-        Export: 
+
+<div class="row">
+    <div class="col-sm-9">
+        <h1 style="margin-top: 0"><%= @project.name %></h1>
+
+        <h2 class="text-muted">Apps</h2>
+
+        <ul style="list-style-type: none; padding-left: 1em">
+            <% @project.apps.each do |app| %>
+                <li>
+                    <%= status_icon_for(app) %> <%= link_to app.name, app %>
+                </li>
+            <% end %>
+        </ul>
+    </div>
+
+    <div class="col-sm-3">
+        <%= link_to font_awesome('pencil', 'fa-fw')+' Edit this project', edit_project_path(@project) %>
+        <br>
+        <%= font_awesome('download', 'fa-fw') %> Export: 
         <%= link_to 'RSpec', project_export_path(@project, format: 'rspec') %>
         <%= link_to 'Text',  project_export_path(@project, format: 'txt') %>
-    </small>
-</p>
+    </div>
 
-
-<h2 class="text-muted">Apps</h2>
-
-<ul style="list-style-type: none; padding-left: 1em">
-    <% @project.apps.each do |app| %>
-        <li>
-            <%= status_icon_for(app) %> <%= link_to app.name, app %>
-        </li>
-    <% end %>
-</ul>
-
+</div>
