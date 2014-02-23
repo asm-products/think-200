@@ -8,6 +8,11 @@
 // @import "font-awesome";
 
 
+$content-bg:        #cccccc;
+$content-bg-active: #dddddd;
+
+$text-semi-muted:   darken($text-muted, 20%);
+
 
 .thumbnail-title {
     font-size: 150%;
@@ -26,7 +31,7 @@
 .project-tile {
     height: 180px;
     cursor: pointer;
-    box-shadow: 0 0 4px 1px #dddddd;
+    box-shadow: 0 0 4px 1px $content-bg;
     background-color: #fafafa;
     table {
         background-color: inherit;        
@@ -35,11 +40,11 @@
 
 .project-tile-active {
     background-color: white;
-    box-shadow: 0 0 5px 3px #e0e0e0;    
+    box-shadow: 0 0 5px 3px $content-bg-active;    
 }
 
 .cards h1, .cards h2 {
-    color: $text-muted;
+    color: $text-semi-muted;
     font-size: $font-size-base - 2px;
     font-weight: normal;
     text-transform: uppercase;
