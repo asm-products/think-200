@@ -6,7 +6,7 @@
 <% else %>
 
     <li class="<%= is_active?(projects_path) %>"><%= link_to 'Projects', projects_path %></li>
-    <li class="<%= is_active?(edit_user_registration_path) %>"><%= link_to "Your account", edit_user_registration_path %></li>
+    <li class="<%= is_active?(edit_user_registration_path) %>"><%= link_to "Account", edit_user_registration_path %></li>
     <% if current_user.admin? %>
         <li class="<%= is_active?(admin_root_path) %>"><%= link_to "Admin", admin_root_path %></li>
     <% end %>

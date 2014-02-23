@@ -27,3 +27,12 @@
     height: 180px;
     cursor: pointer;
 }
+
+.cards h1 {
+    color: $text-muted;
+    font-size: $font-size-base - 2px;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-top: 0.3em;
+}
