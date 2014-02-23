@@ -1,4 +1,6 @@
-<%= form_for(@project) do |f| %>
+
+
+<%= form_for @project, html: { role: 'form' } do |f| %>
   <% if @project.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
@@ -11,11 +13,12 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: 'form-control' %>
+    </div>
+    <div class="actions">
+      <%= f.submit class: 'btn btn-default' %> or 
+      <%= link_to 'cancel', cancel_dest %>
+    </div>
 <% end %>
