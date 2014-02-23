@@ -18,6 +18,8 @@ class Project < ActiveRecord::Base
   belongs_to :user
 
   validates :user, presence: true
+  validates :name, presence: true
+  validates :name, uniqueness: { scope: :user_id }
 
   def to_rspec
     result = <<-END.strip_heredoc
