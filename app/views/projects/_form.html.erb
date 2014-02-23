@@ -21,6 +21,14 @@
         a <i><%= APP_NAME %></i> project would contain apps such as its API and this web site.
       </span>
     </div>
+    <% if @project.persisted? %>
+      <%= link_to 'Delete', @project, 
+        method: :delete, 
+        role: 'button', 
+        class: 'btn btn-danger btn-xs pull-right',
+        style: 'margin-top: 4px' 
+      %>
+    <% end %>
     <div class="actions">
       <%= f.submit class: 'btn btn-default' %> or 
       <%= link_to 'cancel', cancel_dest %>
