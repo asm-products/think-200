@@ -10,6 +10,8 @@ class AppsController < ApplicationController
   # GET /apps/new
   def new
     @app = App.new
+    @project = current_user.projects.find(params[:project_id])
+    @app.project = @project
   end
 
   # GET /apps/1/edit
