@@ -27,6 +27,7 @@
         <br>
         <%= font_awesome('download', 'fa-fw') %> Export: 
         <%= link_to 'RSpec', project_export_path(@project, format: 'rspec') %>
+        <span class="text-muted">|</span>
         <%= link_to 'Text',  project_export_path(@project, format: 'txt') %>
     </div>
 </div>

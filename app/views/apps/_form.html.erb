@@ -20,11 +20,10 @@
       </span>
     </div>
     <% if @app.persisted? %>
-      <%= link_to font_awesome('times') + ' Delete', @app, 
+      <%= link_to delete_icon + ' Delete', @app, 
         method: :delete, 
         role: 'button', 
-        class: 'btn btn-danger btn-xs pull-right',
-        style: 'margin-top: 4px' 
+        class: 'btn btn-danger pull-right'
       %>
     <% end %>
     <div class="actions">

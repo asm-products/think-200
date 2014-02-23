@@ -7,9 +7,20 @@ module ApplicationHelper
     end
   end
 
-  def title(value)
-    unless value.nil?
-      @title = "#{value} | Think200"
+  # Set the page's HTML title.
+  # * value: just the page's local name.
+  #
+  # Responsible for encapsulating how the HTML title is
+  # formatted.
+  # 
+  # A method with side effects. Sets the @title variable
+  # which is picked up in the Application Layout for the
+  # HTML title element.
+  def title(value: nil)
+    if value.nil?
+      APP_NAME
+    else
+      @title = "#{value} | #{APP_NAME}"
     end
   end
 
@@ -18,25 +29,24 @@ module ApplicationHelper
     "<input type=\"button\" value=\"#{label}\" class=\"btn #{classes}\" onclick=\"location.href='#{path}';\">".html_safe
   end
 
-  # <%= glyphicon('remove') %>
-  def glyphicon(name, extra_classes='')
-    "<span class=\"glyphicon glyphicon-#{name} #{extra_classes}\"></span>".html_safe
-  end
-
   # <%= font_awesome('remove') %>
   def font_awesome(name, extra_classes='')
     "<span class=\"fa fa-#{name} #{extra_classes}\"></span>".html_safe
   end
 
 
-
   def failed_icon
-    '<span class="fa fa-warning fa-fw failed-icon"></span>'.html_safe
+    font_awesome 'warning', 'fa-fw failed-icon'
   end
 
   def passed_icon
-    '<span class="fa fa-check fa-fw" style="color: green"></span>'.html_safe
+    font_awesome 'fa-check', 'fa-fw passed_icon'
   end
+
+  def delete_icon
+    font_awesome 'trash-o'
+  end
+
 
   def status_icon_for(thing)
     if thing.passed?.nil?
