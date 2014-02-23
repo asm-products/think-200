@@ -7,7 +7,7 @@ ready = ->
         window.location = $(@).data('url')
 
     $('.project-tile').hover ->
-        $(@).toggleClass( $(@).data('class') + " panel-default" )
+        $(@).toggleClass( 'project-tile-active' )
 
 
 $(document).ready(ready)

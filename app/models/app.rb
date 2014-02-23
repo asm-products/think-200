@@ -14,6 +14,9 @@ class App < ActiveRecord::Base
   belongs_to :project
   has_many   :requirements, dependent: :destroy
 
+  validates :name, presence: true
+  validates :name, uniqueness: { scope: :project_id }
+
   default_scope { order(:name) }
 
   def to_rspec

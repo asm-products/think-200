@@ -1,4 +1,4 @@
-<%= form_for(@app) do |f| %>
+<%= form_for @app, html: { role: 'form' } do |f| %>
   <% if @app.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@app.errors.count, "error") %> prohibited this app from being saved:</h2>
@@ -11,11 +11,24 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field form-group">
+      <%= f.label :name, 'App name' %>
+      <%= f.text_field :name, class: 'form-control' %>
+      <span class="help-block">
+        A program to be monitored and tested. E.g., an API server, a web app, or and
+        online app store.
+      </span>
+    </div>
+    <% if @app.persisted? %>
+      <%= link_to font_awesome('times') + ' Delete', @app, 
+        method: :delete, 
+        role: 'button', 
+        class: 'btn btn-danger btn-xs pull-right',
+        style: 'margin-top: 4px' 
+      %>
+    <% end %>
+    <div class="actions">
+      <%= f.submit class: 'btn btn-primary' %> or 
+      <%= link_to 'cancel', cancel_dest %>
+    </div>
 <% end %>

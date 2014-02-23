@@ -26,7 +26,16 @@
 .project-tile {
     height: 180px;
     cursor: pointer;
-    box-shadow: 0 0 4px 1px #ddd;
+    box-shadow: 0 0 4px 1px #dddddd;
+    background-color: #fafafa;
+    table {
+        background-color: inherit;        
+    }
+}
+
+.project-tile-active {
+    background-color: white;
+    box-shadow: 0 0 5px 3px #e0e0e0;    
 }
 
 .cards h1, .cards h2 {
