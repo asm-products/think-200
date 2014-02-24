@@ -2,6 +2,17 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+
+do_poll = ->
+    $.post('/ajax/queue_status')
+        .done( (data)-> 
+            console.log('done: '+data.project_list))
+        .fail( ->
+            console.log('fail'))
+        .always( -> 
+            window.think200_is_polling = true
+            setTimeout(do_poll, 5000))
+
 ready = ->
     $('.project-tile').click ->
         Turbolinks.visit( $(@).data('url') )
@@ -13,6 +24,12 @@ ready = ->
     # Each page is responsible for adding the focus-here
     # class to the appropriate element.
     $('.focus-here').focus()
+
+    # CoffeeScript executes this although all the 
+    # objects are still live. So we need to make sure
+    # not to start multiple polling tasks.
+    if not window.think200_is_polling?
+        do_poll()
 
 
 $(document).ready(ready)
