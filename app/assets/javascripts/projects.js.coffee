@@ -11,7 +11,7 @@ do_poll = ->
             console.log('fail'))
         .always( -> 
             window.think200_is_polling = true
-            setTimeout(do_poll, 5000))
+            setTimeout(do_poll, 10000))  # Every 10 seconds
 
 ready = ->
     $('.project-tile').click ->

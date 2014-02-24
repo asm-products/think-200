@@ -8,8 +8,8 @@
 // @import "font-awesome";
 
 
-$content-bg:        #cccccc;
-$content-bg-active: #dddddd;
+$content-bg-active: #ffffff;
+$content-bg:        mix($body-bg, $content-bg-active);
 
 $text-semi-muted:   darken($text-muted, 20%);
 
@@ -36,16 +36,16 @@ $text-semi-muted:   darken($text-muted, 20%);
 .project-tile {
     height: 180px;
     cursor: pointer;
-    box-shadow: 0 0 4px 1px $content-bg;
-    background-color: #fafafa;
+    box-shadow: 0 0 4px 1px #bbb;
+    background-color: $content-bg;
     table {
         background-color: inherit;        
     }
 }
 
 .project-tile-active {
-    background-color: white;
-    box-shadow: 0 0 5px 3px $content-bg-active;    
+    background-color: $content-bg-active;
+    box-shadow: 0 0 5px 3px #bbb;    
 }
 
 .cards h1, .cards h2 {
