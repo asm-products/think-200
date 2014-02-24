@@ -4,7 +4,7 @@
 
 
 do_poll = ->
-    $.post('/ajax/queue_status')
+    $.post('/beta/ajax/queue_status')
         .done( (data)-> 
             console.log('done: '+data.project_list))
         .fail( ->
