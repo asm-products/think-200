@@ -4,7 +4,7 @@
 
 ready = ->
     $('.project-tile').click ->
-        window.location = $(@).data('url')
+        Turbolinks.visit( $(@).data('url') )
 
     $('.project-tile').hover ->
         $(@).toggleClass( 'project-tile-active' )
