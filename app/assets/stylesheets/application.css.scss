@@ -14,6 +14,10 @@ $content-bg:        mix($body-bg, $content-bg-active, 15%);
 $text-semi-muted:   darken($text-muted, 20%);
 
 
+#config-data {
+    display: none;
+}
+
 .thumbnail-title {
     font-size: 150%;
 }

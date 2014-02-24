@@ -9,11 +9,7 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-
-    <div id="config-data">
-        <div id="api-query"   data-api-query="<%= @api_query %>"></div>
-        <div id="path-prefix" data-path-prefix="<%= Rails.env.production? ? '/beta' : '' %>"></div>
-    </div>
+    <%= render 'layouts/config_data' %>
 
     <div id="wrap">
       <header>
