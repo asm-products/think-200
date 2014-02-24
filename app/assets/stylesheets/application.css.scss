@@ -9,7 +9,7 @@
 
 
 $content-bg-active: #ffffff;
-$content-bg:        mix($body-bg, $content-bg-active);
+$content-bg:        mix($body-bg, $content-bg-active, 15%);
 
 $text-semi-muted:   darken($text-muted, 20%);
 
@@ -36,7 +36,7 @@ $text-semi-muted:   darken($text-muted, 20%);
 .project-tile {
     height: 180px;
     cursor: pointer;
-    box-shadow: 0 0 4px 1px #bbb;
+    box-shadow: 0 0 4px 0px #bbb;
     background-color: $content-bg;
     table {
         background-color: inherit;        
@@ -50,7 +50,7 @@ $text-semi-muted:   darken($text-muted, 20%);
     // box-shadow: 0 0 5px 3px #bbb;    
 
     // This changes the shadow to the link color.
-    box-shadow: 0 0 4px 1px $link-hover-color;
+    box-shadow: 0 0 4px 0px #999;
 }
 
 .cards h1, .cards h2 {
