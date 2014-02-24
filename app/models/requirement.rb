@@ -14,6 +14,9 @@ class Requirement < ActiveRecord::Base
   belongs_to :app
   has_many   :expectations, dependent: :destroy
 
+  validates :app_id, presence: true
+  validates :name,   presence: true
+
   default_scope { order(:name) }
   
   def to_s

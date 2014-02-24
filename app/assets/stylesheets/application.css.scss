@@ -18,8 +18,13 @@ $text-semi-muted:   darken($text-muted, 20%);
     font-size: 150%;
 }
 
+
 .failed-icon {
     color: $alert-danger-text;
+}
+
+.passed-icon {
+    color: $alert-success-text;
 }
 
 .panel-quiet {

@@ -40,7 +40,7 @@ module ApplicationHelper
   end
 
   def passed_icon
-    font_awesome 'fa-check', 'fa-fw passed_icon'
+    font_awesome 'check',   'fa-fw passed-icon'
   end
 
   def delete_icon

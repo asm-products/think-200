@@ -22,10 +22,11 @@ class AppsController < ApplicationController
   # POST /apps.json
   def create
     @app = App.new(app_params)
+    @project = @app.project
 
     respond_to do |format|
       if @app.save
-        format.html { redirect_to @app, notice: 'App was successfully created.' }
+        format.html { redirect_to @project, notice: 'App was successfully created.' }
         format.json { render action: 'show', status: :created, location: @app }
       else
         format.html { render action: 'new' }
@@ -66,6 +67,6 @@ class AppsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def app_params
-      params.require(:app).permit(:name)
+      params.require(:app).permit(:name, :project_id)
     end
 end

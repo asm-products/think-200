@@ -7,7 +7,7 @@ Think200::Application.routes.draw do
 
   resources :requirements
 
-  resources :apps
+  resources :apps, except: [:index]
 
   resources :projects do
     get 'export'

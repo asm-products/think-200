@@ -12,6 +12,8 @@
   <% end %>
 
     <div class="field form-group">
+      <%= f.hidden_field :project_id %>
+      
       <%= f.label :name, 'App name' %>
       <%= f.text_field :name, class: 'form-control focus-here' %>
       <span class="help-block">
