@@ -5,7 +5,13 @@
     <title><%= @title || APP_NAME %></title>
     <%= favicon_link_tag 'favicon.ico' %>
     <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+
+    <%# Pass information to javascript %>
+    <script>
+      window.think200_path_prefix = '<%= Rails.env.production? ? '/beta' : '' %>';
+    </script>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+
     <%= csrf_meta_tags %>
   </head>
   <body>
