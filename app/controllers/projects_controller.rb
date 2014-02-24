@@ -35,6 +35,7 @@ class ProjectsController < ApplicationController
     @passed_projects =     projects.select{ |p| p.passed? }
     @failed_projects =     projects.select{ |p| p.passed? == false }
     @unfinished_projects = projects.select{ |p| p.passed?.nil? }
+    @api_query = 'queue_status'
   end
 
   # GET /projects/1
