@@ -5,20 +5,23 @@ class AjaxController < ApplicationController
     projects = current_user.projects
     data = {}
 
+    # A list of project id's
     data['project_list'] = projects.map{ |p| p.id }
-    data['status']       = {}
+
+    # a map of id to true/false if currently working
+    data['working'] = {}
 
     projects.each do |p|
-      data['status'][p.id] = case rand(9)
-        when 0..2
-          'working'
-        when 3..5
-          'passed'
-        when 6..8
-          'failed'
+      data['working'][p.id] = case rand(2)
+        when 0
+          'true'
+        when 1
+          'false'
         end
     end
 
     render json: data.to_json
   end
+
+
 end

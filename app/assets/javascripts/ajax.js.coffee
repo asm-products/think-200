@@ -1,22 +1,35 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-do_poll = ->
-    query  = $('#api-query').data('api-query')
-    prefix = $('#path-prefix').data('path-prefix')
-    console.debug("Query: #{query}")
+POLL_FREQUENCY = 2000
 
-    if query
-        $.post(prefix + '/ajax/' + query)
-            .done( (data)-> 
-                console.debug('done: ' + data.project_list))
-            .fail( ->
-                console.debug('fail'))
-            .always( -> 
-                window.think200_is_polling = true
-                setTimeout(do_poll, 10000))  # Every 10 seconds
-    else
-        delete window.think200_is_polling
+
+set_icon = (project_id, is_working) ->
+  span      = $("#icon-#{project_id}")
+  orig_icon = span.data('icon-class')
+  
+  if is_working == 'true'
+    span.removeClass().addClass('fa fa-fw fa-spinner fa-spin')
+  else
+    span.removeClass().addClass("fa fa-fw #{orig_icon}")
+
+
+do_poll = ->
+  query  = $('#api-query').data('api-query')
+  prefix = $('#path-prefix').data('path-prefix')
+
+  if query
+    $.post(prefix + '/ajax/' + query)
+      .done( (data) -> 
+        #console.debug(JSON.stringify(data, undefined, 2))
+        set_icon(p, data.working[p]) for p in data.project_list
+        )
+                
+      .fail( ->
+        console.debug('fail'))
+        
+      .always( -> 
+        window.think200_is_polling = true
+        setTimeout(do_poll, POLL_FREQUENCY))  # Every 10 seconds
+  else
+    delete window.think200_is_polling
 
 
 ready = ->
