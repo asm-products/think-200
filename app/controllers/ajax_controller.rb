@@ -1,3 +1,6 @@
+require 'think200_jobs'
+include Think200
+
 class AjaxController < ApplicationController
   before_action :authenticate_user!
 
@@ -12,12 +15,8 @@ class AjaxController < ApplicationController
     data['working'] = {}
 
     projects.each do |p|
-      data['working'][p.id] = case rand(3)
-        when 0
-          'true'
-        when 1..2
-          'false'
-        end
+      queued = Resque.enqueued?(ScheduledTest, p.id, p.user_id) ? 'true' : 'false'
+      data['working'][p.id] = queued
     end
 
     render json: data.to_json
