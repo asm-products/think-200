@@ -1,4 +1,4 @@
-POLL_FREQUENCY = 5000  # milliseconds
+POLL_FREQUENCY = 2000  # milliseconds
 
 
 set_icon = (project_id, is_working) ->
@@ -20,14 +20,20 @@ do_poll = ->
       .done( (data) -> 
         #console.debug(JSON.stringify(data, undefined, 2))
         set_icon(p, data.working[p]) for p in data.project_list
+        if $("#server-status").hasClass('fa-ellipsis-v')
+          new_class = 'fa-ellipsis-h'
+        else
+          new_class = 'fa-ellipsis-v'
+        $("#server-status").removeClass().addClass("fa fa-fw #{new_class} passed-icon")
         )
                 
       .fail( ->
+        $("#server-status").removeClass().addClass("fa fa-fw fa-warning failed-icon")
         console.debug('fail'))
         
       .always( -> 
         window.think200_is_polling = true
-        setTimeout(do_poll, POLL_FREQUENCY))  # Every 10 seconds
+        setTimeout(do_poll, POLL_FREQUENCY))
   else
     delete window.think200_is_polling
 
