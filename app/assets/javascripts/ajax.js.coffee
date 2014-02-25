@@ -1,4 +1,4 @@
-POLL_FREQUENCY = 2000  # milliseconds
+POLL_FREQUENCY = 5000  # milliseconds
 
 
 set_icon = (project_id, is_working) ->
