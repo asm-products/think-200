@@ -12,10 +12,10 @@ class AjaxController < ApplicationController
     data['working'] = {}
 
     projects.each do |p|
-      data['working'][p.id] = case rand(2)
+      data['working'][p.id] = case rand(3)
         when 0
           'true'
-        when 1
+        when 1..2
           'false'
         end
     end

@@ -7,7 +7,7 @@
   <div class="panel <%= panel_class %> project-tile" data-url="<%= project_path(tile) %>" data-class="<%= panel_class %>">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <%= font_awesome 'question-circle' %>
+	<span id="icon-<%= tile.id %>" class="fa fa-fw fa-question-circle" data-icon-class="fa-question-circle"></span>
         <%= tile.name %>
       </h3>
     </div>

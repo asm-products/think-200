@@ -24,7 +24,7 @@
   <div class="panel <%= panel_class %> project-tile" data-url="<%= project_path(tile) %>" data-class="<%= panel_class %>">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <%= font_awesome 'check-square' %>
+	<span id="icon-<%= tile.id %>" class="fa fa-fw fa-check-square" data-icon-class="fa-check-square"></span>
         <%= tile.name %>
       </h3>
     </div>
