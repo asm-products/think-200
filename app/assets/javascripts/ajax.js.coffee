@@ -17,13 +17,14 @@ set_progress_bar = (percent) ->
   bar       = $('#progress-bar')
   container = $('#progress-bar-container')
   
-  if percent < 15
-    percent = 15
-  if percent == 100
-    container.removeClass('progress-striped active')
-  else
-    container.addClass('progress-striped active')
+  if percent < 15  # Even if it's zero, we want to see some 
+    percent = 15   # indication of activity
+    
   bar.css('width', "#{percent}%")
+  if percent == 100
+    container.fadeOut(1300)
+  else
+    container.fadeIn(1000)
   
 
 do_poll = ->
