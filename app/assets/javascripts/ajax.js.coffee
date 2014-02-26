@@ -14,9 +14,15 @@ set_icon = (project_id, is_working) ->
 
 
 set_progress_bar = (percent) ->
-  bar = $('#progress-bar')
+  bar       = $('#progress-bar')
+  container = $('#progress-bar-container')
+  
   if percent < 15
     percent = 15
+  if percent == 100
+    container.removeClass('progress-striped active')
+  else
+    container.addClass('progress-striped active')
   bar.css('width', "#{percent}%")
   
 
