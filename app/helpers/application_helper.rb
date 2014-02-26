@@ -1,4 +1,9 @@
 module ApplicationHelper
+
+  def tile_col_class
+    'col-sm-6 col-md-4 col-lg-3'
+  end
+
   def is_active?(link_path)
     if current_page?(link_path)
       "active"

@@ -1,3 +1,3 @@
 # think_config
 
-APP_NAME = 'Think200'
+APP_NAME = 'Think 200'

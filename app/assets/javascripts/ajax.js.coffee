@@ -1,6 +1,7 @@
 POLL_FREQUENCY = 5000  # milliseconds
 
 
+
 set_icon = (project_id, is_working) ->
   span      = $("#icon-#{project_id}")
   orig_icon = span.data('icon-class')
@@ -20,15 +21,16 @@ do_poll = ->
       .done( (data) -> 
         #console.debug(JSON.stringify(data, undefined, 2))
         set_icon(p, data.working[p]) for p in data.project_list
-        if $("#server-status").hasClass('fa-ellipsis-v')
-          new_class = 'fa-ellipsis-h'
-        else
-          new_class = 'fa-ellipsis-v'
-        $("#server-status").removeClass().addClass("fa fa-fw #{new_class} passed-icon")
+        #if $("#server-status").hasClass('fa-ellipsis-v')
+        #  new_class = 'fa-ellipsis-h'
+        #else
+        #  new_class = 'fa-ellipsis-v'
+        #$("#server-status").removeClass().addClass("fa fa-fw #{new_class} passed-icon")
+        $("#server-status").removeClass().addClass("fa fa-fw fa-signal")
         )
                 
       .fail( ->
-        $("#server-status").removeClass().addClass("fa fa-fw fa-warning failed-icon")
+        $("#server-status").removeClass().addClass("fa fa-fw fa-ban failed-icon")
         console.debug('fail'))
         
       .always( -> 
