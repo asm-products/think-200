@@ -1,7 +1,7 @@
 module ApplicationHelper
 
   def tile_col_class
-    'col-sm-6 col-md-4 col-lg-3'
+    'col-xs-6 col-sm-5 col-md-3 col-lg-3'
   end
 
 
