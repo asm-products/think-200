@@ -26,11 +26,13 @@ do_poll = ->
         #else
         #  new_class = 'fa-ellipsis-v'
         #$("#server-status").removeClass().addClass("fa fa-fw #{new_class} passed-icon")
-        $("#server-status").removeClass().addClass("fa fa-fw fa-signal")
+        unless $("#server-status").hasClass('fa-signal')
+          $("#server-status").removeClass().addClass("fa fa-fw fa-signal")
         )
                 
       .fail( ->
-        $("#server-status").removeClass().addClass("fa fa-fw fa-ban failed-icon")
+        unless $("#server-status").hasClass('fa-ban')
+          $("#server-status").removeClass().addClass("fa fa-fw fa-ban failed-icon")
         console.debug('fail'))
         
       .always( -> 

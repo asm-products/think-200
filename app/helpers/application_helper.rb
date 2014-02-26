@@ -4,6 +4,7 @@ module ApplicationHelper
     'col-sm-6 col-md-4 col-lg-3'
   end
 
+
   def is_active?(link_path)
     if current_page?(link_path)
       "active"
@@ -11,6 +12,7 @@ module ApplicationHelper
       ""
     end
   end
+
 
   # Set the page's HTML title.
   # * value: just the page's local name.
@@ -29,10 +31,12 @@ module ApplicationHelper
     end
   end
 
+
   # <%= link_button('Re-test', 'btn-primary', retest_project_path(@app.project.id)) %>
   def link_button(label, classes, path)
     "<input type=\"button\" value=\"#{label}\" class=\"btn #{classes}\" onclick=\"location.href='#{path}';\">".html_safe
   end
+
 
   # <%= font_awesome('remove') %>
   def font_awesome(name, extra_classes='')
