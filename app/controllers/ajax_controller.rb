@@ -5,7 +5,7 @@ class AjaxController < ApplicationController
   before_action :authenticate_user!
 
   def queue_status
-    projects = current_user.projects
+    projects = current_user.projects.select{ |p| ! p.incomplete? }
     data = {}
 
     # A list of project id's
@@ -22,7 +22,7 @@ class AjaxController < ApplicationController
     # Percentage complete for progress bar indicators
     total    = projects.count.to_f
     complete = data['working'].values.select{ |v| v == 'false' }.count
-    data['percent_complete'] = (complete / total * 100).round    
+    data['percent_complete'] = (complete / total * 100).round
 
     render json: data.to_json
   end

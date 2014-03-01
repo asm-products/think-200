@@ -1,4 +1,4 @@
-POLL_FREQUENCY = 5000  # milliseconds
+POLL_FREQUENCY = 2000  # milliseconds
 
 
 set_icon = (project_id, is_working) ->
@@ -6,9 +6,11 @@ set_icon = (project_id, is_working) ->
   orig_icon = span.data('icon-class')
   
   if is_working == 'true'
+    $("#test-button-#{project_id}").attr('disabled', 'disabled')
     unless span.hasClass('fa-spinner')
       span.removeClass().addClass('fa fa-fw fa-spinner fa-spin')
   else
+    $("#test-button-#{project_id}").removeAttr('disabled')
     unless span.hasClass(orig_icon)
       span.removeClass().addClass("fa fa-fw #{orig_icon}")
 
@@ -54,11 +56,22 @@ do_poll = ->
 
 
 ready = ->
-    $('.project-tile').click ->
-        Turbolinks.visit( $(@).data('url') )
+    $('.panel-heading').click ->
+        Turbolinks.visit( $(@).parent().data('url') )
+        
+    $('.panel-body').click ->
+        Turbolinks.visit( $(@).parent().data('url') )      
 
     $('.project-tile').hover ->
         $(@).toggleClass( 'project-tile-active' )
+
+    $('.test-button').click ->
+      prefix = $('#path-prefix').data('path-prefix')
+      id     = $(@).data('project-id')
+      url    = prefix + "/retest_project/#{id}"
+      set_icon(id, 'true')
+      $.post(url)
+
 
     # A simple way to set the focus in the right input.
     # Each page is responsible for adding the focus-here

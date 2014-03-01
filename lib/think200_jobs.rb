@@ -34,6 +34,7 @@ module Think200
   # executed from a cron job / rake task.
   def self.test_all_projects
     Project.find_each do |p| 
+      next if p.incomplete?
       puts "Enqueing ScheduledTest #{p.id}, user #{p.user_id}..."
       Resque.enqueue(ScheduledTest, p.id, p.user_id) 
     end

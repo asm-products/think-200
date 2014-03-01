@@ -72,6 +72,11 @@ class Project < ActiveRecord::Base
       end
     end
 
+    # Not runnable; user needs to add expectations.
+    def incomplete?
+      expectations.empty?
+    end
+
     def failing_requirements
       requirements
     end
