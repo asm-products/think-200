@@ -1,49 +1,18 @@
 <% 
-  panel_class = case tile.passed?
-  when nil  # No tests
-    'panel-default panel-quiet'
-  when true # Tests all pass
-    'panel-success'
-  else
-    'panel-danger' 
-  end
-
+  panel_class  = 'panel-success'
   column_class = tile_col_class
-
-  glyph = case tile.passed?
-  when nil  # No tests
-    'question-sign'
-  when true # Tests all pass
-    'ok'
-  else
-    'fire' 
-  end
 %>
 
 <div class="<%= column_class %>">
   <div class="panel <%= panel_class %> project-tile" data-url="<%= project_path(tile) %>" data-class="<%= panel_class %>">
-    <div class="panel-heading" data-url="<%= project_path(tile) %>">
+    <div class="panel-heading">
       <h3 class="panel-title">
-	<!-- <span id="icon-<%= tile.id %>" class="fa fa-fw fa-check-square" data-icon-class="fa-check-square"></span> -->
         <%= link_to tile, project_path(tile) %>
 	<%= render 'test_button', {project: tile} %>
       </h3>
     </div>
     <div class="panel-body">
-      <% if tile.passed? %>
-        <%= image_tag '200-success.svg', style: "width: 132; margin-left: auto; margin-right: auto" %>
-      <% elsif tile.passed? == false %>
-        <% tile.failing_requirements.each do |r| %>
-          <table>
-            <tr>
-              <td style="vertical-align: top"><%= failed_icon %></td>
-              <td style="padding-bottom: 0.5em"><%= r.full_name_without_project %></td>
-            </tr>
-          </table>
-        <% end %>
-      <% else %>
-        Nothing here &mdash; add a test.
-      <% end %>
+      <%= image_tag '200-success.svg', style: "width: 132; margin-left: auto; margin-right: auto" %>
     </div>
   </div>
 </div>
