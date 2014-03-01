@@ -67,7 +67,7 @@ ready = ->
       prefix = $('#path-prefix').data('path-prefix')
       id     = $(@).data('project-id')
       url    = prefix + "/retest_project/#{id}"
-      alert(url)
+      Turbolinks.visit url
 
 
     # A simple way to set the focus in the right input.
