@@ -1,4 +1,4 @@
-POLL_FREQUENCY = 5000  # milliseconds
+POLL_FREQUENCY = 2000  # milliseconds
 
 
 set_icon = (project_id, is_working) ->
@@ -67,7 +67,8 @@ ready = ->
       prefix = $('#path-prefix').data('path-prefix')
       id     = $(@).data('project-id')
       url    = prefix + "/retest_project/#{id}"
-      Turbolinks.visit url
+      set_icon(id, 'true')
+      $.post(url)
 
 
     # A simple way to set the focus in the right input.

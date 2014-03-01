@@ -8,7 +8,7 @@ class ProjectsController < ApplicationController
   # Queue the given project for retesting.
   def retest
     Resque.enqueue(Think200::ScheduledTest, @project.id, current_user.id)
-    redirect_to :back
+    render text: 'ok'
   end
 
   def export
