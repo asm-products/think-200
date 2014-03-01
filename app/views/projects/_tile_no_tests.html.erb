@@ -1,17 +1,21 @@
 <% 
-  panel_class = 'panel-warning'
+  panel_class  = 'panel-default'
   column_class = tile_col_class
+  icon         = 'fa-minus'
 %>
 
 <div class="<%= column_class %>">
   <div class="panel <%= panel_class %> project-tile" data-url="<%= project_path(tile) %>" data-class="<%= panel_class %>">
     <div class="panel-heading">
       <h3 class="panel-title">
-	<span id="icon-<%= tile.id %>" class="fa fa-fw fa-question-circle" data-icon-class="fa-question-circle"></span>
+	<span id="icon-<%= tile.id %>" class="fa fa-fw <%= icon %>" data-icon-class="<%= icon %>"></span>
         <%= tile.name %>
       </h3>
     </div>
     <div class="panel-body">
+    </div>
+    <div class="panel-footer tile-footer">
+      <%= render 'test_button', {project: tile} %>
     </div>
   </div>
 </div>

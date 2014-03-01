@@ -38,13 +38,19 @@ $text-semi-muted:   darken($text-muted, 20%);
 }
 
 .project-tile {
-    height: 180px;
+     box-shadow: 0 0 4px 0px #ccc;
+     background-color: $content-bg;
+     table {
+         background-color: inherit;        
+     }
+}
+
+.panel-heading, .panel-body {
     cursor: pointer;
-    box-shadow: 0 0 4px 0px #bbb;
-    background-color: $content-bg;
-    table {
-        background-color: inherit;        
-    }
+}
+
+.tile-footer {
+    text-align: 'center'
 }
 
 .project-tile-active {

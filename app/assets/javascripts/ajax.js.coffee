@@ -54,11 +54,21 @@ do_poll = ->
 
 
 ready = ->
-    $('.project-tile').click ->
-        Turbolinks.visit( $(@).data('url') )
+    $('.panel-heading').click ->
+        Turbolinks.visit( $(@).parent().data('url') )
+        
+    $('.panel-body').click ->
+        Turbolinks.visit( $(@).parent().data('url') )      
 
     $('.project-tile').hover ->
         $(@).toggleClass( 'project-tile-active' )
+
+    $('.test-button').click ->
+      prefix = $('#path-prefix').data('path-prefix')
+      id     = $(@).data('project-id')
+      url    = prefix + "/retest_project/#{id}"
+      alert(url)
+
 
     # A simple way to set the focus in the right input.
     # Each page is responsible for adding the focus-here
