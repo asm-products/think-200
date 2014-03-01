@@ -1,10 +1,7 @@
-POLL_FREQUENCY = 2000  # milliseconds
+POLL_FREQUENCY = 5000  # milliseconds
 
 
 set_icon = (project_id, is_working) ->
-  span      = $("#icon-#{project_id}")
-  orig_icon = span.data('icon-class')
-  
   if is_working == 'true'
     $("#test-button-#{project_id}").addClass('fa-spin')
   else
@@ -59,11 +56,13 @@ ready = ->
         $(@).toggleClass( 'project-tile-active' )
 
     $('.test-button').click ->
+      $('body').focus()
       prefix = $('#path-prefix').data('path-prefix')
       id     = $(@).data('project-id')
       url    = prefix + "/retest_project/#{id}"
       $.post(url)
       set_icon(id, 'true')
+      set_progress_bar(0)
 
 
     # A simple way to set the focus in the right input.

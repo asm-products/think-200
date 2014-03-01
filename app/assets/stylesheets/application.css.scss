@@ -45,7 +45,7 @@ $text-semi-muted:   darken($text-muted, 20%);
      }
 }
 
-.panel-body {
+.panel-body, .test-button {
     cursor: pointer;
 }
 

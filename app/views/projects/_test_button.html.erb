@@ -4,4 +4,4 @@
 <% end %>
 
 <% disabled = project.incomplete? ? 'disabled' : '' %>
-<a href="#" id="test-button-<%= project.id %>" data-project-id="<%= project.id %>" class="test-button pull-right <%= disabled %>"><span class="fa fa-refresh"></span></a>
+<span id="test-button-<%= project.id %>" data-project-id="<%= project.id %>" class="fa fa-refresh test-button pull-right"></span>
