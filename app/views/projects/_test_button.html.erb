@@ -1,4 +1,7 @@
+<% if false %>
 <% disabled = project.incomplete? ? 'disabled="disabled"' : '' %>
-<button id="test-button-<%= project.id %>"  data-project-id="<%= project.id %>" type="button" class="btn btn-default center-block test-button" <%= disabled %>>Test</button>
+<button id="test-button-<%= project.id %>" data-project-id="<%= project.id %>" type="button" class="btn btn-link test-button pull-right" <%= disabled %>><span class="fa fa-refresh fa-spin"></span></button>
+<% end %>
 
-
+<% disabled = project.incomplete? ? 'disabled' : '' %>
+<span id="test-button-<%= project.id %>" data-project-id="<%= project.id %>" class="fa fa-refresh test-button pull-right"></span>
