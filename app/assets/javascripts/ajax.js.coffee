@@ -6,9 +6,11 @@ set_icon = (project_id, is_working) ->
   orig_icon = span.data('icon-class')
   
   if is_working == 'true'
+    $("#test-button-#{project_id}").attr('disabled', 'disabled')
     unless span.hasClass('fa-spinner')
       span.removeClass().addClass('fa fa-fw fa-spinner fa-spin')
   else
+    $("#test-button-#{project_id}").removeAttr('disabled')
     unless span.hasClass(orig_icon)
       span.removeClass().addClass("fa fa-fw #{orig_icon}")
 
