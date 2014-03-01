@@ -24,8 +24,9 @@
   <div class="panel <%= panel_class %> project-tile" data-url="<%= project_path(tile) %>" data-class="<%= panel_class %>">
     <div class="panel-heading" data-url="<%= project_path(tile) %>">
       <h3 class="panel-title">
-	<span id="icon-<%= tile.id %>" class="fa fa-fw fa-check-square" data-icon-class="fa-check-square"></span>
+	<!-- <span id="icon-<%= tile.id %>" class="fa fa-fw fa-check-square" data-icon-class="fa-check-square"></span> -->
         <%= tile.name %>
+	<%= render 'test_button', {project: tile} %>
       </h3>
     </div>
     <div class="panel-body">
@@ -43,9 +44,6 @@
       <% else %>
         Nothing here &mdash; add a test.
       <% end %>
-    </div>
-    <div class="panel-footer tile-footer">
-      <%= render 'test_button', {project: tile} %>
     </div>
   </div>
 </div>

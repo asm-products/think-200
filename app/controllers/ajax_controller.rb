@@ -4,19 +4,20 @@ include Think200
 class AjaxController < ApplicationController
   before_action :authenticate_user!
 
+  # It's important for this to be extremely efficient
   def queue_status
-    projects = current_user.projects.select{ |p| ! p.incomplete? }
+    projects = current_user.projects.ids
     data = {}
 
     # A list of project id's
-    data['project_list'] = projects.map{ |p| p.id }
+    data['project_list'] = projects
 
     # a map of id to true/false if currently working
     data['working'] = {}
 
     projects.each do |p|
-      queued = Resque.enqueued?(ScheduledTest, p.id, p.user_id) ? 'true' : 'false'
-      data['working'][p.id] = queued
+      queued = Resque.enqueued?(ScheduledTest, p, current_user.id) ? 'true' : 'false'
+      data['working'][p] = queued
     end
 
     # Percentage complete for progress bar indicators

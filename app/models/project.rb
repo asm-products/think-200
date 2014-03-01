@@ -23,7 +23,6 @@ class Project < ActiveRecord::Base
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user_id }
 
-  default_scope { order(:name) }
 
   def to_rspec
     result = <<-END.strip_heredoc

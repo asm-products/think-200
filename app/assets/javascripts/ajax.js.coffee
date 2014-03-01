@@ -6,13 +6,9 @@ set_icon = (project_id, is_working) ->
   orig_icon = span.data('icon-class')
   
   if is_working == 'true'
-    $("#test-button-#{project_id}").attr('disabled', 'disabled')
-    unless span.hasClass('fa-spinner')
-      span.removeClass().addClass('fa fa-fw fa-spinner fa-spin')
+    $("#test-button-#{project_id}").addClass('fa-spin')
   else
-    $("#test-button-#{project_id}").removeAttr('disabled')
-    unless span.hasClass(orig_icon)
-      span.removeClass().addClass("fa fa-fw #{orig_icon}")
+    $("#test-button-#{project_id}").removeClass('fa-spin')
 
 
 set_progress_bar = (percent) ->
@@ -36,7 +32,7 @@ do_poll = ->
   if query
     $.post(prefix + '/ajax/' + query)
       .done( (data) -> 
-        #console.debug(JSON.stringify(data, undefined, 2))
+        console.debug(JSON.stringify(data, undefined, 2))
         set_icon(p, data.working[p]) for p in data.project_list
         set_progress_bar(data.percent_complete)
         unless $("#server-status").hasClass('fa-signal')
@@ -56,9 +52,6 @@ do_poll = ->
 
 
 ready = ->
-    $('.panel-heading').click ->
-        Turbolinks.visit( $(@).parent().data('url') )
-        
     $('.panel-body').click ->
         Turbolinks.visit( $(@).parent().data('url') )      
 
@@ -69,8 +62,8 @@ ready = ->
       prefix = $('#path-prefix').data('path-prefix')
       id     = $(@).data('project-id')
       url    = prefix + "/retest_project/#{id}"
-      set_icon(id, 'true')
       $.post(url)
+      set_icon(id, 'true')
 
 
     # A simple way to set the focus in the right input.
