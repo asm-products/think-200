@@ -88,6 +88,10 @@ class Project < ActiveRecord::Base
       name_slug + '.txt'
     end
 
+    def to_s
+      name
+    end
+
 
     private
     def name_slug

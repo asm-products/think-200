@@ -25,7 +25,7 @@
     <div class="panel-heading" data-url="<%= project_path(tile) %>">
       <h3 class="panel-title">
 	<!-- <span id="icon-<%= tile.id %>" class="fa fa-fw fa-check-square" data-icon-class="fa-check-square"></span> -->
-        <%= tile.name %>
+        <%= link_to tile, project_path(tile) %>
 	<%= render 'test_button', {project: tile} %>
       </h3>
     </div>
