@@ -81,8 +81,8 @@ GEM
     figaro (0.7.0)
       bundler (~> 1.0)
       rails (>= 3, < 5)
-    font-awesome-sass (4.0.3)
-      sass (~> 3.2)
+    font-awesome-sass (4.0.2)
+      sass-rails (>= 3.1.1)
     friendly_id (5.0.3)
       activerecord (>= 4.0.0)
     hike (1.2.3)
@@ -257,7 +257,7 @@ DEPENDENCIES
   coffee-rails
   devise (= 3.2.2)
   figaro
-  font-awesome-sass
+  font-awesome-sass (= 4.0.2)
   friendly_id
   jbuilder
   jquery-rails

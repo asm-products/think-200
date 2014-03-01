@@ -50,7 +50,7 @@ gem 'kaminari'
 gem 'friendly_id'
 
 # font-awesome
-gem 'font-awesome-sass'
+gem 'font-awesome-sass', '4.0.2'
 gem 'devise', '3.2.2'
 
 gem 'bootstrap-sass'
