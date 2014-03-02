@@ -4,11 +4,6 @@
     .jumbotron
       %h1     Think 200,
       %p.lead but test for the unexpected:
+      = render partial: 'layouts/get_started_form'
 
-      .form{role: 'form'}
-        .form-group
-          .row
-            .col-sm-10
-              %input.form-contol.focus-here.input-lg{type: 'text', placeholder: 'Enter a URL or domain name', style: 'width: 100%'}
-            .col-sm-2
-              %button.btn.btn-success.btn-lg{type: 'submit'} Test it
+    
