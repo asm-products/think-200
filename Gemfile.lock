@@ -85,6 +85,8 @@ GEM
       sass-rails (>= 3.1.1)
     friendly_id (5.0.3)
       activerecord (>= 4.0.0)
+    haml (4.0.5)
+      tilt
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (2.0.3)
@@ -259,6 +261,7 @@ DEPENDENCIES
   figaro
   font-awesome-sass (= 4.0.2)
   friendly_id
+  haml
   jbuilder
   jquery-rails
   kaminari

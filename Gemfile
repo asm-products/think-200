@@ -20,6 +20,7 @@ gem 'whenever', :require => false
 gem 'rspec'
 gem 'rspec-webservice_matchers'
 gem 'annotate'
+gem 'haml'
 
 
 group :doc do

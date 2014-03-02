@@ -79,3 +79,9 @@ $text-semi-muted:   darken($text-muted, 20%);
 .shared-links {
     line-height: 1.2em
 }
+
+.jumbotron {
+    h1, p {
+        text-align: center;
+    }
+}
