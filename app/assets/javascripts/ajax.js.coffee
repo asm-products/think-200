@@ -2,10 +2,12 @@ POLL_FREQUENCY = 5000  # milliseconds
 
 
 set_icon = (project_id, is_working) ->
+  button = $("#test-button-#{project_id}")
+  
   if is_working == 'true'
-    $("#test-button-#{project_id}").addClass('fa-spin')
+    button.addClass('fa-spin')
   else
-    $("#test-button-#{project_id}").removeClass('fa-spin')
+    button.removeClass('fa-spin')
 
 
 set_progress_bar = (percent) ->
