@@ -1,24 +1,27 @@
 %div{class: "panel panel-"+status_class_for(app) }
 
   .panel-heading
-    %h4 
-      = status_icon_for(app)
+    %h3{style: "margin:0"}
       = app
 
-  .panel-body
-    - app.requirements.each do |req| 
-      %h5
-        = req
-      %table.table
-        %thead
-        %tbody
-          - req.expectations.each do |exp|
-            %tr
-              %td= status_icon_for(exp)
-              %td= exp.subject
-              %td
-                %span.text-muted should
-                = exp.matcher
-              %td= exp.expected
+  %table.table.table-bordered
+    %thead
+    %tbody
+
+      - app.requirements.each do |req| 
+        %tr
+          %th
+          %th{colspan: "3"}
+            %h4{style: "margin: 1em 0 0 0"}
+              = req
+
+        - req.expectations.each do |exp|
+          %tr{class: 'text-'+status_class_for(exp, only: 'danger')}
+            %td= status_icon_for(exp)
+            %td= exp.subject
+            %td
+              %span.text-muted should
+              = exp.matcher
+            %td= exp.expected
 
 

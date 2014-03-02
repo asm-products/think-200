@@ -69,13 +69,20 @@ module ApplicationHelper
 
 
   # Twitter Bootstrap classes
-  def status_class_for(thing)
+  def status_class_for(thing, only: nil)
     if thing.passed? == true
-      'success'
+      result = 'success'
     elsif thing.passed? == false
-      'danger'
+      result = 'danger'
     else
-      'default'
+      result = 'default'
     end
+
+    if only.nil?
+      result
+    else
+      only == result ? result : ''
+    end
+
   end
 end
