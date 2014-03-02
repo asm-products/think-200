@@ -8,7 +8,17 @@
   .panel-body
     - app.requirements.each do |req| 
       %h5
-        = status_icon_for(req)
         = req
-      
-      
+      %table.table
+        %thead
+        %tbody
+          - req.expectations.each do |exp|
+            %tr
+              %td= status_icon_for(exp)
+              %td= exp.subject
+              %td
+                %span.text-muted should
+                = exp.matcher
+              %td= exp.expected
+
+

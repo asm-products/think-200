@@ -2,9 +2,9 @@
   .col-sm-9
     %h1{style: "margin-top: 0"}= @project.name
     .row
-      .col-sm-3
+      .col-sm-2
         = link_to(font_awesome('plus') + ' New App', new_app_path(project_id: @project.id))
-      .col-sm-9.cards
+      .col-sm-10.cards
         %h2 Apps
         %ul{style: "list-style-type: none; padding-left: 0em"}
           - @project.apps.each do |app|
