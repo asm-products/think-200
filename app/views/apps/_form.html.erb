@@ -13,7 +13,6 @@
 
     <div class="field form-group">
       <%= f.hidden_field :project_id %>
-      
       <%= f.label :name, 'App name' %>
       <%= f.text_field :name, class: 'form-control focus-here' %>
       <span class="help-block">
@@ -21,6 +20,7 @@
         online app store.
       </span>
     </div>
+
     <% if @app.persisted? %>
       <%= link_to delete_icon + ' Delete', @app, 
         method: :delete, 
@@ -28,6 +28,7 @@
         class: 'btn btn-danger pull-right'
       %>
     <% end %>
+
     <div class="actions">
       <%= f.submit class: 'btn btn-primary' %> or 
       <%= link_to 'cancel', cancel_dest %>
