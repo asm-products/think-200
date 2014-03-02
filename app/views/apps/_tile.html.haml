@@ -1,0 +1,14 @@
+%div{class: "panel panel-"+status_class_for(app) }
+
+  .panel-heading
+    %h4 
+      = status_icon_for(app)
+      = app
+
+  .panel-body
+    - app.requirements.each do |req| 
+      %h5
+        = status_icon_for(req)
+        = req
+      
+      

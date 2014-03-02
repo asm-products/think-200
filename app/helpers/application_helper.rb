@@ -66,4 +66,16 @@ module ApplicationHelper
       failed_icon
     end
   end
+
+
+  # Twitter Bootstrap classes
+  def status_class_for(thing)
+    if thing.passed? == true
+      'success'
+    elsif thing.passed? == false
+      'danger'
+    else
+      'default'
+    end
+  end
 end

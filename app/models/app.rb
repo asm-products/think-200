@@ -36,4 +36,8 @@ class App < ActiveRecord::Base
     return nil if requirements.empty?
     ! requirements.map{|e| e.passed?}.include?(false)
   end
+
+  def to_s
+    name
+  end
 end

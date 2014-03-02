@@ -1,0 +1,20 @@
+.row
+  .col-sm-9
+    %h1{style: "margin-top: 0"}= @project.name
+    .row
+      .col-sm-3
+        = link_to(font_awesome('plus') + ' New App', new_app_path(project_id: @project.id))
+      .col-sm-9.cards
+        %h2 Apps
+        %ul{style: "list-style-type: none; padding-left: 0em"}
+          - @project.apps.each do |app|
+            = render 'apps/tile', { app: app }
+
+  .col-sm-3
+    = link_to font_awesome('pencil', 'fa-fw')+' Edit this project', edit_project_path(@project)
+    %br/
+    = font_awesome('download', 'fa-fw')
+    Export:
+    \#{link_to 'RSpec', project_export_path(@project, format: 'rspec')}
+    %span.text-muted |
+    = link_to 'text',  project_export_path(@project, format: 'txt')
