@@ -40,7 +40,7 @@ module ApplicationHelper
 
   # <%= font_awesome('remove') %>
   def font_awesome(name, extra_classes='')
-    "<span class=\"fa fa-#{name} #{extra_classes}\"></span>".html_safe
+    "<i class=\"fa fa-#{name} #{extra_classes}\"></i>".html_safe
   end
 
 

@@ -94,3 +94,11 @@ $text-semi-muted:   darken($text-muted, 20%);
         }
     }
 }
+
+ul.text-menu {
+    list-style: none;
+    padding-left: 0;
+    li {
+	padding-bottom: 0.5em;
+    }
+}
