@@ -85,3 +85,12 @@ $text-semi-muted:   darken($text-muted, 20%);
         text-align: center;
     }
 }
+
+.pr-points {
+    p {
+        margin-bottom: 2em;
+        strong {
+            font-weight: normal;
+        }
+    }
+}
