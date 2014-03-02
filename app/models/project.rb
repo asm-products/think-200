@@ -26,23 +26,22 @@ class Project < ActiveRecord::Base
 
   def to_rspec
     result = <<-END.strip_heredoc
-      #
-      # #{rspec_filename}
-      #
-      # To run these tests:
-      #
-      #   1. Install Ruby >= 2.0.0
-      #   2. Install RSpec: $ gem install rspec-webservice_matchers
-      #   3. Save this page as "#{rspec_filename}"
-      #   4. Run RSpec:     $ rspec ./#{rspec_filename}
-      #
-      # Detailed instructions: http://think200.com/rspec-faq
-      # Generated on #{Time.zone.now.to_s(:db)}
-      #
-      require 'rspec/webservice_matchers'
+    #
+    # #{rspec_filename}
+    #
+    # To run these tests:
+    #
+    #   1. Install Ruby >= 2.0.0
+    #   2. Install RSpec: $ gem install rspec-webservice_matchers
+    #   3. Save this page as "#{rspec_filename}"
+    #   4. Run RSpec:     $ rspec ./#{rspec_filename}
+    #
+    # Generated on #{Time.zone.now.to_s(:db)} by think200.com
+    #
+    require 'rspec/webservice_matchers'
 
-      describe '#{name}' do
-    END
+    describe '#{name}' do
+      END
       # apps.each { |e| result += e.to_rspec.indent(2) }
       contexts = apps.map { |a| a.to_rspec.indent(2) }
       result + contexts.join("\n") + "end\n"
