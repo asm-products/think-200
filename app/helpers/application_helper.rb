@@ -45,11 +45,11 @@ module ApplicationHelper
 
 
   def failed_icon
-    font_awesome 'warning', 'fa-fw failed-icon'
+    font_awesome 'warning', 'failed-icon'
   end
 
   def passed_icon
-    font_awesome 'check',   'fa-fw passed-icon'
+    font_awesome 'check',   'passed-icon'
   end
 
   def delete_icon
@@ -59,7 +59,7 @@ module ApplicationHelper
 
   def status_icon_for(thing)
     if thing.passed?.nil?
-      font_awesome('ellipsis-h', 'fa-fw text-muted')
+      font_awesome('ellipsis-h', 'text-muted')
     elsif thing.passed?
       passed_icon
     else
