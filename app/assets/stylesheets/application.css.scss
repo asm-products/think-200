@@ -63,7 +63,7 @@ $text-semi-muted:   darken($text-muted, 20%);
     box-shadow: 0 0 4px 0px #999;
 }
 
-.cards h1, .cards h2 {
+.cards h1, .cards h2, h2.cards {
     color: $text-semi-muted;
     font-size: $font-size-base - 2px;
     font-weight: normal;
