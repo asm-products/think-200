@@ -12,9 +12,9 @@
 #
 
 class Expectation < ActiveRecord::Base
-  belongs_to :requirement
   belongs_to :matcher
-  validates :requirement, presence: true
+  belongs_to :requirement
+  validates :matcher, :requirement, :subject, presence: true
 
 
   def project

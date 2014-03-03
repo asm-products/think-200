@@ -1,14 +1,17 @@
+.row
+  .col-sm-offset-2.col-sm-6
+    - if @expectation.errors.any?
+      #error_explanation
+        %h2
+          = pluralize(@expectation.errors.count, "error")
+          prevented this test from being saved:
+        %ul
+          - @expectation.errors.full_messages.each do |msg|
+            %li= msg
+
+
 = form_for @expectation, html: { role: 'form', class: 'form-horizontal' } do |f|
-  = f.hidden_field :requirement_id
-  
-  - if @expectation.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@expectation.errors.count, "error")
-        prohibited this app from being saved:
-      %ul
-        - @expectation.errors.full_messages.each do |msg|
-          %li= msg
+  = f.hidden_field :requirement_id  
 
   -# The subject
   .form-group
