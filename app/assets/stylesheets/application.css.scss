@@ -63,7 +63,9 @@ $text-semi-muted:           darken($text-muted, 20%);
 }
 
 .project-tile {
-    height: 180px;
+    .panel-body {
+        height: 140px;
+    }
 }
 
 .panel-body, .test-button {
