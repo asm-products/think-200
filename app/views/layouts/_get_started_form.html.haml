@@ -1,7 +1,10 @@
 .form{role: 'form'}
   .form-group
     .row
-      .col-xs-10
-        %input.form-contol.focus-here.input-lg{disabled: 'disabled', type: 'text', placeholder: 'Enter a URL or domain name', style: 'width: 100%'}
-      .col-xs-2
-        %button.btn.btn-success.btn-lg{type: 'submit'} Test it
+      .col-xs-12
+        .input-group
+          %input.form-control.focus-here{type: 'text', placeholder: 'Enter a URL or domain name'}
+            %span.input-group-btn
+              %button.btn.btn-success{type: 'button'}
+                Test it!
+
