@@ -41,11 +41,15 @@ $text-semi-muted:   darken($text-muted, 20%);
 }
 
 .project-tile, .app-tile {
-     box-shadow: 0 0 4px 0px #ccc;
-     background-color: $content-bg;
-     table {
-         background-color: inherit;        
-     }
+    box-shadow: 0 0 4px 0px #ccc;
+    background-color: $content-bg;
+    table {
+        background-color: inherit;        
+    }
+}
+
+.project-tile {
+    height: 180px;
 }
 
 .panel-body, .test-button {

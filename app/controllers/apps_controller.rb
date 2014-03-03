@@ -52,9 +52,10 @@ class AppsController < ApplicationController
   # DELETE /apps/1
   # DELETE /apps/1.json
   def destroy
+    project = @app.project
     @app.destroy
     respond_to do |format|
-      format.html { redirect_to apps_url }
+      format.html { redirect_to project_path(project) }
       format.json { head :no_content }
     end
   end

@@ -1,29 +1,37 @@
 %div{class: "app-tile panel panel-"+status_class_for(app) }
 
   .panel-heading
-    %h3= app
+    .row
+      .col-sm-10
+        %h3 
+          = app.name 
+      .col-sm-2
+        %a.btn.btn-default.pull-right.btn-sm{href: edit_app_path(app), role: 'button'}
+          = fa_icon 'fa-pencil'
 
-  %table.table
-    %thead
-    %tbody
+  .table-responsive
+    %table.table
+      %thead
+      %tbody
 
-      - app.requirements.each do |req| 
-        %tr
-          %th{colspan: "3"}
-            %h4
-              = req
+        - app.requirements.each do |req| 
+          %tr
+            %th{colspan: "3"}
+              %h4
+                = req
 
-        - req.expectations.each do |exp|
-          %tr{class: 'text-'+status_class_for(exp, only: 'danger')}
-            %td{style: "text-align: center"}= status_icon_for(exp, 'fa-lg')
-            %td
-              %strong= exp.subject
-            %td
-              %span.text-semi-muted
-                should
-              = fa_icon(exp.matcher.icon, 'fa-border')
-              = exp.matcher
-              %strong
-                = exp.expected
+          - req.expectations.each do |exp|
+            %tr{class: 'text-'+status_class_for(exp, only: 'danger')}
+              %td{style: "text-align: center"}= status_icon_for(exp, 'fa-lg')
+              %td{style: 'width: 1px; white-space: nowrap'}
+                %strong= exp.subject
+              %td
+                %span.text-semi-muted
+                  should
+                = fa_icon(exp.matcher.icon, 'fa-border')
+                = exp.matcher
+                %strong
+                  = exp.expected
+
 
 

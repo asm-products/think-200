@@ -93,7 +93,7 @@ website   = App.create!(name: 'Website',        project: quisitive)
 listing   = App.create!(name: 'iTunes Listing', project: quisitive)
 
 is_online = Requirement.create!(name: 'is online', app: website)
-root_dn   = Requirement.create!(name: 'serves from root domain', app: website)
+root_dn   = Requirement.create!(name: 'serves from the root domain', app: website)
 
 redirect1 = Expectation.create!(
   subject:     'http://www.getquisitive.com', 
@@ -115,8 +115,8 @@ redirect3 = Expectation.create!(
 
 
 # The 'My App' demo code
-think200   = Project.create!(name: 'Demo App', user: robb)
-myapp      = App.create!(name: 'My App', project: think200)
+think200   = Project.create!(name: 'Orion', user: robb)
+myapp      = App.create!(name: 'Website', project: think200)
 
 is_online  = Requirement.create!(name: 'is online', app: myapp)
 valid_cert = Requirement.create!(name: 'is correctly configured for ssl', app: myapp)
