@@ -24,7 +24,14 @@
         %ul.list-group
           - Matcher.all.each do |m|
             %li.list-group-item
-              = fa_icon(m.icon, 'fa-fw')
+              .row
+                .col-xs-7
+                  %input{type: 'checkbox'}
+                  = fa_icon(m.icon, 'fa-fw')
+                  = m.to_s
+                - if m.min_args == 1
+                  .col-xs-5
+                    %input.form-control{type: 'text', placeholder: '200'}
 
   .actions
     = f.submit class: 'btn btn-primary'
