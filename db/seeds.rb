@@ -18,63 +18,63 @@ robb = User.new(
   email:    'robb@weblaws.org',
   password: '1234',
   password_confirmation: '1234',
-  )
+)
 robb.skip_confirmation!
 robb.save!
 
 puts 'Creating the Matchers...'
 [
- {
-   code: 'be_status',                
-   min_args: 1, 
-   max_args: 1, 
-   summary: 'Pass if the domain/url has the given status.', 
-   description: 'Uses curl_lib.',
-   icon: 'fa-stethoscope',
-   placeholder: '200'
- },
- {
-   code: 'be_up',                    
-   min_args: 0, 
-   max_args: 0,
-   summary: 'Follows redirects if necessary and checks for 200',
-   description: 'Uses curl_lib.',
-   icon: 'fa-thumbs-o-up',  
- },
- {
-   code: 'have_a_valid_cert',        
-   min_args: 0, 
-   max_args: 0,
-   summary: 'Serves HTTPS correctly.',
-   description: 'Uses curl_lib.',
-   icon: 'fa-lock'
- },
- {
-   code: 'enforce_https_everywhere', 
-   min_args: 0, 
-   max_args: 0,
-   summary: 'Forces visitors to use HTTPS.',
-   description: 'Uses curl_lib.',
-   icon: 'fa-globe'
- },
- {
-   code: 'redirect_permanently_to',  
-   min_args: 1, 
-   max_args: 1,
-   summary: 'Checks for a 301 redirect to a given location.',
-   description: 'Uses curl_lib.',
-   icon: 'fa-level-down fa-rotate-270',
-   placeholder: 'http://somewhere.com/'
- },
- {
-   code: 'redirect_temporarily_to',  
-   min_args: 1, 
-   max_args: 1,
-   summary: 'Checks for either a 302 or 307 redirect to a given location.',
-   description: 'Uses curl_lib.',
-   icon: 'fa-share',
-   placeholder: 'http://somewhere.else.com/'
- }
+  {
+    code: 'be_status',
+    min_args: 1,
+    max_args: 1,
+    summary: 'Pass if the domain/url has the given status.',
+    description: 'Uses curl_lib.',
+    icon: 'fa-stethoscope',
+    placeholder: '200'
+  },
+  {
+    code: 'be_up',
+    min_args: 0,
+    max_args: 0,
+    summary: 'Follows redirects if necessary and checks for 200',
+    description: 'Uses curl_lib.',
+    icon: 'fa-thumbs-o-up',
+  },
+  {
+    code: 'have_a_valid_cert',
+    min_args: 0,
+    max_args: 0,
+    summary: 'Serves HTTPS correctly.',
+    description: 'Uses curl_lib.',
+    icon: 'fa-lock'
+  },
+  {
+    code: 'enforce_https_everywhere',
+    min_args: 0,
+    max_args: 0,
+    summary: 'Forces visitors to use HTTPS.',
+    description: 'Uses curl_lib.',
+    icon: 'fa-globe'
+  },
+  {
+    code: 'redirect_permanently_to',
+    min_args: 1,
+    max_args: 1,
+    summary: 'Checks for a 301 redirect to a given location.',
+    description: 'Uses curl_lib.',
+    icon: 'fa-level-down fa-rotate-270',
+    placeholder: 'somewhere.com'
+  },
+  {
+    code: 'redirect_temporarily_to',
+    min_args: 1,
+    max_args: 1,
+    summary: 'Checks for either a 302 or 307 redirect to a given location.',
+    description: 'Uses curl_lib.',
+    icon: 'fa-share',
+    placeholder: 'somewhere.else.com'
+  }
 ].each do |m|
   matcher = Matcher.new
   matcher.code        = m[:code]
@@ -89,7 +89,7 @@ end
 
 
 # Robb's data
-puts 'Creating Quisitive data...'
+puts 'Creating Quisitive project...'
 quisitive = Project.create!(name: 'Quisitive', user: robb)
 
 api       = App.create!(name: 'API',            project: quisitive)
@@ -100,25 +100,26 @@ is_online = Requirement.create!(name: 'is online', app: website)
 root_dn   = Requirement.create!(name: 'serves from the root domain', app: website)
 
 redirect1 = Expectation.create!(
-  subject:     'http://www.getquisitive.com', 
+  subject:     'www.getquisitive.com',
   matcher:     Matcher.find_by_code('redirect_permanently_to'),
-  expected:    'http://getquisitive.com/',
+  expected:    'getquisitive.com/',
   requirement: root_dn
-  )
+)
 redirect1 = Expectation.create!(
-  subject:     'http://www.getquisitive.com/press-kit/', 
+  subject:     'www.getquisitive.com/press-kit/',
   matcher:     Matcher.find_by_code('redirect_permanently_to'),
-  expected:    'http://getquisitive.com/press-kit/',
+  expected:    'getquisitive.com/press-kit/',
   requirement: root_dn
-  )
+)
 redirect3 = Expectation.create!(
-  subject:     'getquisitive.com', 
+  subject:     'getquisitive.com',
   matcher:     Matcher.find_by_code('be_up'),
   requirement: is_online
-  )
+)
 
 
 # The 'My App' demo code
+puts 'Creating Orion project...'
 think200   = Project.create!(name: 'Orion', user: robb)
 myapp      = App.create!(name: 'Website', project: think200)
 
@@ -130,38 +131,39 @@ Expectation.create!(
   subject:     'www.myapp.com/',
   matcher:     Matcher.find_by_code('be_up'),
   requirement: is_online
-  )
+)
 
 Expectation.create!(
   subject:     'www.myapp.com/about',
   matcher:     Matcher.find_by_code('be_status'),
   expected:    '200',
   requirement: is_online
-  )
+)
 
 Expectation.create!(
   subject:     'www.myapp.com',
   matcher:     Matcher.find_by_code('have_a_valid_cert'),
   requirement: valid_cert
-  )
+)
 
 Expectation.create!(
   subject:     'http://myapp.com',
   matcher:     Matcher.find_by_code('redirect_permanently_to'),
   expected: 'http://www.myapp.com/',
   requirement: to_www
-  )
+)
 
 Expectation.create!(
   subject:     'myapp.com',
   matcher:     Matcher.find_by_code('enforce_https_everywhere'),
   requirement: valid_cert
-  )
+)
 
 
 #
 # Project: CodePage.io
 #
+puts 'Creating CodePage.io project...'
 codepage    = Project.create!(name: 'CodePage.io', user: robb)
 website     = App.create!(name: 'website', project: codepage)
 on_assembly = Requirement.create!(name: 'is hosted by Assembly', app: website)
@@ -170,15 +172,16 @@ Expectation.create!(
   matcher:     Matcher.find_by_code('redirect_temporarily_to'),
   expected:    'https://assemblymade.com/code-pagecodepageio',
   requirement: on_assembly
-  )
+)
 Expectation.create!(
   subject:     'https://assemblymade.com/code-pagecodepageio',
   matcher:     Matcher.find_by_code('be_status'),
   expected:    '200',
   requirement: on_assembly
-  )
+)
 
 
+puts "Creating unfinished projects..."
 # Projects in an unfinished state
 Project.create!(name: 'Best Korea',  user: robb)
 
@@ -196,23 +199,25 @@ Requirement.create!(name: 'is online', app: t200_site)
 result = 'y'
 
 if result == "y"
-  
+
   # Test user accounts
   # STDOUT.puts
   # STDOUT.print "How many test users?:"
   # users_amount = STDIN.gets.chomp.to_i
   users_amount = 200
-  (1..users_amount).each do |i|
-    u = User.new(
-      username: "user#{i}",
-      email: "user#{i}@example.com",
-      password: "1234",
-      password_confirmation: "1234"
-    )
-    u.skip_confirmation!
-    u.save!
-    
-    puts "#{i} test users created..." if (i % 10 == 0)
+  User.transaction do
+    (1..users_amount).each do |i|
+      u = User.new(
+        username: "user#{i}",
+        email: "user#{i}@example.com",
+        password: "1234",
+        password_confirmation: "1234"
+      )
+      u.skip_confirmation!
+      u.save!
+
+      puts "#{i} of #{users_amount} test users created..." if (i % 10 == 0)
+    end
   end
-  
+
 end
