@@ -24,48 +24,54 @@ robb.save!
 
 # The matchers
 [
-  {
-    code: 'be_status',                
-    min_args: 1, 
-    max_args: 1, 
-    summary: 'Pass if the domain/url has the given status.', 
-    description: 'Uses curl_lib.'
-    },
-  {
-    code: 'be_up',                    
-    min_args: 0, 
-    max_args: 0,
-    summary: 'Follows redirects if necessary and checks for 200',
-    description: 'Uses curl_lib.'
-    },
-  {
-    code: 'have_a_valid_cert',        
-    min_args: 0, 
-    max_args: 0,
-    summary: 'Serves HTTPS correctly.',
-    description: 'Uses curl_lib.'
-    },
-  {
-    code: 'enforce_https_everywhere', 
-    min_args: 0, 
-    max_args: 0,
-    summary: 'Forces visitors to use HTTPS.',
-    description: 'Uses curl_lib.'
-    },
-  {
-    code: 'redirect_permanently_to',  
-    min_args: 1, 
-    max_args: 1,
-    summary: 'Checks for a 301 redirect to a given location.',
-    description: 'Uses curl_lib.'
-    },
-  {
-    code: 'redirect_temporarily_to',  
-    min_args: 1, 
-    max_args: 1,
-    summary: 'Checks for either a 302 or 307 redirect to a given location.',
-    description: 'Uses curl_lib.'
-  }
+ {
+   code: 'be_status',                
+   min_args: 1, 
+   max_args: 1, 
+   summary: 'Pass if the domain/url has the given status.', 
+   description: 'Uses curl_lib.',
+   icon: 'fa-stethoscope'
+ },
+ {
+   code: 'be_up',                    
+   min_args: 0, 
+   max_args: 0,
+   summary: 'Follows redirects if necessary and checks for 200',
+   description: 'Uses curl_lib.',
+   icon: 'fa-thumbs-o-up',  
+ },
+ {
+   code: 'have_a_valid_cert',        
+   min_args: 0, 
+   max_args: 0,
+   summary: 'Serves HTTPS correctly.',
+   description: 'Uses curl_lib.',
+   icon: 'fa-lock'
+ },
+ {
+   code: 'enforce_https_everywhere', 
+   min_args: 0, 
+   max_args: 0,
+   summary: 'Forces visitors to use HTTPS.',
+   description: 'Uses curl_lib.',
+   icon: 'fa-globe'
+ },
+ {
+   code: 'redirect_permanently_to',  
+   min_args: 1, 
+   max_args: 1,
+   summary: 'Checks for a 301 redirect to a given location.',
+   description: 'Uses curl_lib.',
+   icon: 'fa-level-down fa-rotate-270'
+ },
+ {
+   code: 'redirect_temporarily_to',  
+   min_args: 1, 
+   max_args: 1,
+   summary: 'Checks for either a 302 or 307 redirect to a given location.',
+   description: 'Uses curl_lib.',
+   icon: 'fa-share'
+ }
 ].each do |m|
   matcher = Matcher.new
   matcher.code        = m[:code]
@@ -73,6 +79,7 @@ robb.save!
   matcher.max_args    = m[:max_args]
   matcher.summary     = m[:summary]
   matcher.description = m[:description]
+  matcher.icon        = m[:icon]
   matcher.save!
 end
 
@@ -114,7 +121,6 @@ myapp      = App.create!(name: 'My App', project: think200)
 is_online  = Requirement.create!(name: 'is online', app: myapp)
 valid_cert = Requirement.create!(name: 'is correctly configured for ssl', app: myapp)
 to_www     = Requirement.create!(name: 'redirects to www', app: myapp)
-https_only = Requirement.create!(name: 'forces visitors to use https', app: myapp)
 
 Expectation.create!(
   subject:     'www.myapp.com/',
@@ -145,7 +151,7 @@ Expectation.create!(
 Expectation.create!(
   subject:     'myapp.com',
   matcher:     Matcher.find_by_code('enforce_https_everywhere'),
-  requirement: https_only
+  requirement: valid_cert
   )
 
 
