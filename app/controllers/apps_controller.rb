@@ -22,7 +22,7 @@ class AppsController < ApplicationController
 
     respond_to do |format|
       if @app.save
-        format.html { redirect_to @project, notice: 'App was successfully created.' }
+        format.html { redirect_to @project}
         format.json { render action: 'show', status: :created, location: @app }
       else
         format.html { render action: 'new' }
@@ -36,7 +36,7 @@ class AppsController < ApplicationController
   def update
     respond_to do |format|
       if @app.update(app_params)
-        format.html { redirect_to @app.project, notice: 'App was successfully updated.' }
+        format.html { redirect_to @app.project}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
