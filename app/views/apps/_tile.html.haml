@@ -1,26 +1,29 @@
-%div{class: "panel panel-"+status_class_for(app) }
+%div{class: "app-tile panel panel-"+status_class_for(app) }
 
   .panel-heading
-    %h3{style: "margin:0"}
-      = app
+    %h3= app
 
-  %table.table.table-bordered
+  %table.table
     %thead
     %tbody
 
       - app.requirements.each do |req| 
         %tr
-          %th{colspan: "4"}
-            %h4{style: "margin: 1em 0 0 0"}
+          %th{colspan: "3"}
+            %h4
               = req
 
         - req.expectations.each do |exp|
           %tr{class: 'text-'+status_class_for(exp, only: 'danger')}
-            %td= status_icon_for(exp)
-            %td= exp.subject
+            %td{style: "text-align: center"}= status_icon_for(exp, 'fa-lg')
             %td
-              %span.text-muted should
+              %strong= exp.subject
+            %td
+              %span.text-semi-muted
+                should
+              = fa_icon(exp.matcher.icon, 'fa-border')
               = exp.matcher
-            %td= exp.expected
+              %strong
+                = exp.expected
 
 

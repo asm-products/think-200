@@ -4,6 +4,7 @@
 #
 #  created_at :datetime
 #  id         :integer          not null, primary key
+#  manual     :boolean
 #  project_id :integer
 #  raw_data   :text
 #  updated_at :datetime

@@ -13,6 +13,9 @@ $content-bg:        mix($body-bg, $content-bg-active, 15%);
 
 $text-semi-muted:   darken($text-muted, 20%);
 
+.text-semi-muted {
+    color: $text-semi-muted;
+}
 
 #config-data {
     display: none;
@@ -37,7 +40,7 @@ $text-semi-muted:   darken($text-muted, 20%);
     }
 }
 
-.project-tile {
+.project-tile, .app-tile {
      box-shadow: 0 0 4px 0px #ccc;
      background-color: $content-bg;
      table {
@@ -100,5 +103,18 @@ ul.text-menu {
     padding-left: 0;
     li {
 	padding-bottom: 0.5em;
+    }
+}
+
+.app-tile {
+    margin-bottom: 2em;
+
+    h3 {
+	margin: 0;
+    }
+    h4 {
+	margin: 0.75em 0 0 0;
+	font-weight: normal;
+	font-size: 160%;
     }
 }

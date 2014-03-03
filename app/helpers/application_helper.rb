@@ -43,13 +43,16 @@ module ApplicationHelper
     "<i class=\"fa fa-#{name} #{extra_classes}\"></i>".html_safe
   end
 
-
-  def failed_icon
-    font_awesome 'warning', 'fa-fw failed-icon'
+  def fa_icon(classes, extra_classes='')
+    "<i class=\"fa #{classes} #{extra_classes}\"></i>".html_safe
   end
 
-  def passed_icon
-    font_awesome 'check',   'fa-fw passed-icon'
+  def failed_icon(extra)
+    font_awesome 'warning', "#{extra} failed-icon"
+  end
+
+  def passed_icon(extra)
+    font_awesome 'check',   "#{extra} passed-icon"
   end
 
   def delete_icon
@@ -57,13 +60,13 @@ module ApplicationHelper
   end
 
 
-  def status_icon_for(thing)
+  def status_icon_for(thing, extra_classes='')
     if thing.passed?.nil?
-      font_awesome('ellipsis-h', 'fa-fw text-muted')
+      font_awesome('ellipsis-h', "text-muted #{extra_classes}")
     elsif thing.passed?
-      passed_icon
+      passed_icon(extra_classes)
     else
-      failed_icon
+      failed_icon(extra_classes)
     end
   end
 
@@ -83,6 +86,6 @@ module ApplicationHelper
     else
       only == result ? result : ''
     end
-
   end
+
 end
