@@ -21,6 +21,15 @@ class Expectation < ActiveRecord::Base
     spec_run.status?(expectation: self)
   end
 
+  def icon
+    if passed? == true
+      'fa-check'
+    elsif passed?.nil?
+      'fa-ellipsis-h'
+    else
+      'fa-warning'
+    end
+  end
 
   def to_s
     "#{subject} should #{matcher} #{expected}"
