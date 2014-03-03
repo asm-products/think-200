@@ -2,10 +2,6 @@ class AppsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_app, only: [:show, :edit, :update, :destroy]
 
-  # GET /apps/1
-  # GET /apps/1.json
-  def show
-  end
 
   # GET /apps/new
   def new
@@ -40,7 +36,7 @@ class AppsController < ApplicationController
   def update
     respond_to do |format|
       if @app.update(app_params)
-        format.html { redirect_to @app, notice: 'App was successfully updated.' }
+        format.html { redirect_to @app.project, notice: 'App was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -55,7 +51,7 @@ class AppsController < ApplicationController
     project = @app.project
     @app.destroy
     respond_to do |format|
-      format.html { redirect_to project_path(project) }
+      format.html { redirect_to project }
       format.json { head :no_content }
     end
   end
