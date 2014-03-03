@@ -14,6 +14,7 @@ class ExpectationsController < ApplicationController
     @requirement = current_user.requirements.find(params[:requirement_id])
     @expectation.requirement = @requirement
     @project     = @requirement.project
+    @app         = @requirement.app
   end
 
   # GET /expectations/1/edit
@@ -27,7 +28,7 @@ class ExpectationsController < ApplicationController
 
     respond_to do |format|
       if @expectation.save
-        format.html { redirect_to @expectation, notice: 'Expectation was successfully created.' }
+        format.html { redirect_to @expectation}
         format.json { render action: 'show', status: :created, location: @expectation }
       else
         format.html { render action: 'new' }
@@ -41,7 +42,7 @@ class ExpectationsController < ApplicationController
   def update
     respond_to do |format|
       if @expectation.update(expectation_params)
-        format.html { redirect_to @expectation, notice: 'Expectation was successfully updated.' }
+        format.html { redirect_to @expectation}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -10,13 +10,22 @@
         - @expectation.errors.full_messages.each do |msg|
           %li= msg
 
+  .row
+    -# The subject
+    .col-sm-4
+      .field.form-group
+        = f.label :subject, 'This'
+        = f.text_field :subject, class: 'form-control focus-here', placeholder: 'URL or domain name'
 
-  .field.form-group
-    = f.label :subject, 'Subject'
-    = f.text_field :subject, class: 'form-control focus-here'
-  .field.form-group
-    = f.label :expected, 'Expected'
-    = f.text_field :expected, class: 'form-control focus-here'
+    -# The matchers
+    .col-sm-8
+      .form-group
+        %label Should
+        %ul.list-group
+          - Matcher.all.each do |m|
+            %li.list-group-item
+              = fa_icon(m.icon, 'fa-fw')
+
   .actions
     = f.submit class: 'btn btn-primary'
     or
