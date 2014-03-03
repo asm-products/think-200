@@ -5,13 +5,27 @@
  */
 @import "framework_and_overrides";
 // @import "bootstrap";
- @import "font-awesome";
+@import "font-awesome";
 
 
-$content-bg-active: #ffffff;
-$content-bg:        mix($body-bg, $content-bg-active, 15%);
+$content-bg-active:         #ffffff;
+$content-bg:                mix($body-bg, $content-bg-active, 15%);
+$input-color-placeholder:   #bbb; // Placeholder text color
+$text-semi-muted:           darken($text-muted, 20%);
 
-$text-semi-muted:   darken($text-muted, 20%);
+::-webkit-input-placeholder { /* WebKit browsers */
+    color:    $input-color-placeholder !important;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    $input-color-placeholder !important;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    $input-color-placeholder !important;
+}
+:-ms-input-placeholder { /* Internet Explorer 10+ */
+    color:    $input-color-placeholder !important;
+}
+
 
 .text-semi-muted {
     color: $text-semi-muted;

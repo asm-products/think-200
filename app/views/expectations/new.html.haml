@@ -1,7 +1,10 @@
 .row
-  .col-sm-12
+  .col-sm-offset-2.col-sm-10
     %h1
-      When
+      When the
       = @app
       = @requirement.to_s + ':'
+
+.row
+  .col-sm-12
     = render 'form'
