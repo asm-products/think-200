@@ -21,10 +21,14 @@ class AjaxController < ApplicationController
     end
 
     # Percentage complete for progress bar indicators
-    total    = projects.count.to_f
-    complete = data['working'].values.select{ |v| v == 'false' }.count
-    data['percent_complete'] = (complete / total * 100).round
-
+    if projects.empty?
+      data['percent_complete'] = 100
+    else
+      total    = projects.count.to_f
+      complete = data['working'].values.select{ |v| v == 'false' }.count
+      data['percent_complete'] = (complete / total * 100).round
+    end
+    
     render json: data.to_json
   end
 
