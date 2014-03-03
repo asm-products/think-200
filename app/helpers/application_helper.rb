@@ -1,12 +1,9 @@
 module ApplicationHelper
 
   def dquo(content)
-    maybe_safe whole: "&ldquo;#{content}&rdquo;", part: content
+    "&ldquo;#{h content}&rdquo;".html_safe
   end
   
-  def maybe_safe(whole:, part:)
-    part.html_safe? ? whole.html_safe : whole
-  end
 
   def tile_col_class
     'col-xs-6 col-sm-5 col-md-3 col-lg-3'
