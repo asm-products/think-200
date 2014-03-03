@@ -5,6 +5,7 @@
 #  code        :string(255)      not null
 #  created_at  :datetime
 #  description :text
+#  icon        :string(255)
 #  id          :integer          not null, primary key
 #  max_args    :integer          not null
 #  min_args    :integer          not null
