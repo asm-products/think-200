@@ -1,4 +1,4 @@
-= form_for @expectation, html: { role: 'form' } do |f|
+= form_for @expectation, html: { role: 'form', class: 'form-horizontal' } do |f|
   = f.hidden_field :requirement_id
   
   - if @expectation.errors.any?
@@ -10,31 +10,31 @@
         - @expectation.errors.full_messages.each do |msg|
           %li= msg
 
-  .row
-    -# The subject
-    .col-sm-4
-      .field.form-group
-        = f.label :subject, 'This'
-        = f.text_field :subject, class: 'form-control focus-here', placeholder: 'URL or domain name'
+  -# The subject
+  .form-group
+    = f.label :subject, 'This:', {class: 'col-sm-2 control-label'}
+    .col-sm-6
+      = f.text_field :subject, class: 'form-control focus-here', placeholder: 'URL or domain name'
 
-    -# The matchers
-    .col-sm-8
-      .form-group
-        %label Should
-        %ul.list-group
-          - Matcher.all.each do |m|
-            %li.list-group-item
-              .row
-                .col-xs-7
-                  %input{type: 'checkbox'}
-                  %span.lead
-                    = fa_icon(m.icon, 'fa-fw')
-                    = m.to_s
-                - if m.min_args == 1
-                  .col-xs-5
-                    %input.form-control{type: 'text', placeholder: '200'}
+  -# The matchers
+  .form-group
+    %label.col-sm-2.control-label Should:
+    .col-sm-10
+      %ul.list-group
+        - Matcher.all.each do |m|
+          %li.list-group-item
+            .row
+              .col-xs-7
+                %input{type: 'checkbox'}
+                %span.lead
+                  = fa_icon(m.icon, 'fa-fw')
+                  = m.to_s
+              - if m.min_args == 1
+                .col-xs-5
+                  %input.form-control{type: 'text', placeholder: '200'}
 
-  .actions
-    = f.submit class: 'btn btn-primary'
-    or
-    = link_to 'cancel', project_path(@project)
+    .form-group
+      .col-sm-offset-2.col-sm-10
+        = f.submit class: 'btn btn-primary'
+        or
+        = link_to 'cancel', project_path(@project)
