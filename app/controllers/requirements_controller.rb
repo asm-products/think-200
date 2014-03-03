@@ -12,6 +12,7 @@ class RequirementsController < ApplicationController
 
   # GET /requirements/1/edit
   def edit
+    @project     = @requirement.project
   end
 
   # POST /requirements
@@ -34,11 +35,11 @@ class RequirementsController < ApplicationController
   # PATCH/PUT /requirements/1
   # PATCH/PUT /requirements/1.json
   def update
-    project = current_user.projects.find(@requirement.app.project_id)
+    @project = current_user.projects.find(@requirement.app.project_id)
 
     respond_to do |format|
       if @requirement.update(requirement_params)
-        format.html { redirect_to project}
+        format.html { redirect_to @project}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -50,10 +51,10 @@ class RequirementsController < ApplicationController
   # DELETE /requirements/1
   # DELETE /requirements/1.json
   def destroy
-    project = current_user.projects.find @requirement.project.id
+    @project = current_user.projects.find @requirement.project.id
     @requirement.destroy
     respond_to do |format|
-      format.html { redirect_to project }
+      format.html { redirect_to @project }
       format.json { head :no_content }
     end
   end
