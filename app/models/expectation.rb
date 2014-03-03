@@ -14,6 +14,12 @@
 class Expectation < ActiveRecord::Base
   belongs_to :requirement
   belongs_to :matcher
+  validates :requirement, presence: true
+
+
+  def project
+    requirement.project
+  end
 
   def passed?
     spec_run = self.requirement.app.project.most_recent_test

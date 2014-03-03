@@ -26,10 +26,14 @@ class SpecRun < ActiveRecord::Base
   end
 
   def status?(expectation: nil)
-    if raw_data[expectation.id][:examples][0][:status] == STATUS_FAILED
-      false
-    else
-      true
+    begin
+      if raw_data[expectation.id][:examples][0][:status] == STATUS_FAILED
+        false
+      else
+        true
+      end
+    rescue
+      nil
     end
   end
 

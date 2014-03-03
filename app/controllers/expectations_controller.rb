@@ -25,10 +25,13 @@ class ExpectationsController < ApplicationController
   # POST /expectations.json
   def create
     @expectation = Expectation.new(expectation_params)
+    @expectation.matcher_id = params['matcher-radio']
+
+    @project     = current_user.projects.find(@expectation.project.id)
 
     respond_to do |format|
       if @expectation.save
-        format.html { redirect_to @expectation}
+        format.html { redirect_to @project}
         format.json { render action: 'show', status: :created, location: @expectation }
       else
         format.html { render action: 'new' }

@@ -25,7 +25,7 @@
           %li.list-group-item
             .row
               .col-xs-7
-                %input{type: 'checkbox', id: "matcher-#{m.id}-checkbox", name: "matcher-#{m.id}-checkbox"}
+                %input{type: 'radio', id: "matcher-#{m.id}-radio", name: "matcher-radio", value: m.id}
                 %span.lead
                   = fa_icon(m.icon, 'fa-fw')
                   = m.to_s
