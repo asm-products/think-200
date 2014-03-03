@@ -5,7 +5,7 @@ class AppsController < ApplicationController
 
   # GET /apps/new
   def new
-    @app = App.new
+    @app     = App.new
     @project = current_user.projects.find(params[:project_id])
     @app.project = @project
   end
@@ -18,7 +18,7 @@ class AppsController < ApplicationController
   # POST /apps.json
   def create
     @app = App.new(app_params)
-    @project = @app.project
+    @project = current_user.projects.find(@app.project_id)
 
     respond_to do |format|
       if @app.save
@@ -34,9 +34,11 @@ class AppsController < ApplicationController
   # PATCH/PUT /apps/1
   # PATCH/PUT /apps/1.json
   def update
+    project = current_user.projects.find(@app.project_id)
+
     respond_to do |format|
       if @app.update(app_params)
-        format.html { redirect_to @app.project}
+        format.html { redirect_to project}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -48,7 +50,7 @@ class AppsController < ApplicationController
   # DELETE /apps/1
   # DELETE /apps/1.json
   def destroy
-    project = @app.project
+    project = current_user.projects.find(@app.project_id)
     @app.destroy
     respond_to do |format|
       format.html { redirect_to project }

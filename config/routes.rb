@@ -6,7 +6,7 @@ Think200::Application.routes.draw do
 
   resources :matchers
 
-  resources :requirements
+  resources :requirements, except: [:index, :show]
 
   resources :apps, except: [:index, :show]
 

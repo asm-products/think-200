@@ -14,11 +14,16 @@ class Requirement < ActiveRecord::Base
   belongs_to :app
   has_many   :expectations, dependent: :destroy
 
-  validates :app_id, presence: true
-  validates :name,   presence: true
+  validates :app_id, :name, presence: true
+  validates :name, uniqueness: { scope: :app_id }
+  
 
   default_scope { order(:name) }
   
+  def project
+    app.project
+  end
+
   def to_s
     name
   end
