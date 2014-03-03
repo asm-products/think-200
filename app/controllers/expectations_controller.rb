@@ -54,10 +54,7 @@ class ExpectationsController < ApplicationController
   # DELETE /expectations/1.json
   def destroy
     @expectation.destroy
-    respond_to do |format|
-      format.html { redirect_to expectations_url }
-      format.json { head :no_content }
-    end
+    redirect_to project_path(@project)
   end
 
   private

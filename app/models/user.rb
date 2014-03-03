@@ -55,6 +55,7 @@ class User < ActiveRecord::Base
   has_many :projects, dependent: :destroy
   has_many :apps, through: :projects
   has_many :requirements, through: :apps
+  has_many :expectations, through: :requirements
 
   # Pagination
   paginates_per 100
