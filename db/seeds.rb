@@ -22,7 +22,7 @@ robb = User.new(
 robb.skip_confirmation!
 robb.save!
 
-# The matchers
+puts 'Creating the Matchers...'
 [
  {
    code: 'be_status',                
@@ -30,7 +30,8 @@ robb.save!
    max_args: 1, 
    summary: 'Pass if the domain/url has the given status.', 
    description: 'Uses curl_lib.',
-   icon: 'fa-stethoscope'
+   icon: 'fa-stethoscope',
+   placeholder: '200'
  },
  {
    code: 'be_up',                    
@@ -62,7 +63,8 @@ robb.save!
    max_args: 1,
    summary: 'Checks for a 301 redirect to a given location.',
    description: 'Uses curl_lib.',
-   icon: 'fa-level-down fa-rotate-270'
+   icon: 'fa-level-down fa-rotate-270',
+   placeholder: 'http://somewhere.com/'
  },
  {
    code: 'redirect_temporarily_to',  
@@ -70,7 +72,8 @@ robb.save!
    max_args: 1,
    summary: 'Checks for either a 302 or 307 redirect to a given location.',
    description: 'Uses curl_lib.',
-   icon: 'fa-share'
+   icon: 'fa-share',
+   placeholder: 'http://somewhere.else.com/'
  }
 ].each do |m|
   matcher = Matcher.new
@@ -80,6 +83,7 @@ robb.save!
   matcher.summary     = m[:summary]
   matcher.description = m[:description]
   matcher.icon        = m[:icon]
+  matcher.placeholder = m[:placeholder]
   matcher.save!
 end
 
@@ -197,7 +201,7 @@ if result == "y"
   # STDOUT.puts
   # STDOUT.print "How many test users?:"
   # users_amount = STDIN.gets.chomp.to_i
-  users_amount = 20
+  users_amount = 200
   (1..users_amount).each do |i|
     u = User.new(
       username: "user#{i}",

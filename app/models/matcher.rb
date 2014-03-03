@@ -9,6 +9,7 @@
 #  id          :integer          not null, primary key
 #  max_args    :integer          not null
 #  min_args    :integer          not null
+#  placeholder :string(255)
 #  summary     :string(255)
 #  updated_at  :datetime
 #
