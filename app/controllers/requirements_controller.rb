@@ -5,9 +5,9 @@ class RequirementsController < ApplicationController
   # GET /requirements/new
   def new
     @requirement = Requirement.new
-    app          = current_user.apps.find(params[:app_id])
-    @requirement.app = app
-    @project     = app.project
+    @app         = current_user.apps.find(params[:app_id])
+    @requirement.app = @app
+    @project     = @app.project
   end
 
   # GET /requirements/1/edit

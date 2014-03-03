@@ -21,9 +21,15 @@
         -# One row for the Requirement name
         - app.requirements.each do |req| 
           %tr
-            %th{colspan: "3"}
-              %h4
-                = req
+            %th{colspan: "3", style: 'vertical-align: bottom'}
+              .row
+                .col-sm-9
+                  %h4
+                    = req
+                .col-sm-3
+                  %a.btn.btn-default.pull-right.btn-xs{href: edit_requirement_path(req), role: 'button'}
+                    = fa_icon 'fa-pencil'
+
 
           -# Rows for the Expectations
           - req.expectations.each do |exp|

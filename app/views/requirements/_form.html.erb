@@ -13,11 +13,12 @@
 
     <div class="field form-group">
       <%= f.hidden_field :app_id %>
-      <%= f.label :name, 'Requirement name' %>
+      <%= f.label :name, 'Name' %>
       <%= f.text_field :name, class: 'form-control focus-here' %>
       <span class="help-block">
-        A program to be monitored and tested. E.g., an API server, a web app, or and
-        online app store.
+	A business need. <i>E.g.</i>:
+	<strong><%= dquo raw 'is fast' %></strong>, or
+	<strong><%= dquo raw 'redirects to the new blog' %></strong>.
       </span>
     </div>
 
