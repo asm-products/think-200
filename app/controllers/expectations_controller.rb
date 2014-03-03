@@ -2,11 +2,6 @@ class ExpectationsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_expectation, only: [:show, :edit, :update, :destroy]
 
-  # GET /expectations
-  # GET /expectations.json
-  def index
-    @expectations = Expectation.all
-  end
 
   # GET /expectations/1
   # GET /expectations/1.json
@@ -16,6 +11,9 @@ class ExpectationsController < ApplicationController
   # GET /expectations/new
   def new
     @expectation = Expectation.new
+    @requirement = current_user.requirements.find(params[:requirement_id])
+    @expectation.requirement = @requirement
+    @project     = @requirement.project
   end
 
   # GET /expectations/1/edit
@@ -65,7 +63,8 @@ class ExpectationsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_expectation
-      @expectation = Expectation.find(params[:id])
+      @expectation = current_user.expectations.find(params[:id])
+      @project     = @expectation.project
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

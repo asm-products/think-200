@@ -2,7 +2,7 @@ Think200::Application.routes.draw do
   post "ajax/queue_status"
   resources :spec_runs
 
-  resources :expectations
+  resources :expectations, except: [:index]
 
   resources :matchers
 
