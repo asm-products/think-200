@@ -1,7 +1,7 @@
 <% 
   panel_class  = 'panel-danger' 
   column_class = tile_col_class
-  limit = 2
+  limit = 1
 %>
 
 <div class="<%= column_class %>">
@@ -9,20 +9,20 @@
     <div class="panel-heading">
       <h3 class="panel-title">
         <%= link_to tile, project_path(tile) %>
-	<%= render 'test_button', {project: tile} %>
+      	<%= render 'test_button', {project: tile} %>
       </h3>
     </div>
     <div class="panel-body text-danger">
       <table>
-	<% tile.failing_requirements.limit(limit).each do |r| %>
+    	<% tile.failing_requirements.limit(limit).each do |r| %>
         <tr>
           <td style="vertical-align: top; line-height: 120%">&bull;&nbsp;</td>
-          <td style="padding-bottom: 0.5em; line-height: 120%"><%= r.full_name_without_project %></td>
+          <td style="padding-bottom: 0.5em; line-height: 120%">Failing: <%= dquo r.full_name_without_project %></td>
         </tr>
-	<% end %>
-	<% if tile.failing_requirements.count > limit %>
-        <tr><td></td><td><small><%= tile.failing_requirements.count - limit %> more...</small></td></tr>
-	<% end %>
+    	<% end %>
+    	<% if tile.failing_requirements.count > limit %>
+            <tr><td></td><td><small><%= tile.failing_requirements.count - limit %> more...</small></td></tr>
+    	<% end %>
       </table>
     </div>
   </div>
