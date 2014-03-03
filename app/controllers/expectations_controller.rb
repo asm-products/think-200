@@ -22,21 +22,17 @@ class ExpectationsController < ApplicationController
   end
 
   # POST /expectations
-  # POST /expectations.json
   def create
+    # Assemble a new expectation from the form
     @expectation = Expectation.new(expectation_params)
     @expectation.matcher_id = params['matcher-radio']
+    @expectation.expected   = params["matcher-#{@expectation.matcher_id}-input"]
+    @project                = current_user.projects.find(@expectation.project.id)
 
-    @project     = current_user.projects.find(@expectation.project.id)
-
-    respond_to do |format|
-      if @expectation.save
-        format.html { redirect_to @project}
-        format.json { render action: 'show', status: :created, location: @expectation }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @expectation.errors, status: :unprocessable_entity }
-      end
+    if @expectation.save
+      redirect_to @project
+    else
+      render action: 'new'
     end
   end
 
