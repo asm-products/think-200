@@ -20,8 +20,8 @@ require 'capistrano/rvm'
 require 'capistrano/bundler'
 require 'capistrano/rails'
 
-# Stopped working all of a sudden
-# require "whenever/capistrano"
+# Broken in 0.9.1?
+require "whenever/capistrano"
 
 # require 'capistrano/console'
 

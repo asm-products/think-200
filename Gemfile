@@ -16,7 +16,7 @@ gem 'newrelic_rpm'
 gem 'figaro'
 gem 'pg'
 gem 'pry-rails'
-gem 'whenever', :require => false
+gem 'whenever', '0.9.0', require: false
 gem 'rspec'
 gem 'rspec-webservice_matchers'
 gem 'annotate'
