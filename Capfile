@@ -19,7 +19,10 @@ require 'capistrano/rvm'
 # require 'capistrano/chruby'
 require 'capistrano/bundler'
 require 'capistrano/rails'
-require "whenever/capistrano"
+
+# Stopped working all of a sudden
+# require "whenever/capistrano"
+
 # require 'capistrano/console'
 
 # Loads custom tasks from `lib/capistrano/tasks' if you have any defined.
