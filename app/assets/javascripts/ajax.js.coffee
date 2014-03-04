@@ -67,6 +67,8 @@ ready = ->
       set_progress_bar(0)
       $.post(url)
 
+    $("abbr.timeago").timeago();
+
 
     # A simple way to set the focus in the right input.
     # Each page is responsible for adding the focus-here
