@@ -61,6 +61,10 @@ class Project < ActiveRecord::Base
       spec_runs.last
     end
 
+    def tested_at
+      most_recent_test.try(:updated_at)
+    end
+
     # Returns true, false, or nil.
     def passed?
       if expectations.empty?

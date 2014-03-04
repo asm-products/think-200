@@ -13,17 +13,28 @@
       </h3>
     </div>
     <div class="panel-body text-danger">
-      <table>
+      <table style="margin-bottom: 0.5em">
     	<% tile.failing_requirements.limit(limit).each do |r| %>
         <tr>
-          <td style="vertical-align: top; line-height: 120%">&bull;&nbsp;</td>
-          <td style="padding-bottom: 0.5em; line-height: 120%">Failing: <%= dquo r.full_name_without_project %></td>
+          <td style="padding-bottom: 0.2em; line-height: 120%; vertical-align: top">Failing:&nbsp;</td>
+          <td style="padding-bottom: 0.2em; line-height: 120%"><strong><%= r.full_name_without_project %></strong></td>
         </tr>
     	<% end %>
     	<% if tile.failing_requirements.count > limit %>
-            <tr><td></td><td><small><%= tile.failing_requirements.count - limit %> more...</small></td></tr>
+        <tr>
+          <td colspan="2"><small>
+            plus <%= tile.failing_requirements.count - limit %> more&hellip;
+          </small></td>
+        </tr>
     	<% end %>
       </table>
+
+    </div>
+    <div class="panel-footer">
+      <div class="tested-at">
+        <span class="text-semi-muted">Tested</span> <%= time_ago_in_words tile.tested_at %> <span class="text-semi-muted">ago</span>
+      </div>
+
     </div>
   </div>
 </div>

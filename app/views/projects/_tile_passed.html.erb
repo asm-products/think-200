@@ -12,7 +12,11 @@
       </h3>
     </div>
     <div class="panel-body">
-      <%= image_tag '200-success.svg', style: "width: 132; margin-left: auto; margin-right: auto" %>
+    </div>
+    <div class="panel-footer">
+      <div class="tested-at">
+        <span class="text-semi-muted">Tested</span> <%= time_ago_in_words tile.tested_at %> <span class="text-semi-muted">ago</span>
+      </div>
     </div>
   </div>
 </div>

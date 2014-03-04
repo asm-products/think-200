@@ -64,7 +64,7 @@ $text-semi-muted:           darken($text-muted, 20%);
 
 .project-tile {
     .panel-body {
-        height: 140px;
+        height: 110px;
     }
 }
 
@@ -137,4 +137,8 @@ ul.text-menu {
 	font-weight: normal;
 	font-size: 160%;
     }
+}
+
+.tested-at {
+    text-align: center
 }

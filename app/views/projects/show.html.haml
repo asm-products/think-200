@@ -1,4 +1,13 @@
-%h1{style: "margin-top: 0"}= @project.name
+%h1{style: "margin-top: 0"}
+  = @project.name
+  %small
+    - if @project.tested_at
+      tested
+      = time_ago_in_words(@project.tested_at)
+      ago
+    - else
+      Not yet tested
+
 .row
   .col-sm-3.col-md-2.col-lg-2
     %small
