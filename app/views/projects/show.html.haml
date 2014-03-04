@@ -3,8 +3,7 @@
   %small
     - if @project.tested_at
       tested
-      = time_ago_in_words(@project.tested_at)
-      ago
+      = timeago @project.tested_at
     - else
       Not yet tested
 
