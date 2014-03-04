@@ -18,7 +18,7 @@
         <% if tile.tested_at.nil? %>
           <span class="text-semi-muted">(Not yet tested)</span>
         <% else %>
-          <span class="text-semi-muted">Tested</span> <%= time_ago_in_words tile.tested_at %> <span class="text-semi-muted">ago</span>
+          <%= timeago tile.tested_at %>
         <% end %>
       </div>
     </div>

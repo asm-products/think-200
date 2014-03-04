@@ -16,14 +16,26 @@
       <table style="margin-bottom: 0.5em">
     	<% tile.failing_requirements.limit(limit).each do |r| %>
         <tr>
-          <td style="padding-bottom: 0.2em; line-height: 120%; vertical-align: top">Failing:&nbsp;</td>
-          <td style="padding-bottom: 0.2em; line-height: 120%"><strong><%= r.full_name_without_project %></strong></td>
+
+          <% if r.can_be_negated? %>
+            <td></td>
+            <td style="padding-bottom: 0.2em; line-height: 120%">
+              <strong>
+                The <%= r.full_name_without_project_negated.downcase %>.
+              </strong>
+            </td>
+          <% else %>
+            <td style="padding-bottom: 0.2em; line-height: 120%; vertical-align: top; padding-right: 0.5em;">Failed:</td>
+            <td style="padding-bottom: 0.2em; line-height: 120%"><strong><%= r.full_name_without_project %></strong></td>
+          <% end %>
+
         </tr>
-    	<% end %>
+      <% end %>
     	<% if tile.failing_requirements.count > limit %>
         <tr>
-          <td colspan="2"><small>
-            plus <%= tile.failing_requirements.count - limit %> more&hellip;
+          <td></td>
+          <td><small>
+            <%= tile.failing_requirements.count - limit %> more&hellip;
           </small></td>
         </tr>
     	<% end %>
@@ -32,9 +44,8 @@
     </div>
     <div class="panel-footer">
       <div class="tested-at">
-        <span class="text-semi-muted">Tested</span> <%= time_ago_in_words tile.tested_at %> <span class="text-semi-muted">ago</span>
+        <%= timeago tile.tested_at %>
       </div>
-
     </div>
   </div>
 </div>

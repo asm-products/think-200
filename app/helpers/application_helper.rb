@@ -1,9 +1,14 @@
 module ApplicationHelper
 
+  def timeago(time, options = {})
+    options[:class] ||= "timeago"
+    content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
+  end
+
   def dquo(content)
     "&ldquo;#{h content}&rdquo;".html_safe
   end
-  
+
 
   def tile_col_class
     'col-xs-12 col-sm-5 col-md-4 col-lg-3'
@@ -24,7 +29,7 @@ module ApplicationHelper
   #
   # Responsible for encapsulating how the HTML title is
   # formatted.
-  # 
+  #
   # A method with side effects. Sets the @title variable
   # which is picked up in the Application Layout for the
   # HTML title element.

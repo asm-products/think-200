@@ -1,5 +1,6 @@
 <nav class="navbar navbar-default" role="navigation">
   <div class="container">
+
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
         <span class="sr-only">Toggle navigation</span>
@@ -7,13 +8,21 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <% destination = current_user.nil? ? root_path : projects_path %>
-      <%= link_to APP_NAME, destination, class: 'navbar-brand' %>
+      <%= link_to(APP_NAME, root_path, class: 'navbar-brand ') unless current_user %>
+<!--       <% if current_user %>
+          <%= link_to(fa_icon('fa-home', 'fa-lg'), projects_path, class: 'navbar-brand '+is_active?(projects_path)) %>
+      <% end %>
+ -->    
     </div>
-    <div class="collapse navbar-collapse">
+
+    <div class="collapse navbar-collapse" style="margin-left: -15px">
       <ul class="nav navbar-nav">
         <%= render 'layouts/navigation_links' %>
       </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <%= render 'layouts/navigation_links_right' %>
+      </ul>
     </div>
+
   </div>
 </nav>

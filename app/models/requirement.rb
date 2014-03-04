@@ -32,6 +32,18 @@ class Requirement < ActiveRecord::Base
     "#{app.name} #{name}"
   end
 
+  def can_be_negated?
+    /^is / === name
+  end
+
+  def name_negated
+    name.sub(/^is /, 'is not ')    
+  end
+
+  def full_name_without_project_negated
+    "#{app.name} #{name_negated}"
+  end
+
   def to_rspec
     result = "it '#{name}' do\n"
     expectations.each { |e| result += e.to_rspec.indent(2) }

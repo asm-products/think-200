@@ -1,5 +1,8 @@
 <div class="row">
     <div class="col-sm-offset-3 col-sm-6">
+        <div class="page-header">
+            <h1>Add an app to <%= link_to @project, @project %></h1>
+        </div>
         <%= render 'form', { cancel_dest: project_path(@project) } %>
     </div>
 </div>
