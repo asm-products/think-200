@@ -16,15 +16,26 @@
       <table style="margin-bottom: 0.5em">
     	<% tile.failing_requirements.limit(limit).each do |r| %>
         <tr>
-          <td style="padding-bottom: 0.2em; line-height: 120%; vertical-align: top; padding-right: 0.5em;">Failed:</td>
-          <td style="padding-bottom: 0.2em; line-height: 120%"><strong><%= r.full_name_without_project %></strong></td>
+
+          <% if r.can_be_negated? %>
+            <td></td>
+            <td style="padding-bottom: 0.2em; line-height: 120%">
+              <strong>
+                The <%= r.full_name_without_project_negated.downcase %>.
+              </strong>
+            </td>
+          <% else %>
+            <td style="padding-bottom: 0.2em; line-height: 120%; vertical-align: top; padding-right: 0.5em;">Failed:</td>
+            <td style="padding-bottom: 0.2em; line-height: 120%"><strong><%= r.full_name_without_project %></strong></td>
+          <% end %>
+
         </tr>
-    	<% end %>
+      <% end %>
     	<% if tile.failing_requirements.count > limit %>
         <tr>
           <td></td>
           <td><small>
-            plus <%= tile.failing_requirements.count - limit %> more&hellip;
+            <%= tile.failing_requirements.count - limit %> more&hellip;
           </small></td>
         </tr>
     	<% end %>
