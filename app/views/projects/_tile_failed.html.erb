@@ -16,13 +16,14 @@
       <table style="margin-bottom: 0.5em">
     	<% tile.failing_requirements.limit(limit).each do |r| %>
         <tr>
-          <td style="padding-bottom: 0.2em; line-height: 120%; vertical-align: top">Failing:&nbsp;</td>
+          <td style="padding-bottom: 0.2em; line-height: 120%; vertical-align: top; padding-right: 0.5em;">Failed:</td>
           <td style="padding-bottom: 0.2em; line-height: 120%"><strong><%= r.full_name_without_project %></strong></td>
         </tr>
     	<% end %>
     	<% if tile.failing_requirements.count > limit %>
         <tr>
-          <td colspan="2"><small>
+          <td></td>
+          <td><small>
             plus <%= tile.failing_requirements.count - limit %> more&hellip;
           </small></td>
         </tr>
