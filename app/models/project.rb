@@ -6,6 +6,7 @@
 #  id         :integer          not null, primary key
 #  name       :string(255)
 #  notes      :text
+#  tested_at  :datetime
 #  updated_at :datetime
 #  user_id    :integer
 #
@@ -59,10 +60,6 @@ class Project < ActiveRecord::Base
 
     def most_recent_test
       spec_runs.order('created_at DESC').first
-    end
-
-    def tested_at
-      most_recent_test.try(:created_at)
     end
 
     # Returns true, false, or nil.

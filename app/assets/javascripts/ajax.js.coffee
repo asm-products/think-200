@@ -9,7 +9,7 @@ set_icon = (project_id, is_working) ->
     button.addClass(spin)
   else
     if button.hasClass(spin)
-      update_project_tile(project_id)
+      # update_project_tile(project_id)
       button.removeClass(spin)
 
 
