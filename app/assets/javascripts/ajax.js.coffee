@@ -26,17 +26,20 @@ set_progress_bar = (percent) ->
 
 
 project_is_updated = (p_id, tested_at) ->
-  $("#project-tile-#{p_id}").data('tested-at') < tested_at
+  server_time = tested_at
+  client_time = $("#project-tile-#{p_id}").data('tested-at')
+  console.debug("Project #{p_id}: #{client_time} < #{server_time} ? #{client_time < server_time}")
+  client_time < server_time
 
 
 update_project_tile = (p_id) ->
+  console.debug("Updating project #{p_id}...")
   prefix   = $('#path-prefix').data('path-prefix')
   tile_url = prefix + '/ajax/' + "project_tile?project_id=#{p_id}"
   $.get(tile_url)
     .done( (html) ->
       $("#project-tile-#{p_id}").replaceWith(html)
       $("#project-tile-#{p_id} abbr.timeago").timeago();
-      console.debug(html)
       )
 
 
@@ -49,7 +52,7 @@ do_poll = ->
   if query
     $.post(prefix + '/ajax/' + query)
       .done( (data) -> 
-        console.debug(JSON.stringify(data, undefined, 2))
+        # console.debug(JSON.stringify(data, undefined, 2))
         
         # Update activity indicators
         unless $("#server-status").hasClass('fa-signal')
@@ -61,6 +64,10 @@ do_poll = ->
         for p_id, proj of data.projects
           if proj.queued == 'false' and project_is_updated(p_id, proj.tested_at)
             update_project_tile(p_id)
+
+        $('.panel-body, .panel-heading, .panel-footer').click ->
+          Turbolinks.visit( $(@).parent().data('url') )      
+
         )
 
 
