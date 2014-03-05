@@ -15,14 +15,14 @@
     </div>
     <div class="panel-footer">
       <div class="tested-at">
+        <small>
         <% if tile.tested_at.nil? %>
-          <span class="text-semi-muted">(Not yet tested)</span>
+          <span class="text-muted">(Not yet tested)</span>
         <% else %>
-          <small>
-            <span class="text-muted">Tested</span>
-            <%= timeago tile.tested_at %>
-          </small>
+          <span class="text-muted">Tested</span>
+          <%= timeago tile.tested_at %>
         <% end %>
+        </small>
       </div>
     </div>
   </div>

@@ -11,7 +11,6 @@
 $content-bg-active:         #ffffff;
 $content-bg:                mix($body-bg, $content-bg-active, 15%);
 $input-color-placeholder:   #bbb; // Placeholder text color
-$text-semi-muted:           darken($text-muted, 20%);
 
 
 ::-webkit-input-placeholder { /* WebKit browsers */
@@ -29,7 +28,7 @@ $text-semi-muted:           darken($text-muted, 20%);
 
 
 .text-semi-muted {
-    color: $text-semi-muted;
+    color: $text-muted;
 }
 
 #config-data {
@@ -92,7 +91,7 @@ $text-semi-muted:           darken($text-muted, 20%);
 }
 
 .cards h1, .cards h2, h2.cards {
-    color: $text-semi-muted;
+    color: $text-muted;
     font-size: $font-size-base - 2px;
     font-weight: normal;
     text-transform: uppercase;
