@@ -40,7 +40,7 @@ do_poll = ->
         unless $("#server-status").hasClass('fa-signal')
           $("#server-status").removeClass().addClass("fa fa-fw fa-signal")
         )
-                
+
       .fail( ->
         unless $("#server-status").hasClass('fa-ban')
           $("#server-status").removeClass().addClass("fa fa-fw fa-ban failed-icon")
