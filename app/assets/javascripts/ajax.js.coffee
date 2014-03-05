@@ -8,7 +8,9 @@ set_icon = (project_id, is_working) ->
   if is_working == 'true'
     button.addClass(spin)
   else
-    button.removeClass(spin)
+    if button.hasClass(spin)
+      update_project_tile(project_id)
+      button.removeClass(spin)
 
 
 set_progress_bar = (percent) ->
@@ -28,7 +30,6 @@ set_progress_bar = (percent) ->
 project_is_updated = (p_id, tested_at) ->
   server_time = tested_at
   client_time = $("#project-tile-#{p_id}").data('tested-at')
-  console.debug("Project #{p_id}: #{client_time} < #{server_time} ? #{client_time < server_time}")
   client_time < server_time
 
 

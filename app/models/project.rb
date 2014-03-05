@@ -58,11 +58,11 @@ class Project < ActiveRecord::Base
     end
 
     def most_recent_test
-      spec_runs.last
+      spec_runs.order('created_at DESC').first
     end
 
     def tested_at
-      most_recent_test.try(:updated_at)
+      most_recent_test.try(:created_at)
     end
 
     # Returns true, false, or nil.
