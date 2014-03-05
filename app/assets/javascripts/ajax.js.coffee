@@ -52,7 +52,7 @@ do_poll = ->
 
 
 ready = ->
-    $('.panel-body, .panel-heading').click ->
+    $('.panel-body, .panel-heading, .panel-footer').click ->
       Turbolinks.visit( $(@).parent().data('url') )      
 
     $('.project-tile').hover ->
