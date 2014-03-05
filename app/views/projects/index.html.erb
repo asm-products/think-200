@@ -4,6 +4,14 @@
     <div class="col-xs-2 col-sm-3 col-md-2 col-lg-2">
       <p><%= link_to(font_awesome('plus') + ' New Project', new_project_path) %></p>
       <hr>
+      <p>
+<i>        Accounts are currently configured for a basic service level: Project tests are re-run
+              automatically just once per day, and users can manually trigger tests as often
+              as desired.
+      </i>      </p>
+      <p>
+<i>        We're planning to offer a premium account type which will receive once-per-minute monitoring, plus extra dedicated queue workers for a quicker reponse. 
+      </i>      </p>
       <p><%= render 'layouts/server_status' %></p>
       <p><%= render 'layouts/progress_bar' %></p>
     </div>
