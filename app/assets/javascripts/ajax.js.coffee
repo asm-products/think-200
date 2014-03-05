@@ -69,7 +69,8 @@ do_poll = ->
             update_project_tile(p_id)
 
         $('.panel-body, .panel-heading, .panel-footer').click ->
-          Turbolinks.visit( $(@).parent().data('url') )      
+          # Turbolinks.visit( $(@).parent().data('url') )  
+          window.location = $(@).parent().data('url')
 
         )
 
@@ -90,7 +91,8 @@ do_poll = ->
 
 ready = ->
     $('.panel-body, .panel-heading, .panel-footer').click ->
-      Turbolinks.visit( $(@).parent().data('url') )      
+      # Turbolinks.visit( $(@).parent().data('url') )  
+      window.location = $(@).parent().data('url')
 
     $('.project-tile').hover ->
       $(@).toggleClass( 'project-tile-active' )
