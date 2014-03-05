@@ -90,7 +90,7 @@ do_poll = ->
 
 
 ready = ->
-    $('.panel-body, .panel-heading, .panel-footer').click ->
+    $('.project-tile .panel-body, .project-tile .panel-heading, .project-tile .panel-footer').click ->
       # Turbolinks.visit( $(@).parent().data('url') )  
       window.location = $(@).parent().data('url')
 

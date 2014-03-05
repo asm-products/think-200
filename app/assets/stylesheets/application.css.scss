@@ -68,8 +68,10 @@ $input-color-placeholder:   #bbb; // Placeholder text color
     }
 }
 
-.panel-body, .panel-heading, .panel-footer {
-    cursor: pointer;
+.project-tile {
+    .panel-body, .panel-heading, .panel-footer {
+        cursor: pointer;
+    }
 }
 
 .jumbotron {
