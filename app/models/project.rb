@@ -79,6 +79,20 @@ class Project < ActiveRecord::Base
       expectations.empty?
     end
 
+    def tested?
+      ! tested_at.nil?
+    end
+
+    def test_status_string
+      if ! tested?
+        'untested'
+      elsif passed?
+        'passed'
+      else
+        'failed'
+      end
+    end
+
     def failing_requirements
       requirements
     end

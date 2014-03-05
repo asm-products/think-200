@@ -14,7 +14,8 @@ class AjaxController < ApplicationController
       # Working in the queue?
       queued = Resque.enqueued?(ScheduledTest, p, current_user.id) ? 'true' : 'false'
       project_data[p] = {}
-      project_data[p]['working'] = queued
+      project_data[p]['working']     = queued
+      project_data[p]['test_status'] = Project.find(p).test_status_string
     end
 
     # Percentage complete for all projects
