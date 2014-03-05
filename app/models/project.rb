@@ -2,13 +2,14 @@
 #
 # Table name: projects
 #
-#  created_at :datetime
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  notes      :text
-#  tested_at  :datetime
-#  updated_at :datetime
-#  user_id    :integer
+#  created_at  :datetime
+#  id          :integer          not null, primary key
+#  in_progress :boolean
+#  name        :string(255)
+#  notes       :text
+#  tested_at   :datetime
+#  updated_at  :datetime
+#  user_id     :integer
 #
 
 class Project < ActiveRecord::Base

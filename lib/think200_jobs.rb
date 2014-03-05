@@ -70,7 +70,8 @@ module Think200
       file.unlink
       collected_results[expectation.id] = json_formatter.output_hash
     end
-    proj.tested_at = Time.now
+    proj.tested_at = Time.now  # Ugh. This is hackish code.
+    proj.in_progress = false   # This too.
     proj.save!
     SpecRun.create!(raw_data: collected_results, project: proj, manual: manual)
   end

@@ -7,6 +7,8 @@ class ProjectsController < ApplicationController
 
   # Queue the given project for retesting.
   def retest
+    @project.in_progress = true
+    @project.save!
     Resque.enqueue(Think200::ScheduledTest, @project.id, current_user.id)
     render text: 'ok'
   end

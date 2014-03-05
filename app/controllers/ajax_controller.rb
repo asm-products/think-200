@@ -12,10 +12,10 @@ class AjaxController < ApplicationController
 
     current_user.projects.each do |project|
       p = project.id
-      # Working in the queue?
-      queued = Resque.enqueued?(ScheduledTest, p, current_user.id) ? 'true' : 'false'
+      # In the queue or being worked on?
+      # queued  = Resque.enqueued?(ScheduledTest, p, current_user.id) ? 'true' : 'false'
       project_data[p] = {}
-      project_data[p]['queued']     = queued
+      project_data[p]['queued']    = (!! project.in_progress?)
       project_data[p]['tested_at'] = project.tested_at.to_i
     end
 
