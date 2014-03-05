@@ -52,13 +52,14 @@ do_poll = ->
 
 
 ready = ->
-    $('.panel-body').click ->
-        Turbolinks.visit( $(@).parent().data('url') )      
+    $('.panel-body, .panel-heading').click ->
+      Turbolinks.visit( $(@).parent().data('url') )      
 
     $('.project-tile').hover ->
-        $(@).toggleClass( 'project-tile-active' )
+      $(@).toggleClass( 'project-tile-active' )
 
-    $('.test-button').click ->
+    $('.test-button').click (e) ->
+      e.stopPropagation()
       $('body').focus()
       prefix = $('#path-prefix').data('path-prefix')
       id     = $(@).data('project-id')
