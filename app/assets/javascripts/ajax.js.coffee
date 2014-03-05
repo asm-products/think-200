@@ -9,7 +9,6 @@ set_icon = (project_id, is_working) ->
     button.addClass(spin)
   else
     if button.hasClass(spin)
-      # update_project_tile(project_id)
       button.removeClass(spin)
 
 
@@ -40,7 +39,10 @@ update_project_tile = (p_id) ->
   $.get(tile_url)
     .done( (html) ->
       $("#project-tile-#{p_id}").replaceWith(html)
+      # Re-configure javascript events
       $("#project-tile-#{p_id} abbr.timeago").timeago();
+      $("#project-tile-#{p_id}").hover ->   # TODO: do with CSS only
+        $(@).toggleClass( 'project-tile-active' )
       )
 
 
