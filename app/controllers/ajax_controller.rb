@@ -6,22 +6,13 @@ class AjaxController < ApplicationController
 
   # It's important for this to be extremely efficient
   def queue_status
-    projects = current_user.projects.ids
     data = {}
-
-    # A list of project id's
-    data['project_ids'] = projects
     project_data = {}
-
-
-    # a map of id to true/false if currently working
-    data['working'] = {}
+    projects = current_user.projects.ids
 
     projects.each do |p|
       # Working in the queue?
       queued = Resque.enqueued?(ScheduledTest, p, current_user.id) ? 'true' : 'false'
-      data['working'][p] = queued
-
       project_data[p] = {}
       project_data[p]['working'] = queued
     end
@@ -31,7 +22,7 @@ class AjaxController < ApplicationController
       data['percent_complete'] = 100
     else
       total    = projects.count.to_f
-      complete = data['working'].values.select{ |v| v == 'false' }.count
+      complete = project_data.values.map{|h| h['working']}.select{ |v| v == 'false' }.count
       data['percent_complete'] = (complete / total * 100).round
     end
 
