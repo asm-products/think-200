@@ -3,11 +3,10 @@
   column_class = tile_col_class
 %>
 
-<div class="<%= column_class %>">
-  <div class="panel <%= panel_class %> project-tile" data-url="<%= project_path(tile) %>" data-class="<%= panel_class %>" data-tested-at="<%= tile.tested_at.to_i %>">
+  <div id="project-tile-<%= tile.id %>"  class="panel <%= panel_class %> project-tile" data-url="<%= project_path(tile) %>" data-class="<%= panel_class %>" data-tested-at="<%= tile.tested_at.to_i %>">
     <div class="panel-heading">
       <h3 class="panel-title">
-	<%= render 'test_button', {project: tile} %>
+	<%= render 'projects/test_button', {project: tile} %>
         <%= link_to tile, project_path(tile) %>
       </h3>
     </div>
@@ -26,4 +25,3 @@
       </div>
     </div>
   </div>
-</div>

@@ -1,5 +1,7 @@
 Think200::Application.routes.draw do
   post "ajax/queue_status"
+  get  'ajax/project_tile'
+  
   resources :spec_runs
 
   resources :expectations, except: [:index]

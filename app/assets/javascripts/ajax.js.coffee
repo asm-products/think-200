@@ -23,7 +23,22 @@ set_progress_bar = (percent) ->
     container.fadeOut(1300)
   else
     container.fadeIn(1000)
-  
+
+
+project_is_updated = (p_id, tested_at) ->
+  $("#project-tile-#{p_id}").data('tested-at') < tested_at
+
+
+update_project_tile = (p_id) ->
+  prefix   = $('#path-prefix').data('path-prefix')
+  tile_url = prefix + '/ajax/' + "project_tile?project_id=#{p_id}"
+  $.get(tile_url)
+    .done( (html) ->
+      $("#project-tile-#{p_id}").replaceWith(html)
+      $("#project-tile-#{p_id} abbr.timeago").timeago();
+      console.debug(html)
+      )
+
 
 do_poll = ->
   query  = $('#api-query').data('api-query')
@@ -35,20 +50,30 @@ do_poll = ->
     $.post(prefix + '/ajax/' + query)
       .done( (data) -> 
         console.debug(JSON.stringify(data, undefined, 2))
-        set_icon(p, data.projects[p].queued) for p of data.projects
-        set_progress_bar(data.percent_complete)
+        
+        # Update activity indicators
         unless $("#server-status").hasClass('fa-signal')
           $("#server-status").removeClass().addClass("fa fa-fw fa-signal")
+        set_progress_bar(data.percent_complete)
+        set_icon(p, data.projects[p].queued) for p of data.projects
+
+        # Update project tiles which have changed on the server
+        for p_id, proj of data.projects
+          if proj.queued == 'false' and project_is_updated(p_id, proj.tested_at)
+            update_project_tile(p_id)
         )
+
 
       .fail( ->
         unless $("#server-status").hasClass('fa-ban')
           $("#server-status").removeClass().addClass("fa fa-fw fa-ban failed-icon")
         console.debug('fail'))
+
         
       .always( -> 
         window.think200_is_polling = true
         setTimeout(do_poll, POLL_FREQUENCY))
+
   else
     delete window.think200_is_polling
 

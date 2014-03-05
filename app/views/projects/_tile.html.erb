@@ -9,4 +9,10 @@
   end
 %>
 
-<%= render partial: "tile_#{tile_partial}", locals: {tile: tile} %>
+<% unless @no_cols %>
+<div class="<%= tile_col_class %>">
+<% end %>
+	<%= render partial: "projects/tile_#{tile_partial}", locals: {tile: tile} %>
+<% unless @no_cols %>
+</div>
+<% end %>
