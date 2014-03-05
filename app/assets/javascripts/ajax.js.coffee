@@ -29,6 +29,8 @@ do_poll = ->
   query  = $('#api-query').data('api-query')
   prefix = $('#path-prefix').data('path-prefix')
 
+  # The page controls polling by setting or not setting
+  # the api-query value.
   if query
     $.post(prefix + '/ajax/' + query)
       .done( (data) -> 
@@ -61,10 +63,10 @@ ready = ->
     $('.test-button').click (e) ->
       e.stopPropagation()
       $('body').focus()
-      prefix = $('#path-prefix').data('path-prefix')
-      id     = $(@).data('project-id')
-      url    = prefix + "/retest_project/#{id}"
-      set_icon(id, 'true')
+      prefix  = $('#path-prefix').data('path-prefix')
+      proj_id = $(@).data('project-id')
+      url     = prefix + "/retest_project/#{proj_id}"
+      set_icon(proj_id, 'true')
       set_progress_bar(0)
       $.post(url)
 
