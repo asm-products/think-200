@@ -10,17 +10,23 @@ class AjaxController < ApplicationController
     data = {}
 
     # A list of project id's
-    data['project_list'] = projects
+    data['project_ids'] = projects
+    project_data = {}
+
 
     # a map of id to true/false if currently working
     data['working'] = {}
 
     projects.each do |p|
+      # Working in the queue?
       queued = Resque.enqueued?(ScheduledTest, p, current_user.id) ? 'true' : 'false'
       data['working'][p] = queued
+
+      project_data[p] = {}
+      project_data[p]['working'] = queued
     end
 
-    # Percentage complete for progress bar indicators
+    # Percentage complete for all projects
     if projects.empty?
       data['percent_complete'] = 100
     else
@@ -28,7 +34,8 @@ class AjaxController < ApplicationController
       complete = data['working'].values.select{ |v| v == 'false' }.count
       data['percent_complete'] = (complete / total * 100).round
     end
-    
+
+    data['projects'] = project_data
     render json: data.to_json
   end
 

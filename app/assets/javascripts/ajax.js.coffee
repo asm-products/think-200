@@ -35,7 +35,7 @@ do_poll = ->
     $.post(prefix + '/ajax/' + query)
       .done( (data) -> 
         console.debug(JSON.stringify(data, undefined, 2))
-        set_icon(p, data.working[p]) for p in data.project_list
+        set_icon(p, data.projects[p].working) for p in data.project_ids
         set_progress_bar(data.percent_complete)
         unless $("#server-status").hasClass('fa-signal')
           $("#server-status").removeClass().addClass("fa fa-fw fa-signal")
