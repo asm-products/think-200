@@ -61,34 +61,41 @@ $component-active-bg: $brand-primary;
 $caret-width-base: 4px;
 $caret-width-large: 5px;
 
+
+//
+//// BUTTONS ////////////////////
+//
+
 // Buttons: Global
-$btn-font-weight: normal;
-$btn-link-disabled-color: #cccccc;
+// $btn-font-weight: normal;
+// $btn-link-disabled-color: #cccccc;
 
-// Buttons: Default
-$btn-default-color: #ffffff;
-$btn-default-bg: #bbbbbb;
-$btn-default-border: #cccccc;
+// // Buttons: Default
+// $btn-default-color: #ffffff;
+// $btn-default-bg: #bbbbbb;
+// $btn-default-border: #cccccc;
 
-// Buttons: Primary
-$btn-primary-color: $btn-default-color;
-$btn-primary-bg: $brand-primary;
-$btn-primary-border: darken($btn-primary-bg, 5%);
+// // Buttons: Primary
+// $btn-primary-color: $btn-default-color;
+// $btn-primary-bg: $brand-primary;
+// $btn-primary-border: darken($btn-primary-bg, 5%);
 
-// Buttons: Info
-$btn-info-color: $btn-default-color;
-$btn-info-bg: $brand-info;
-$btn-info-border: darken($btn-info-bg, 5%);
+// // Buttons: Info
+// $btn-info-color: $btn-default-color;
+// $btn-info-bg: $brand-info;
+// $btn-info-border: darken($btn-info-bg, 5%);
 
-// Buttons: Warning
-$btn-warning-color: $btn-default-color;
-$btn-warning-bg: $brand-warning;
-$btn-warning-border: darken($btn-warning-bg, 5%);
+// // Buttons: Warning
+// $btn-warning-color: $btn-default-color;
+// $btn-warning-bg: $brand-warning;
+// $btn-warning-border: darken($btn-warning-bg, 5%);
 
-// Buttons: Danger
-$btn-danger-color: $btn-default-color;
-$btn-danger-bg: $brand-danger;
-$btn-danger-border: darken($btn-danger-bg, 5%);
+// // Buttons: Danger
+// $btn-danger-color: $btn-default-color;
+// $btn-danger-bg: $brand-danger;
+// $btn-danger-border: darken($btn-danger-bg, 5%);
+
+
 
 // Form states and alerts
 $state-success-text: #468847; 
@@ -290,7 +297,7 @@ $well-bg: #f5f5f5;
 
 // Jumbotron
 $jumbotron-padding: 30px; 
-$jumbotron-bg: #cccccc; 
+$jumbotron-bg: #ddd; 
 $jumbotron-font-size: ceil($font-size-base * 1.5); 
 $jumbotron-color: $text-color; 
 $jumbotron-heading-color: $headings-color;
