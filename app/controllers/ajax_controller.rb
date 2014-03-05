@@ -15,7 +15,7 @@ class AjaxController < ApplicationController
       # In the queue or being worked on?
       # queued  = Resque.enqueued?(ScheduledTest, p, current_user.id) ? 'true' : 'false'
       project_data[p] = {}
-      project_data[p]['queued']    = (!! project.in_progress?)
+      project_data[p]['queued']    = project.in_progress? ? 'true' : 'false'
       project_data[p]['tested_at'] = project.tested_at.to_i
     end
 
