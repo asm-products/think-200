@@ -2,6 +2,7 @@
  * Overwritten by RailsBricks
  *
  *= require_self
+ *= require 'prism'
  */
 @import "framework_and_overrides";
 // @import "bootstrap";
@@ -138,3 +139,6 @@ ul.text-menu {
 .tested-at {
     text-align: center
 }
+
+
+ 
