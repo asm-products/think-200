@@ -8,8 +8,7 @@ set_icon = (project_id, is_working) ->
   if is_working == 'true'
     button.addClass(spin)
   else
-    if button.hasClass(spin)
-      button.removeClass(spin)
+    button.removeClass(spin)
 
 
 set_progress_bar = (percent) ->

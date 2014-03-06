@@ -27,6 +27,10 @@ $input-color-placeholder:   #bbb; // Placeholder text color
 }
 
 
+ul {
+    list-style-type: none;
+}
+
 .text-semi-muted {
     color: $text-muted;
 }
