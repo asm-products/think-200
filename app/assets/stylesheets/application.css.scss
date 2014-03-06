@@ -10,21 +10,6 @@
 
 $content-bg-active:         #ffffff;
 $content-bg:                mix($body-bg, $content-bg-active, 15%);
-$input-color-placeholder:   #bbb; // Placeholder text color
-
-
-::-webkit-input-placeholder { /* WebKit browsers */
-    color:    $input-color-placeholder !important;
-}
-:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-    color:    $input-color-placeholder !important;
-}
-::-moz-placeholder { /* Mozilla Firefox 19+ */
-    color:    $input-color-placeholder !important;
-}
-:-ms-input-placeholder { /* Internet Explorer 10+ */
-    color:    $input-color-placeholder !important;
-}
 
 
 ul {

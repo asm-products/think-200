@@ -224,42 +224,42 @@ $table-bg-hover: #f5f5f5;
 // -> Border color for table and cell borders.
 $table-border-color: #dddddd; 
 
-// Forms
-// -> Inputs
-$input-color: $text-color; // Text color for <input>s
-$input-bg: #ffffff; // <input> background color
-$input-border: #cccccc; // <input> border color
-$input-border-radius: $border-radius-base; // <input> border radius
-$input-color-placeholder: #eeeeee; // Placeholder text color
-// -> Input states
-$input-border-focus: #66afe9; // Border color for inputs on focus
-$input-bg-disabled: #dddddd; // <input disabled> background color
-// -> Input sizes
-$input-height-base: 38px; // Default .form-control height
-$input-height-large: 46px; // Large .form-control height
-$input-height-small: 28px; // Small .form-control height
-// -> Legend
-$legend-color: #aaaaaa; 
-$legend-border-color: #e5e5e5;
-// -> Input groups
-$input-group-addon-bg: #cccccc; // Background color for textual input addons
-$input-group-addon-border-color: $input-border; // Border color for textual input addons
+// // Forms
+// // -> Inputs
+// $input-color: $text-color; // Text color for <input>s
+// $input-bg: #ffffff; // <input> background color
+// $input-border: #cccccc; // <input> border color
+// $input-border-radius: $border-radius-base; // <input> border radius
+// $input-color-placeholder: #eeeeee; // Placeholder text color
+// // -> Input states
+// $input-border-focus: #66afe9; // Border color for inputs on focus
+// $input-bg-disabled: #dddddd; // <input disabled> background color
+// // -> Input sizes
+// $input-height-base: 38px; // Default .form-control height
+// $input-height-large: 46px; // Large .form-control height
+// $input-height-small: 28px; // Small .form-control height
+// // -> Legend
+// $legend-color: #aaaaaa; 
+// $legend-border-color: #e5e5e5;
+// // -> Input groups
+// $input-group-addon-bg: #cccccc; // Background color for textual input addons
+// $input-group-addon-border-color: $input-border; // Border color for textual input addons
 
-// Dropdowns
-// -> Dropdown menu
-$dropdown-bg: #ffffff; // Dropdown menu background color
-$dropdown-border: #373737; // Dropdown menu border color
-$dropdown-fallback-border: #cccccc; // Dropdown menu border color for IE8
-$dropdown-caret-color: #dddddd; // Indicator arrow for showing an element has a dropdown 
-$dropdown-divider-bg: #e5e5e5; // Dropdown divider top border color
-$dropdown-header-color: #dddddd; // Text color for headers within dropdown menus
-// -> Dropdown items
-$dropdown-link-color: $text-color; // Dropdown text color 
-$dropdown-link-hover-color: darken($dropdown-link-color,5%); // Hovered dropdown menu entry text color 
-$dropdown-link-hover-bg: #f5f5f5; // Hovered dropdown menu entry text color
-$dropdown-link-active-color: $component-active-color; // Active dropdown menu entry text color 
-$dropdown-link-active-bg: $component-active-bg; // Active dropdown menu entry background color
-$dropdown-link-disabled-color: #dddddd; // Disabled dropdown menu entry background color
+// // Dropdowns
+// // -> Dropdown menu
+// $dropdown-bg: #ffffff; // Dropdown menu background color
+// $dropdown-border: #373737; // Dropdown menu border color
+// $dropdown-fallback-border: #cccccc; // Dropdown menu border color for IE8
+// $dropdown-caret-color: #dddddd; // Indicator arrow for showing an element has a dropdown 
+// $dropdown-divider-bg: #e5e5e5; // Dropdown divider top border color
+// $dropdown-header-color: #dddddd; // Text color for headers within dropdown menus
+// // -> Dropdown items
+// $dropdown-link-color: $text-color; // Dropdown text color 
+// $dropdown-link-hover-color: darken($dropdown-link-color,5%); // Hovered dropdown menu entry text color 
+// $dropdown-link-hover-bg: #f5f5f5; // Hovered dropdown menu entry text color
+// $dropdown-link-active-color: $component-active-color; // Active dropdown menu entry text color 
+// $dropdown-link-active-bg: $component-active-bg; // Active dropdown menu entry background color
+// $dropdown-link-disabled-color: #dddddd; // Disabled dropdown menu entry background color
 
 // Panels and wells
 // -> Common panel styles
