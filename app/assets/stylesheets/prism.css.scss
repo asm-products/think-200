@@ -1,8 +1,12 @@
-/**
- * prism.js default theme for JavaScript, CSS and HTML
- * Based on dabblet (http://dabblet.com)
- * @author Lea Verou
+/*
+ * prism.js Think 200 theme
  */
+
+ $keyword-color:		#333;
+ $comment-color: 	 	#998;
+ $punctuation-color:	#333;
+ $string-color:      	#d14;
+
 
 code[class*="language-"],
 pre[class*="language-"] {
@@ -52,10 +56,13 @@ pre[class*="language-"] {
 	overflow: auto;
 }
 
-:not(pre) > code[class*="language-"],
-pre[class*="language-"] {
-	background: #f5f2f0;
-}
+
+// Not setting a background color:
+
+// :not(pre) > code[class*="language-"],
+// pre[class*="language-"] {
+// 	background: #f5f2f0;
+// }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
@@ -63,15 +70,20 @@ pre[class*="language-"] {
 	border-radius: .3em;
 }
 
+.token {
+	font-weight: normal;
+}
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: slategray;
+	color: $comment-color;
+	font-style: italic;
 }
 
 .token.punctuation {
-	color: #999;
+	color: $punctuation-color;
+	font-weight: normal;
 }
 
 .namespace {
@@ -91,7 +103,7 @@ pre[class*="language-"] {
 .token.attr-name,
 .token.string,
 .token.builtin {
-	color: #690;
+	color: $string-color;
 }
 
 .token.operator,
@@ -107,7 +119,11 @@ pre[class*="language-"] {
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: #07a;
+	color: $keyword-color;
+}
+
+.token.function {
+	color: $keyword-color;
 }
 
 
