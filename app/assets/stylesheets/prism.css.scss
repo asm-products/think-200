@@ -2,11 +2,11 @@
  * prism.js Think 200 theme
  */
 
-$rspec-color:       blue;
-$keyword-color:		#333;
+$keyword-color:		#555;
 $comment-color:		#998;
-$punctuation-color:	#333;
+$punctuation-color:	#555;
 $string-color:     	#d14;
+$rspec-keyword-color: #333;
 
 
 code[class*="language-"],
@@ -76,7 +76,8 @@ pre[class*="language-"] {
 }
 
 .token.rspec-keyword {
-	color: $rspec-color;
+	color: $rspec-keyword-color;
+	font-weight: bold;
 }
 
 .token.comment,
