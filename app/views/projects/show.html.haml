@@ -12,21 +12,18 @@
   .col-sm-3.col-md-2.col-lg-2
     %small
       %ul.nav.nav-pills
-        %li
-          = link_to(font_awesome('plus', 'fa-fw') + ' New App', new_app_path(project_id: @project.id))
-        %li
-          = link_to font_awesome('pencil', 'fa-fw')+' Edit project', edit_project_path(@project)
+        %li= link_to(font_awesome('plus', 'fa-fw')+' New App', new_app_path(project_id: @project.id))
+        %li= link_to font_awesome('pencil', 'fa-fw')+' Edit project', edit_project_path(@project)
         %li.dropdown
           %a.dropdown-toggle{'data-toggle'=>'dropdown', href: '#'}
             = font_awesome('cloud-download', 'fa-fw')
             Export
             %span.caret
           %ul.dropdown-menu
-            %li
-              = link_to 'RSpec', project_export_path(@project, format: 'rspec')
-            %li
-              = link_to 'text',  project_export_path(@project, format: 'txt')
-              
+            %li= link_to 'RSpec', project_export_path(@project, format: 'rspec')
+            %li= link_to 'text',  project_export_path(@project, format: 'txt')
+        %li= link_to font_awesome('cloud-download', 'fa-fw') + ' Export', '#', {'data-toggle'=>"modal", 'data-target'=>".bs-example-modal-lg"}
+
   .col-sm-9.col-md-10.col-lg-10
     %h2.cards Apps
     - @project.apps.each do |app|
