@@ -35,7 +35,7 @@ class Project < ActiveRecord::Base
     #
     #   1. Install Ruby >= 2.0.0
     #   2. Install RSpec: $ gem install rspec-webservice_matchers
-    #   3. Save this page as "#{rspec_filename}"
+    #   3. Save this code as "#{rspec_filename}"
     #   4. Run RSpec:     $ rspec ./#{rspec_filename}
     #
     # Generated on #{Time.zone.now.to_s(:db)} by think200.com

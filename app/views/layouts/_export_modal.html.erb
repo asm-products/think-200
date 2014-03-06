@@ -1,19 +1,24 @@
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<% if @project %>
+<div class="modal fade export-modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
 	    <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        <h4 class="modal-title" id="myModalLabel">Export <%= @project.name %> as Ruby RSpec</h4>
+	        <h4 class="modal-title" id="myModalLabel">
+	        	Export the <%= @project.name %> project as Ruby RSpec
+	        </h4>
 	      </div>
 	      <div class="modal-body">
-	      	<!-- <code> -->
-	      		<pre><%= @project.to_rspec %></pre>
-			<!-- </code> -->
+	      		<pre style="max-height: 400px"><code class="language-ruby"><%= @project.to_rspec %></code></pre>
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	        <button type="button" class="btn btn-primary">Download</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal"><%= fa_icon 'fa-times' %> Close</button>
+	        <%= link_to	project_export_path(@project, {format: 'rspec', download: 'true'}), 
+	        			{class: 'btn btn-primary', role: 'button'} do %>
+				 <%= fa_icon('fa-cloud-download') %> Download
+			<% end %>
 	      </div>
       </div>
   </div>
 </div>
+<% end %>

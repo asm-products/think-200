@@ -14,19 +14,21 @@ class ProjectsController < ApplicationController
   end
 
   def export
+    raise "format not specified" if ! params[:format]
     project = current_user.projects.find(params[:project_id])
+    dispo = (params[:download] == 'true') ? 'attachment' : 'inline'
     if params[:format] == 'txt'
       send_data project.to_plaintext,
         filename: project.text_filename,
         type: 'text/plain',
-        disposition: 'inline'      
+        disposition: dispo      
     else
       # This is how GitHub does the "raw" file view. See headers, e.g.
       # https://raw.github.com/dogweather/naturally/master/spec/naturally_spec.rb
       send_data project.to_rspec,
         filename: project.rspec_filename,
         type: 'text/plain',
-        disposition: 'inline'
+        disposition: dispo
     end
   end
 
