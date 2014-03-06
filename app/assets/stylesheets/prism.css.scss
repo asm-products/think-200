@@ -75,6 +75,7 @@ pre[class*="language-"] {
 	font-weight: normal;
 }
 
+.token.rspec-matcher,
 .token.rspec-keyword {
 	color: $rspec-keyword-color;
 	font-weight: bold;

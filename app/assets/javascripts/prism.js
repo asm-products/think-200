@@ -391,9 +391,10 @@ Prism.languages.ruby = Prism.languages.extend('clike', {
 });
 
 /**
- * Robb Shecter, based on ruby definition
+ * Robb Shecter, based on the ruby definition
  *
- * Adds the following new token classes:
+ * Recognizes RSpec matchers and adds
+ * the following new token classes:
  *      describe, context, it, expect, should
  */
 Prism.languages.rspec = Prism.languages.extend('clike', {
@@ -402,6 +403,7 @@ Prism.languages.rspec = Prism.languages.extend('clike', {
     'builtin':       /\b(Array|Bignum|Binding|Class|Continuation|Dir|Exception|FalseClass|File|Stat|File|Fixnum|Fload|Hash|Integer|IO|MatchData|Method|Module|NilClass|Numeric|Object|Proc|Range|Regexp|String|Struct|TMS|Symbol|ThreadGroup|Thread|Time|TrueClass)\b/,
     'constant':      /\b[A-Z][a-zA-Z_0-9]*[?!]?\b/g,
     'rspec-keyword': /\b(describe|context|it|expect|should)\b/g,
+    'rspec-matcher': /\b[a-z][a-z_]+\b/g,
     /* A hack to allow "expect(" to be recognized as an rspec 
      * keyword, and not a function. I'm simply disabling the
      * function parsing in a hackish way.
