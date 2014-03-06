@@ -402,6 +402,10 @@ Prism.languages.rspec = Prism.languages.extend('clike', {
     'builtin':       /\b(Array|Bignum|Binding|Class|Continuation|Dir|Exception|FalseClass|File|Stat|File|Fixnum|Fload|Hash|Integer|IO|MatchData|Method|Module|NilClass|Numeric|Object|Proc|Range|Regexp|String|Struct|TMS|Symbol|ThreadGroup|Thread|Time|TrueClass)\b/,
     'constant':      /\b[A-Z][a-zA-Z_0-9]*[?!]?\b/g,
     'rspec-keyword': /\b(describe|context|it|expect|should)\b/g,
+    /* A hack to allow "expect(" to be recognized as an rspec 
+     * keyword, and not a function. I'm simply disabling the
+     * function parsing in a hackish way.
+     */
     'function': {
         pattern: /never-never-match/ig,
         inside: {
