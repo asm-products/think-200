@@ -8,10 +8,11 @@ class PagesController < ApplicationController
   end
 
   def checkit
+  	# Validate and/or clean up the input
   	user_input = params[:url_or_domain_name]
   	redirect_to root_path if user_input.blank?
 
-  	
+
   end
   
   def inside
