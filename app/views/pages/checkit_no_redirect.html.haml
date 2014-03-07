@@ -1,46 +1,40 @@
 .row
-  .col-sm-offset-2.col-sm-8
+  .col-sm-offset-1.col-sm-10
+    .page-header
+      %h1.text-center
+        Test Results
 
-    .jumbotron
-      %h1     Thinking 200 no redirect:
-      %table
-        %tr
-          %td valid cert
-          %td= @valid_cert
-        %tr
-          %td http status
-          %td= @http_status
-        %tr
-          %td user input
-          %td= @user_input
+
 
     .row.pr-points
       .col-sm-6
         %h4 
-          %i.fa.fa-fw.fa-heart
-          Free for Open Source
+          = Think200::HttpStatus.title(code: @http_status)
         %p 
-          <strong>Free continuous black-box testing</strong> for Open Source apps is our way
-          of giving back.
-
-        %h4 
-          %i.fa.fa-fw.fa-cloud-download
-          Open Platform
-        %p
-          <strong>Export your tests as runnable Ruby</strong> code at any time. This is no walled garden; we built #{h APP_NAME} on an 
-          %a{href: 'https://github.com/dogweather/rspec-webservice_matchers'}
-            open source core 
-          and open standards.
+          = "#{@user_input} is"
+          = dquo(Think200::HttpStatus.title(code: @http_status))
+          %br
+          = "(code #{@http_status})"
 
       .col-sm-6
-        %h4
-          %i.fa.fa-fw.fa-globe
-          A monitor for ALL the Things
-        %p  
-          <strong>Uptime is just the beginning.</strong> We test SSL configuration, Google Pagespeed, temporary &amp; permanent redirects, all http status codes, and JSON schema.
+        = image_tag("#{@http_status}.svg", {class: 'img-responsive'})
 
-        %h4
-          %i.fa.fa-fw.fa-bug
-          Test Driven Devops
-        %p  
-          <strong>Write a test and watch it fail.</strong> Now change your server configuration. When all your tests pass, you're done.
+    .row.pr-points
+      .col-sm-6
+        %h4 
+          Is what you expect?
+        %p 
+          If you expected the web resource to be
+          status
+          = "#{@http_status},"
+          then you can save this as a test, which is 
+          successful at the moment. If, though, you 
+          wanted a different status code, you
+          can create a test which looks for that result.
+
+      .col-sm-6
+        .well
+          %button.btn.btn-default.btn-lg.btn-block
+            Yes, save this test
+          %button.btn.btn-default.btn-lg.btn-block
+            No, create a different test

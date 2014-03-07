@@ -1,3 +1,5 @@
+require 'think200'
+
 class PagesController < ApplicationController
   CheckitResult = Struct.new(:status, :valid_cert, :is_redirect, :is_error, :redirect_perm, :redirect_dest)
   ERROR_MESSAGE = "Please enter a URL or domain name"
