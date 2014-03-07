@@ -1,11 +1,11 @@
-.form{role: 'form'}
+%form{role: 'form', action: checkit_path, method: 'get'}
   .form-group
     .row
       .col-xs-12
         .input-group
-          %input.form-control.input-lg.focus-here{type: 'text', placeholder: 'yoursite.com'}
+          %input.form-control.input-lg.focus-here{name: 'url_or_domain_name', type: 'text', placeholder: 'yoursite.com'}
             %span.input-group-btn
-              %button.btn.btn-success.btn-lg{type: 'button'}
+              %button.btn.btn-success.btn-lg{type: 'submit'}
                 = fa_icon 'fa-flash'
                 Test it
 
