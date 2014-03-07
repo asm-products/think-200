@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  CheckitResult = Struct.new(:status, :valid_cert, :is_redirect, :redirect_perm, :redirect_dest)
+  CheckitResult = Struct.new(:status, :valid_cert, :is_redirect, :is_error, :redirect_perm, :redirect_dest)
   ERROR_MESSAGE = "Please enter a URL or domain name"
 
   before_action :authenticate_user!, only: [
@@ -23,17 +23,22 @@ class PagesController < ApplicationController
 
     test_results = check(user_input)
     @valid_cert  = test_results.valid_cert
-    if ! test_results.is_redirect
+    if test_results.is_redirect
+      @redirect_kind = test_results.redirect_perm ? 'permanent' : 'temporary'
+      @redirect_dest = test_results.redirect_dest
+      render 'checkit_with_redirect'
+    elsif test_results.is_error
+      render 'checkit_with_error'
+    else
+      @http_status = test_results.status
       render 'checkit_no_redirect'
     end
-
-    flash[:alert] = "TBD"
   end
   
 
   private
   def check(url_or_domain_name)
-    CheckitResult.new(status: 200, valid_cert: true, is_redirect: false)
+    CheckitResult.new(200, true, false)  # Kinda shitty that Struct doesn't do keyword args
   end
 
 end
