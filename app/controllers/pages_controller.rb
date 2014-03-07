@@ -13,24 +13,25 @@ class PagesController < ApplicationController
 
 
   def checkit
-  	# Validate and clean up the input
-  	user_input = params[:url_or_domain_name].strip
-    unless /\A[[:alnum:]\-.]{4,63}\z/ === user_input  # Just a safety check:
-      flash[:alert] = ERROR_MESSAGE                   # valid characters & length
+  	# Clean up the input and make safe
+  	@user_input = params[:url_or_domain_name].strip
+    unless /\A[[:alnum:]\-.]{4,63}\z/ === @user_input  # Just a safety check:
+      flash[:alert] = ERROR_MESSAGE                    # valid characters & length
     	redirect_to root_path
       return
     end
 
-    test_results = check(user_input)
-    @valid_cert  = test_results.valid_cert
+    test_results = check(@user_input)
     if test_results.is_redirect
       @redirect_kind = test_results.redirect_perm ? 'permanent' : 'temporary'
       @redirect_dest = test_results.redirect_dest
+      @valid_cert    = test_results.valid_cert
       render 'checkit_with_redirect'
     elsif test_results.is_error
       render 'checkit_with_error'
     else
       @http_status = test_results.status
+      @valid_cert  = test_results.valid_cert
       render 'checkit_no_redirect'
     end
   end
