@@ -15,7 +15,9 @@ class PagesController < ApplicationController
   def checkit
   	# Clean up the input and do a little checking
   	@user_input = params[:url_or_domain_name].strip
-    unless /\A[^|<>"\\`^{}[:space:]]{4,63}\z/ === @user_input
+    # 4..2000 characters which are not in the restricted
+    # group: | <> " \ ` ^ {} and all whitespace
+    unless /\A[^|<>"\\`^{}[:space:]]{4,2000}\z/ === @user_input
       flash[:alert] = ERROR_MESSAGE
     	redirect_to root_path
       return
