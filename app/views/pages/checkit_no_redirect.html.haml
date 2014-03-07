@@ -27,14 +27,19 @@
           If you expected the web resource to be
           status
           = "#{@http_status},"
-          then you can save this as a test, which is 
-          successful at the moment. If, though, you 
+          then you can save this test, which is passing successfully.
+          If, though, you 
           wanted a different status code, you
           can create a test which looks for that result.
 
       .col-sm-6
+        %p
+          
+
+    .row.pr-points
+      .col-sm-offset-3.col-sm-6
         .well
-          %button.btn.btn-default.btn-lg.btn-block
-            Yes, save this test
-          %button.btn.btn-default.btn-lg.btn-block
-            No, create a different test
+          %button.btn.btn-default.btn-lg.btn-block.btn-success
+            Save this test
+          %button.btn.btn-default.btn-lg.btn-block.btn-danger
+            Create a different test
