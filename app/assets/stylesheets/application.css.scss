@@ -12,6 +12,9 @@
 $content-bg-active: #ffffff;
 $content-bg:        mix($body-bg, $content-bg-active, 15%);
 
+.alert {
+    margin-top: 1em;
+}
 
 ul {
     list-style-type: none;
