@@ -13,10 +13,10 @@ class PagesController < ApplicationController
 
 
   def checkit
-  	# Clean up the input and make safe
+  	# Clean up the input and do a little checking
   	@user_input = params[:url_or_domain_name].strip
-    unless /\A[[:alnum:]\-.]{4,63}\z/ === @user_input  # Just a safety check:
-      flash[:alert] = ERROR_MESSAGE                    # valid characters & length
+    unless /\A[^|<>"\\`^{}[:space:]]{4,63}\z/ === @user_input
+      flash[:alert] = ERROR_MESSAGE
     	redirect_to root_path
       return
     end
