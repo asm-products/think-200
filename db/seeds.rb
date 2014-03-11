@@ -14,11 +14,12 @@ u.save!
 
 # The 'robb' user
 robb = User.new(
-  username: 'robb',
-  email:    'robb@weblaws.org',
-  password: '1234',
-  password_confirmation: '1234',
-)
+                username: 'robb',
+                email:    'robb@weblaws.org',
+                password: '1234',
+                password_confirmation: '1234',
+                admin: true
+                )
 robb.skip_confirmation!
 robb.save!
 
