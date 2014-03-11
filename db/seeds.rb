@@ -192,32 +192,20 @@ t200_site = App.create!(name: 'website', project: think_200)
 Requirement.create!(name: 'is online', app: t200_site)
 
 
-# Prompt for test data
-# STDOUT.puts
-# STDOUT.print "Do you want to seed test data?(y/n):"
-# result = STDIN.gets.chomp
-result = 'y'
+users_amount = 200
+User.transaction do
+  (1..users_amount).each do |i|
+    u = User.new(
+                 username: "user#{i}",
+                 email: "user#{i}@example.com",
+                 password: "1234",
+                 password_confirmation: "1234"
+                 )
+    u.skip_confirmation!
+    u.save!
 
-if result == "y"
-
-  # Test user accounts
-  # STDOUT.puts
-  # STDOUT.print "How many test users?:"
-  # users_amount = STDIN.gets.chomp.to_i
-  users_amount = 200
-  User.transaction do
-    (1..users_amount).each do |i|
-      u = User.new(
-        username: "user#{i}",
-        email: "user#{i}@example.com",
-        password: "1234",
-        password_confirmation: "1234"
-      )
-      u.skip_confirmation!
-      u.save!
-
-      puts "#{i} of #{users_amount} test users created..." if (i % 10 == 0)
-    end
+    puts "#{i} of #{users_amount} test users created..." if (i % 10 == 0)
   end
-
 end
+
+
