@@ -26,7 +26,6 @@ class PagesController < ApplicationController
     end
 
     test_results = check(@user_input)
-    @is_up  = test_results.is_up
 
     if test_results.is_error
       render 'checkit_with_error'
@@ -34,6 +33,7 @@ class PagesController < ApplicationController
       @expectation = Expectation.new
       @expectation.subject = @user_input
       @expectation.matcher = Matcher.find_by(code: 'be_up')
+      @is_up  = test_results.is_up
       render 'checkit_is_up'
     end
   end
@@ -41,7 +41,7 @@ class PagesController < ApplicationController
 
   private
   def check(url_or_domain_name)
-    CheckitResult.new(true, false)  # Kinda shitty that Struct doesn't do keyword args
+    CheckitResult.new(false, false)  # Kinda shitty that Struct doesn't do keyword args
   end
 
 end

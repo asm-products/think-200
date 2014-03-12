@@ -2,11 +2,16 @@
   .col-sm-offset-1.col-sm-10
     .page-header
       %h1.text-center
-        = passed_icon
-        #{@user_input.gsub(%r[^https?://],'')} is up
+        = @is_up ? passed_icon : failed_icon
+        #{@user_input.gsub(%r[^https?://],'')} is
+        = @is_up ? 'up' : 'down'
         %br
         %small
-          Congratulations, you have your first passing test
+          - if @is_up
+            Congratulations, you have your first passing test
+          - else
+            We've created your first test
+
 
 .row
   .col-sm-offset-2.col-sm-8
