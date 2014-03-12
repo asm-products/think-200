@@ -25,9 +25,9 @@
               = expectation_to_html(@expectation, type_icon: false)
       .col-sm-4
         %p{style: 'margin-top: 0.5em'}
-          = @expectation.matcher.summary
+          = @expectation.summary
     .row
       .col-sm-offset-2.col-sm-8{style: 'padding-top: 3em'}
-        %a.btn.btn-lg.btn-block.btn-success{href: new_user_registration_path({subject: @user_input})}
+        %a.btn.btn-lg.btn-block.btn-success{href: @next_step}
           Save and start monitoring
 

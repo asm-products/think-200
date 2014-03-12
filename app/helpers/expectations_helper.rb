@@ -8,11 +8,11 @@ module ExpectationsHelper
 
     result <<      
       '<strong>' + 
-        e.subject + '</strong> ' + 
+        "#{e.subject} </strong> " + 
       '<span class="text-muted">' + 
-        'should' + '</span> ' +
+        'should </span> ' +
       '<strong>' +
-        e.matcher.to_s + '</strong>'
+        "#{e.matcher} </strong>"
 
     result.html_safe
   end

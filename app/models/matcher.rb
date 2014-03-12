@@ -20,6 +20,10 @@ class Matcher < ActiveRecord::Base
   validates :code, :summary, uniqueness: true
   validates :code, :max_args, :min_args, :summary, :description, presence: true
 
+  def self.for(code)
+    Matcher.find_by(code: code)
+  end
+
   def to_s
     code.gsub('_', ' ')
   end

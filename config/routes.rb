@@ -17,8 +17,8 @@ Think200::Application.routes.draw do
   end
 
   root "pages#home"    
-  get "home",    to: "pages#home", as: "home"
-  get 'checkit', to: 'pages#checkit', as: 'checkit'
+  get  "home",    to: "pages#home", as: "home"
+  post 'checkit', to: 'pages#checkit', as: 'checkit'
   
     
   devise_for :users
