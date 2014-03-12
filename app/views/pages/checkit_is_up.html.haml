@@ -1,13 +1,30 @@
 .row
-  .col-sm-offset-3.col-sm-6
+  .col-sm-offset-2.col-sm-8
     .page-header
       %h1.text-center
         = "#{passed_icon} #{@user_input} is up".html_safe
 
-      %p
-        We tested #{@user_input} for a <code>200</code> response, following
-        up to four redirects.
+    %p
+      Congratulations, you have your first passing test:
 
-      %p 
-        %button.btn.btn-default.btn-lg.btn-block.btn-success
-          Save this test
+    %row
+      .col-sm-8
+        %p.lead
+          %span.text-muted
+            = fa_icon(@expectation.matcher.icon, 'fa-lg')
+          %strong
+            = @expectation.subject
+          %span.text-muted
+            should
+          %strong
+            = @expectation.matcher
+      .col-sm-4
+        %p
+          Check for an #{dquo('OK')} (<code>200</code>)
+          response, following up to four redirects.
+    %row
+      .col-sm-12
+        %p 
+          %button.btn.btn-default.btn-lg.btn-block.btn-success
+            Save this test
+

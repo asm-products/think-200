@@ -15,11 +15,10 @@ class PagesController < ApplicationController
 
 
   def checkit
-    # Clean up the input and do a little checking
-    @user_input = params[:url_or_domain_name].strip
-
+    # Clean up the input and do some checking
     # 4..2000 characters which are not in the restricted
     # group: | <> " \ ` ^ {} and all whitespace
+    @user_input = params[:url_or_domain_name].strip
     unless /\A[^|<>"\\`^{}[:space:]]{4,2000}\z/ === @user_input
       flash[:alert] = ERROR_MESSAGE
     	redirect_to root_path
@@ -32,6 +31,9 @@ class PagesController < ApplicationController
     if test_results.is_error
       render 'checkit_with_error'
     else
+      @expectation = Expectation.new
+      @expectation.subject = @user_input
+      @expectation.matcher = Matcher.find_by(code: 'be_up')
       render 'checkit_is_up'
     end
   end
