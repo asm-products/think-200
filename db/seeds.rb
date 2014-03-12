@@ -38,7 +38,7 @@ puts 'Creating the Matchers...'
     code: 'be_up',
     min_args: 0,
     max_args: 0,
-    summary: 'Follows redirects if necessary and checks for 200',
+    summary: 'Check for an &ldquo;OK&rdquo; (<code>200</code>) response, following up to four redirects.',
     description: 'Uses curl_lib.',
     icon: 'fa-thumbs-o-up',
   },

@@ -23,4 +23,8 @@ class Matcher < ActiveRecord::Base
   def to_s
     code.gsub('_', ' ')
   end
+
+  def summary
+    self[:summary].html_safe
+  end
 end

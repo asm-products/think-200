@@ -4,30 +4,22 @@
       %h1.text-center
         #{@user_input.gsub(%r[^https?://],'')} is up
         = passed_icon
+        %br
+        %small
+          Congratulations, you have your first passing test
 
 .row
   .col-sm-offset-2.col-sm-8
-    %p.lead.text-center
-      Congratulations, you have your first passing test:
-
     %row
       .col-sm-8
-        %p
-          %span.text-muted
-            = fa_icon(@expectation.type_icon, 'fa-lg')
-          %strong
-            = @expectation.subject
-          %span.text-muted
-            should
-          %strong
-            = @expectation.matcher
+        %p.lead
+          = expectation_to_html(@expectation)
       .col-sm-4
         %p
-          Check for an #{dquo('OK')} (<code>200</code>)
-          response, following up to four redirects.
+          = @expectation.matcher.summary
     %row
-      .col-sm-12
+      .col-sm-offset-3.col-sm-6
         %p 
           %button.btn.btn-default.btn-lg.btn-block.btn-success
-            Save this test
+            Save and monitor
 
