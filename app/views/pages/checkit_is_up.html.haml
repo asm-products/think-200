@@ -1,17 +1,20 @@
 .row
-  .col-sm-offset-2.col-sm-8
+  .col-sm-offset-1.col-sm-10
     .page-header
       %h1.text-center
-        = "#{passed_icon} #{@user_input} is up".html_safe
+        #{@user_input.gsub(%r[^https?://],'')} is up
+        = passed_icon
 
-    %p
+.row
+  .col-sm-offset-2.col-sm-8
+    %p.lead.text-center
       Congratulations, you have your first passing test:
 
     %row
       .col-sm-8
-        %p.lead
+        %p
           %span.text-muted
-            = fa_icon(@expectation.matcher.icon, 'fa-lg')
+            = fa_icon(@expectation.type_icon, 'fa-lg')
           %strong
             = @expectation.subject
           %span.text-muted

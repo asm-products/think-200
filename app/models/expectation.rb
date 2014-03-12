@@ -21,6 +21,10 @@ class Expectation < ActiveRecord::Base
     requirement.project
   end
 
+  def type_icon
+    matcher.icon
+  end
+
   def passed?
     spec_run = self.requirement.app.project.most_recent_test
     return nil if spec_run.nil?
