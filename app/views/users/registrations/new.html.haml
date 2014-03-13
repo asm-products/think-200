@@ -13,12 +13,12 @@
         .col-xs-6
 
           %p.lead
-            Create an account to save your test and start monitoring
-            your site for free.
+            Create a free account to save your test and start monitoring
+            your site.
 
           .form-group
             = f.label 'Your First Test'
-            .well
+            .well.lead
               = checkit_test_to_html(@user_input, type_icon: true)
 
         .col-xs-6
