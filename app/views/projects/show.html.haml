@@ -10,6 +10,10 @@
 .row
   .col-sm-3.col-md-2.col-lg-2
     %ul.nav.nav-pills
+      %li
+        = link_to(render('projects/test_button', {project: @project, align: 'fa-fw'}) + ' Refresh', '#')
+        = render 'layouts/progress_bar'
+
       %li= link_to(font_awesome('plus', 'fa-fw')+' New App', new_app_path(project_id: @project.id))
       %li= link_to font_awesome('pencil', 'fa-fw')+' Edit project', edit_project_path(@project)
       %li= link_to font_awesome('cloud-download', 'fa-fw') + ' Export', '#', {'data-toggle'=>"modal", 'data-target'=>".export-modal"}
