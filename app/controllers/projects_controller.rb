@@ -45,6 +45,9 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    # TODO: append the project id to this query to allow the 
+    #       server to return info about just one project
+    @api_query = 'queue_status'
   end
 
   # GET /projects/new
