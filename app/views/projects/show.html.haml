@@ -3,18 +3,16 @@
     = @project.name
     %small
       - if @project.tested_at
-        tested
-        = timeago @project.tested_at
+        tested #{timeago @project.tested_at}
       - else
         Not yet tested
 
 .row
   .col-sm-3.col-md-2.col-lg-2
-    %small
-      %ul.nav.nav-pills
-        %li= link_to(font_awesome('plus', 'fa-fw')+' New App', new_app_path(project_id: @project.id))
-        %li= link_to font_awesome('pencil', 'fa-fw')+' Edit project', edit_project_path(@project)
-        %li= link_to font_awesome('cloud-download', 'fa-fw') + ' Export', '#', {'data-toggle'=>"modal", 'data-target'=>".export-modal"}
+    %ul.nav.nav-pills
+      %li= link_to(font_awesome('plus', 'fa-fw')+' New App', new_app_path(project_id: @project.id))
+      %li= link_to font_awesome('pencil', 'fa-fw')+' Edit project', edit_project_path(@project)
+      %li= link_to font_awesome('cloud-download', 'fa-fw') + ' Export', '#', {'data-toggle'=>"modal", 'data-target'=>".export-modal"}
 
   .col-sm-9.col-md-10.col-lg-10
     %h2.cards Apps
