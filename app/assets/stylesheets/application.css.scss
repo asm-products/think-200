@@ -9,8 +9,9 @@
 @import "font-awesome";
 
 
-$content-bg-active: #ffffff;
-$content-bg:        mix($body-bg, $content-bg-active, 15%);
+$content-bg-active: #eef;
+// $content-bg:        mix($body-bg, $content-bg-active, 15%);
+$content-bg: #ffffff;
 
 .alert {
     margin-top: 1em;
