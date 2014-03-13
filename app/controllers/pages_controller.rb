@@ -1,11 +1,11 @@
 require 'think200'
 
 class PagesController < ApplicationController
-  CheckitResult = Struct.new(:is_up, :is_error)
+  CheckitResult = Struct.new(:is_up)
   ERROR_MESSAGE = "Please enter a URL or domain name"
 
   before_action :authenticate_user!, only: [
-    #:inside
+    # :inside
   ]
 
 
@@ -37,7 +37,7 @@ class PagesController < ApplicationController
 
   private
   def check(url_or_domain_name)
-    CheckitResult.new(false, false)  # Kinda shitty that Struct doesn't do keyword args
+    CheckitResult.new(false)  # Kinda dumb that Struct doesn't do keyword args
   end
 
 end
