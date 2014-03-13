@@ -17,7 +17,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     requirement = Requirement.create!(name: 'is online', app: app)
     expectation = Expectation.create!(
                                       subject:     session[:checkit_user_input],
-                                      matcher:     Matcher.for 'be_up',
+                                      matcher:     Matcher.for('be_up'),
                                       requirement: requirement
                                       )
   end

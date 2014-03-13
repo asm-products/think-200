@@ -20,9 +20,10 @@ Think200::Application.routes.draw do
   #resources :matchers
 
 
-  root "pages#home"    
-  get  "home",    to: "pages#home", as: "home"
-  post 'checkit', to: 'pages#checkit', as: 'checkit'
+  # Sign up path
+  root 'pages#home'    
+  post 'checkit', to: 'pages#checkit', as: 'checkit'  # From our home page
+  get  'checkit', to: redirect('/')                   # Never allowed
   
 
   # Devise and admin ############
