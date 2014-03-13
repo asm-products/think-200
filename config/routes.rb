@@ -1,20 +1,24 @@
 Think200::Application.routes.draw do
+
+  # AJAX API
   post "ajax/queue_status"
   get  'ajax/project_tile'
-  
-  resources :spec_runs
+  post 'retest_project/:id', to: 'projects#retest', as: 'retest_project'  
 
-  resources :expectations, except: [:index]
-
-  resources :matchers
-
-  resources :requirements, except: [:index, :show]
-
-  resources :apps, except: [:index, :show]
-
+  # Open resources
   resources :projects do
     get 'export'
   end
+
+  # Partially restricted resources
+  resources :apps,         except: [:index, :show]
+  resources :requirements, except: [:index, :show]
+  resources :expectations, except: [:index, :show]
+
+  # Completed restricted resources
+  #resources :spec_runs
+  #resources :matchers
+
 
   root "pages#home"    
   get  "home",    to: "pages#home", as: "home"
@@ -28,7 +32,7 @@ Think200::Application.routes.draw do
     resources :users
   end
 
-  post 'retest_project/:id', to: 'projects#retest', as: 'retest_project'
+
 
 
   # Resque ######################
