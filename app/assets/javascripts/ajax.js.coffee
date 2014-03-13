@@ -119,7 +119,7 @@ ready = ->
     if not window.think200_is_polling?
         do_poll()
 
-    Prism.highlightAll()
+    Prism.highlightElement( $('#rspec-export')[0] )
 
 
 $(document).ready(ready)
