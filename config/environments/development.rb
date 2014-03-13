@@ -26,6 +26,15 @@ Think200::Application.configure do
   
   # Mailer
   config.action_mailer.raise_delivery_errors = true
-  
+  config.action_mailer.default_url_options = { :host => 'devbox.srsly.co:8997' }
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:   'smtp.mandrillapp.com',
+    port:      587,
+    user_name: 'robb@weblaws.org',
+    password:  'Nhb1wo6JFM_5ryNspJbZYA',
+  }
+
+
   BetterErrors::Middleware.allow_ip! ENV['TRUSTED_IP'] if ENV['TRUSTED_IP']
 end

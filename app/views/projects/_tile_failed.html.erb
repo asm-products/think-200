@@ -7,7 +7,7 @@
   <div id="project-tile-<%= tile.id %>" class="panel <%= panel_class %> project-tile" data-url="<%= project_path(tile) %>" data-class="<%= panel_class %>" data-tested-at="<%= tile.tested_at.to_i %>">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <%= link_to tile, project_path(tile) %>
+        <%= tile %>
       	<%= render 'projects/test_button', {project: tile} %>
       </h3>
     </div>

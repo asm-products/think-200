@@ -14,11 +14,12 @@ u.save!
 
 # The 'robb' user
 robb = User.new(
-  username: 'robb',
-  email:    'robb@weblaws.org',
-  password: '1234',
-  password_confirmation: '1234',
-)
+                username: 'robb',
+                email:    'robb@weblaws.org',
+                password: '1234',
+                password_confirmation: '1234',
+                admin: true
+                )
 robb.skip_confirmation!
 robb.save!
 
@@ -37,7 +38,7 @@ puts 'Creating the Matchers...'
     code: 'be_up',
     min_args: 0,
     max_args: 0,
-    summary: 'Follows redirects if necessary and checks for 200',
+    summary: 'Check for an &ldquo;OK&rdquo; (<code>200</code>) response, following up to four redirects.',
     description: 'Uses curl_lib.',
     icon: 'fa-thumbs-o-up',
   },
@@ -113,7 +114,7 @@ redirect1 = Expectation.create!(
 )
 redirect3 = Expectation.create!(
   subject:     'getquisitive.com',
-  matcher:     Matcher.find_by_code('be_up'),
+  matcher:     Matcher.for('be_up'),
   requirement: is_online
 )
 
@@ -129,33 +130,33 @@ to_www     = Requirement.create!(name: 'redirects to www', app: myapp)
 
 Expectation.create!(
   subject:     'www.myapp.com/',
-  matcher:     Matcher.find_by_code('be_up'),
+  matcher:     Matcher.for('be_up'),
   requirement: is_online
 )
 
 Expectation.create!(
   subject:     'www.myapp.com/about',
-  matcher:     Matcher.find_by_code('be_status'),
+  matcher:     Matcher.for('be_status'),
   expected:    '200',
   requirement: is_online
 )
 
 Expectation.create!(
   subject:     'www.myapp.com',
-  matcher:     Matcher.find_by_code('have_a_valid_cert'),
+  matcher:     Matcher.for('have_a_valid_cert'),
   requirement: valid_cert
 )
 
 Expectation.create!(
   subject:     'http://myapp.com',
-  matcher:     Matcher.find_by_code('redirect_permanently_to'),
+  matcher:     Matcher.for('redirect_permanently_to'),
   expected: 'http://www.myapp.com/',
   requirement: to_www
 )
 
 Expectation.create!(
   subject:     'myapp.com',
-  matcher:     Matcher.find_by_code('enforce_https_everywhere'),
+  matcher:     Matcher.for('enforce_https_everywhere'),
   requirement: valid_cert
 )
 
@@ -169,13 +170,13 @@ website     = App.create!(name: 'website', project: codepage)
 on_assembly = Requirement.create!(name: 'is hosted by Assembly', app: website)
 Expectation.create!(
   subject:     'http://codepage.io',
-  matcher:     Matcher.find_by_code('redirect_temporarily_to'),
+  matcher:     Matcher.for('redirect_temporarily_to'),
   expected:    'https://assemblymade.com/code-pagecodepageio',
   requirement: on_assembly
 )
 Expectation.create!(
   subject:     'https://assemblymade.com/code-pagecodepageio',
-  matcher:     Matcher.find_by_code('be_status'),
+  matcher:     Matcher.for('be_status'),
   expected:    '200',
   requirement: on_assembly
 )

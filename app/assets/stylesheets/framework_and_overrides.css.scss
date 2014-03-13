@@ -1,5 +1,6 @@
 //***********************************************************
 // BOOTSTRAP VARIABLES OVERRIDES
+// Test
 
 // Color system
 $brand-primary: #428bca;
@@ -34,11 +35,11 @@ $headings-font-weight: 700;
 $headings-color: inherit;
 
 // Code blocks
-$code-color: #c7254e;
-$code-bg: #f9f2f4;
-$pre-color: #373737;
-$pre-bg: #f5f5f5;
-$pre-border-color: #cccccc;
+/* $code-color: #c7254e; */
+/* $code-bg: #f9f2f4; */
+/* $pre-color: #373737; */
+/* $pre-bg: #f5f5f5; */
+/* $pre-border-color: #cccccc; */
 
 // Components: Padding
 $padding-base-vertical: 6px;
@@ -114,30 +115,30 @@ $state-info-text: #3a87ad;
 $state-info-bg: #d9edf7; 
 $state-info-border: darken($state-info-bg, 7%); 
 
-// Alerts: Base styles
-$alert-padding: 15px; 
-$alert-border-radius: $border-radius-base; 
-$alert-link-font-weight: bold; 
+// // Alerts: Base styles
+// $alert-padding: 15px; 
+// $alert-border-radius: $border-radius-base; 
+// $alert-link-font-weight: bold; 
 
-// Alerts: Warning
-$alert-warning-text: $state-warning-text; 
-$alert-warning-bg: $state-warning-bg; 
-$alert-warning-border: $state-warning-border;
+// // Alerts: Warning
+// $alert-warning-text: $state-warning-text; 
+// $alert-warning-bg: $state-warning-bg; 
+// $alert-warning-border: $state-warning-border;
 
-// Alerts: Success
-$alert-success-text: $state-success-text; 
-$alert-success-bg: $state-success-bg; 
-$alert-success-border: $state-success-border;
+// // Alerts: Success
+// $alert-success-text: $state-success-text; 
+// $alert-success-bg: $state-success-bg; 
+// $alert-success-border: $state-success-border;
 
-// Alerts: Danger
-$alert-danger-text: $state-danger-text; 
-$alert-danger-bg: $state-danger-bg; 
-$alert-danger-border: $state-danger-border;
+// // Alerts: Danger
+// $alert-danger-text: $state-danger-text; 
+// $alert-danger-bg: $state-danger-bg; 
+// $alert-danger-border: $state-danger-border;
  
-//Alerts: Info
-$alert-info-text: $state-info-text; 
-$alert-info-bg: $state-info-bg; 
-$alert-info-border: $state-info-border;
+// //Alerts: Info
+// $alert-info-text: $state-info-text; 
+// $alert-info-bg: $state-info-bg; 
+// $alert-info-border: $state-info-border;
 
 // Navbar: Base styles
 $navbar-height: 50px; 

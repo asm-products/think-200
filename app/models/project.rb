@@ -26,7 +26,15 @@ class Project < ActiveRecord::Base
   validates :name, uniqueness: { scope: :user_id }
 
 
+  # Do I have rspec to offer?
+  # Yes, if I have been saved.
+  def rspec?
+    persisted?
+  end
+
   def to_rspec
+    return nil if name.nil?
+
     result = <<-END.strip_heredoc
     #
     # #{rspec_filename}

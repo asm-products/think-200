@@ -21,6 +21,16 @@ class Expectation < ActiveRecord::Base
     requirement.project
   end
 
+  # Following the Law of Demeter:
+  def type_icon
+    matcher.icon
+  end
+
+  def summary
+    matcher.summary
+  end
+
+
   def passed?
     spec_run = self.requirement.app.project.most_recent_test
     return nil if spec_run.nil?

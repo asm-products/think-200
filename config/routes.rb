@@ -1,34 +1,40 @@
 Think200::Application.routes.draw do
+
+  # AJAX API
   post "ajax/queue_status"
   get  'ajax/project_tile'
-  
-  resources :spec_runs
+  post 'retest_project/:id', to: 'projects#retest', as: 'retest_project'  
 
-  resources :expectations, except: [:index]
-
-  resources :matchers
-
-  resources :requirements, except: [:index, :show]
-
-  resources :apps, except: [:index, :show]
-
+  # Open resources
   resources :projects do
     get 'export'
   end
 
-  root "pages#home"    
-  get "home", to: "pages#home", as: "home"
-  get "inside", to: "pages#inside", as: "inside"
+  # Partially restricted resources
+  resources :apps,         except: [:index, :show]
+  resources :requirements, except: [:index, :show]
+  resources :expectations, except: [:index, :show]
+
+  # Completed restricted resources
+  #resources :spec_runs
+  #resources :matchers
+
+
+  # Sign up path
+  root 'pages#home'    
+  post 'checkit', to: 'pages#checkit', as: 'checkit'  # From our home page
+  get  'checkit', to: redirect('/')                   # Never allowed
   
+
+  # Devise and admin ############
     
-  devise_for :users
-  
+
+  devise_for :users, controllers: { registrations: "users/registrations" }
+
   namespace :admin do
     root "base#index"
     resources :users
   end
-
-  post 'retest_project/:id', to: 'projects#retest', as: 'retest_project'
 
 
   # Resque ######################

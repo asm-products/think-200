@@ -12,6 +12,9 @@
 $content-bg-active: #ffffff;
 $content-bg:        mix($body-bg, $content-bg-active, 15%);
 
+.alert {
+    margin-top: 1em;
+}
 
 ul {
     list-style-type: none;
@@ -97,7 +100,9 @@ ul {
 }
 
 .shared-links {
-    line-height: 1.2em
+    line-height: 1.2em;
+    margin-top: 3em;
+    font-size: 90%;
 }
 
 .jumbotron {

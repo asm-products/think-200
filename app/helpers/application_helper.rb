@@ -57,11 +57,11 @@ module ApplicationHelper
     "<i class=\"fa #{classes} #{extra_classes}\"></i>".html_safe
   end
 
-  def failed_icon(extra)
+  def failed_icon(extra='')
     font_awesome 'warning', "#{extra} failed-icon"
   end
 
-  def passed_icon(extra)
+  def passed_icon(extra='')
     font_awesome 'check',   "#{extra} passed-icon"
   end
 

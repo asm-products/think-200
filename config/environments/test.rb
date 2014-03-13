@@ -33,4 +33,12 @@ Think200::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+  config.action_mailer.default_url_options = { :host => 'localhost' }  
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address:   'smtp.mandrillapp.com',
+    port:      587,
+    user_name: 'robb@weblaws.org',
+    password:  'Nhb1wo6JFM_5ryNspJbZYA',
+  }
 end
