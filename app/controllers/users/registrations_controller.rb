@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  # def create
-  #   super
-  # end
+  def create
+    super
+  end
 end

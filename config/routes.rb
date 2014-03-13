@@ -24,9 +24,12 @@ Think200::Application.routes.draw do
   get  "home",    to: "pages#home", as: "home"
   post 'checkit', to: 'pages#checkit', as: 'checkit'
   
+
+  # Devise and admin ############
     
-  devise_for :users
-  
+
+  devise_for :users, controllers: { registrations: "users/registrations" }
+
   namespace :admin do
     root "base#index"
     resources :users
