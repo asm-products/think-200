@@ -42,6 +42,9 @@ update_project_tile = (p_id) ->
       $("#project-tile-#{p_id} abbr.timeago").timeago();
       $("#project-tile-#{p_id}").hover ->   # TODO: do with CSS only
         $(@).toggleClass( 'project-tile-active' )
+      $('.project-tile .panel-body, .project-tile .panel-heading, .project-tile .panel-footer').click ->
+        # Turbolinks.visit( $(@).parent().data('url') )  
+        window.location = $(@).parent().data('url')
       )
 
 
@@ -108,7 +111,6 @@ ready = ->
 
     $("abbr.timeago").timeago();
 
-
     # A simple way to set the focus in the right input.
     # Each page is responsible for adding the focus-here
     # class to the appropriate element.
@@ -117,7 +119,9 @@ ready = ->
     if not window.think200_is_polling?
         do_poll()
 
+    Prism.highlightAll()
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
-#Turbolinks.enableTransitionCache()
+Turbolinks.enableTransitionCache()
