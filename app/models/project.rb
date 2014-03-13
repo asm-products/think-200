@@ -100,7 +100,7 @@ class Project < ActiveRecord::Base
     end
 
     def failing_requirements
-      requirements
+      requirements.select{|r| r.failed?}
     end
 
     def rspec_filename
