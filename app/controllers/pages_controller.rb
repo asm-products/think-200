@@ -29,16 +29,9 @@ class PagesController < ApplicationController
     end
     session[:checkit_user_input] = @user_input
 
-    test_results = check(@user_input)
-
-    if test_results.is_error
-      render 'checkit_with_error'
-    else
-      @expectation = Expectation.new subject: @user_input, matcher: Matcher.for('be_up')
-      @is_up     = test_results.is_up
-      @next_step = new_user_registration_path
-      render 'checkit_is_up'
-    end
+    @expectation = Expectation.new subject: @user_input, matcher: Matcher.for('be_up')
+    @is_up       = check(@user_input).is_up
+    @next_step   = new_user_registration_path
   end
   
 

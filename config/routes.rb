@@ -33,8 +33,6 @@ Think200::Application.routes.draw do
   end
 
 
-
-
   # Resque ######################
 
   ResqueWeb::Engine.eager_load!
