@@ -24,7 +24,7 @@
     %label.col-sm-2.control-label Should:
     .col-sm-10
       %ul.list-group
-        - Matcher.all.each do |m|
+        - Matcher.order(:code).each do |m|
           %li.list-group-item
             .row
               .col-xs-7
