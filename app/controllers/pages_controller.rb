@@ -1,7 +1,7 @@
 require 'think200'
 
 class PagesController < ApplicationController
-  CheckitResult = Struct.new(:is_up)
+  CheckitResult = Struct.new(:is_up, :error_msg)
   ERROR_MESSAGE = "Please enter a URL or domain name"
 
   before_action :authenticate_user!, only: [
@@ -29,15 +29,27 @@ class PagesController < ApplicationController
     end
     session[:checkit_user_input] = @user_input
 
+    results      = check(@user_input)
     @expectation = Expectation.new subject: @user_input, matcher: Matcher.for('be_up')
-    @is_up       = check(@user_input).is_up
+    @is_up       = results.is_up
+    @error_msg   = results.error_msg
     @next_step   = new_user_registration_path
+    @prev_step   = root_path
   end
   
 
   private
+
   def check(url_or_domain_name)
-    CheckitResult.new(false)  # Kinda dumb that Struct doesn't do keyword args
+    begin
+      is_up = RSpec::WebserviceMatchers.up? url_or_domain_name
+      error_msg = ''
+    rescue Exception => e
+      is_up = false
+      error_msg = e.message
+    end
+    
+    CheckitResult.new(is_up, error_msg)
   end
 
 end
