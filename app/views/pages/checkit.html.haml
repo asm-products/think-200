@@ -10,7 +10,7 @@
           - if @is_up
             Congratulations, you have your first passing test
           - else
-            We've created your first test:
+            and we've created your first test:
 
 .row
   .col-sm-offset-2.col-sm-8
@@ -22,7 +22,7 @@
               %span.text-muted{style: 'white-space: nowrap'}
                 #{fa_icon(@expectation.type_icon, 'fa-lg')}&nbsp;&nbsp;
             %td.lead
-              = expectation_to_html(@expectation, type_icon: false)
+              = checkit_test_to_html(@user_input, type_icon: false)
       .col-sm-4
         %p{style: 'margin-top: 0.5em'}
           = @expectation.summary

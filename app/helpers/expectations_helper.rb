@@ -16,4 +16,9 @@ module ExpectationsHelper
 
     result.html_safe
   end
+
+  def checkit_test_to_html(user_input, type_icon: true)
+    e = Expectation.new subject: user_input, matcher: Matcher.for('be_up')
+    expectation_to_html(e, type_icon: type_icon)
+  end
 end
