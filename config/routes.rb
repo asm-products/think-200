@@ -3,6 +3,7 @@ Think200::Application.routes.draw do
   # AJAX API
   post "ajax/queue_status"
   get  'ajax/project_tile'
+  get  'ajax/project_page'
   post 'retest_project/:id', to: 'projects#retest', as: 'retest_project'  
 
   # Open resources
@@ -21,7 +22,7 @@ Think200::Application.routes.draw do
 
 
   # Sign up path
-  root 'pages#home'    
+  root 'pages#home'
   post 'checkit', to: 'pages#checkit', as: 'checkit'  # From our home page
   get  'checkit', to: redirect('/')                   # Never allowed
   

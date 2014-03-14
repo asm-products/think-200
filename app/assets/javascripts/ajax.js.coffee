@@ -20,7 +20,6 @@ set_icon = (project_id, is_working) ->
 
 
 set_progress_bar = (percent) ->
-  console.debug("set_progress_bar #{percent}")
   bar       = $('#progress-bar')
   container = $('#progress-bar-container')
   
@@ -36,11 +35,15 @@ set_progress_bar = (percent) ->
 
 project_is_updated = (p_id, tested_at) ->
   server_time = tested_at
+  # Either a tile or a page
   client_time = $("#project-tile-#{p_id}").data('tested-at')
+  if ! client_time
+    client_time = $("#project-page-#{p_id}").data('tested-at')  
   client_time < server_time
 
 
 update_project_tile = (p_id) ->
+  return if $("#project-tile-#{p_id}").length == 0
   console.debug("Updating project #{p_id}...")
   prefix   = $('#path-prefix').data('path-prefix')
   tile_url = prefix + '/ajax/' + "project_tile?project_id=#{p_id}"
@@ -52,6 +55,20 @@ update_project_tile = (p_id) ->
       $("#project-tile-#{p_id}").hover ->   # TODO: do with CSS only
         $(@).toggleClass( 'project-tile-active' )
       add_action_to_project_tiles()
+      )
+
+
+update_project_page = (p_id) ->
+  return if $("#project-page-#{p_id}").length == 0
+  console.debug("Updating project page #{p_id}...")
+  prefix   = $('#path-prefix').data('path-prefix')
+  tile_url = prefix + '/ajax/' + "project_page?project_id=#{p_id}"
+  $.get(tile_url)
+    .done( (html) ->
+      $("#project-page-#{p_id}").replaceWith(html)
+      # Re-configure javascript events
+      $("#project-page-#{p_id} abbr.timeago").timeago();
+      add_click_action_to_test_button()
       )
 
 
@@ -76,7 +93,9 @@ do_poll = ->
         # based on the difference in timestamps
         for p_id, proj of data.projects
           if proj.queued == 'false' and project_is_updated(p_id, proj.tested_at)
+            # Update whichever works:
             update_project_tile(p_id)
+            update_project_page(p_id)
 
         add_action_to_project_tiles()
         )
@@ -94,8 +113,21 @@ do_poll = ->
     delete window.think200_is_polling
 
 
+add_click_action_to_test_button = ->
+  $('.test-button').click (e) ->
+    e.stopPropagation()
+    $('body').focus()
+    prefix  = $('#path-prefix').data('path-prefix')
+    proj_id = $(@).data('project-id')
+    url     = prefix + "/retest_project/#{proj_id}"
+    set_icon(proj_id, 'true')
+    set_progress_bar(0)
+    $.post(url)
+
+
 ready = ->
     add_action_to_project_tiles()
+    add_click_action_to_test_button()
 
     $('.project-tile').hover ->
       $(@).toggleClass( 'project-tile-active' )
