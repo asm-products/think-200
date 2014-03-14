@@ -1,7 +1,25 @@
 POLL_FREQUENCY = 5000  # milliseconds
 
+# Helper functions ###########################
+element_exists = (pattern) ->
+  $(pattern).length > 0
 
-add_action_to_project_tiles = ->
+
+# Return the element representing the given project
+# or null if not present on the page.
+project_container = (p_id) ->
+  tile = "#project-tile-#{p_id}"
+  page = "#project-page-#{p_id}"
+
+  if element_exists(tile)
+    return $(tile)
+  else if element_exists(page)
+    return $(page)
+  return null
+
+
+# Make an entire project tile into a clickable button
+add_click_to_project_tiles = ->
     $('.project-tile .panel-body, .project-tile .panel-heading, .project-tile .panel-footer').click ->
       # Disabled for some reason I've forgotten. We should
       # re-try turbolinks on these. (RS)
@@ -9,6 +27,8 @@ add_action_to_project_tiles = ->
       window.location = $(@).parent().data('url')  
 
 
+# Toggle the spinning / non-spinning state of the project
+# refresh button
 set_icon = (project_id, is_working) ->
   button = $("#test-button-#{project_id}")
   spin   = 'fa-spin'
@@ -35,15 +55,13 @@ set_progress_bar = (percent) ->
 
 project_is_updated = (p_id, tested_at) ->
   server_time = tested_at
-  # Either a tile or a page
-  client_time = $("#project-tile-#{p_id}").data('tested-at')
-  if ! client_time
-    client_time = $("#project-page-#{p_id}").data('tested-at')  
-  client_time < server_time
+  project     = project_container(p_id)
+  return if ! project
+  project.data('tested-at') < server_time
 
 
 update_project_tile = (p_id) ->
-  return if $("#project-tile-#{p_id}").length == 0
+  return if ! element_exists("#project-tile-#{p_id}")
   console.debug("Updating project #{p_id}...")
   prefix   = $('#path-prefix').data('path-prefix')
   tile_url = prefix + '/ajax/' + "project_tile?project_id=#{p_id}"
@@ -54,12 +72,12 @@ update_project_tile = (p_id) ->
       $("#project-tile-#{p_id} abbr.timeago").timeago();
       $("#project-tile-#{p_id}").hover ->   # TODO: do with CSS only
         $(@).toggleClass( 'project-tile-active' )
-      add_action_to_project_tiles()
+      add_click_to_project_tiles()
       )
 
 
 update_project_page = (p_id) ->
-  return if $("#project-page-#{p_id}").length == 0
+  return if ! element_exists("#project-page-#{p_id}")
   console.debug("Updating project page #{p_id}...")
   prefix   = $('#path-prefix').data('path-prefix')
   tile_url = prefix + '/ajax/' + "project_page?project_id=#{p_id}"
@@ -81,7 +99,7 @@ do_poll = ->
   if query
     $.post(prefix + '/ajax/' + query)
       .done( (data) -> 
-        # console.debug(JSON.stringify(data, undefined, 2))
+        console.debug(JSON.stringify(data, undefined, 2))
         
         # Update activity indicators
         unless $("#server-status").hasClass('fa-signal')
@@ -93,11 +111,12 @@ do_poll = ->
         # based on the difference in timestamps
         for p_id, proj of data.projects
           if proj.queued == 'false' and project_is_updated(p_id, proj.tested_at)
+            console.debug("Trying to update project #{p_id}")
             # Update whichever works:
             update_project_tile(p_id)
             update_project_page(p_id)
 
-        add_action_to_project_tiles()
+        add_click_to_project_tiles()
         )
 
       .fail( ->
@@ -126,7 +145,7 @@ add_click_action_to_test_button = ->
 
 
 ready = ->
-    add_action_to_project_tiles()
+    add_click_to_project_tiles()
     add_click_action_to_test_button()
 
     $('.project-tile').hover ->
