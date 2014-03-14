@@ -4,6 +4,10 @@ POLL_FREQUENCY = 5000  # milliseconds
 element_exists = (pattern) ->
   $(pattern).length > 0
 
+debug_json = (json) ->
+  console.debug(JSON.stringify(json, undefined, 2))
+
+
 
 # Return the element representing the given project
 # or null if not present on the page.
@@ -27,7 +31,7 @@ add_click_to_project_tiles = ->
       window.location = $(@).parent().data('url')  
 
 
-# Toggle the spinning / non-spinning state of the project
+# Set the spinning / non-spinning state of the project
 # refresh button
 set_icon = (project_id, is_working) ->
   button = $("#test-button-#{project_id}")
@@ -46,18 +50,19 @@ set_progress_bar = (percent) ->
   if percent < 15  # Even if it's zero, we want to see some 
     percent = 15   # indication of activity
     
-  bar.css('width', "#{percent}%")
-  if percent == 100
+  bar.css('width', "#{percent}%")  # Set the actual state
+  if percent == 100                # Make its appearance not jarring
     container.fadeOut(1300)
   else
     container.fadeIn(1000)
 
 
+# True if the project has been updated on the server, and the
+# on-screen representation is out of date.
 project_is_updated = (p_id, tested_at) ->
-  server_time = tested_at
-  project     = project_container(p_id)
-  return if ! project
-  project.data('tested-at') < server_time
+  project = project_container(p_id)
+  return false if ! project
+  project.data('tested-at') < tested_at
 
 
 update_project_tile = (p_id) ->
@@ -86,20 +91,20 @@ update_project_page = (p_id) ->
       $("#project-page-#{p_id}").replaceWith(html)
       # Re-configure javascript events
       $("#project-page-#{p_id} abbr.timeago").timeago();
-      add_click_action_to_test_button()
+      add_click_to_test_buttons()
       )
 
 
 do_poll = ->
+  # The page controls polling by setting or not setting
+  # the data-api-query value.
   query  = $('#api-query').data('api-query')
   prefix = $('#path-prefix').data('path-prefix')
 
-  # The page controls polling by setting or not setting
-  # the api-query value.
   if query
     $.post(prefix + '/ajax/' + query)
       .done( (data) -> 
-        console.debug(JSON.stringify(data, undefined, 2))
+        debug_json(data)
         
         # Update activity indicators
         unless $("#server-status").hasClass('fa-signal')
@@ -132,7 +137,7 @@ do_poll = ->
     delete window.think200_is_polling
 
 
-add_click_action_to_test_button = ->
+add_click_to_test_buttons = ->
   $('.test-button').click (e) ->
     e.stopPropagation()
     $('body').focus()
@@ -146,7 +151,7 @@ add_click_action_to_test_button = ->
 
 ready = ->
     add_click_to_project_tiles()
-    add_click_action_to_test_button()
+    add_click_to_test_buttons()
 
     $('.project-tile').hover ->
       $(@).toggleClass( 'project-tile-active' )
