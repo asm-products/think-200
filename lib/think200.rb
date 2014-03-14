@@ -1,7 +1,22 @@
 module Think200
 
+  # true  = judged to be passed
+  # false = judged to be failed
+  # nil   = untested, at least in part
   def self.aggregate_test_status(collection:)
+    return nil if collection.empty?
+
+    # False if anything is false
+    results = collection.map{|c| c.passed?}
+    return false if results.include? false
+
+    # True only if it's all true
+    return true  if results.length == results.select{|r| r == true}.length
+
+    # Nil in any other case
+    return nil
   end
+
 
   module HttpStatus
 
