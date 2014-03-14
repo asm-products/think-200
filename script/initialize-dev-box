@@ -1,0 +1,8 @@
+#!/bin/bash
+set -e
+
+ln -s database.yml-default config/database.yml
+export POSTGRESQL_USER=`ps aux | grep postgres | grep -v grep | head -n 1 | cut -d' ' -f1`
+echo "PostgreSQL user is: '$POSTGRESQL_USER'"
+sudo su -m $POSTGRESQL_USER -c "echo CREATE USER think200 WITH CREATEDB LOGIN PASSWORD \'think200\' | psql"
+rake db:reset
