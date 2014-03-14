@@ -1,4 +1,8 @@
 module Think200
+
+  def self.aggregate_test_status(collection:)
+  end
+
   module HttpStatus
 
     # Return the status string for the
