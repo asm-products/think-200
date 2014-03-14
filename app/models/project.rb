@@ -80,7 +80,8 @@ class Project < ActiveRecord::Base
       end
     end
 
-    # Not runnable; user needs to add expectations.
+    # True if not runnable; the user needs to 
+    # add expectations.
     def incomplete?
       expectations.empty?
     end

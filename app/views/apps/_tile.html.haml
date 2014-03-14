@@ -1,4 +1,4 @@
-%div{class: "app-tile panel panel-"+status_class_for(app) }
+%div{class: "app-tile panel panel-" + status_class_for(app) }
 
   -# The App name
   .panel-heading
@@ -34,7 +34,7 @@
 
           -# Rows for the Expectations
           - req.expectations.each do |exp|
-            %tr{class: 'text-'+status_class_for(exp, only: 'danger')}
+            %tr{class: 'text-'+status_class_for(exp)}
               %td{style: "text-align: center; width: 1px; white-space: nowrap"}= fa_icon(exp.matcher.icon, 'fa-lg')
               %td{style: 'width: 1px; white-space: nowrap'}
                 %strong= exp.subject
