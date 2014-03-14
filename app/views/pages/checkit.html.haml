@@ -20,7 +20,12 @@
           %tr
             %td.lead{style: 'vertical-align: top'}
               %span.text-muted{style: 'white-space: nowrap'}
-                #{fa_icon(@expectation.type_icon, 'fa-lg')}&nbsp;&nbsp;
+                -if @is_up
+                  #{fa_icon(@expectation.type_icon, 'fa-lg')}&nbsp;&nbsp;
+                -else
+                  %span.fa-stack.fa-lg
+                    %i.fa.fa-thumbs-up.fa-stack-1x
+                    %i.fa.fa-ban.fa-stack-2x.text-danger
             %td.lead
               = checkit_test_to_html(@user_input, type_icon: false)
       .col-sm-4
@@ -28,7 +33,7 @@
           = @expectation.summary
     .row
       .col-sm-offset-1.col-sm-10.text-center{style: 'padding-top: 3em'}
-        %a.btn.btn-lg.btn-block.btn-success{href: @next_step}
+        %a.btn.btn-lg.btn-block{href: @next_step, class: @is_up ? 'btn-success' : 'btn-primary'}
           Save and start monitoring
 
 
