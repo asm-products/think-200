@@ -73,6 +73,7 @@ do_poll = ->
         set_icon(p, data.projects[p].queued) for p of data.projects
 
         # Update project tiles which have changed on the server
+        # based on the difference in timestamps
         for p_id, proj of data.projects
           if proj.queued == 'false' and project_is_updated(p_id, proj.tested_at)
             update_project_tile(p_id)
