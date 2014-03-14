@@ -1,5 +1,5 @@
 require 'spec_helper'
-require 'think200'
+require 'think200_libs'
 
 describe Think200 do
   describe 'Think200#aggregate_test_status(collection)' do

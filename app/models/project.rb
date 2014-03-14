@@ -1,5 +1,5 @@
 require 'think200_jobs'
-require 'think200'
+require 'think200_libs'
 
 # == Schema Information
 #
