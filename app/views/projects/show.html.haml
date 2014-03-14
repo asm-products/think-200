@@ -2,7 +2,7 @@
   .page-header
     %h1
       = @project.name
-      .tested-at
+      .tested-at{style: 'display: inline'}
         %small
           - if @project.tested_at
             tested #{timeago @project.tested_at}
