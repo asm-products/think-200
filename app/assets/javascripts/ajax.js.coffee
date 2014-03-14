@@ -1,6 +1,11 @@
 POLL_FREQUENCY = 5000  # milliseconds
 
 
+add_action_to_project_tiles = ->
+    $('.project-tile .panel-body, .project-tile .panel-heading, .project-tile .panel-footer').click ->
+      # Turbolinks.visit( $(@).parent().data('url') )  
+      window.location = $(@).parent().data('url')  
+
 set_icon = (project_id, is_working) ->
   button = $("#test-button-#{project_id}")
   spin   = 'fa-spin'
@@ -42,9 +47,7 @@ update_project_tile = (p_id) ->
       $("#project-tile-#{p_id} abbr.timeago").timeago();
       $("#project-tile-#{p_id}").hover ->   # TODO: do with CSS only
         $(@).toggleClass( 'project-tile-active' )
-      $('.project-tile .panel-body, .project-tile .panel-heading, .project-tile .panel-footer').click ->
-        # Turbolinks.visit( $(@).parent().data('url') )  
-        window.location = $(@).parent().data('url')
+      add_action_to_project_tiles()
       )
 
 
@@ -70,10 +73,7 @@ do_poll = ->
           if proj.queued == 'false' and project_is_updated(p_id, proj.tested_at)
             update_project_tile(p_id)
 
-        $('.panel-body, .panel-heading, .panel-footer').click ->
-          # Turbolinks.visit( $(@).parent().data('url') )  
-          window.location = $(@).parent().data('url')
-
+        add_action_to_project_tiles()
         )
 
 
@@ -92,9 +92,7 @@ do_poll = ->
 
 
 ready = ->
-    $('.project-tile .panel-body, .project-tile .panel-heading, .project-tile .panel-footer').click ->
-      # Turbolinks.visit( $(@).parent().data('url') )  
-      window.location = $(@).parent().data('url')
+    add_action_to_project_tiles()
 
     $('.project-tile').hover ->
       $(@).toggleClass( 'project-tile-active' )
