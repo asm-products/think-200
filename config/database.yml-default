@@ -1,0 +1,19 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: think200_development
+  pool: 5
+  username: think200
+  password: think200
+  host: localhost
+  port: 5432
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: think200_test
+  pool: 5
+  username: think200
+  password: think200
+  host: localhost
+  port: 5432
