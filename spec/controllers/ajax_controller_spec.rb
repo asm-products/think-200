@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe AjaxController do
+  login_user
 
   describe "GET 'queue_status'" do
     it "returns http success" do
