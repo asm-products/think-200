@@ -72,6 +72,9 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    dotenv (0.10.0)
+    dotenv-rails (0.10.0)
+      dotenv (= 0.10.0)
     erubis (2.7.0)
     execjs (2.0.2)
     faraday (0.8.9)
@@ -258,6 +261,7 @@ DEPENDENCIES
   capistrano-rvm
   coffee-rails
   devise (= 3.2.2)
+  dotenv-rails
   figaro
   font-awesome-sass (= 4.0.2)
   friendly_id
