@@ -2,7 +2,7 @@
 
 Install ruby 2.1.1, postgres, and redis.  Ensure postgres and redis are running.
 
-```
+```bash
 git clone git@github.com:weblaws/think200.git
 cd think200
 bundle install
@@ -13,7 +13,7 @@ script/initialize-dev-box
 
 This is the server json response to the queue-status request:
 
-```
+```json
 {
   "percent_complete": 80,
   "projects": {
