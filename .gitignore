@@ -24,4 +24,4 @@ doc/
 /config/application.yml
 /config/database.yml
 .secret
-.env
+.env.local

@@ -1,4 +1,6 @@
 Think200::Application.configure do
+  Dotenv.overload('.env.local')
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -23,10 +25,10 @@ Think200::Application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
-  
+
   # Mailer
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => 'devbox.srsly.co:8997' }
+  config.action_mailer.default_url_options = { :host => ENV['DEV_MAILER_URL'] }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:   'smtp.mandrillapp.com',
