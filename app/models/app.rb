@@ -32,9 +32,27 @@ class App < ActiveRecord::Base
     result
   end
 
+  # true  = passed
+  # false = failed
+  # nil   = untested, at least in part
   def passed?
-    return nil if requirements.empty?
-    ! requirements.map{|e| e.passed?}.include?(false)
+    # No requirements?
+    if requirements.empty?
+      return nil
+    end
+
+    # A failing requirement?
+    results = requirements.map{ |e| e.passed? }
+    if results.include?(false)
+      return false
+    end
+
+    # An untested requirement?
+    if results.include?(nil)
+      return nil
+    end
+
+    true
   end
 
   def to_s

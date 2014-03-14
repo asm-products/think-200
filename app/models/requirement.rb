@@ -56,11 +56,32 @@ class Requirement < ActiveRecord::Base
     result + "\n"
   end
 
+
+  # true  = passed
+  # false = failed
+  # nil   = untested, at least in part
   def passed?
-    ! expectations.map{|e| e.passed?}.include?(false)
+    # No expectations?
+    if expectations.empty?
+      return nil
+    end
+
+    # A failing expectation?
+    results = expectations.map{ |e| e.passed? }
+    if results.include?(false)
+      return false
+    end
+
+    # An untested expectation?
+    if results.include?(nil)
+      return nil
+    end
+
+    true
   end
 
+
   def failed?
-    expectations.map{|e| e.passed?}.include?(false)
+    passed? == false
   end
 end
