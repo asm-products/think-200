@@ -42,7 +42,7 @@ class App < ActiveRecord::Base
     end
 
     # A failing requirement?
-    results = requirements.map{ |e| e.passed? }
+    results = requirements.map{ |r| r.passed? }
     if results.include?(false)
       return false
     end

@@ -3,8 +3,11 @@ POLL_FREQUENCY = 5000  # milliseconds
 
 add_action_to_project_tiles = ->
     $('.project-tile .panel-body, .project-tile .panel-heading, .project-tile .panel-footer').click ->
+      # Disabled for some reason I've forgotten. We should
+      # re-try turbolinks on these. (RS)
       # Turbolinks.visit( $(@).parent().data('url') )  
       window.location = $(@).parent().data('url')  
+
 
 set_icon = (project_id, is_working) ->
   button = $("#test-button-#{project_id}")
@@ -76,12 +79,10 @@ do_poll = ->
         add_action_to_project_tiles()
         )
 
-
       .fail( ->
         unless $("#server-status").hasClass('fa-ban')
           $("#server-status").removeClass().addClass("fa fa-fw fa-ban failed-icon")
         console.debug('fail'))
-
         
       .always( -> 
         window.think200_is_polling = true

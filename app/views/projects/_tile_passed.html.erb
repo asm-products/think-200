@@ -1,5 +1,5 @@
 <% 
-  panel_class  = tile.tested_at.nil? ? 'panel-default' : 'panel-success'
+  panel_class  = 'panel-' + status_class_for(tile)
   column_class = tile_col_class
 %>
 

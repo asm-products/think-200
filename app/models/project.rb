@@ -71,33 +71,44 @@ class Project < ActiveRecord::Base
       spec_runs.order('created_at DESC').first
     end
 
-    # Returns true, false, or nil.
+
+    # true  = passed
+    # false = failed
+    # nil   = untested, at least in part
     def passed?
-      if expectations.empty?
-        nil
-      else
-        ! expectations.map{|e| e.passed?}.include?(false)
+      # No apps?
+      if apps.empty?
+        return nil
       end
+
+      # A failing app?
+      results = apps.map{ |app| app.passed? }
+      if results.include?(false)
+        return false
+      end
+
+      # An untested app?
+      if results.include?(nil)
+        return nil
+      end
+
+      # There are apps, and they all passed.
+      true
     end
 
-    # True if not runnable; the user needs to 
+
+    # True if not runnable; the user needs to
     # add expectations.
     def incomplete?
       expectations.empty?
     end
 
-    def tested?
-      ! tested_at.nil?
+    def runnable?
+      ! incomplete?
     end
 
-    def test_status_string
-      if ! tested?
-        'untested'
-      elsif passed?
-        'passed'
-      else
-        'failed'
-      end
+    def tested?
+      ! tested_at.nil?
     end
 
     def failing_requirements
