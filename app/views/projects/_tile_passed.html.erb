@@ -1,12 +1,12 @@
 <% 
-  panel_class  = tile.tested_at.nil? ? 'panel-default' : 'panel-success'
+  panel_class  = 'panel-' + status_class_for(tile)
   column_class = tile_col_class
 %>
 
   <div id="project-tile-<%= tile.id %>"  class="panel <%= panel_class %> project-tile" data-url="<%= project_path(tile) %>" data-class="<%= panel_class %>" data-tested-at="<%= tile.tested_at.to_i %>">
     <div class="panel-heading">
       <h3 class="panel-title">
-	<%= render 'projects/test_button', {project: tile} %>
+      	<%= render 'projects/test_button', {project: tile} %>
         <%= tile %>
       </h3>
     </div>
@@ -20,7 +20,7 @@
       </table>
     </div>
     <div class="panel-footer">
-      <div class="tested-at">
+      <div class="tested-at text-center">
         <small>
         <% if tile.tested_at.nil? %>
           <span class="text-muted">(Not yet tested)</span>

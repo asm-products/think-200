@@ -1,3 +1,6 @@
+require 'think200_jobs'
+require 'think200_libs'
+
 # == Schema Information
 #
 # Table name: projects
@@ -11,7 +14,6 @@
 #  updated_at  :datetime
 #  user_id     :integer
 #
-
 class Project < ActiveRecord::Base
   has_many :apps, dependent: :destroy
   belongs_to :user
@@ -25,6 +27,14 @@ class Project < ActiveRecord::Base
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user_id }
 
+
+  def queue_for_testing
+    unless incomplete?
+      self[:in_progress] = true
+      self.save!
+      Resque.enqueue(Think200::ScheduledTest, id, user_id)
+    end
+  end
 
   # Do I have rspec to offer?
   # Yes, if I have been saved.
@@ -71,32 +81,27 @@ class Project < ActiveRecord::Base
       spec_runs.order('created_at DESC').first
     end
 
-    # Returns true, false, or nil.
+
+    # true  = passed
+    # false = failed
+    # nil   = untested, at least in part
     def passed?
-      if expectations.empty?
-        nil
-      else
-        ! expectations.map{|e| e.passed?}.include?(false)
-      end
+      Think200.aggregate_test_status(collection: apps)
     end
 
-    # Not runnable; user needs to add expectations.
+
+    # True if not runnable; the user needs to
+    # add expectations.
     def incomplete?
       expectations.empty?
     end
 
-    def tested?
-      ! tested_at.nil?
+    def runnable?
+      ! incomplete?
     end
 
-    def test_status_string
-      if ! tested?
-        'untested'
-      elsif passed?
-        'passed'
-      else
-        'failed'
-      end
+    def tested?
+      ! tested_at.nil?
     end
 
     def failing_requirements

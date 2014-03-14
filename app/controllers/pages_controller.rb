@@ -1,4 +1,4 @@
-require 'think200'
+require 'think200_libs'
 
 class PagesController < ApplicationController
   CheckitResult = Struct.new(:is_up, :error_msg)

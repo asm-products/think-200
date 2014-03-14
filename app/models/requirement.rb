@@ -10,6 +10,8 @@
 #  updated_at :datetime
 #
 
+require 'think200_libs'
+
 class Requirement < ActiveRecord::Base
   belongs_to :app
   has_many   :expectations, dependent: :destroy
@@ -56,11 +58,16 @@ class Requirement < ActiveRecord::Base
     result + "\n"
   end
 
+
+  # true  = passed
+  # false = failed
+  # nil   = untested, at least in part
   def passed?
-    ! expectations.map{|e| e.passed?}.include?(false)
+    Think200.aggregate_test_status(collection: expectations)
   end
 
+
   def failed?
-    expectations.map{|e| e.passed?}.include?(false)
+    passed? == false
   end
 end

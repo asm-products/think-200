@@ -9,6 +9,7 @@
 #  project_id :integer
 #  updated_at :datetime
 #
+require 'think200_libs'
 
 class App < ActiveRecord::Base
   belongs_to :project
@@ -32,9 +33,11 @@ class App < ActiveRecord::Base
     result
   end
 
+  # true  = passed
+  # false = failed
+  # nil   = untested, at least in part
   def passed?
-    return nil if requirements.empty?
-    ! requirements.map{|e| e.passed?}.include?(false)
+    Think200.aggregate_test_status(collection: requirements)
   end
 
   def to_s

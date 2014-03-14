@@ -1,1 +1,7 @@
-<i id="test-button-<%= project.id %>" data-project-id="<%= project.id %>" class="fa fa-refresh pull-right test-button"></i>
+<% 
+    if ! defined? align
+        align = 'pull-right'
+    end
+%>
+
+<i id="test-button-<%= project.id %>" data-project-id="<%= project.id %>" class="fa fa-lg fa-refresh <%= align %> test-button"></i>

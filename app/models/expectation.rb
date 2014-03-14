@@ -31,6 +31,9 @@ class Expectation < ActiveRecord::Base
   end
 
 
+  # true  = passed
+  # false = failed
+  # nil   = not tested
   def passed?
     spec_run = self.requirement.app.project.most_recent_test
     return nil if spec_run.nil?

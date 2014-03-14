@@ -1,18 +1,21 @@
 <% 
-  tile_partial = case tile.passed?
-  when nil  # No tests
-    'no_tests'
-  when true # Tests all pass
-    'passed'
-  else      # A test failed
-    'failed' 
-  end
+    if tile.incomplete?
+        tile_partial = 'no_tests'
+    else
+        if [true, nil].include? tile.passed?
+            tile_partial = 'passed'
+        else
+            tile_partial = 'failed'
+        end
+    end
 %>
 
 <% unless @no_cols %>
 <div class="<%= tile_col_class %>">
 <% end %>
-	<%= render partial: "projects/tile_#{tile_partial}", locals: {tile: tile} %>
+
+<%= render partial: "projects/tile_#{tile_partial}", locals: {tile: tile} %>
+
 <% unless @no_cols %>
 </div>
 <% end %>
