@@ -9,8 +9,8 @@ describe User do
       expect(valid_user).to be_valid
     end
 
-    it 'when username <= 10' do
-      valid_user.username = 'x'*10
+    it 'when username <= 20' do
+      valid_user.username = 'x'*20
       expect(valid_user).to be_valid
     end
 
@@ -21,8 +21,8 @@ describe User do
   end
 
   describe '#invalid?' do
-    it 'when username > 10' do
-      user.username = 'x'*11
+    it 'when username > 20' do
+      user.username = 'x'*21
       expect(user).to be_invalid
     end
 
