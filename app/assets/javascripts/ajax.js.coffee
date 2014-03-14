@@ -1,8 +1,8 @@
 POLL_FREQUENCY = 5000  # milliseconds
 
 # Helper functions ###########################
-element_exists = (pattern) ->
-  $(pattern).length > 0
+element_exists = (selector) ->
+  $(selector).length > 0
 
 debug_json = (json) ->
   console.debug(JSON.stringify(json, undefined, 2))
@@ -67,7 +67,7 @@ project_is_updated = (p_id, tested_at) ->
 
 update_project_tile = (p_id) ->
   return if ! element_exists("#project-tile-#{p_id}")
-  console.debug("Updating project #{p_id}...")
+  console.debug("Updating project tile #{p_id}...")
   prefix   = $('#path-prefix').data('path-prefix')
   tile_url = prefix + '/ajax/' + "project_tile?project_id=#{p_id}"
   $.get(tile_url)
@@ -104,8 +104,7 @@ do_poll = ->
   if query
     $.post(prefix + '/ajax/' + query)
       .done( (data) -> 
-        debug_json(data)
-        
+
         # Update activity indicators
         unless $("#server-status").hasClass('fa-signal')
           $("#server-status").removeClass().addClass("fa fa-fw fa-signal")
