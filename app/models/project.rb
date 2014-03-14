@@ -1,4 +1,5 @@
 require 'think200_jobs'
+require 'think200'
 
 # == Schema Information
 #
@@ -85,26 +86,7 @@ class Project < ActiveRecord::Base
     # false = failed
     # nil   = untested, at least in part
     def passed?
-      # aggregate_test_status(collection: apps)
-
-      # No apps?
-      if apps.empty?
-        return nil
-      end
-
-      # A failing app?
-      results = apps.map{ |app| app.passed? }
-      if results.include?(false)
-        return false
-      end
-
-      # An untested app?
-      if results.include?(nil)
-        return nil
-      end
-
-      # There are apps, and they all passed.
-      true
+      Think200.aggregate_test_status(collection: apps)
     end
 
 
