@@ -1,3 +1,5 @@
+require 'think200_jobs'
+
 # == Schema Information
 #
 # Table name: projects
@@ -11,7 +13,6 @@
 #  updated_at  :datetime
 #  user_id     :integer
 #
-
 class Project < ActiveRecord::Base
   has_many :apps, dependent: :destroy
   belongs_to :user
@@ -25,6 +26,14 @@ class Project < ActiveRecord::Base
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user_id }
 
+
+  def queue_for_testing
+    unless incomplete?
+      self[:in_progress] = true
+      self.save!
+      Resque.enqueue(Think200::ScheduledTest, id, user_id)
+    end
+  end
 
   # Do I have rspec to offer?
   # Yes, if I have been saved.

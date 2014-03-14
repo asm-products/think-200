@@ -20,6 +20,7 @@ set_icon = (project_id, is_working) ->
 
 
 set_progress_bar = (percent) ->
+  console.debug("set_progress_bar #{percent}")
   bar       = $('#progress-bar')
   container = $('#progress-bar-container')
   

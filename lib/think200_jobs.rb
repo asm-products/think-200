@@ -20,6 +20,7 @@ module Think200
     end
   end
 
+
   # Also run a project's tests, but intended to be done from a cron job.
   class ScheduledTest
     include Resque::Plugins::UniqueJob
@@ -30,14 +31,11 @@ module Think200
     end
   end
 
+
   # Enqueue all projects for testing in the premium queue. This is intended to be
   # executed from a cron job / rake task.
   def self.test_all_projects
-    Project.find_each do |p| 
-      next if p.incomplete?
-      puts "Enqueing ScheduledTest #{p.id}, user #{p.user_id}..."
-      Resque.enqueue(ScheduledTest, p.id, p.user_id) 
-    end
+    Project.find_each{ |p| p.queue_for_testing }
   end
 
 

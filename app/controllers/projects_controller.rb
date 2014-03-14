@@ -1,17 +1,13 @@
-require 'think200_jobs'
-
-
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_project, only: [:retest, :show, :edit, :update, :destroy]
 
-  # Queue the given project for retesting.
+
   def retest
-    @project.in_progress = true
-    @project.save!
-    Resque.enqueue(Think200::ScheduledTest, @project.id, current_user.id)
+    @project.queue_for_testing
     render text: 'ok'
   end
+
 
   def export
     raise "format not specified" if ! params[:format]
@@ -31,6 +27,7 @@ class ProjectsController < ApplicationController
         disposition: dispo
     end
   end
+
 
   # GET /projects
   # GET /projects.json
