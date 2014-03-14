@@ -85,7 +85,7 @@ class Project < ActiveRecord::Base
     # false = failed
     # nil   = untested, at least in part
     def passed?
-      # aggregate_test_status(apps)
+      # aggregate_test_status(collection: apps)
 
       # No apps?
       if apps.empty?
