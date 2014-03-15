@@ -34,13 +34,5 @@
 
           -# Rows for the Expectations
           - req.expectations.each do |exp|
-            %tr
-              %td{class: status_class_for(exp), style: "text-align: center; width: 1px; white-space: nowrap"}= fa_icon(exp.matcher.icon, 'fa-lg')
-              %td{class: status_class_for(exp)}
-                %strong= exp.subject
-                %span.text-semi-muted
-                  should
-                = exp.matcher
-                %strong= exp.expected
-              %td
-                = make_button(icon_class: delete_icon_class, href: exp, method: :delete, subtle: true)
+            = render partial: 'apps/expectation', locals: {exp: exp}
+
