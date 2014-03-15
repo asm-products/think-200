@@ -1,5 +1,27 @@
 module ApplicationHelper
 
+  def make_button(icon_class:, href: '#', method: 'get', subtle: true)
+    if subtle
+      link_to(
+              fa_icon(icon_class, 'fa-fw'), 
+              href, 
+              {
+                method: method,
+                class: 'subtle-button'
+              }
+              )
+    else
+      link_to(
+              fa_icon(icon_class), 
+              href, 
+              {
+                method: method,
+                class: 'btn btn-default'
+              }
+              )      
+    end
+  end
+
   def timeago(time, options = {})
     options[:class] ||= "timeago"
     content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
@@ -66,7 +88,11 @@ module ApplicationHelper
   end
 
   def delete_icon
-    font_awesome 'trash-o'
+    font_awesome 'times'
+  end
+
+  def delete_icon_class
+    'fa-times'
   end
 
 

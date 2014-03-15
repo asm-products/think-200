@@ -13,6 +13,20 @@ $content-bg-active: #ffffff;
 // $content-bg:        mix($body-bg, $content-bg-active, 15%);
 $content-bg: #ffffff;
 
+
+//
+// The Subtle Button
+//
+a.subtle-button {
+    color: #cccccc;
+}
+
+a.subtle-button:hover {
+    color: $link-hover-color;
+}
+
+
+
 .alert {
     margin-top: 1em;
 }

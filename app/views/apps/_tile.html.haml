@@ -34,14 +34,13 @@
 
           -# Rows for the Expectations
           - req.expectations.each do |exp|
-            %tr{class: 'text-'+status_class_for(exp)}
-              %td{style: "text-align: center; width: 1px; white-space: nowrap"}= fa_icon(exp.matcher.icon, 'fa-lg')
-              %td{style: 'width: 1px; white-space: nowrap'}
+            %tr
+              %td{class: status_class_for(exp), style: "text-align: center; width: 1px; white-space: nowrap"}= fa_icon(exp.matcher.icon, 'fa-lg')
+              %td{class: status_class_for(exp)}
                 %strong= exp.subject
-              %td
                 %span.text-semi-muted
                   should
                 = exp.matcher
-                %strong
-                  = exp.expected
-                  = link_to delete_icon, exp, method: :delete, role: 'button', class: 'btn btn-danger btn-xs pull-right'
+                %strong= exp.expected
+              %td
+                = make_button(icon_class: delete_icon_class, href: exp, method: :delete, subtle: true)
