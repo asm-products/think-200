@@ -1,31 +1,29 @@
 module ApplicationHelper
 
-  def make_button(icon_class:, href: '#', method: 'get', subtle: true)
-    if subtle
-      link_to(
-              fa_icon(icon_class, 'fa-fw'), 
-              href, 
-              {
-                method: method,
-                class: 'subtle-button'
-              }
-              )
-    else
-      link_to(
-              fa_icon(icon_class), 
-              href, 
-              {
-                method: method,
-                class: 'btn btn-default'
-              }
-              )      
-    end
+  def button(icon_class:, href: '#', text: nil, button_classes: 'btn-default')
+    label = fa_icon(icon_class)
+    label += " #{text}" unless text.blank?
+    "<button type=\"button\" class=\"btn #{button_classes}\" onclick=\"location.href='#{href}';\">#{label}</button>".html_safe
   end
+
+
+  def subtle_button(icon_class:, href: '#', method: 'get', text: nil, button_classes: 'btn-default')
+    link_to(
+            fa_icon(icon_class, 'fa-fw'), 
+            href, 
+            {
+              method: method,
+              class: 'subtle-button'
+            }
+            )
+  end
+
 
   def timeago(time, options = {})
     options[:class] ||= "timeago"
     content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
   end
+
 
   def dquo(content)
     "&ldquo;#{h content}&rdquo;".html_safe

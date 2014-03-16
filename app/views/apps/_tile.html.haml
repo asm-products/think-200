@@ -7,8 +7,8 @@
           = app.name 
       .col-sm-2
         .pull-right
-          = make_button(icon_class: 'fa-plus', href: new_requirement_path(app_id: app.id))
-          = make_button(icon_class: 'fa-pencil', href: edit_app_path(app))
+          = subtle_button(icon_class: 'fa-plus', href: new_requirement_path(app_id: app.id))
+          = subtle_button(icon_class: 'fa-pencil', href: edit_app_path(app))
 
   .panel-body
     - app.requirements.each do |req| 
@@ -17,8 +17,8 @@
           %h4= req
         .col-sm-2
           .pull-right
-            = make_button(icon_class: 'fa-plus', href: new_expectation_path(requirement_id: req.id))
-            = make_button(icon_class: 'fa-pencil', href: edit_requirement_path(req))
+            = subtle_button(icon_class: 'fa-plus', href: new_expectation_path(requirement_id: req.id))
+            = subtle_button(icon_class: 'fa-pencil', href: edit_requirement_path(req))
  
       - req.expectations.each do |exp|
         = render partial: 'apps/expectation', locals: {exp: exp}

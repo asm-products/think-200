@@ -14,7 +14,6 @@
       %ul.nav.nav-pills
         %li
           = link_to(render('projects/test_button', {project: @project, align: 'fa-fw'}) + ' Refresh', '#', {class: 'test-button', 'data-project-id' => @project.id})
-        %li= link_to(font_awesome('plus', 'fa-fw fa-lg')+' New App', new_app_path(project_id: @project.id))
         %li= link_to font_awesome('pencil', 'fa-fw fa-lg')+' Edit project', edit_project_path(@project)
         %li= link_to font_awesome('cloud-download', 'fa-fw fa-lg') + ' Export', '#', {'data-toggle'=>"modal", 'data-target'=>".export-modal"}
 
@@ -22,6 +21,7 @@
       %h2.cards Apps
       - @project.apps.each do |app|
         = render 'apps/tile', { app: app }
+      = button(icon_class: 'fa-plus', text: 'New App', button_classes: 'btn-primary', href: new_app_path(project_id: @project.id))
 
     .col-sm-2
       = render 'layouts/activity'
