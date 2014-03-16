@@ -1,6 +1,5 @@
 //***********************************************************
 // BOOTSTRAP VARIABLES OVERRIDES
-// Test
 
 // Color system
 $brand-primary: #428bca;
@@ -100,7 +99,7 @@ $caret-width-large: 5px;
 
 // Form states and alerts
 $state-success-text: #468847; 
-$state-success-bg: #dff0d8; 
+$state-success-bg: #e6f1d3; 
 $state-success-border: darken($state-success-bg, 5%); 
 
 $state-warning-text: #c09853;
@@ -108,7 +107,7 @@ $state-warning-bg: #fcf8e3;
 $state-warning-border: darken($state-warning-bg, 3%);
 
 $state-danger-text: #b94a48; 
-$state-danger-bg: #f2dede; 
+$state-danger-bg: #fcd5d5; 
 $state-danger-border: darken($state-danger-bg, 3%); 
 
 $state-info-text: #3a87ad; 
@@ -342,6 +341,9 @@ $component-offset-horizontal: 180px; // Horizontal offset for forms and lists
 @import "bootstrap";
 @import "font-awesome";
 
+
+
+
 //***********************************************************
 // TESTING CLASSES
 .shigh{
@@ -434,6 +436,4 @@ img{
   }
 }
 //***********************************************************
-
-
 

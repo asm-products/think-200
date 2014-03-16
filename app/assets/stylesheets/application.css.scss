@@ -6,12 +6,18 @@
  */
 @import "framework_and_overrides";
 // @import "bootstrap";
-@import "font-awesome";
+// @import "font-awesome";
 
 
 $content-bg-active: #ffffff;
-// $content-bg:        mix($body-bg, $content-bg-active, 15%);
 $content-bg: #ffffff;
+
+
+// A new contextual bg
+.bg-default {
+    background-color: #eeeeee;
+}
+
 
 
 //
