@@ -1,6 +1,6 @@
 .row
   .col-sm-10
-    %p{class: status_class_for(exp)}
+    %p{class: 'bg-'+status_class_for(exp)}
       = fa_icon(exp.matcher.icon, 'fa-lg fa-fw')
       %strong= exp.subject
       %span.text-semi-muted should
