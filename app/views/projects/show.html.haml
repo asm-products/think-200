@@ -25,7 +25,7 @@
       // Button to create a new app
       // Using the new "Garden-Path" UX strategy
       - button_class = @project.apps.empty? ? 'primary' : 'default'
-      = button(icon_class: 'fa-plus', text: 'New App', button_classes: 'btn-'+button_class, href: new_app_path(project_id: @project.id))
+      = button(icon_class: 'fa-plus', text: 'New App', button_classes: 'btn-lg btn-'+button_class, href: new_app_path(project_id: @project.id))
 
     .col-sm-2
       = render 'layouts/activity'

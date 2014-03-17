@@ -16,10 +16,13 @@ $content-bg: #ffffff;
     background-color: #eeeeee;
 }
 
-p.expectation-row {
+.expectation-row {
     padding: 0.3em;
 }
 
+.requirement-row {
+    padding-top: 0.3em;
+}
 
 
 //
@@ -71,10 +74,17 @@ ul {
 }
 
 
-// App Tile
+//
+// The App Tile
+//
 
 .app-tile {
     margin-bottom: 3em;
+
+    h3 {
+	font-weight: normal;
+	font-size: 180%;
+    }
 }
 
 .project-tile, .app-tile {
