@@ -15,7 +15,7 @@
         .col-sm-10
           %h4
             = req
-            = subtle_button(icon_class: 'fa-share fa-rotate-90', href: new_expectation_path(requirement_id: req.id))
+            = subtle_button(icon_class: 'fa-plus', anchor_class: 'add-expectation',  href: new_expectation_path(requirement_id: req.id), tooltip: 'Add a new expectation')
         .col-sm-2
           .pull-right
             = subtle_button(icon_class: 'fa-pencil', href: edit_requirement_path(req))

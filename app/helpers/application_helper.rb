@@ -7,15 +7,28 @@ module ApplicationHelper
   end
 
 
-  def subtle_button(icon_class:, href: '#', method: 'get', text: nil, button_classes: 'btn-default')
-    link_to(
-            fa_icon(icon_class, 'fa-fw'), 
-            href, 
-            {
-              method: method,
-              class: 'subtle-button'
-            }
-            )
+  def subtle_button(icon_class:, href: '#', anchor_class: '', method: 'get', text: nil, button_classes: 'btn-default', tooltip: '')
+    if tooltip.blank?
+      link_to(
+              fa_icon(icon_class, 'fa-fw'), 
+              href, 
+              {
+                method: method,
+                class: 'subtle-button'
+              }
+              )
+    else 
+      link_to(
+              fa_icon(icon_class, 'fa-fw'), 
+              href, 
+              {
+                method: method,
+                class: "subtle-button #{anchor_class}",
+                title:  tooltip,
+                'data-toggle' => 'tooltip',
+              }
+              )
+    end
   end
 
 
