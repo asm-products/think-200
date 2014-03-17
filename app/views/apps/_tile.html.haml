@@ -1,47 +1,30 @@
-%div{class: "app-tile panel panel-" + status_class_for(app) }
+%div.panel.panel-default.app-tile
 
-  -# The App name
   .panel-heading
     .row
       .col-sm-10
-        %h3 
+        %h3.panel-title
           = app.name 
       .col-sm-2
-        %a.btn.btn-default.pull-right.btn-xs{href: new_requirement_path(app_id: app.id), role: 'button'}
-          = fa_icon 'fa-plus'
-        %a.btn.btn-default.pull-right.btn-xs{href: edit_app_path(app), role: 'button'}
-          = fa_icon 'fa-pencil'
+        .pull-right
+          = subtle_button(icon_class: 'fa-pencil', href: edit_app_path(app))
 
-  -# A table of the App's Requirements
-  .table-responsive
-    %table.table
-      %thead
-      %tbody
+  .panel-body
+    - app.requirements.each do |req| 
+      .row.requirement-row
+        .col-sm-10
+          %h4
+            = req
+            = subtle_button(icon_class: 'fa-plus', anchor_class: 'add-expectation',  href: new_expectation_path(requirement_id: req.id), tooltip: 'Add a new expectation')
+        .col-sm-2
+          .pull-right
+            = subtle_button(icon_class: 'fa-pencil', href: edit_requirement_path(req))
 
-        -# One row for the Requirement name
-        - app.requirements.each do |req| 
-          %tr
-            %th{colspan: "3", style: 'vertical-align: bottom'}
-              .row
-                .col-sm-10
-                  %h4
-                    = req
-                .col-sm-2
-                  %a.btn.btn-default.pull-right.btn-xs{href: new_expectation_path(requirement_id: req.id), role: 'button'}
-                    = fa_icon 'fa-plus'
-                  %a.btn.btn-default.pull-right.btn-xs{href: edit_requirement_path(req), role: 'button'}
-                    = fa_icon 'fa-pencil'
+      - req.expectations.each do |exp|
+        = render partial: 'apps/expectation', locals: {exp: exp}
 
-          -# Rows for the Expectations
-          - req.expectations.each do |exp|
-            %tr{class: 'text-'+status_class_for(exp)}
-              %td{style: "text-align: center; width: 1px; white-space: nowrap"}= fa_icon(exp.matcher.icon, 'fa-lg')
-              %td{style: 'width: 1px; white-space: nowrap'}
-                %strong= exp.subject
-              %td
-                %span.text-semi-muted
-                  should
-                = exp.matcher
-                %strong
-                  = exp.expected
-                  = link_to delete_icon, exp, method: :delete, role: 'button', class: 'btn btn-danger btn-xs pull-right'
+  // Button to create a new App
+  .panel-footer
+    - button_class = app.requirements.empty? ? 'primary' : 'default'
+    = button(icon_class: 'fa-plus', text: 'New Requirement', button_classes: 'btn-sm btn-'+button_class, href: new_requirement_path(app_id: app.id))
+

@@ -22,6 +22,10 @@ project_container = (p_id) ->
   return null
 
 
+add_tooltips = ->
+    $('a.add-expectation').tooltip()
+
+        
 # Make an entire project tile into a clickable button
 add_click_to_project_tiles = ->
     $('.project-tile .panel-body, .project-tile .panel-heading, .project-tile .panel-footer').click ->
@@ -92,6 +96,7 @@ update_project_page = (p_id) ->
       # Re-configure javascript events
       $("#project-page-#{p_id} abbr.timeago").timeago();
       add_click_to_test_buttons()
+      add_tooltips()
       )
 
 
@@ -151,6 +156,7 @@ add_click_to_test_buttons = ->
 ready = ->
     add_click_to_project_tiles()
     add_click_to_test_buttons()
+    add_tooltips()
 
     $('.project-tile').hover ->
       $(@).toggleClass( 'project-tile-active' )

@@ -1,9 +1,46 @@
 module ApplicationHelper
 
+  def feedback_link
+    '<a href="mailto:helpdesk@think200.com" class="alert-link feedback-link">Feedback</a>'.html_safe
+  end
+
+  def button(icon_class:, href: '#', text: nil, button_classes: 'btn-default')
+    label = fa_icon(icon_class)
+    label += " #{text}" unless text.blank?
+    "<button type=\"button\" class=\"btn #{button_classes}\" onclick=\"location.href='#{href}';\">#{label}</button>".html_safe
+  end
+
+
+  def subtle_button(icon_class:, href: '#', anchor_class: '', method: 'get', text: nil, button_classes: 'btn-default', tooltip: '')
+    if tooltip.blank?
+      link_to(
+              fa_icon(icon_class, 'fa-fw'), 
+              href, 
+              {
+                method: method,
+                class: 'subtle-button'
+              }
+              )
+    else 
+      link_to(
+              fa_icon(icon_class, 'fa-fw'), 
+              href, 
+              {
+                method: method,
+                class: "subtle-button #{anchor_class}",
+                title:  tooltip,
+                'data-toggle' => 'tooltip',
+              }
+              )
+    end
+  end
+
+
   def timeago(time, options = {})
     options[:class] ||= "timeago"
     content_tag(:abbr, time.to_s, options.merge(:title => time.getutc.iso8601)) if time
   end
+
 
   def dquo(content)
     "&ldquo;#{h content}&rdquo;".html_safe
@@ -66,7 +103,11 @@ module ApplicationHelper
   end
 
   def delete_icon
-    font_awesome 'trash-o'
+    font_awesome 'times'
+  end
+
+  def delete_icon_class
+    'fa-times'
   end
 
 

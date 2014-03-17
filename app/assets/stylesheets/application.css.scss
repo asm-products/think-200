@@ -5,13 +5,49 @@
  *= require 'prism'
  */
 @import "framework_and_overrides";
-// @import "bootstrap";
-@import "font-awesome";
 
 
 $content-bg-active: #ffffff;
-// $content-bg:        mix($body-bg, $content-bg-active, 15%);
 $content-bg: #ffffff;
+
+
+// A new contextual bg
+.bg-default {
+    background-color: #eeeeee;
+}
+
+
+//
+// Alerts and the Feedback Link
+// The feedback link is decorated
+// like this to differentate it
+// from the alert header styling.
+//
+.alert p:not(:first-child) {
+    padding-top: 1em;
+}
+
+a.feedback-link {
+    border-bottom: 1px dotted !important;
+}
+a.feedback-link:hover {
+    text-decoration: none;
+    border-bottom: 1px solid !important;
+}
+
+
+//
+// The Subtle Button
+//
+a.subtle-button {
+    color: #cccccc;
+}
+
+a.subtle-button:hover {
+    color: $link-hover-color;
+}
+
+
 
 .alert {
     margin-top: 1em;
@@ -45,6 +81,28 @@ ul {
 .panel-quiet {
     h3, .panel-body {
         color: #999999;
+    }
+}
+
+
+//
+// The App Tile
+//
+
+.app-tile {
+    margin-bottom: 3em;
+
+    h3 {
+	font-weight: normal;
+	font-size: 180%;
+    }
+
+    .expectation-row {
+	padding: 0.3em;
+    }
+
+    .requirement-row {
+	padding-top: 0.4em;
     }
 }
 
@@ -126,19 +184,6 @@ ul.text-menu {
     padding-left: 0;
     li {
 	padding-bottom: 0.5em;
-    }
-}
-
-.app-tile {
-    margin-bottom: 2em;
-
-    h3 {
-	margin: 0;
-    }
-    h4 {
-	margin: 0.75em 0 0 0;
-	font-weight: normal;
-	font-size: 160%;
     }
 }
 
