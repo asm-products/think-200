@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'debugger'
 
 describe Users::RegistrationsController, '#create' do
   let(:valid_create_params) do
