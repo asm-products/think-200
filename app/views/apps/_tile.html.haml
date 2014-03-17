@@ -13,7 +13,9 @@
     - app.requirements.each do |req| 
       .row.requirement-row
         .col-sm-10
-          %h4= req
+          %h4
+            = req
+            = subtle_button(icon_class: 'fa-share fa-rotate-90', href: new_expectation_path(requirement_id: req.id))
         .col-sm-2
           .pull-right
             = subtle_button(icon_class: 'fa-pencil', href: edit_requirement_path(req))
@@ -21,13 +23,8 @@
       - req.expectations.each do |exp|
         = render partial: 'apps/expectation', locals: {exp: exp}
 
-      // Button to create a new Expectation
-      //- button_class = req.expectations.empty? ? 'primary' : 'default'
-      //= button(icon_class: 'fa-plus', text: 'New Expectation', button_classes: 'btn-sm btn-'+button_class, href: new_expectation_path(requirement_id: req.id))
-    
-        
   // Button to create a new App
   .panel-footer
     - button_class = app.requirements.empty? ? 'primary' : 'default'
-    = button(icon_class: 'fa-plus', text: 'New Requirement', button_classes: 'btn-'+button_class, href: new_requirement_path(app_id: app.id))
+    = button(icon_class: 'fa-plus', text: 'New Requirement', button_classes: 'btn-sm btn-'+button_class, href: new_requirement_path(app_id: app.id))
 
