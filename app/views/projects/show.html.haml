@@ -13,7 +13,7 @@
     .col-sm-2
       %ul.nav.nav-pills
         %li
-          = link_to(render('projects/test_button', {project: @project, align: 'fa-fw'}) + ' Refresh', '#', {class: 'test-button', 'data-project-id' => @project.id})
+          = link_to(render('projects/test_button', {project: @project, align: 'fa-fw'}) + ' Run tests', '#', {class: 'test-button', 'data-project-id' => @project.id})
         %li= link_to font_awesome('pencil', 'fa-fw fa-lg')+' Edit project', edit_project_path(@project)
         %li= link_to font_awesome('cloud-download', 'fa-fw fa-lg') + ' Export', '#', {'data-toggle'=>"modal", 'data-target'=>".export-modal"}
 

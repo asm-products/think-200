@@ -1,10 +1,11 @@
-%div.panel.app-tile{class: 'panel-' + status_class_for(app)}
+%div.panel.app-tile.panel-default
 
   .panel-heading
     .row
       .col-sm-10
         %h3.panel-title
-          = app.name 
+          = app.name
+          = status_icon_for(app)
       .col-sm-2
         .pull-right
           = subtle_button(icon_class: 'fa-pencil', href: edit_app_path(app))
@@ -15,15 +16,14 @@
         .col-sm-10
           %h4
             = req
+            // Button to create a new Expectation
+            - is_primary = req.expectations.empty?
+            = subtle_button(is_primary: is_primary, icon_class: 'fa-plus', anchor_class: 'add-expectation',  href: new_expectation_path(requirement_id: req.id), tooltip: 'Add a new test')
         .col-sm-2
           .pull-right
             = subtle_button(icon_class: 'fa-pencil', href: edit_requirement_path(req))
       - req.expectations.each do |exp|
         = render partial: 'apps/expectation', locals: {exp: exp}
-      // Button to create a new Expectation
-      %p
-        - is_primary = req.expectations.empty?
-        = subtle_button(is_primary: is_primary, icon_class: 'fa-plus', anchor_class: 'add-expectation',  href: new_expectation_path(requirement_id: req.id), tooltip: 'Add a new expectation (test)')
 
 
   // Button to create a new App
