@@ -13,11 +13,15 @@
 
     <div class="field form-group">
       <%= f.label :name, 'Name' %>
-      <%= f.text_field :name, class: 'form-control focus-here' %>
+      <%= f.text_field :name, class: 'form-control focus-here', placeholder: 'Acme Corporation' %>
       <span class="help-block">
-        A collection of apps which should all be tested together. For example,
+        <i>E.g.,</i>
+        <strong>Acme Corporation</strong>,
+        <strong>Startup Project Zulu</strong>.
+        <br>
+        A collection of apps which should be tested together. For example,
         a “<%= APP_NAME %>” project would contain apps such as this web site as
-        well as its API service. It could also be the name of a client.
+        well as its API service. The project could also be the name of a client.
       </span>
     </div>
 
