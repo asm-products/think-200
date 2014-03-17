@@ -23,4 +23,18 @@ describe Project do
       expect(proj.passed?).to be nil
     end
   end
+
+  describe "#invalid?" do
+    it 'when the user is missing' do
+      proj = Project.create(name: 'LiquidSunshine.com')
+      expect(proj).to be_invalid
+    end
+
+    it 'when the user is present but invalid' do
+      invalid_user = User.create(username: 'Name With Spaces', email: 'valid@email.com', password: 'sekret')
+      proj = Project.create(name: 'LiquidSunshine.com', user: invalid_user)
+      expect(proj).to be_invalid
+      expect(proj.errors[:user]).to include('is invalid')
+    end
+  end
 end

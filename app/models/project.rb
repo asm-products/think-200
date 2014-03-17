@@ -24,6 +24,7 @@ class Project < ActiveRecord::Base
   has_many :spec_runs
 
   validates :user, presence: true
+  validates_associated :user
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user_id }
 

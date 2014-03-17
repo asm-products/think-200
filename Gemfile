@@ -30,6 +30,7 @@ end
 
 # development gems
 group :development, :test do
+  gem 'debugger'
   gem 'dotenv-rails'
   gem 'rails-erd'
   gem 'rspec-rails'
