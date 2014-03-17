@@ -30,5 +30,10 @@ describe User do
       user.username = 'x'*3
       expect(user).to be_invalid
     end
+
+    it 'when username includes a space' do
+      user.username = 'Inigo Montoya'
+      expect(user).to be_invalid
+    end
   end
 end
