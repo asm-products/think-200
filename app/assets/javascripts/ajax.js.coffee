@@ -96,6 +96,7 @@ update_project_page = (p_id) ->
       # Re-configure javascript events
       $("#project-page-#{p_id} abbr.timeago").timeago();
       add_click_to_test_buttons()
+      add_tooltips()
       )
 
 
