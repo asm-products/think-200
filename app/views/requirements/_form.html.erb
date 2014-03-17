@@ -14,11 +14,11 @@
     <div class="field form-group">
       <%= f.hidden_field :app_id %>
       <%= f.label :name, 'It...' %>
-      <%= f.text_field :name, class: 'form-control focus-here' %>
+      <%= f.text_field :name, class: 'form-control focus-here', placeholder: 'is online' %>
       <span class="help-block">
         <i>E.g.</i>,
-      	<strong><%= dquo 'is online' %></strong>, or
-      	<strong><%= dquo raw 'redirects to the new blog' %></strong>. This is the reason for the
+      	<strong>is online</strong>, or
+      	<strong>redirects to the new blog</strong>. This is the reason for the
         actual tests; a statement of a business need.
       </span>
     </div>
