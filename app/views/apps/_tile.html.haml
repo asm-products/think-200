@@ -7,7 +7,6 @@
           = app.name 
       .col-sm-2
         .pull-right
-          = subtle_button(icon_class: 'fa-plus', href: new_requirement_path(app_id: app.id))
           = subtle_button(icon_class: 'fa-pencil', href: edit_app_path(app))
 
   .panel-body
@@ -22,4 +21,9 @@
  
       - req.expectations.each do |exp|
         = render partial: 'apps/expectation', locals: {exp: exp}
+        
+  // Button to create a new app
+  .panel-footer
+    - button_class = app.requirements.empty? ? 'primary' : 'default'
+    = button(icon_class: 'fa-plus', text: 'New Requirement', button_classes: 'btn-sm btn-'+button_class, href: new_requirement_path(app_id: app.id))
 
