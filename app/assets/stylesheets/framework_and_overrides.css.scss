@@ -98,21 +98,21 @@ $caret-width-large: 5px;
 
 
 // Form states and alerts
-$state-success-text: #468847; 
-$state-success-bg: #e6f1d3; 
-$state-success-border: darken($state-success-bg, 5%); 
+/* $state-success-text: #468847;  */
+/* $state-success-bg: #e6f1d3;  */
+/* $state-success-border: darken($state-success-bg, 5%);  */
 
-$state-warning-text: #c09853;
-$state-warning-bg: #fcf8e3; 
-$state-warning-border: darken($state-warning-bg, 3%);
+/* $state-warning-text: #c09853; */
+/* $state-warning-bg: #fcf8e3;  */
+/* $state-warning-border: darken($state-warning-bg, 3%); */
 
-$state-danger-text: #b94a48; 
-$state-danger-bg: #fcd5d5; 
-$state-danger-border: darken($state-danger-bg, 3%); 
+/* $state-danger-text: #b94a48;  */
+/* $state-danger-bg: #fcd5d5;  */
+/* $state-danger-border: darken($state-danger-bg, 3%);  */
 
-$state-info-text: #3a87ad; 
-$state-info-bg: #d9edf7; 
-$state-info-border: darken($state-info-bg, 7%); 
+/* $state-info-text: #3a87ad;  */
+/* $state-info-bg: #d9edf7;  */
+/* $state-info-border: darken($state-info-bg, 7%);  */
 
 // // Alerts: Base styles
 // $alert-padding: 15px; 
@@ -261,39 +261,39 @@ $table-border-color: #dddddd;
 // $dropdown-link-active-bg: $component-active-bg; // Active dropdown menu entry background color
 // $dropdown-link-disabled-color: #dddddd; // Disabled dropdown menu entry background color
 
-// Panels and wells
-// -> Common panel styles
-$panel-bg: #ffffff; 
-$panel-inner-border: #dddddd; // Border color for elements within panels 
-$panel-border-radius: $border-radius-base; 
-$panel-footer-bg: #f5f5f5; 
-// -> Contextual panel colors
-// --> Default
-$panel-default-text: #373737; 
-$panel-default-border: #dddddd; 
-$panel-default-heading-bg: #f5f5f5; 
-// --> Primary
-$panel-primary-text: #ffffff; 
-$panel-primary-border: $brand-primary; 
-$panel-primary-heading-bg: $brand-primary; 
-// --> Success
-$panel-success-text: $state-success-text; 
-$panel-success-border: $state-success-border; 
-$panel-success-heading-bg: $state-success-bg; 
-// --> Info
-$panel-info-text: $state-info-text; 
-$panel-info-border: $state-info-border; 
-$panel-info-heading-bg: $state-info-bg; 
-// --> Warning
-$panel-warning-text: $state-warning-text; 
-$panel-warning-border: $state-warning-border; 
-$panel-warning-heading-bg: $state-warning-bg; 
-// --> Danger
-$panel-danger-text: $state-danger-text; 
-$panel-danger-border: $state-danger-border; 
-$panel-danger-heading-bg: $state-danger-bg; 
-// -> Wells
-$well-bg: #f5f5f5;
+/* // Panels and wells */
+/* // -> Common panel styles */
+/* $panel-bg: #ffffff;  */
+/* $panel-inner-border: #dddddd; // Border color for elements within panels  */
+/* $panel-border-radius: $border-radius-base;  */
+/* $panel-footer-bg: #f5f5f5;  */
+/* // -> Contextual panel colors */
+/* // --> Default */
+/* $panel-default-text: #373737;  */
+/* $panel-default-border: #dddddd;  */
+/* $panel-default-heading-bg: #f5f5f5;  */
+/* // --> Primary */
+/* $panel-primary-text: #ffffff;  */
+/* $panel-primary-border: $brand-primary;  */
+/* $panel-primary-heading-bg: $brand-primary;  */
+/* // --> Success */
+/* $panel-success-text: $state-success-text;  */
+/* $panel-success-border: $state-success-border;  */
+/* $panel-success-heading-bg: $state-success-bg;  */
+/* // --> Info */
+/* $panel-info-text: $state-info-text;  */
+/* $panel-info-border: $state-info-border;  */
+/* $panel-info-heading-bg: $state-info-bg;  */
+/* // --> Warning */
+/* $panel-warning-text: $state-warning-text;  */
+/* $panel-warning-border: $state-warning-border;  */
+/* $panel-warning-heading-bg: $state-warning-bg;  */
+/* // --> Danger */
+/* $panel-danger-text: $state-danger-text;  */
+/* $panel-danger-border: $state-danger-border;  */
+/* $panel-danger-heading-bg: $state-danger-bg;  */
+/* // -> Wells */
+/* $well-bg: #f5f5f5; */
 
 // Jumbotron
 $jumbotron-padding: 30px; 

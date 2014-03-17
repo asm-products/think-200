@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def feedback_link
+    '<a href="mailto:helpdesk@think200.com" class="alert-link feedback-link">Feedback</a>'.html_safe
+  end
+
   def button(icon_class:, href: '#', text: nil, button_classes: 'btn-default')
     label = fa_icon(icon_class)
     label += " #{text}" unless text.blank?

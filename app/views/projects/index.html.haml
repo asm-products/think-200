@@ -7,13 +7,21 @@
     %p= render 'layouts/server_status'
     %p= render 'layouts/progress_bar'
     %hr/
-    %small
-    %p
-      In beta: Projects are tested
-      once per day. Users can manually trigger tests as often
-      as desired.
-    %p
-      Premium accounts will receive continuous monitoring and extra dedicated queue workers.
+
+
+    .alert.alert-info
+      %p
+        %strong
+          In beta: 
+        Tests are running once per day. Run tests man&shy;ually as often
+        as you like.
+      %p
+        <strong>Premium accounts and open source projects</strong> will 
+        re&shy;ceive con&shy;tinuous moni&shy;toring and extra queue workers.
+      %p
+        = feedback_link
+
+
   .col-xs-10.col-sm-9.col-md-10.col-lg-10.cards
     %header
       %h1 All Projects

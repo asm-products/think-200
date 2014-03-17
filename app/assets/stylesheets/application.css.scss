@@ -17,6 +17,24 @@ $content-bg: #ffffff;
 }
 
 
+//
+// Alerts and the Feedback Link
+// The feedback link is decorated
+// like this to differentate it
+// from the alert header styling.
+//
+.alert p:not(:first-child) {
+    padding-top: 1em;
+}
+
+a.feedback-link {
+    border-bottom: 1px dotted !important;
+}
+a.feedback-link:hover {
+    text-decoration: none;
+    border-bottom: 1px solid !important;
+}
+
 
 //
 // The Subtle Button
