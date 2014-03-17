@@ -17,15 +17,17 @@
         <tr>
 
           <% if r.can_be_negated? %>
-            <td></td>
+            <td style="vertical-align: top; line-height: 120%; padding-right: 0.5em"><%= fa_icon('fa-warning') %></td>
             <td style="padding-bottom: 0.2em; line-height: 120%">
               <strong>
                 The <%= r.full_name_without_project_negated.downcase %>.
               </strong>
             </td>
           <% else %>
-            <td style="padding-bottom: 0.2em; line-height: 120%; vertical-align: top; padding-right: 0.5em;">Failed:</td>
-            <td style="padding-bottom: 0.2em; line-height: 120%"><strong><%= r.full_name_without_project %></strong></td>
+            <td style="padding-bottom: 0.2em; line-height: 120%; vertical-align: top; padding-right: 0.5em;">
+	      <%= fa_icon('fa-warning') %>
+	    </td>
+            <td style="padding-bottom: 0.2em; line-height: 120%">Failed: <strong><%= r.full_name_without_project %></strong></td>
           <% end %>
 
         </tr>
