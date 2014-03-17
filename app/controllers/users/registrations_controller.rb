@@ -7,6 +7,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def create
+    @user_input = session[:checkit_user_input]
     super
 
     if resource.valid?
