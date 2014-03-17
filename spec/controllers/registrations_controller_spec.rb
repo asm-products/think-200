@@ -43,5 +43,14 @@ describe Users::RegistrationsController, '#create' do
       expect(response).to render_template("new")
       expect(response.body).to match /Username can only contain letters and digits/m
     end
+
+    it 'presents the stored url' do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      bad_create_params = valid_create_params.dup
+      bad_create_params[:user][:username] = 'bad username has spaces'
+      post :create, valid_create_params.merge( user: {username: 'bad username has spaces'} ), session_with_stored_url
+      expect(response).to render_template("new")
+      expect(response.body).to match /#{session_with_stored_url[:checkit_user_input]}/
+    end
   end
 end
