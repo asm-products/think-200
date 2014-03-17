@@ -11,14 +11,16 @@ module ApplicationHelper
   end
 
 
-  def subtle_button(icon_class:, href: '#', anchor_class: '', method: 'get', text: nil, button_classes: 'btn-default', tooltip: '')
+  def subtle_button(is_primary: false, icon_class:, href: '#', anchor_class: '', method: 'get', text: nil, button_classes: 'btn-default', tooltip: '')
+    a_class = is_primary ? 'primary-subtle-button' : 'subtle-button'
+
     if tooltip.blank?
       link_to(
               fa_icon(icon_class, 'fa-fw'), 
               href, 
               {
                 method: method,
-                class: 'subtle-button'
+                class: a_class
               }
               )
     else 
@@ -27,7 +29,7 @@ module ApplicationHelper
               href, 
               {
                 method: method,
-                class: "subtle-button #{anchor_class}",
+                class: "#{a_class} #{anchor_class}",
                 title:  tooltip,
                 'data-toggle' => 'tooltip',
               }

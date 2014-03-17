@@ -15,7 +15,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       #   user's input: session[:checkit_user_input]
       #   user:         resource
       project     = Project.create!(name: 'First Project', user: resource)
-      app         = App.create!(name: 'Website', project: project)
+      app         = App.create!(name: 'website', project: project)
       requirement = Requirement.create!(name: 'is online', app: app)
       expectation = Expectation.create!(
                                         subject:     session[:checkit_user_input],

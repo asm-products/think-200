@@ -20,8 +20,10 @@
             = subtle_button(icon_class: 'fa-pencil', href: edit_requirement_path(req))
       - req.expectations.each do |exp|
         = render partial: 'apps/expectation', locals: {exp: exp}
+      // Button to create a new Expectation
       %p
-        = subtle_button(icon_class: 'fa-plus', anchor_class: 'add-expectation',  href: new_expectation_path(requirement_id: req.id), tooltip: 'Add a new expectation (test)')
+        - is_primary = req.expectations.empty?
+        = subtle_button(is_primary: is_primary, icon_class: 'fa-plus', anchor_class: 'add-expectation',  href: new_expectation_path(requirement_id: req.id), tooltip: 'Add a new expectation (test)')
 
 
   // Button to create a new App
