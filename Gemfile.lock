@@ -193,7 +193,7 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    rspec-webservice_matchers (1.4.3)
+    rspec-webservice_matchers (1.4.6)
       faraday
       faraday_middleware
       rspec (~> 2)
