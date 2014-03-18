@@ -75,7 +75,10 @@ end
   # Is blank if I passed, or if no message is coded for the
   # open source matcher.
   def actual_message
-    message = my_spec_run.exception_message_for(expectation: self)
+    spec_run = my_spec_run
+    return '' if spec_run.nil? # No tests run yet
+    
+    message = spec_run.exception_message_for(expectation: self)
 
     # Do some de-geekifying
     message.sub!(/^getaddrinfo: Name or service not known$/, 'Domain name not found')
