@@ -78,7 +78,8 @@ end
     message = my_spec_run.exception_message_for(expectation: self)
 
     # Do some de-geekifying
-    message.sub('getaddrinfo: Name or service not known', 'Domain name not found')
+    message.sub!(/^getaddrinfo: Name or service not known$/, 'Domain name not found')
+    message.sub(/^execution expired$/, 'Timed out')
   end
 
 
