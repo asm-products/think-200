@@ -37,6 +37,20 @@ class SpecRun < ActiveRecord::Base
     end
   end
 
+  def exception_message_for(expectation:)
+    # Only do this for the open source matchers which have
+    # implemented meaningful messages
+    unless MATCHERS_WITH_RELEVANT_MESSAGES.include? expectation.code
+      return ''
+    end
+
+    begin
+      raw_data[expectation.id][:examples][0][:exception][:message]
+    rescue
+      ''
+    end
+  end
+
   private
   STATUS_FAILED = 'failed'
 end

@@ -35,33 +35,27 @@ class Expectation < ActiveRecord::Base
   # false = failed
   # nil   = not tested
   def passed?
-    spec_run = self.requirement.app.project.most_recent_test
+    spec_run = my_spec_run
     return nil if spec_run.nil?
     spec_run.status?(expectation: self)
   end
 
-  def icon
-    if passed? == true
-      'fa-check'
-    elsif passed?.nil?
-      'fa-ellipsis-h'
-    else
-      'fa-warning'
-    end
-  end
 
   def to_s
     "#{subject} should #{matcher} #{expected}"
   end
+
 
   def to_rspec
     expected_text = expected.blank? ? '' : "'#{expected}'"
     "expect('#{subject}').to #{matcher.code} #{expected_text}\n"
   end
 
+
   def to_plaintext
     "Expectation: " + self.to_s + "\n"
   end
+
 
   def to_encapsulated_rspec
     <<-here
@@ -73,6 +67,27 @@ describe 'encapsulated' do
   end
 end
     here
+  end
+
+
+  # Return the message to display for the actual result,
+  # vs. the expected response.
+  # Is blank if I passed, or if no message is coded for the
+  # open source matcher.
+  def actual_message
+    my_spec_run.exception_message_for(expectation: self)
+  end
+
+
+  def code
+    matcher.code
+  end
+
+
+  private
+
+  def my_spec_run
+    self.requirement.app.project.most_recent_test
   end
 
 end
