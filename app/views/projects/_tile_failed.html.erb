@@ -17,7 +17,7 @@
         <tr>
 
           <% if r.can_be_negated? %>
-            <td style="vertical-align: top; line-height: 120%; padding-right: 0.5em"><%= fa_icon('fa-warning') %></td>
+            <td style="vertical-align: top; line-height: 120%; padding-right: 0.5em"><%= failed_icon %></td>
             <td style="padding-bottom: 0.2em; line-height: 120%">
               <strong>
                 The <%= r.full_name_without_project_negated.downcase %>.
@@ -25,7 +25,7 @@
             </td>
           <% else %>
             <td style="padding-bottom: 0.2em; line-height: 120%; vertical-align: top; padding-right: 0.5em;">
-	      <%= fa_icon('fa-warning') %>
+	      <%= failed_icon %>
 	    </td>
             <td style="padding-bottom: 0.2em; line-height: 120%">Failed: <strong><%= r.full_name_without_project %></strong></td>
           <% end %>
