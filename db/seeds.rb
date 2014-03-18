@@ -193,7 +193,7 @@ t200_site = App.create!(name: 'website', project: think_200)
 Requirement.create!(name: 'is online', app: t200_site)
 
 
-users_amount = 200
+users_amount = 10
 User.transaction do
   (1..users_amount).each do |i|
     u = User.new(
