@@ -9,3 +9,10 @@
   .col-sm-1
     .pull-right
       = subtle_button(icon_class: delete_icon_class, href: exp, method: :delete)
+
+- if ! exp.actual_message.blank?
+  .row
+    .col-sm-11
+      .actual-message-row
+        = status_icon_for(exp)
+        = exp.actual_message
