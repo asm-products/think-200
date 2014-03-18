@@ -60,14 +60,22 @@ module Think200
       # Prepare the rspec runner
       config = RSpec.configuration
       json_formatter = RSpec::Core::Formatters::JsonFormatter.new(config.out)
-      reporter =  RSpec::Core::Reporter.new(json_formatter)
+      reporter = RSpec::Core::Reporter.new(json_formatter)
       config.instance_variable_set(:@reporter, reporter)
 
       # Run the rspec
       RSpec::Core::Runner.run([file.path])
       file.unlink
-      collected_results[expectation.id] = json_formatter.output_hash
+      hash_structure = json_formatter.output_hash
+
+      # Clean up the data: Delete the backtrace if present
+      begin
+        hash_structure[:examples][0][:exception].delete(:backtrace)
+      rescue NoMethodError => e
+      end
+      collected_results[expectation.id] = hash_structure
     end
+
     proj.tested_at = Time.now  # Ugh. This is hackish code.
     proj.in_progress = false   # This too.
     proj.save!
