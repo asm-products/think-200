@@ -1,0 +1,64 @@
+require 'spec_helper'
+
+describe SpecRun do
+  let(:phoebe)  { User.create!(username: 'Phoebe', email: 'phoebe@att.com', password: 'password') }
+  let(:att)     { Project.create!(name: "Client - AT&T", user: phoebe) }
+  let(:all_passing) { SpecRun.create!(project: att, raw_data:
+                                      {
+                                        3=>
+                                        {
+                                          :examples=>
+                                          [{:description=>"does this rspec",
+                                             :full_description=>"encapsulated does this rspec",
+                                             :status=>"passed",
+                                             :file_path=>"/tmp/rspec20140316-17211-1u2gd68",
+                                             :line_number=>4}],
+                                          :summary=>
+                                          {
+                                            :duration=>0.024736337,
+                                            :example_count=>1,
+                                            :failure_count=>0,
+                                            :pending_count=>0
+                                          },
+                                          :summary_line=>"1 example, 0 failures"},
+                                        
+                                        1=>
+                                        {
+                                          :examples=>
+                                          [{:description=>"does this rspec",
+                                             :full_description=>"encapsulated does this rspec",
+                                             :status=>"passed",
+                                             :file_path=>"/tmp/rspec20140316-17211-1lxntyb",
+                                             :line_number=>4}],
+                                          :summary=>
+                                          {
+                                            :duration=>0.241699992,
+                                            :example_count=>1,
+                                            :failure_count=>0,
+                                            :pending_count=>0
+                                          },
+                                          :summary_line=>"1 example, 0 failures"
+                                        },
+
+                                        2=>
+                                        {:examples=>
+                                          [{:description=>"does this rspec",
+                                             :full_description=>"encapsulated does this rspec",
+                                             :status=>"passed",
+                                             :file_path=>"/tmp/rspec20140316-17211-lja33o",
+                                             :line_number=>4}],
+                                          :summary=>
+                                          {:duration=>0.013908195,
+                                            :example_count=>1,
+                                            :failure_count=>0,
+                                            :pending_count=>0},
+                                          :summary_line=>"1 example, 0 failures"}
+                                      }                                        
+                                      )}
+  
+  describe '#results' do
+    it 'returns keys with Expectation ids' do
+      expect(all_passing.results.keys.sort).to eq [1, 2, 3]
+    end
+  end
+end

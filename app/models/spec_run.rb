@@ -22,8 +22,14 @@ class SpecRun < ActiveRecord::Base
 
   SpecResult = Struct.new(:passed, :error_message, :duration)
   
-  # Return an array of SpecResults
+  # Return a hash of SpecResults, keyed by 
+  # Expectation id
   def results
+    result = {}
+    for e in raw_data.keys
+      result[e] = nil
+    end
+    result
   end
 
 
