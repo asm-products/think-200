@@ -1,6 +1,6 @@
 Fabricator(:user) do
-  username 'phoebe'
-  email 'phoebe@lclark.edu'
+  username { "user#{rand(1000000)}" }  # Couldn't get sequences to work
+  email    { "mailbox#{rand(1000000)}@example.com" }
   password 'password'
 end
 

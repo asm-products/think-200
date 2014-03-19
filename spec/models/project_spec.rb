@@ -1,24 +1,22 @@
 require 'spec_helper'
 
 describe Project do
-  let(:phoebe) { Fabricate(:user) }
-
   describe '#passed?' do
     it "is nil when the project is not finished" do
-      proj = Project.create!(name: "Client - AT&T", user: phoebe)
+      proj = Fabricate(:project)
       expect(proj.passed?).to be nil
 
-      api = App.create!(name: 'API', project: proj)
+      api = Fabricate(:app, project: proj)
       expect(proj.passed?).to be nil
 
-      is_online = Requirement.create!(name: 'is online', app: api)
+      is_online = Fabricate(:requirement, app: api)
       expect(proj.passed?).to be nil
     end
 
     it "is nil when the project's expecations are all untested" do
-      proj = Project.create!(name: "Client - AT&T", user: phoebe)
-      api = App.create!(name: 'API', project: proj)
-      is_online = Requirement.create!(name: 'is online', app: api)
+      proj = Fabricate(:project)
+      api =  Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
       Expectation.create!(
         subject:     'att.com',
         matcher:     Matcher.find_by_code('redirect_permanently_to'),
