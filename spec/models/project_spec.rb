@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Project do
-  let(:phoebe) {User.create!(username: 'Phoebe', email: 'phoebe@att.com', password: 'password')}
+  let(:phoebe) { Fabricate(:user) }
 
   describe '#passed?' do
     it "is nil when the project is not finished" do

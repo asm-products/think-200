@@ -35,6 +35,7 @@ group :development, :test do
   gem 'rails-erd'
   gem 'rspec-rails'
   gem 'rails_layout', '~> 0.5'  # Bootstrap 3 layout generator
+  gem 'fabrication'
 end
 
 group :development do
