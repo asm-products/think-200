@@ -19,19 +19,28 @@ class SpecRun < ActiveRecord::Base
   serialize :raw_data, Hash
   validates :raw_data, :project_id, presence: true
 
+  STATUS_FAILED = 'failed'
 
-  SpecResult = Struct.new(:passed, :error_message, :duration)
+  SpecResult = Struct.new("SpecResult", :success?, :error_message, :duration)
   
   # Return a hash of SpecResults, keyed by 
   # Expectation id
   def results
     result = {}
-    for e in raw_data.keys
-      result[e] = nil
+    raw_data.each_pair do |expectation_id, structure|
+      status   = (structure[:examples][0][:status] != STATUS_FAILED)
+      message  = status ? '' : structure[:examples][0][:exception][:message]
+      duration = structure[:summary][:duration]
+      result[expectation_id] = SpecResult.new(status, message, duration)
     end
     result
   end
 
+  def expectation_ids
+    results.keys.sort
+  end
+
+  
 
   def passed?
     statuses = raw_data.keys.map{ |k| raw_data[k][:examples][0][:status] }
@@ -58,6 +67,4 @@ class SpecRun < ActiveRecord::Base
     end
   end
 
-  private
-  STATUS_FAILED = 'failed'
 end
