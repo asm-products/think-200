@@ -20,6 +20,13 @@ class SpecRun < ActiveRecord::Base
   validates :raw_data, :project_id, presence: true
 
 
+  SpecResult = Struct.new(:passed, :error_message, :duration)
+  
+  # Return an array of SpecResults
+  def results
+  end
+
+
   def passed?
     statuses = raw_data.keys.map{ |k| raw_data[k][:examples][0][:status] }
     !statuses.include? STATUS_FAILED
