@@ -4,7 +4,7 @@ describe Project do
   let(:phoebe) {User.create!(username: 'Phoebe', email: 'phoebe@att.com', password: 'password')}
 
   describe '#passed?' do
-    it "is nil when the project is not finished or is untested" do
+    it "is nil when the project is not finished" do
       proj = Project.create!(name: "Client - AT&T", user: phoebe)
       expect(proj.passed?).to be nil
 
@@ -13,15 +13,29 @@ describe Project do
 
       is_online = Requirement.create!(name: 'is online', app: api)
       expect(proj.passed?).to be nil
+    end
 
-      redirect1 = Expectation.create!(
+    it "is nil when the project's expecations are all untested" do
+      proj = Project.create!(name: "Client - AT&T", user: phoebe)
+      api = App.create!(name: 'API', project: proj)
+      is_online = Requirement.create!(name: 'is online', app: api)
+      Expectation.create!(
         subject:     'att.com',
         matcher:     Matcher.find_by_code('redirect_permanently_to'),
         expected:    'att.com/',
         requirement: is_online
       )
+      Expectation.create!(
+        subject:     'sprint.com',
+        matcher:     Matcher.find_by_code('redirect_permanently_to'),
+        expected:    'www.sprint.com',
+        requirement: is_online
+      )
       expect(proj.passed?).to be nil
     end
+
+    it 'is true when all expectations have been tested and passed' 
+    it 'is false if any expectation failed a test'
   end
 
   describe "#invalid?" do
