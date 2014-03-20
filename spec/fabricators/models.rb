@@ -18,3 +18,9 @@ Fabricator(:requirement) do
   name 'is online'
   app
 end
+
+Fabricator(:expectation) do
+  subject     Faker::Internet.domain_name
+  matcher     Matcher.find_by_code('be_up')
+  requirement
+end

@@ -14,27 +14,17 @@ describe Project do
     end
 
     it "is nil when the project's expecations are all untested" do
-      proj = Fabricate(:project)
-      api =  Fabricate(:app, project: proj)
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
       is_online = Fabricate(:requirement, app: api)
-      Expectation.create!(
-        subject:     'att.com',
-        matcher:     Matcher.find_by_code('redirect_permanently_to'),
-        expected:    'att.com/',
-        requirement: is_online
-      )
-      Expectation.create!(
-        subject:     'sprint.com',
-        matcher:     Matcher.find_by_code('redirect_permanently_to'),
-        expected:    'www.sprint.com',
-        requirement: is_online
-      )
+      (1..5).each { Fabricate(:expectation, requirement: is_online) }
       expect(proj.passed?).to be nil
     end
 
     it 'is true when all expectations have been tested and passed' 
     it 'is false if any expectation failed a test'
   end
+
 
   describe "#invalid?" do
     it 'when the user is missing' do
