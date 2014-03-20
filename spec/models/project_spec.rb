@@ -21,7 +21,7 @@ describe Project do
       expect(proj.passed?).to be nil
     end
 
-    it 'is true when all expectations have been tested and passed' 
+    it 'is true when all expectations have been tested and passed'
     it 'is false if any expectation failed a test'
   end
 
