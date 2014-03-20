@@ -42,6 +42,18 @@ describe Project do
       proj.passed?.should be_false
     end
 
+    it 'is false if the tests are a mix of pass and fail, and untested expectations' do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      # Untested: No SpecRun data for it in models.rb
+      Fabricate(:expectation, id: 444, requirement: is_online)
+      spec_run = Fabricate(:spec_run_mixed_results, project: proj)
+
+      proj.passed?.should be_false
+    end
+
     it 'is true when all expectations have been tested and passed' do
       proj      = Fabricate(:project)
       api       = Fabricate(:app, project: proj)
