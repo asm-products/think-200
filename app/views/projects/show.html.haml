@@ -19,12 +19,12 @@
 
     .col-sm-8
       %h2.cards Apps
-      - @project.apps.each do |app|
+      - @apps.each do |app|
         = render 'apps/tile', { app: app }
 
       // Button to create a new app
       // Using the new "Garden-Path" UX strategy
-      - button_class = @project.apps.empty? ? 'primary' : 'default'
+      - button_class = @apps.empty? ? 'primary' : 'default'
       = button(icon_class: 'fa-plus', text: 'New App', button_classes: 'btn-'+button_class, href: new_app_path(project_id: @project.id))
 
     .col-sm-2

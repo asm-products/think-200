@@ -33,9 +33,6 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @projects = current_user.projects.order(:name)
-    @passed_projects =     @projects.select{ |p| p.passed? }
-    @failed_projects =     @projects.select{ |p| p.passed? == false }
-    @unfinished_projects = @projects.select{ |p| p.passed?.nil? }
     @api_query = 'queue_status'
   end
 
@@ -43,6 +40,7 @@ class ProjectsController < ApplicationController
     # TODO: append the project id to this query to allow the 
     #       server to return info about just one project
     @api_query = 'queue_status'
+    @apps = @project.apps.includes(requirements: [:expectations])
   end
 
   # GET /projects/new

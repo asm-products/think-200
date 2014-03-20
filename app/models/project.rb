@@ -77,7 +77,7 @@ class Project < ActiveRecord::Base
     end
 
     def most_recent_test
-      spec_runs.order('created_at DESC').first
+      @most_recent_test ||= spec_runs.order('created_at DESC').first
     end
 
 
@@ -85,15 +85,13 @@ class Project < ActiveRecord::Base
     # false = failed
     # nil   = untested, at least in part
     def passed?
-      my_test = most_recent_test
-      return nil if my_test.nil?
+      return nil if most_recent_test.nil?
 
-      results = my_test.results
+      results = most_recent_test.results
       return false if results.values.map{|r| r.success? }.include?(false)
 
       # If tested expectations are a superset of current ones
-      current_expectations = self.expectations.pluck(:id).to_set
-      if my_test.expectation_ids.to_set.superset?(current_expectations)
+      if most_recent_test.expectation_ids.to_set.superset?(expectation_ids)
         # Assert: there are no failed results; we already checked.
         # So therefore, we know that the remaining are successful.
         return true
@@ -103,11 +101,15 @@ class Project < ActiveRecord::Base
       end
     end
 
+    def expectation_ids
+      @expectation_ids ||= expectations.pluck(:id).to_set
+    end
+
 
     # True if not runnable; the user needs to
     # add expectations.
     def incomplete?
-      expectations.empty?
+      expectation_ids.empty?
     end
 
     def runnable?

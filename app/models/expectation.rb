@@ -110,7 +110,7 @@ end
   private
 
   def my_spec_run
-    self.requirement.app.project.most_recent_test
+    project.most_recent_test
   end
 
 end
