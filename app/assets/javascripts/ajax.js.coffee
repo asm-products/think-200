@@ -130,12 +130,15 @@ do_poll = ->
 
       .fail( ->
         unless $("#server-status").hasClass('fa-ban')
-          $("#server-status").removeClass().addClass("fa fa-fw fa-ban failed-icon")
-        console.debug('fail'))
+          $("#server-status").removeClass().addClass("fa fa-fw fa-ban failed-icon"))
         
-      .always( -> 
-        window.think200_is_polling = true
-        setTimeout(do_poll, POLL_FREQUENCY))
+      .always( (jqxhr) -> 
+        if jqxhr.status == 422
+          # console.debug("Got 422: not logged in, and so not polling")
+          delete window.think200_is_polling
+        else
+          window.think200_is_polling = true
+          setTimeout(do_poll, POLL_FREQUENCY))
 
   else
     delete window.think200_is_polling
