@@ -51,6 +51,18 @@ describe Project do
 
       proj.passed?.should be_true
     end
+
+    it 'is nil when all tested expectations have passed but some are untested' do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      [111, 222, 333].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      # Untested: No SpecRun data for it in models.rb
+      Fabricate(:expectation, id: 444, requirement: is_online)
+      spec_run = Fabricate(:spec_run_all_passed, project: proj)
+
+      proj.passed?.should be_nil
+    end
   end
 
 
