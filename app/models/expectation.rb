@@ -27,6 +27,14 @@ class Expectation < ActiveRecord::Base
     self.project = self.requirement.project
   end
 
+  def project
+    if self[:project].nil?
+      requirement.project
+    else
+      self[:project]
+    end
+  end
+
 
 
   # Following the Law of Demeter:
