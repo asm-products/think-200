@@ -20,14 +20,13 @@ class Project < ActiveRecord::Base
 
   # Convenience functions
   has_many :requirements, through: :apps
-  has_many :expectations, through: :requirements
+  has_many :expectations
   has_many :spec_runs
 
   validates :user, presence: true
   validates_associated :user
   validates :name, presence: true
   validates :name, uniqueness: { scope: :user_id }
-
 
   def queue_for_testing
     unless incomplete?
@@ -95,7 +94,7 @@ class Project < ActiveRecord::Base
       # If tested expectations are a superset of current ones
       current_expectations = self.expectations.pluck(:id).to_set
       if my_test.expectation_ids.to_set.superset?(current_expectations)
-        # Assert: there are no failed results; we already checked. 
+        # Assert: there are no failed results; we already checked.
         # So therefore, we know that the remaining are successful.
         return true
       else
