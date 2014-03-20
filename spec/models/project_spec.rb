@@ -18,15 +18,26 @@ describe Project do
       api       = Fabricate(:app, project: proj)
       is_online = Fabricate(:requirement, app: api)
       (1..5).each { Fabricate(:expectation, requirement: is_online) }
+      # No spec runs
       expect(proj.passed?).to be nil
     end
 
-    it 'is false if any expectation failed a test' do
+    it 'is false if all tests failed' do
       proj      = Fabricate(:project)
       api       = Fabricate(:app, project: proj)
       is_online = Fabricate(:requirement, app: api)
       Fabricate(:expectation, id: 888, requirement: is_online)
       spec_run = Fabricate(:spec_run_all_failed)
+
+      proj.passed?.should be_false
+    end
+
+    it 'is false if the tests are a mix of pass and fail' do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      spec_run = Fabricate(:spec_run_mixed_results)
 
       proj.passed?.should be_false
     end

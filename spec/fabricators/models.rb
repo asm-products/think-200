@@ -49,7 +49,7 @@ failed_examples = { 888 => {
                     }
 
 passed_examples = {
-  3=>
+  333=>
   {
     :examples=>
     [{:description=>"does this rspec",
@@ -66,7 +66,7 @@ passed_examples = {
     },
   :summary_line=>"1 example, 0 failures"},
 
-  1=>
+  111=>
   {
     :examples=>
     [{:description=>"does this rspec",
@@ -84,7 +84,7 @@ passed_examples = {
     :summary_line=>"1 example, 0 failures"
   },
 
-  2=>
+  222=>
   {:examples=>
    [{:description=>"does this rspec",
      :full_description=>"encapsulated does this rspec",
@@ -99,6 +99,7 @@ passed_examples = {
    :summary_line=>"1 example, 0 failures"}
 }
 
+
 Fabricator(:spec_run_all_failed, from: :spec_run) do
   raw_data { failed_examples }
   project
@@ -106,5 +107,10 @@ end
 
 Fabricator(:spec_run_all_passed, from: :spec_run) do
   raw_data { passed_examples }
+  project
+end
+
+Fabricator(:spec_run_mixed_results, from: :spec_run) do
+  raw_data { passed_examples.merge(failed_examples) }
   project
 end
