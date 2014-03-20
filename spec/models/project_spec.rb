@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: projects
+#
+#  created_at  :datetime
+#  id          :integer          not null, primary key
+#  in_progress :boolean
+#  name        :string(255)
+#  notes       :text
+#  tested_at   :datetime
+#  updated_at  :datetime
+#  user_id     :integer
+#
+
 require 'spec_helper'
 
 describe Project do

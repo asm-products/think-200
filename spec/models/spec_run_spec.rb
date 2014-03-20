@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: spec_runs
+#
+#  created_at :datetime
+#  id         :integer          not null, primary key
+#  manual     :boolean
+#  project_id :integer
+#  raw_data   :text
+#  updated_at :datetime
+#
+# Indexes
+#
+#  index_spec_runs_on_project_id  (project_id)
+#
+
 require 'spec_helper'
 
 describe SpecRun do  

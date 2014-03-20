@@ -6,20 +6,28 @@
 #  expected       :string(255)
 #  id             :integer          not null, primary key
 #  matcher_id     :integer          not null
+#  project_id     :integer
 #  requirement_id :integer          not null
 #  subject        :string(255)      not null
 #  updated_at     :datetime
 #
 
+# Very important: Expectations are immutable. 
+# In the future, if we allow users to "edit" an expectation, then
+# we must actually create a new instance in the old one's place.
+# This immutability allows for many optimizations.
 class Expectation < ActiveRecord::Base
   belongs_to :matcher
   belongs_to :requirement
-  validates :matcher, :requirement, :subject, presence: true
+  belongs_to :project
+  validates  :project, :matcher, :requirement, :subject, presence: true
 
-
-  def project
-    requirement.project
+  # Set the redundant project attribute automatically
+  before_validation(on: :create) do
+    self.project = self.requirement.project
   end
+
+
 
   # Following the Law of Demeter:
   def type_icon
