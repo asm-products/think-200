@@ -37,12 +37,20 @@ describe Project do
       api       = Fabricate(:app, project: proj)
       is_online = Fabricate(:requirement, app: api)
       [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
-      spec_run = Fabricate(:spec_run_mixed_results)
+      spec_run = Fabricate(:spec_run_mixed_results, project: proj)
 
       proj.passed?.should be_false
     end
 
-    it 'is true when all expectations have been tested and passed'
+    it 'is true when all expectations have been tested and passed' do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      [111, 222, 333].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      spec_run = Fabricate(:spec_run_all_passed, project: proj)
+
+      proj.passed?.should be_true
+    end
   end
 
 
