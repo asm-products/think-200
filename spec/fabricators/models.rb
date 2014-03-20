@@ -25,7 +25,7 @@ Fabricator(:expectation) do
   requirement
 end
 
-failed_examples = { 8 => {
+failed_examples = { 888 => {
                       :examples=>
                       [
                         {:description=>"does this rspec",

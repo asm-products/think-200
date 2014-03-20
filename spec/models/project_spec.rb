@@ -21,8 +21,17 @@ describe Project do
       expect(proj.passed?).to be nil
     end
 
+    it 'is false if any expectation failed a test' do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      Fabricate(:expectation, id: 888, requirement: is_online)
+      spec_run = Fabricate(:spec_run_all_failed)
+
+      proj.passed?.should be_false
+    end
+
     it 'is true when all expectations have been tested and passed'
-    it 'is false if any expectation failed a test'
   end
 
 
