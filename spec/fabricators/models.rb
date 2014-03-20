@@ -48,8 +48,63 @@ failed_examples = { 8 => {
                     }
                     }
 
+passed_examples = {
+  3=>
+  {
+    :examples=>
+    [{:description=>"does this rspec",
+      :full_description=>"encapsulated does this rspec",
+      :status=>"passed",
+      :file_path=>"/tmp/rspec20140316-17211-1u2gd68",
+      :line_number=>4}],
+    :summary=>
+    {
+      :duration=>0.024736337,
+      :example_count=>1,
+      :failure_count=>0,
+      :pending_count=>0
+    },
+  :summary_line=>"1 example, 0 failures"},
+
+  1=>
+  {
+    :examples=>
+    [{:description=>"does this rspec",
+      :full_description=>"encapsulated does this rspec",
+      :status=>"passed",
+      :file_path=>"/tmp/rspec20140316-17211-1lxntyb",
+      :line_number=>4}],
+    :summary=>
+    {
+      :duration=>0.241699992,
+      :example_count=>1,
+      :failure_count=>0,
+      :pending_count=>0
+    },
+    :summary_line=>"1 example, 0 failures"
+  },
+
+  2=>
+  {:examples=>
+   [{:description=>"does this rspec",
+     :full_description=>"encapsulated does this rspec",
+     :status=>"passed",
+     :file_path=>"/tmp/rspec20140316-17211-lja33o",
+     :line_number=>4}],
+   :summary=>
+   {:duration=>0.013908195,
+    :example_count=>1,
+    :failure_count=>0,
+    :pending_count=>0},
+   :summary_line=>"1 example, 0 failures"}
+}
 
 Fabricator(:spec_run_all_failed, from: :spec_run) do
   raw_data { failed_examples }
+  project
+end
+
+Fabricator(:spec_run_all_passed, from: :spec_run) do
+  raw_data { passed_examples }
   project
 end
