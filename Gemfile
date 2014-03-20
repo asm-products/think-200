@@ -28,16 +28,15 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# development gems
 group :development, :test do
   gem 'debugger'
   gem 'dotenv-rails'
-  gem 'rails-erd'
   gem 'rspec-rails'
   gem 'rails_layout', '~> 0.5'  # Bootstrap 3 layout generator
 end
 
 group :development do
+  gem 'rails-erd'
   gem 'quiet_assets'
   gem 'capistrano', '~> 3.1.0'
   gem 'capistrano-rails'
@@ -45,6 +44,11 @@ group :development do
   gem 'capistrano-bundler'
   gem "better_errors"
   gem "binding_of_caller"
+end
+
+group :test do
+  gem 'fabrication'
+  gem 'faker'
 end
 
 # Paging

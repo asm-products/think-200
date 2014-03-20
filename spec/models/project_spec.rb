@@ -1,28 +1,82 @@
 require 'spec_helper'
 
 describe Project do
-  let(:phoebe) {User.create!(username: 'Phoebe', email: 'phoebe@att.com', password: 'password')}
-
   describe '#passed?' do
-    it "is nil when the project is not finished or is untested" do
-      proj = Project.create!(name: "Client - AT&T", user: phoebe)
+    it "is nil when the project is not finished" do
+      proj = Fabricate(:project)
       expect(proj.passed?).to be nil
 
-      api = App.create!(name: 'API', project: proj)
+      api = Fabricate(:app, project: proj)
       expect(proj.passed?).to be nil
 
-      is_online = Requirement.create!(name: 'is online', app: api)
-      expect(proj.passed?).to be nil
-
-      redirect1 = Expectation.create!(
-        subject:     'att.com',
-        matcher:     Matcher.find_by_code('redirect_permanently_to'),
-        expected:    'att.com/',
-        requirement: is_online
-      )
+      is_online = Fabricate(:requirement, app: api)
       expect(proj.passed?).to be nil
     end
+
+    it "is nil when the project's expecations are all untested" do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      (1..5).each { Fabricate(:expectation, requirement: is_online) }
+      # No spec runs
+      expect(proj.passed?).to be nil
+    end
+
+    it 'is false if all tests failed' do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      Fabricate(:expectation, id: 888, requirement: is_online)
+      spec_run = Fabricate(:spec_run_all_failed)
+
+      proj.passed?.should be_false
+    end
+
+    it 'is false if the tests are a mix of pass and fail' do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      spec_run = Fabricate(:spec_run_mixed_results, project: proj)
+
+      proj.passed?.should be_false
+    end
+
+    it 'is false if the tests are a mix of pass and fail, and untested expectations' do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      # Untested: No SpecRun data for it in models.rb
+      Fabricate(:expectation, id: 444, requirement: is_online)
+      spec_run = Fabricate(:spec_run_mixed_results, project: proj)
+
+      proj.passed?.should be_false
+    end
+
+    it 'is true when all expectations have been tested and passed' do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      [111, 222, 333].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      spec_run = Fabricate(:spec_run_all_passed, project: proj)
+
+      proj.passed?.should be_true
+    end
+
+    it 'is nil when all tested expectations have passed but some are untested' do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      [111, 222, 333].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      # Untested: No SpecRun data for it in models.rb
+      Fabricate(:expectation, id: 444, requirement: is_online)
+      spec_run = Fabricate(:spec_run_all_passed, project: proj)
+
+      proj.passed?.should be_nil
+    end
   end
+
 
   describe "#invalid?" do
     it 'when the user is missing' do
