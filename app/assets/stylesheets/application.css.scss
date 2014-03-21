@@ -207,3 +207,10 @@ ul.text-menu {
 .test-button:hover {
     color: $link-color;
 }
+
+// Disable the abbr styling for timeago
+abbr.timeago[title],
+abbr.timeago[data-original-title] {
+  cursor: inherit;
+  border-bottom: none;
+}
