@@ -1,4 +1,6 @@
-POLL_FREQUENCY = 5000  # milliseconds
+# Milliseconds
+POLL_FREQUENCY = 5000         # When "nothing special is happening"
+POLL_FREQUENCY_ACTIVE = 1000  # When tests are queued and working
 
 # Helper functions ###########################
 element_exists = (selector) ->
@@ -68,7 +70,7 @@ set_progress_bar = (percent) ->
     container.fadeIn(1000)
 
 progress_bar_is_active = ->
-  progress_bar_container.css("opacity") == 0
+  progress_bar_container().css("display") != 'none'
 
 
 # True if the project has been updated on the server, and the
@@ -148,7 +150,8 @@ do_poll = ->
           delete window.think200_is_polling
         else
           window.think200_is_polling = true
-          setTimeout(do_poll, POLL_FREQUENCY))
+          frequency = if progress_bar_is_active() then POLL_FREQUENCY_ACTIVE else POLL_FREQUENCY
+          setTimeout(do_poll, frequency))
 
   else
     delete window.think200_is_polling
