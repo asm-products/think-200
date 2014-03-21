@@ -39,7 +39,10 @@ class AjaxController < ApplicationController
   end
 
   def project_page
+    # TODO: Remove duplication between here and ProjectsController
     @project = current_user.projects.find params[:project_id]
+    @api_query = 'queue_status'
+    @apps = @project.apps.includes(requirements: [:expectations])
     render 'projects/show', layout: nil    
   end
 
