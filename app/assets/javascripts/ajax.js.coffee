@@ -47,9 +47,16 @@ set_icon = (project_id, is_working) ->
     button.removeClass(spin)
 
 
+#
+# PROGRESS BAR
+#
+
+progress_bar_container = ->
+  $('#progress-bar-container')
+
 set_progress_bar = (percent) ->
   bar       = $('#progress-bar')
-  container = $('#progress-bar-container')
+  container = progress_bar_container()
   
   if percent < 15  # Even if it's zero, we want to see some 
     percent = 15   # indication of activity
@@ -59,6 +66,9 @@ set_progress_bar = (percent) ->
     container.fadeOut(1300)
   else
     container.fadeIn(1000)
+
+progress_bar_is_active = ->
+  progress_bar_container.css("opacity") == 0
 
 
 # True if the project has been updated on the server, and the
