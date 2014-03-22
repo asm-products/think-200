@@ -35,6 +35,7 @@ class AjaxController < ApplicationController
   def project_tile
     @project = current_user.projects.find params[:project_id]
     @no_cols = true
+    @spin    = true
     render partial: 'projects/tile', layout: nil, locals: {tile: @project}
   end
 

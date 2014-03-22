@@ -10,6 +10,11 @@
 $content-bg-active: #ffffff;
 $content-bg: #ffffff;
 
+$tile-glow-shadow-color: $link-color;
+$tile-normal-shadow-color: #ccc;
+
+
+
 
 // A new contextual bg
 .bg-default {
@@ -121,12 +126,21 @@ ul {
     }
 }
 
+
+//
+// The Project Tile
+//
+
 .project-tile, .app-tile {
-    box-shadow: 0 0 4px 0px #ccc;
+    box-shadow: 0 0 4px 0px $tile-normal-shadow-color;
     background-color: $content-bg;
     table {
         background-color: inherit;        
     }
+}
+
+.glow {
+    box-shadow: 0 0 6px 2px $tile-glow-shadow-color !important;
 }
 
 .project-tile {
