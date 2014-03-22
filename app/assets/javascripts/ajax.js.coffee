@@ -9,6 +9,14 @@ element_exists = (selector) ->
 debug_json = (json) ->
   console.debug(JSON.stringify(json, undefined, 2))
 
+glow_effect = (selector) ->
+  console.debug("Making #{selector} glow...")
+  orig_bg_color = $(selector).css('background-color')
+  $(selector).animate({backgroundColor: "#5bc0de"}, 1)
+    .animate({ 'background-color': 'white' }, 1000)
+  # Works:
+  # $(selector).hide('slow')
+  # $(selector).effect('bounce')
 
 
 # Return the element representing the given project
@@ -94,6 +102,7 @@ update_project_tile = (p_id) ->
       $("#project-tile-#{p_id}").hover ->   # TODO: do with CSS only
         $(@).toggleClass( 'project-tile-active' )
       add_click_to_project_tiles()
+      glow_effect("#project-tile-#{p_id}")
       )
 
 
