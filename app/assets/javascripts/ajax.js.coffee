@@ -39,6 +39,18 @@ add_click_to_project_tiles = ->
       window.location = $(@).parent().data('url')  
 
 
+add_click_to_test_buttons = ->
+  $('.test-button:not(.bound)').addClass('bound').click (e) ->
+    e.stopPropagation()
+    $('body').focus()
+    prefix  = $('#path-prefix').data('path-prefix')
+    proj_id = $(@).data('project-id')
+    url     = prefix + "/retest_project/#{proj_id}"
+    set_icon(proj_id, 'true')
+    set_progress_bar(0)
+    $.post(url)
+
+
 # Set the spinning / non-spinning state of the project
 # refresh button
 set_icon = (project_id, is_working) ->
@@ -160,18 +172,6 @@ do_poll = ->
 
   else
     delete window.think200_is_polling
-
-
-add_click_to_test_buttons = ->
-  $('.test-button').click (e) ->
-    e.stopPropagation()
-    $('body').focus()
-    prefix  = $('#path-prefix').data('path-prefix')
-    proj_id = $(@).data('project-id')
-    url     = prefix + "/retest_project/#{proj_id}"
-    set_icon(proj_id, 'true')
-    set_progress_bar(0)
-    $.post(url)
 
 
 ready = ->
