@@ -10,14 +10,14 @@
             Not yet tested
 
   .row
-    .col-sm-2
+    .col-sm-3.col-lg-2
       %ul.nav.nav-pills
         %li
           = link_to(render('projects/test_button', {project: @project, align: 'fa-fw'}) + ' Run tests', '#', {class: 'test-button', 'data-project-id' => @project.id})
         %li= link_to font_awesome('pencil', 'fa-fw fa-lg')+' Edit project', edit_project_path(@project)
         %li= link_to font_awesome('cloud-download', 'fa-fw fa-lg') + ' Export', '#', {'data-toggle'=>"modal", 'data-target'=>".export-modal"}
 
-    .col-sm-8
+    .col-sm-7.col-lg-8
       %h2.cards Apps
       - @apps.each do |app|
         = render 'apps/tile', { app: app }
@@ -27,5 +27,5 @@
       - button_class = @apps.empty? ? 'primary' : 'default'
       = button(icon_class: 'fa-plus', text: 'New App', button_classes: 'btn-'+button_class, href: new_app_path(project_id: @project.id))
 
-    .col-sm-2
+    .col-sm-2.col-lg-2
       = render 'layouts/activity'
