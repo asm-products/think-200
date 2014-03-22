@@ -10,13 +10,7 @@ debug_json = (json) ->
   console.debug(JSON.stringify(json, undefined, 2))
 
 glow_effect = (selector) ->
-  console.debug("Making #{selector} glow...")
-  orig_bg_color = $(selector).css('background-color')
-  $(selector).animate({backgroundColor: "#5bc0de"}, 1)
-    .animate({ 'background-color': 'white' }, 1000)
-  # Works:
-  # $(selector).hide('slow')
-  # $(selector).effect('bounce')
+  $( selector ).animate({ boxShadow : "0 0 7px 1px #428bca" }, 1).animate({ boxShadow : "0 0 4px 0px #ccc" }, 500)
 
 
 # Return the element representing the given project
@@ -91,7 +85,6 @@ project_is_updated = (p_id, tested_at) ->
 
 update_project_tile = (p_id) ->
   return if ! element_exists("#project-tile-#{p_id}")
-  console.debug("Updating project tile #{p_id}...")
   prefix   = $('#path-prefix').data('path-prefix')
   tile_url = prefix + '/ajax/' + "project_tile?project_id=#{p_id}"
   $.get(tile_url)
@@ -102,13 +95,14 @@ update_project_tile = (p_id) ->
       $("#project-tile-#{p_id}").hover ->   # TODO: do with CSS only
         $(@).toggleClass( 'project-tile-active' )
       add_click_to_project_tiles()
+      add_click_to_test_buttons()
       glow_effect("#project-tile-#{p_id}")
+      set_icon(p_id, false)
       )
 
 
 update_project_page = (p_id) ->
   return if ! element_exists("#project-page-#{p_id}")
-  console.debug("Updating project page #{p_id}...")
   prefix   = $('#path-prefix').data('path-prefix')
   tile_url = prefix + '/ajax/' + "project_page?project_id=#{p_id}"
   $.get(tile_url)
@@ -135,13 +129,14 @@ do_poll = ->
         unless $("#server-status").hasClass('fa-signal')
           $("#server-status").removeClass().addClass("fa fa-fw fa-signal")
         set_progress_bar(data.percent_complete)
-        set_icon(p, data.projects[p].queued) for p of data.projects
+        for p_id, proj of data.projects
+          if proj.queued == 'true'
+            set_icon(p_id, 'true') 
 
         # Update project tiles which have changed on the server
         # based on the difference in timestamps
         for p_id, proj of data.projects
           if proj.queued == 'false' and project_is_updated(p_id, proj.tested_at)
-            console.debug("Trying to update project #{p_id}")
             # Update whichever works:
             update_project_tile(p_id)
             update_project_page(p_id)
@@ -155,7 +150,6 @@ do_poll = ->
         
       .always( (jqxhr) -> 
         if jqxhr.status == 422
-          # console.debug("Got 422: not logged in, and so not polling")
           delete window.think200_is_polling
         else
           window.think200_is_polling = true
@@ -185,16 +179,6 @@ ready = ->
 
     $('.project-tile').hover ->
       $(@).toggleClass( 'project-tile-active' )
-
-    $('.test-button').click (e) ->
-      e.stopPropagation()
-      $('body').focus()
-      prefix  = $('#path-prefix').data('path-prefix')
-      proj_id = $(@).data('project-id')
-      url     = prefix + "/retest_project/#{proj_id}"
-      set_icon(proj_id, 'true')
-      set_progress_bar(0)
-      $.post(url)
 
     $("abbr.timeago").timeago();
 
