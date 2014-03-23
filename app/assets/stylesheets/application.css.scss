@@ -8,7 +8,7 @@
 
 
 $content-bg-active: #ffffff;
-$content-bg: #ffffff;
+$content-bg: #fdfdfd;
 
 $tile-glow-shadow-color: $link-color;
 $tile-normal-shadow-color: #ccc;
@@ -149,13 +149,17 @@ ul {
     .panel-body {
         height: 110px;
     }
-}
 
-.project-tile {
     .panel-body, .panel-heading, .panel-footer {
         cursor: pointer;
     }
 }
+
+// .project-tile:hover {
+//     background-color: $content-bg-active;
+//     box-shadow: 0 0 4px 0px #999;
+// }
+
 
 .jumbotron {
     margin-top: 1em;
@@ -165,15 +169,6 @@ ul {
     text-align: 'center'
 }
 
-.project-tile-active {
-    background-color: $content-bg-active;
-    // This simply makes the shadow more
-    // pronounced.
-    // box-shadow: 0 0 5px 3px #bbb;    
-
-    // This changes the shadow to the link color.
-    box-shadow: 0 0 4px 0px #999;
-}
 
 .cards h1, .cards h2, h2.cards {
     color: $text-muted;
