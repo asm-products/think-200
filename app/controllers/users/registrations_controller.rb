@@ -3,7 +3,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
     # Provide access to special Think 200 stuff
     # to the devise sign up template
     @user_input = session[:checkit_user_input]
-    super
+    if @user_input.blank?
+      redirect_to root_path
+    else
+      super
+    end
   end
 
   def create
