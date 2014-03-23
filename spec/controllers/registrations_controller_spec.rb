@@ -1,5 +1,17 @@
 require 'spec_helper'
 
+describe Users::RegistrationsController, '#new' do
+  describe 'without valid params' do
+    it 'redirects to the home page' do
+      @request.env["devise.mapping"] = Devise.mappings[:user]
+      get :new
+      response.status.should eq 302
+      response.location.should eq root_url
+    end
+  end
+end
+
+
 describe Users::RegistrationsController, '#create' do
   let(:valid_create_params) do
     {
