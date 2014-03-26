@@ -4,4 +4,4 @@
     end
 %>
 
-<i id="test-button-<%= project.id %>" data-project-id="<%= project.id %>" class="fa fa-lg fa-refresh <%= align %> test-button"></i>
+<i id="test-button-<%= project.id %>" data-project-id="<%= project.id %>" class="fa fa-lg fa-refresh <%= @spin ? 'fa-spin' : '' %> <%= align %> test-button"></i>

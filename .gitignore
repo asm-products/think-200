@@ -24,3 +24,4 @@ doc/
 /config/application.yml
 /config/database.yml
 .env.local
+.rspec
