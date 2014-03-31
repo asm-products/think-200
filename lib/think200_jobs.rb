@@ -32,10 +32,18 @@ module Think200
   end
 
 
-  # Enqueue all projects for testing in the premium queue. This is intended to be
-  # executed from a cron job / rake task.
+  # Enqueue all projects for testing in the premium queue. This is intended to be                             
+  # executed from a cron job / rake task.                                                                     
   def self.test_all_projects
-    Project.find_each{ |p| p.queue_for_testing }
+    Project.find_each do |p|
+      proj_desc = "project #{p.id} / #{p.name}"
+      begin
+        p.queue_for_testing
+        puts "Queued for testing: #{proj_desc}"
+      rescue Exception => e
+        $stderr.puts "Could not enqueue project #{proj_desc}: #{e}"
+      end
+    end
   end
 
 
