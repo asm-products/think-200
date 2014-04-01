@@ -32,7 +32,6 @@ describe Users::RegistrationsController, '#create' do
       expect {
         post :create, valid_create_params, session_with_stored_url
       }.to change{ User.count }.by(1)
-      expect(response.redirect_url).to eq('http://test.host/')
     end
 
     it "creates the project" do
@@ -40,7 +39,6 @@ describe Users::RegistrationsController, '#create' do
       expect {
         post :create, valid_create_params, session_with_stored_url
       }.to change{ Project.count }.by(1)
-      expect(response.redirect_url).to eq('http://test.host/')
     end
   end
 
