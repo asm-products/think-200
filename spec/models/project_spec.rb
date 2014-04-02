@@ -53,34 +53,31 @@ describe Project do
     end
 
     it 'is false if the tests are a mix of pass and fail' do
-      proj      = Fabricate(:project)
-      api       = Fabricate(:app, project: proj)
-      is_online = Fabricate(:requirement, app: api)
-      [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
-      spec_run = Fabricate(:spec_run_mixed_results, project: proj)
-
+      proj      = Fabricate.build(:project)
+      api       = Fabricate.build(:app, project: proj)
+      is_online = Fabricate.build(:requirement, app: api)
+      [111, 222, 333, 888].each { |n| Fabricate.build(:expectation, id: n, requirement: is_online) }
+      spec_run = Fabricate.build(:spec_run_mixed_results, project: proj)
       proj.tested_at        = Time.now
       proj.in_progress      = false
       proj.most_recent_test = spec_run
-      proj.save!
 
       proj.passed?.should be_false
       proj.passed?.should_not be_nil
     end
 
     it 'is false if the tests are a mix of pass and fail, and untested expectations' do
-      proj      = Fabricate(:project)
-      api       = Fabricate(:app, project: proj)
-      is_online = Fabricate(:requirement, app: api)
-      [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      proj      = Fabricate.build(:project)
+      api       = Fabricate.build(:app, project: proj)
+      is_online = Fabricate.build(:requirement, app: api)
+      [111, 222, 333, 888].each { |n| Fabricate.build(:expectation, id: n, requirement: is_online) }
       # Untested: No SpecRun data for it in models.rb
-      Fabricate(:expectation, id: 444, requirement: is_online)
-      spec_run = Fabricate(:spec_run_mixed_results, project: proj)
+      Fabricate.build(:expectation, id: 444, requirement: is_online)
+      spec_run = Fabricate.build(:spec_run_mixed_results, project: proj)
 
       proj.tested_at        = Time.now
       proj.in_progress      = false
       proj.most_recent_test = spec_run
-      proj.save!
 
       proj.passed?.should be_false
       proj.passed?.should_not be_nil
@@ -91,11 +88,10 @@ describe Project do
       api       = Fabricate.build(:app, project: proj)
       is_online = Fabricate.build(:requirement, app: api)
       [111, 222, 333].each { |n| Fabricate.build(:expectation, id: n, requirement: is_online) }
-      spec_run = Fabricate(:spec_run_all_passed, project: proj)
+      spec_run = Fabricate.build(:spec_run_all_passed, project: proj)
       proj.tested_at        = Time.now
       proj.in_progress      = false
       proj.most_recent_test = spec_run
-      proj.save!
 
       proj.passed?.should be_true
     end
