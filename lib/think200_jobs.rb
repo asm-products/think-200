@@ -32,10 +32,18 @@ module Think200
   end
 
 
-  # Enqueue all projects for testing in the premium queue. This is intended to be
-  # executed from a cron job / rake task.
+  # Enqueue all projects for testing in the premium queue. This is intended to be                             
+  # executed from a cron job / rake task.                                                                     
   def self.test_all_projects
-    Project.find_each{ |p| p.queue_for_testing }
+    Project.find_each do |p|
+      proj_desc = "project #{p.id} / #{p.name}"
+      begin
+        p.queue_for_testing
+        puts "Queued for testing: #{proj_desc}"
+      rescue Exception => e
+        $stderr.puts "Could not enqueue project #{proj_desc}: #{e}"
+      end
+    end
   end
 
 
@@ -76,9 +84,10 @@ module Think200
       collected_results[expectation.id] = hash_structure
     end
 
-    proj.tested_at = Time.now  # Ugh. This is hackish code.
-    proj.in_progress = false   # This too.
+    spec_run = SpecRun.create!(raw_data: collected_results, project: proj, manual: manual)
+    proj.tested_at        = Time.now  # All of these should be internal to Project.
+    proj.in_progress      = false
+    proj.most_recent_test = spec_run
     proj.save!
-    SpecRun.create!(raw_data: collected_results, project: proj, manual: manual)
   end
 end

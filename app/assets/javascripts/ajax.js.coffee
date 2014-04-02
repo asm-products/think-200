@@ -1,13 +1,18 @@
 # Milliseconds
 POLL_FREQUENCY = 10000         # When "nothing special is happening"
 POLL_FREQUENCY_ACTIVE = 1000   # When tests are queued and working
+DEBUG = 0                      # 1 to switch on, 0 for off
 
 # Helper functions ###########################
 element_exists = (selector) ->
   $(selector).length > 0
 
+debug = (message) ->
+  if DEBUG
+    console.debug(message)
+
 debug_json = (json) ->
-  console.debug(JSON.stringify(json, undefined, 2))
+  debug(JSON.stringify(json, undefined, 2))
 
 glow_effect = (selector) ->
   $( selector ).animate({ boxShadow : "0 0 7px 1px #428bca" }, 1).animate({ boxShadow : "0 0 4px 0px #ccc" }, 1000)
@@ -79,6 +84,7 @@ progress_bar_container = ->
   $('#progress-bar-container')
 
 set_progress_bar = (percent) ->
+  debug("set_progress_bar(#{percent})")
   bar       = $('#progress-bar')
   container = progress_bar_container()
   
@@ -87,9 +93,9 @@ set_progress_bar = (percent) ->
     
   bar.css('width', "#{percent}%")  # Set the actual state
   if percent == 100                # Make its appearance not jarring
-    container.fadeOut(1300)
+    container.fadeOut(500)
   else
-    container.fadeIn(1000)
+    container.fadeIn(500)
 
 progress_bar_is_active = ->
   progress_bar_container().css("display") != 'none'

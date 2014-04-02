@@ -1,20 +1,24 @@
 Fabricator(:user) do
+  id       { (rand * 1000000).to_i }
   username { "user#{rand(1000000)}" }  # Couldn't get sequences to work
   email    { "mailbox#{rand(1000000)}@example.com" }
   password 'password'
 end
 
 Fabricator(:project) do
+  id   { (rand * 1000000).to_i }
   name 'Lewis & Clark College'
   user
 end
 
 Fabricator(:app) do
+  id   { (rand * 1000000).to_i }
   name 'api'
   project
 end
 
 Fabricator(:requirement) do
+  id   { (rand * 1000000).to_i }
   name 'is online'
   app
 end
@@ -101,16 +105,19 @@ passed_examples = {
 
 
 Fabricator(:spec_run_all_failed, from: :spec_run) do
+  id   { (rand * 1000000).to_i }
   raw_data { failed_examples }
   project
 end
 
 Fabricator(:spec_run_all_passed, from: :spec_run) do
+  id   { (rand * 1000000).to_i }
   raw_data { passed_examples }
   project
 end
 
 Fabricator(:spec_run_mixed_results, from: :spec_run) do
+  id   { (rand * 1000000).to_i }
   raw_data { passed_examples.merge(failed_examples) }
   project
 end
