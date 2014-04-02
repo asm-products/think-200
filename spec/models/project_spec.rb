@@ -41,7 +41,7 @@ describe Project do
       api         = Fabricate(:app, project: proj)
       is_online   = Fabricate(:requirement, app: api)
       expectation = Fabricate(:expectation, id: 888, requirement: is_online)
-      spec_run    = Fabricate(:spec_run_all_failed)
+      spec_run    = Fabricate(:spec_run_all_failed, project: proj)
 
       proj.passed?.should be_false
       proj.passed?.should_not be_nil
@@ -52,8 +52,7 @@ describe Project do
       api       = Fabricate(:app, project: proj)
       is_online = Fabricate(:requirement, app: api)
       [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
-      spec_run = Fabricate(:spec_run_mixed_results)
-
+      spec_run = Fabricate(:spec_run_mixed_results, project: proj)
       proj.passed?.should be_false
       proj.passed?.should_not be_nil
     end
