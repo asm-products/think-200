@@ -1,4 +1,5 @@
 Fabricator(:user) do
+  id       { (rand * 1000000).to_i }
   username { "user#{rand(1000000)}" }  # Couldn't get sequences to work
   email    { "mailbox#{rand(1000000)}@example.com" }
   password 'password'
