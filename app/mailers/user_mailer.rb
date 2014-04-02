@@ -1,7 +1,7 @@
 class UserMailer < ActionMailer::Base
   default from: CONTACT_EMAIL
 
-  def test_failed()
+  def test_failed(spec_run)
     @greeting = "Hi"
     mail to: "to@example.org"
   end

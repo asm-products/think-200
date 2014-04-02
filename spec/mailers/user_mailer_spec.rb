@@ -15,12 +15,23 @@ describe UserMailer do
       mail = UserMailer.test_failed(spec_run)
 
       mail.subject.should eq("Test failed")
-      mail.to.should eq(["to@example.org"])
-      mail.from.should eq([CONTACT_EMAIL_SHORT])
+      mail.to.should      eq(["to@example.org"])
+      mail.from.should    eq([CONTACT_EMAIL_SHORT])
     end
 
     it "renders the body" do
-      mail.body.encoded.should match("Hi")
+      proj        = Fabricate.build(:project)
+      api         = Fabricate.build(:app, project: proj)
+      is_online   = Fabricate.build(:requirement, app: api)
+      expectation = Fabricate.build(:expectation, id: 888, requirement: is_online)
+      spec_run    = Fabricate.build(:spec_run_all_failed, project: proj)
+
+      proj.tested_at        = Time.now
+      proj.in_progress      = false
+      proj.most_recent_test = spec_run
+      mail = UserMailer.test_failed(spec_run)
+
+      mail.body.encoded.should match('error')
     end
   end
 
