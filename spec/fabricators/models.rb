@@ -104,16 +104,19 @@ passed_examples = {
 
 
 Fabricator(:spec_run_all_failed, from: :spec_run) do
+  id   { (rand * 1000000).to_i }
   raw_data { failed_examples }
   project
 end
 
 Fabricator(:spec_run_all_passed, from: :spec_run) do
+  id   { (rand * 1000000).to_i }
   raw_data { passed_examples }
   project
 end
 
 Fabricator(:spec_run_mixed_results, from: :spec_run) do
+  id   { (rand * 1000000).to_i }
   raw_data { passed_examples.merge(failed_examples) }
   project
 end

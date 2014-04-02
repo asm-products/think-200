@@ -107,4 +107,24 @@ describe Project do
       expect(proj.errors[:user]).to include('is invalid')
     end
   end
+
+  describe '#most_recent_test' do
+    it 'is nil if the project is untested' do
+      project = Fabricate.build(:project)
+      expect(project.most_recent_test).to be_nil
+    end
+
+    it 'returns the last spec_run' do
+      project     = Fabricate(:project)
+      api         = Fabricate(:app, project: project)
+      is_online   = Fabricate(:requirement, app: api)
+      expectation = Fabricate(:expectation, id: 888, requirement: is_online)
+
+      spec_run_1  = Fabricate(:spec_run_all_failed, project: project)
+      spec_run_2  = Fabricate(:spec_run_all_failed, project: project)
+      spec_run_3  = Fabricate(:spec_run_all_failed, project: project)
+
+      expect(project.most_recent_test).to eq spec_run_3
+    end
+  end
 end
