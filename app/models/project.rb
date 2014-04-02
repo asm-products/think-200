@@ -1,19 +1,20 @@
 require 'think200_jobs'
 require 'think200_libs'
-
 # == Schema Information
 #
 # Table name: projects
 #
-#  created_at  :datetime
-#  id          :integer          not null, primary key
-#  in_progress :boolean
-#  name        :string(255)
-#  notes       :text
-#  tested_at   :datetime
-#  updated_at  :datetime
-#  user_id     :integer
+#  created_at       :datetime
+#  id               :integer          not null, primary key
+#  in_progress      :boolean
+#  most_recent_test :integer
+#  name             :string(255)
+#  notes            :text
+#  tested_at        :datetime
+#  updated_at       :datetime
+#  user_id          :integer
 #
+
 class Project < ActiveRecord::Base
   has_many :apps, dependent: :destroy
   belongs_to :user
@@ -22,6 +23,7 @@ class Project < ActiveRecord::Base
   has_many :requirements, through: :apps
   has_many :expectations
   has_many :spec_runs
+  belongs_to :most_recent_test, class_name: 'SpecRun', foreign_key: :most_recent_test
 
   validates :user, presence: true
   validates_associated :user
@@ -75,11 +77,6 @@ class Project < ActiveRecord::Base
     def owned_by?(user)
       self.user == user
     end
-
-    def most_recent_test
-      @most_recent_test ||= spec_runs.order('created_at DESC').first
-    end
-
 
     # true  = passed
     # false = failed
