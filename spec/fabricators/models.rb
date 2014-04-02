@@ -5,16 +5,19 @@ Fabricator(:user) do
 end
 
 Fabricator(:project) do
+  id   { (rand * 1000000).to_i }
   name 'Lewis & Clark College'
   user
 end
 
 Fabricator(:app) do
+  id   { (rand * 1000000).to_i }
   name 'api'
   project
 end
 
 Fabricator(:requirement) do
+  id   { (rand * 1000000).to_i }
   name 'is online'
   app
 end
