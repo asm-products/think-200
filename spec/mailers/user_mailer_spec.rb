@@ -7,7 +7,7 @@ describe UserMailer do
     it "renders the headers" do
       mail.subject.should eq("Test failed")
       mail.to.should eq(["to@example.org"])
-      mail.from.should eq(["from@example.com"])
+      mail.from.should eq([CONTACT_EMAIL_SHORT])
     end
 
     it "renders the body" do
@@ -21,7 +21,7 @@ describe UserMailer do
     it "renders the headers" do
       mail.subject.should eq("Test passed")
       mail.to.should eq(["to@example.org"])
-      mail.from.should eq(["from@example.com"])
+      mail.from.should eq([CONTACT_EMAIL_SHORT])
     end
 
     it "renders the body" do
