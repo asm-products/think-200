@@ -22,8 +22,8 @@ class SpecRun < ActiveRecord::Base
   STATUS_FAILED = 'failed'
 
   SpecResult = Struct.new("SpecResult", :success?, :error_message, :duration)
-  
-  # Return a hash of SpecResults, keyed by 
+
+  # Return a hash of SpecResults, keyed by
   # Expectation id
   def results
     result = {}
@@ -36,15 +36,18 @@ class SpecRun < ActiveRecord::Base
     result
   end
 
-  def expectation_ids
-    results.keys.sort
-  end
-
-  
-
   def passed?
     statuses = raw_data.keys.map{ |k| raw_data[k][:examples][0][:status] }
     !statuses.include? STATUS_FAILED
+  end
+
+  def any_failed?
+    results.values.map{|r| r.success? }.include?(false)
+  end
+
+  # True if I've covered these expectations
+  def covered?(expectation_ids)
+    my_expectation_ids.to_set.superset?(expectation_ids.to_set)
   end
 
   def status?(expectation: nil)
@@ -65,6 +68,13 @@ class SpecRun < ActiveRecord::Base
     rescue
       ''
     end
+  end
+
+
+  private
+
+  def my_expectation_ids
+    results.keys.sort
   end
 
 end
