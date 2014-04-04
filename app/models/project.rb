@@ -82,17 +82,9 @@ class Project < ActiveRecord::Base
     # false = failed, at least in part
     # nil   = untested, at least in part
     def passed?
-      return nil   if most_recent_test.nil?
+      return nil   if most_recent_test.nil? || !most_recent_test.covered?(expectation_ids)
       return false if most_recent_test.any_failed?
-
-      if most_recent_test.covered? expectation_ids
-        # Assert: there are no failed results; we already checked.
-        #         Therefore, we know that the remaining are successful.
-        return true
-      else
-        # New, untested expectations have been added
-        return nil
-      end
+      return true
     end
 
     def expectation_ids
