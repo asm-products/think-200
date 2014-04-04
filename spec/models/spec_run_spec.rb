@@ -34,23 +34,12 @@ describe SpecRun do
   end
 
   describe '#covered?' do
-    let(:test) { Fabricate.build(:spec_run_all_passed) }
+    subject { Fabricate.build(:spec_run_all_passed) } # Tested 111, 222, and 333
 
-    it 'is true when the ids are a subset' do
-      expect(test.covered? [111, 222]).to be_true
-    end
-
-    it 'is true when the ids are equal' do
-      expect(test.covered? [111, 222, 333]).to be_true
-    end
-
-    it 'is false when an id was not tested' do
-      expect(test.covered? [111, 121, 222]).to be_false
-    end
-
-    it 'is false when none of the ids were tested' do
-      expect(test.covered? [8, 9, 10]).to be_false
-    end
+    specify { should be_covered([111, 222]) }
+    specify { should be_covered([111, 222, 333]) }
+    specify { should_not be_covered([111, 222, 999]) }
+    specify { should_not be_covered([888, 999]) }
   end
 
   describe '#any_failed?' do
