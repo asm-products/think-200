@@ -52,4 +52,18 @@ describe SpecRun do
       expect(test.covered? [8, 9, 10]).to be_false
     end
   end
+
+  describe '#any_failed?' do
+    it 'is true if all tests failed' do
+      expect( Fabricate.build(:spec_run_all_failed).any_failed? ).to be_true
+    end
+
+    it 'is false if all tests passed' do
+      Fabricate.build(:spec_run_all_passed).any_failed?.should be_false
+    end
+
+    it 'is true if some tests passed and some failed' do
+      Fabricate.build(:spec_run_mixed_results).any_failed?.should be_true
+    end
+  end
 end
