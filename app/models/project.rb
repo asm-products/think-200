@@ -79,27 +79,24 @@ class Project < ActiveRecord::Base
     end
 
     # true  = passed
-    # false = failed
+    # false = failed, at least in part
     # nil   = untested, at least in part
     def passed?
-      return nil if most_recent_test.nil?
+      return nil   if most_recent_test.nil?
+      return false if most_recent_test.any_failed?
 
-      results = most_recent_test.results
-      return false if results.values.map{|r| r.success? }.include?(false)
-
-      # If tested expectations are a superset of current ones
-      if most_recent_test.expectation_ids.to_set.superset?(expectation_ids)
+      if most_recent_test.covered? expectation_ids
         # Assert: there are no failed results; we already checked.
-        # So therefore, we know that the remaining are successful.
+        #         Therefore, we know that the remaining are successful.
         return true
       else
-        # Assert: new, untested expectations have been added
+        # New, untested expectations have been added
         return nil
       end
     end
 
     def expectation_ids
-      @expectation_ids ||= expectations.pluck(:id).to_set
+      @expectation_ids ||= expectations.pluck(:id)
     end
 
 

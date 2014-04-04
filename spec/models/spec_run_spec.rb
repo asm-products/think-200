@@ -32,11 +32,4 @@ describe SpecRun do
       expect(a_result.success?).to be_false
     end
   end
-
-  describe '#expectation_ids' do
-    it 'returns the tested expectation ids' do
-      expect(Fabricate.build(:spec_run_all_passed).expectation_ids).to eq [111, 222, 333]
-      expect(Fabricate.build(:spec_run_all_failed).expectation_ids).to eq [888]
-    end
-  end
 end
