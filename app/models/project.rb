@@ -78,9 +78,9 @@ class Project < ActiveRecord::Base
       self.user == user
     end
 
-    # true  = passed
-    # false = failed, at least in part
     # nil   = untested, at least in part
+    # false = failed, at least in part
+    # true  = passed
     def passed?
       return nil   if most_recent_test.nil? || !most_recent_test.covered?(expectation_ids)
       return false if most_recent_test.any_failed?
