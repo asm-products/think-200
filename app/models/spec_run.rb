@@ -26,23 +26,32 @@ class SpecRun < ActiveRecord::Base
   # Return a hash of SpecResults, keyed by
   # Expectation id
   def results
-    result = {}
-    raw_data.each_pair do |expectation_id, structure|
-      status   = (structure[:examples][0][:status] != STATUS_FAILED)
-      message  = status ? '' : structure[:examples][0][:exception][:message]
-      duration = structure[:summary][:duration]
-      result[expectation_id] = SpecResult.new(status, message, duration)
+    unless @result
+      @result = {}
+      raw_data.each_pair do |expectation_id, structure|
+        status   = (structure[:examples][0][:status] != STATUS_FAILED)
+        message  = status ? '' : structure[:examples][0][:exception][:message]
+        duration = structure[:summary][:duration]
+        @result[expectation_id] = SpecResult.new(status, message, duration)
+      end
     end
-    result
-  end
-
-  def passed?
-    statuses = raw_data.keys.map{ |k| raw_data[k][:examples][0][:status] }
-    !statuses.include? STATUS_FAILED
+    @result
   end
 
   def any_failed?
     results.values.map{|r| r.success? }.include?(false)
+  end
+
+  def passed?
+    !any_failed?
+  end
+
+  def status?(expectation:)
+    results[expectation.id].try(:success?)
+  end
+
+  def exception_message_for(expectation:)
+    results[expectation.id].try(:error_message) || ''
   end
 
   # True if I've covered these expectations
@@ -50,31 +59,11 @@ class SpecRun < ActiveRecord::Base
     my_expectation_ids.to_set.superset?(expectation_ids.to_set)
   end
 
-  def status?(expectation: nil)
-    begin
-      if raw_data[expectation.id][:examples][0][:status] == STATUS_FAILED
-        false
-      else
-        true
-      end
-    rescue
-      nil
-    end
-  end
-
-  def exception_message_for(expectation:)
-    begin
-      raw_data[expectation.id][:examples][0][:exception][:message]
-    rescue
-      ''
-    end
-  end
-
 
   private
 
   def my_expectation_ids
-    results.keys.sort
+    results.keys
   end
 
 end
