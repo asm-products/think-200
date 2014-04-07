@@ -35,7 +35,6 @@ describe SpecRun do
 
   describe '#covered?' do
     subject { Fabricate.build(:spec_run_all_passed) } # Tested 111, 222, and 333
-
     specify { should be_covered([111, 222]) }
     specify { should be_covered([111, 222, 333]) }
     specify { should_not be_covered([111, 222, 999]) }
@@ -53,6 +52,24 @@ describe SpecRun do
 
     it 'is true if some tests passed and some failed' do
       Fabricate.build(:spec_run_mixed_results).any_failed?.should be_true
+    end
+  end
+
+  describe '#status?' do
+    it "returns true if the expectation was tested and passed" do
+      spec_run = Fabricate.build(:spec_run_all_passed)
+      expect( spec_run.status? expectation: Fabricate.build(:expectation, id: 111) ).to be_true
+    end
+
+    it "returns false if the expectation was tested and failed" do
+      spec_run = Fabricate.build(:spec_run_all_failed)
+      expect( spec_run.status? expectation: Fabricate.build(:expectation, id: 888) ).to be_false
+      expect( spec_run.status? expectation: Fabricate.build(:expectation, id: 888) ).to_not be_nil
+    end
+
+    it "returns nil if the expectation was not tested" do
+      spec_run = Fabricate.build(:spec_run_all_passed)
+      expect( spec_run.status? expectation: Fabricate.build(:expectation, id: 999999) ).to be_nil
     end
   end
 end
