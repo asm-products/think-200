@@ -55,6 +55,23 @@ describe SpecRun do
     end
   end
 
+  describe '#passed?' do
+    it 'is true when all tests passed' do
+      Fabricate.build(:spec_run_all_passed).passed?.should be_true
+    end
+
+    it 'is false if any test failed' do
+      Fabricate.build(:spec_run_mixed_results).passed?.should be_false
+      Fabricate.build(:spec_run_mixed_results).passed?.should_not be_nil
+    end
+  end
+
+  describe '#exception_message_for' do
+    it 'returns something when the exectation failed'
+    it 'returns a blank string when the expectation passed'
+    it 'returns a blank string when the expectation was not tested'
+  end
+
   describe '#status?' do
     it "returns true if the expectation was tested and passed" do
       spec_run = Fabricate.build(:spec_run_all_passed)
