@@ -24,12 +24,12 @@ describe SpecRun do
 
     it 'notifies when a test passed' do
       a_result = Fabricate.build(:spec_run_all_passed).results.values.first
-      expect(a_result.success?).to be_true
+      expect(a_result.success?).to be true
     end
 
     it 'notifies when a test failed' do
       a_result = Fabricate.build(:spec_run_all_failed).results.values.first
-      expect(a_result.success?).to be_false
+      expect(a_result.success?).to be false
     end
   end
 
@@ -43,45 +43,57 @@ describe SpecRun do
 
   describe '#any_failed?' do
     it 'is true if all tests failed' do
-      expect( Fabricate.build(:spec_run_all_failed).any_failed? ).to be_true
+      expect( Fabricate.build(:spec_run_all_failed).any_failed? ).to be true
     end
 
     it 'is false if all tests passed' do
-      Fabricate.build(:spec_run_all_passed).any_failed?.should be_false
+      Fabricate.build(:spec_run_all_passed).any_failed?.should be false
     end
 
     it 'is true if some tests passed and some failed' do
-      Fabricate.build(:spec_run_mixed_results).any_failed?.should be_true
+      Fabricate.build(:spec_run_mixed_results).any_failed?.should be true
     end
   end
 
   describe '#passed?' do
     it 'is true when all tests passed' do
-      Fabricate.build(:spec_run_all_passed).passed?.should be_true
+      Fabricate.build(:spec_run_all_passed).passed?.should be true
     end
 
     it 'is false if any test failed' do
-      Fabricate.build(:spec_run_mixed_results).passed?.should be_false
-      Fabricate.build(:spec_run_mixed_results).passed?.should_not be_nil
+      Fabricate.build(:spec_run_mixed_results).passed?.should be false
     end
   end
 
   describe '#exception_message_for' do
-    it 'returns something when the exectation failed'
-    it 'returns a blank string when the expectation passed'
-    it 'returns a blank string when the expectation was not tested'
+    it 'returns something when the exectation failed' do
+      spec_run = Fabricate.build(:spec_run_all_failed)
+      e        = Fabricate.build(:expectation, id: 888)
+      expect( spec_run.exception_message_for(expectation: e).length ).to be > 1
+    end
+
+    it 'returns a blank string when the expectation passed' do
+      spec_run = Fabricate.build(:spec_run_all_passed)
+      e        = Fabricate.build(:expectation, id: 222)
+      expect( spec_run.exception_message_for(expectation: e).length ).to eql(0)
+    end
+
+    it 'returns a blank string when the expectation was not tested' do
+      spec_run = Fabricate.build(:spec_run_all_passed)
+      e        = Fabricate.build(:expectation, id: 1111111)
+      expect( spec_run.exception_message_for(expectation: e).length ).to eql(0)
+    end
   end
 
   describe '#status?' do
     it "returns true if the expectation was tested and passed" do
       spec_run = Fabricate.build(:spec_run_all_passed)
-      expect( spec_run.status? expectation: Fabricate.build(:expectation, id: 111) ).to be_true
+      expect( spec_run.status? expectation: Fabricate.build(:expectation, id: 111) ).to be true
     end
 
     it "returns false if the expectation was tested and failed" do
       spec_run = Fabricate.build(:spec_run_all_failed)
-      expect( spec_run.status? expectation: Fabricate.build(:expectation, id: 888) ).to be_false
-      expect( spec_run.status? expectation: Fabricate.build(:expectation, id: 888) ).to_not be_nil
+      expect( spec_run.status? expectation: Fabricate.build(:expectation, id: 888) ).to be false
     end
 
     it "returns nil if the expectation was not tested" do
