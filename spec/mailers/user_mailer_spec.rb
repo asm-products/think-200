@@ -35,7 +35,7 @@ describe UserMailer do
     end
   end
 
-  describe "#test_passing" do
+  describe "#test_is_passing" do
     before (:each) do
       proj        = Fabricate.build(:project)
       api         = Fabricate.build(:app, project: proj)
@@ -46,7 +46,7 @@ describe UserMailer do
       proj.tested_at        = Time.now
       proj.in_progress      = false
       proj.most_recent_test = spec_run
-      @mail = UserMailer.test_passing(spec_run)
+      @mail = UserMailer.test_is_passing(spec_run)
       @user = proj.user
     end
 

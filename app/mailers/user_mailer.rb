@@ -6,7 +6,7 @@ class UserMailer < ActionMailer::Base
     mail to: spec_run.contact_email
   end
 
-  def test_passing(spec_run)
+  def test_is_passing(spec_run)
     @greeting = "Hi"
     mail to: spec_run.contact_email
   end
