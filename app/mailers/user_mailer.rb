@@ -3,11 +3,11 @@ class UserMailer < ActionMailer::Base
 
   def test_failed(spec_run)
     @greeting = "Hi"
-    mail to: "to@example.org"
+    mail to: spec_run.contact_email
   end
 
-  def test_passed()
+  def test_passing(spec_run)
     @greeting = "Hi"
-    mail to: "to@example.org"
+    mail to: spec_run.contact_email
   end
 end

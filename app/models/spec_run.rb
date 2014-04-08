@@ -59,6 +59,11 @@ class SpecRun < ActiveRecord::Base
     my_expectation_ids.to_set.superset?(expectation_ids.to_set)
   end
 
+  # Email to notify about events
+  def contact_email
+    project.user.email
+  end
+
 
   private
 
