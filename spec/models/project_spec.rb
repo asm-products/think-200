@@ -124,6 +124,7 @@ describe Project do
     end
   end
 
+
   describe '#most_recent_test' do
     it 'is nil if the project is untested' do
       project = Fabricate.build(:project)
