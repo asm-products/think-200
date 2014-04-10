@@ -53,6 +53,7 @@ end
 group :test do
   gem 'fabrication'
   gem 'faker'
+  gem 'timecop'
 end
 
 # Paging
