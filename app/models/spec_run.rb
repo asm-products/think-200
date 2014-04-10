@@ -19,23 +19,24 @@ class SpecRun < ActiveRecord::Base
   serialize :raw_data, Hash
   validates :raw_data, :project_id, presence: true
 
+  after_validation { project.you_were_tested(spec_run: self) }
+
   STATUS_FAILED = 'failed'
 
-  SpecResult = Struct.new("SpecResult", :success?, :error_message, :duration)
+  SpecResult = Struct.new(:success?, :error_message, :duration)
 
   # Return a hash of SpecResults, keyed by
   # Expectation id
   def results
-    unless @result
-      @result = {}
-      raw_data.each_pair do |expectation_id, structure|
-        status   = (structure[:examples][0][:status] != STATUS_FAILED)
-        message  = status ? '' : structure[:examples][0][:exception][:message]
-        duration = structure[:summary][:duration]
-        @result[expectation_id] = SpecResult.new(status, message, duration)
-      end
+    result = {}
+    raw_data.each_pair do |expectation_id, structure|
+      next if structure.keys.empty?
+      status   = (structure[:examples][0][:status] != STATUS_FAILED)
+      message  = status ? '' : structure[:examples][0][:exception][:message]
+      duration = structure[:summary][:duration]
+      result[expectation_id] = SpecResult.new(status, message, duration)
     end
-    @result
+    result
   end
 
   def any_failed?
@@ -57,6 +58,11 @@ class SpecRun < ActiveRecord::Base
   # True if I've covered these expectations
   def covered?(expectation_ids)
     my_expectation_ids.to_set.superset?(expectation_ids.to_set)
+  end
+
+  # Email to notify about events
+  def contact_email
+    project.user.email
   end
 
 

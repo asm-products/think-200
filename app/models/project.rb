@@ -32,10 +32,18 @@ class Project < ActiveRecord::Base
 
   def queue_for_testing
     unless incomplete?
-      self[:in_progress] = true
+      self.in_progress = true
       self.save!
       Resque.enqueue(Think200::ScheduledTest, id, user_id)
     end
+  end
+
+  # Let me know that I was just tested.
+  def you_were_tested(spec_run:)
+    self.tested_at        = Time.now
+    self.in_progress      = false
+    self.most_recent_test = spec_run
+    self.save!
   end
 
   # Do I have rspec to offer?

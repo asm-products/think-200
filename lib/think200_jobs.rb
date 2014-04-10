@@ -84,10 +84,6 @@ module Think200
       collected_results[expectation.id] = hash_structure
     end
 
-    spec_run = SpecRun.create!(raw_data: collected_results, project: proj, manual: manual)
-    proj.tested_at        = Time.now  # All of these should be internal to Project.
-    proj.in_progress      = false
-    proj.most_recent_test = spec_run
-    proj.save!
+    SpecRun.create!(raw_data: collected_results, project: proj, manual: manual)
   end
 end

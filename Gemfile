@@ -45,11 +45,15 @@ group :development do
   gem 'capistrano-bundler'
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'guard-rspec', require: false
+  gem 'terminal-notifier-guard'
+  gem 'spork-rails'
 end
 
 group :test do
   gem 'fabrication'
   gem 'faker'
+  gem 'timecop'
 end
 
 # Paging
