@@ -21,7 +21,7 @@ class SpecRun < ActiveRecord::Base
 
   STATUS_FAILED = 'failed'
 
-  SpecResult = Struct.new("SpecResult", :success?, :error_message, :duration)
+  SpecResult = Struct.new(:success?, :error_message, :duration)
 
   # Return a hash of SpecResults, keyed by
   # Expectation id

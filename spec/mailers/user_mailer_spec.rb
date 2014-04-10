@@ -35,6 +35,8 @@ describe UserMailer do
       @proj.most_recent_test = spec_run
 
       ActionMailer::Base.deliveries.should_not be_empty
+
+      Timecop.return
     end
   end
 
