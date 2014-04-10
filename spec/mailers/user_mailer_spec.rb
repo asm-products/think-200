@@ -6,15 +6,15 @@ describe UserMailer do
       @proj       = Fabricate.build(:project)
       api         = Fabricate.build(:app, project: @proj)
       is_online   = Fabricate.build(:requirement, app: api)
+
+      # First, a passing test
       expectation = Fabricate.build(:expectation, id: 111, requirement: is_online)
       spec_run    = Fabricate.build(:spec_run_all_passed, project: @proj)
-
       the_time               = Time.now
       @proj.tested_at        = the_time
       @proj.in_progress      = false
       @proj.most_recent_test = spec_run
 
-      # First, a passing test
       ActionMailer::Base.deliveries.should be_empty
 
       # Now, another passing test
