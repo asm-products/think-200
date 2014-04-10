@@ -19,6 +19,8 @@ class SpecRun < ActiveRecord::Base
   serialize :raw_data, Hash
   validates :raw_data, :project_id, presence: true
 
+  after_validation { project.you_were_tested(spec_run: self) }
+
   STATUS_FAILED = 'failed'
 
   SpecResult = Struct.new(:success?, :error_message, :duration)

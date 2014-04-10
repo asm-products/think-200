@@ -38,18 +38,12 @@ describe Project do
     end
 
     it 'is false if all tests failed' do
-      proj        = Fabricate.build(:project)
-      api         = Fabricate.build(:app, project: proj)
-      is_online   = Fabricate.build(:requirement, app: api)
-      expectation = Fabricate.build(:expectation, id: 888, requirement: is_online)
-      spec_run    = Fabricate.build(:spec_run_all_failed, project: proj)
-
-      proj.tested_at        = Time.now
-      proj.in_progress      = false
-      proj.most_recent_test = spec_run
-
-      proj.passed?.should be_false
-      proj.passed?.should_not be_nil
+      proj        = Fabricate(:project)
+      api         = Fabricate(:app, project: proj)
+      is_online   = Fabricate(:requirement, app: api)
+      expectation = Fabricate(:expectation, id: 888, requirement: is_online)
+      sr          = Fabricate(:spec_run_all_failed, project: proj)
+      proj.passed?.should be false
     end
 
     it 'is false if the tests are a mix of pass and fail' do
