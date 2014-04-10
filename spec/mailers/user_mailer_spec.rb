@@ -4,9 +4,6 @@ describe UserMailer do
 
   context 'when a test only succeeds' do
     it 'does not send an email' do
-      # Sanity check
-      ActionMailer::Base.deliveries.should be_empty
-
       @proj       = Fabricate(:project)
       api         = Fabricate(:app, project: @proj)
       is_online   = Fabricate(:requirement, app: api)
@@ -26,7 +23,7 @@ describe UserMailer do
     end
   end
 
-  context 'when a test first fails' do
+  context 'when a test fails,' do
     it 'sends an email' do
       pending "I'd like to do some refactoring first"
 

@@ -42,7 +42,7 @@ describe Project do
       api         = Fabricate(:app, project: proj)
       is_online   = Fabricate(:requirement, app: api)
       expectation = Fabricate(:expectation, id: 888, requirement: is_online)
-      sr          = Fabricate(:spec_run_all_failed, project: proj)
+      Fabricate(:spec_run_all_failed, project: proj)
       proj.passed?.should be false
     end
 
@@ -51,13 +51,8 @@ describe Project do
       api       = Fabricate(:app, project: proj)
       is_online = Fabricate(:requirement, app: api)
       [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
-      spec_run = Fabricate(:spec_run_mixed_results, project: proj)
-      proj.tested_at        = Time.now
-      proj.in_progress      = false
-      proj.most_recent_test = spec_run
-
-      proj.passed?.should be_false
-      proj.passed?.should_not be_nil
+      Fabricate(:spec_run_mixed_results, project: proj)
+      proj.passed?.should be false
     end
 
     it 'is nil if the tests are a mix of pass and fail, and untested expectations' do
@@ -75,11 +70,7 @@ describe Project do
       api       = Fabricate(:app, project: proj)
       is_online = Fabricate(:requirement, app: api)
       [111, 222, 333].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
-      spec_run = Fabricate(:spec_run_all_passed, project: proj)
-      proj.tested_at        = Time.now
-      proj.in_progress      = false
-      proj.most_recent_test = spec_run
-
+      Fabricate(:spec_run_all_passed, project: proj)
       proj.passed?.should be_true
     end
 
@@ -87,11 +78,8 @@ describe Project do
       proj      = Fabricate(:project)
       api       = Fabricate(:app, project: proj)
       is_online = Fabricate(:requirement, app: api)
-      [111, 222, 333].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
-      # Untested: No SpecRun data for it in models.rb
-      Fabricate(:expectation, id: 444, requirement: is_online)
-      spec_run = Fabricate(:spec_run_all_passed, project: proj)
-
+      [111, 222, 333, 444].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      Fabricate(:spec_run_all_passed, project: proj)
       proj.passed?.should be_nil
     end
   end
@@ -99,13 +87,12 @@ describe Project do
 
   describe "#invalid?" do
     it 'when the user is missing' do
-      proj = Project.create(name: 'LiquidSunshine.com')
-      expect(proj).to be_invalid
+      Project.create(name: 'New Web Startup').should be_invalid
     end
 
     it 'when the user is present but invalid' do
-      invalid_user = User.create(username: 'Name With Spaces', email: 'valid@email.com', password: 'sekret')
-      proj = Project.create(name: 'LiquidSunshine.com', user: invalid_user)
+      invalid_user = User.create(username: 'Name With Spaces', email: 'me@app.com', password: 'pass')
+      proj         = Project.create(name: 'New iOS app', user: invalid_user)
       expect(proj).to be_invalid
       expect(proj.errors[:user]).to include('is invalid')
     end
@@ -115,7 +102,7 @@ describe Project do
   describe '#most_recent_test' do
     it 'is nil if the project is untested' do
       project = Fabricate(:project)
-      expect(project.most_recent_test).to be_nil
+      expect( project.most_recent_test ).to be_nil
     end
 
     it 'returns the last spec_run' do
@@ -125,21 +112,10 @@ describe Project do
       expectation = Fabricate(:expectation, id: 888, requirement: is_online)
 
       spec_run_1  = Fabricate(:spec_run_all_failed, project: project)
-      project.tested_at        = Time.now
-      project.in_progress      = false
-      project.most_recent_test = spec_run_1
-
       spec_run_2  = Fabricate(:spec_run_all_failed, project: project)
-      project.tested_at        = Time.now
-      project.in_progress      = false
-      project.most_recent_test = spec_run_2
-
       spec_run_3  = Fabricate(:spec_run_all_failed, project: project)
-      project.tested_at        = Time.now
-      project.in_progress      = false
-      project.most_recent_test = spec_run_3
 
-      expect(project.most_recent_test).to eq spec_run_3
+      expect( project.most_recent_test ).to eq spec_run_3
     end
   end
 end
