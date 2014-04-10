@@ -31,20 +31,20 @@ describe UserMailer do
       is_online   = Fabricate(:requirement, app: api)
 
       # First, a passing test
-      expectation = Fabricate(:expectation, id: 111, requirement: is_online)
-      spec_run    = Fabricate(:spec_run_all_passed, project: @proj)
-      the_time    = Time.now
+      the_time = Time.now
+      Fabricate(:expectation, id: 111, requirement: is_online)
+      Fabricate(:spec_run_all_passed, project: @proj)
       ActionMailer::Base.deliveries.should be_empty
 
       # Now, another passing test
       Timecop.freeze(the_time + 1.minute)
-      spec_run    = Fabricate(:spec_run_all_passed, project: @proj)
+      Fabricate(:spec_run_all_passed, project: @proj)
       ActionMailer::Base.deliveries.should be_empty
 
       # Now, a failing test
       Timecop.freeze(the_time + 2.minutes)
-      expectation = Fabricate(:expectation, id: 888, requirement: is_online)
-      spec_run    = Fabricate(:spec_run_all_failed, project: @proj)
+      Fabricate(:expectation, id: 888, requirement: is_online)
+      Fabricate(:spec_run_all_failed, project: @proj)
       ActionMailer::Base.deliveries.should_not be_empty
 
       Timecop.return
