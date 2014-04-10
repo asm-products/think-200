@@ -23,10 +23,9 @@ describe UserMailer do
     end
   end
 
-  context 'when a test fails,' do
-    it 'sends an email' do
-      pending "I'd like to do some refactoring first"
 
+  context 'when a test fails,' do
+    it 'an email gets sent' do
       @proj       = Fabricate(:project)
       api         = Fabricate(:app, project: @proj)
       is_online   = Fabricate(:requirement, app: api)
@@ -34,7 +33,7 @@ describe UserMailer do
       # First, a passing test
       expectation = Fabricate(:expectation, id: 111, requirement: is_online)
       spec_run    = Fabricate(:spec_run_all_passed, project: @proj)
-      the_time               = Time.now
+      the_time    = Time.now
       ActionMailer::Base.deliveries.should be_empty
 
       # Now, another passing test
@@ -51,6 +50,7 @@ describe UserMailer do
       Timecop.return
     end
   end
+
 
   describe "#test_failed" do
     before(:each) do

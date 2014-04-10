@@ -38,10 +38,10 @@ class Project < ActiveRecord::Base
     end
   end
 
-  # Let me know that I was just tested.
+  # Let me know that my test just finished.
   def you_were_tested(spec_run:)
-    self.tested_at        = Time.now
     self.in_progress      = false
+    self.tested_at        = Time.now
     self.most_recent_test = spec_run
     self.save!
   end
