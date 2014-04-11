@@ -2,46 +2,71 @@ require "spec_helper"
 
 describe UserMailer do
 
-  context 'when a test succeeds repeatedly' do
-    it 'no email is sent' do
-      @proj       = Fabricate(:project)
-      api         = Fabricate(:app, project: @proj)
-      is_online   = Fabricate(:requirement, app: api)
-      expectation = Fabricate(:expectation, id: 111, requirement: is_online)
-
-      # A passing test
-      Fabricate(:spec_run_all_passed, project: @proj)
-
-      # Another passing test
-      Timecop.freeze(Date.today + 1.minute) do
-        Fabricate(:spec_run_all_passed, project: @proj)
-      end
-      
-      ActionMailer::Base.deliveries.should be_empty
-    end
-  end
-
-
-  context 'when a test fails after a previous pass,' do
-    it 'an email gets sent' do
+  describe 'sends' do
+    before(:each) do
       @proj       = Fabricate(:project)
       api         = Fabricate(:app, project: @proj)
       is_online   = Fabricate(:requirement, app: api)
       Fabricate(:expectation, id: 111, requirement: is_online)
       Fabricate(:expectation, id: 888, requirement: is_online)
+    end
 
-      # First, a passing test
-      Fabricate(:spec_run_all_passed, project: @proj)
+    context 'when a test succeeds repeatedly' do
+      it 'no email is sent' do
+        # A passing test
+        Fabricate(:spec_run_all_passed, project: @proj)
 
-      # Now, a failing test
-      Timecop.freeze(Time.now + 2.minutes) do
-        Fabricate(:spec_run_all_failed, project: @proj)
+        # Another passing test
+        Timecop.freeze(Date.today + 1.minute) do
+          Fabricate(:spec_run_all_passed, project: @proj)
+        end
+
+        ActionMailer::Base.deliveries.should be_empty
       end
+    end
 
-      ActionMailer::Base.deliveries.should_not be_empty
+    context 'when a test fails repeatedly' do
+      it 'no email is sent' do
+        # A failing test
+        Fabricate(:spec_run_all_failed, project: @proj)
+
+        # Another failing test
+        Timecop.freeze(Date.today + 1.minute) do
+          Fabricate(:spec_run_all_failed, project: @proj)
+        end
+
+        ActionMailer::Base.deliveries.should be_empty
+      end
+    end
+
+    context 'when a test fails after a previous pass,' do
+      it 'an email gets sent' do
+        # First, a passing test
+        Fabricate(:spec_run_all_passed, project: @proj)
+
+        # Now, a failing test
+        Timecop.freeze(Time.now + 2.minutes) do
+          Fabricate(:spec_run_all_failed, project: @proj)
+        end
+
+        ActionMailer::Base.deliveries.should_not be_empty
+      end
+    end
+
+    context 'when a test passes after a previous fail,' do
+      it 'an email gets sent' do
+        # First, a failing test
+        Fabricate(:spec_run_all_failed, project: @proj)
+
+        # Now, a passing test
+        Timecop.freeze(Time.now + 2.minutes) do
+          Fabricate(:spec_run_all_passed, project: @proj)
+        end
+
+        ActionMailer::Base.deliveries.should_not be_empty
+      end
     end
   end
-
 
   describe "#test_failed" do
     before(:each) do
