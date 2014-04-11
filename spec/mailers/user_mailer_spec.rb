@@ -33,8 +33,12 @@ describe UserMailer do
         # A failing test
         Fabricate(:spec_run_all_failed, project: @proj)
 
-        # Another failing test
+        # More failing tests
         Timecop.freeze(Date.today + 1.minute) do
+          Fabricate(:spec_run_all_failed, project: @proj)
+        end
+
+        Timecop.freeze(Date.today + 2.minutes) do
           Fabricate(:spec_run_all_failed, project: @proj)
         end
 
