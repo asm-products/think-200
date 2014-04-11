@@ -1,10 +1,13 @@
 require "spec_helper"
 
 describe UserMailer do
+  let(:fail_text) { 'failed' }
+  let(:pass_text) { 'passing' }
+
   before(:each) do
-    @proj       = Fabricate(:project)
-    api         = Fabricate(:app, project: @proj)
-    is_online   = Fabricate(:requirement, app: api)
+    @proj     = Fabricate(:project)
+    api       = Fabricate(:app, project: @proj)
+    is_online = Fabricate(:requirement, app: api)
     Fabricate(:expectation, id: 111, requirement: is_online)
     Fabricate(:expectation, id: 888, requirement: is_online)
   end
@@ -49,7 +52,7 @@ describe UserMailer do
           Fabricate(:spec_run_all_failed, project: @proj)
         end
 
-        ActionMailer::Base.deliveries.should_not be_empty
+        ActionMailer::Base.deliveries[0].subject.should match(/#{fail_text}/i)
       end
     end
 
@@ -63,7 +66,7 @@ describe UserMailer do
           Fabricate(:spec_run_all_passed, project: @proj)
         end
 
-        ActionMailer::Base.deliveries.should_not be_empty
+        ActionMailer::Base.deliveries[0].subject.should match(/#{pass_text}/i)
       end
     end
   end
@@ -75,13 +78,13 @@ describe UserMailer do
     end
 
     it "renders the headers" do
-      @mail.subject.should match(/failed/i)
+      @mail.subject.should match(/#{fail_text}/i)
       @mail.to.should      eq([@proj.user.email])
       @mail.from.should    eq([CONTACT_EMAIL_SHORT])
     end
 
     it "renders the body" do
-      @mail.body.encoded.should match(/failed/i)
+      @mail.body.encoded.should match(/#{fail_text}/i)
     end
 
     it 'sends an email' do
@@ -97,13 +100,13 @@ describe UserMailer do
     end
 
     it "renders the headers" do
-      @mail.subject.should match(/passing/i)
+      @mail.subject.should match(/#{pass_text}/i)
       @mail.to.should   eq([@proj.user.email])
       @mail.from.should eq([CONTACT_EMAIL_SHORT])
     end
 
     it "renders the body" do
-      @mail.body.encoded.should match(/passing/i)
+      @mail.body.encoded.should match(/#{pass_text}/i)
     end
 
     it 'sends an email' do
