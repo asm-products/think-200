@@ -1,5 +1,6 @@
 require 'think200_jobs'
 require 'think200_libs'
+
 # == Schema Information
 #
 # Table name: projects
@@ -40,10 +41,18 @@ class Project < ActiveRecord::Base
 
   # Let me know that my test just finished.
   def you_were_tested(spec_run:)
+    previous_test = self.most_recent_test
+
     self.in_progress      = false
     self.tested_at        = Time.now
     self.most_recent_test = spec_run
     self.save!
+
+    # Notify listeners if this is a change from pass-to-fail or
+    # vice versa.
+    if previous_test && (previous_test.passed? != spec_run.passed?)
+      UserMailer.notify_for(spec_run)
+    end
   end
 
   # Do I have rspec to offer?
@@ -98,7 +107,6 @@ class Project < ActiveRecord::Base
     def expectation_ids
       @expectation_ids ||= expectations.pluck(:id)
     end
-
 
     # True if not runnable; the user needs to
     # add expectations.
