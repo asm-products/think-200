@@ -34,12 +34,6 @@ describe UserMailer do
       the_time = Time.now
       Fabricate(:expectation, id: 111, requirement: is_online)
       Fabricate(:spec_run_all_passed, project: @proj)
-      ActionMailer::Base.deliveries.should be_empty
-
-      # Now, another passing test
-      Timecop.freeze(the_time + 1.minute)
-      Fabricate(:spec_run_all_passed, project: @proj)
-      ActionMailer::Base.deliveries.should be_empty
 
       # Now, a failing test
       Timecop.freeze(the_time + 2.minutes)
