@@ -1,16 +1,16 @@
 require "spec_helper"
 
 describe UserMailer do
+  before(:each) do
+    @proj       = Fabricate(:project)
+    api         = Fabricate(:app, project: @proj)
+    is_online   = Fabricate(:requirement, app: api)
+    Fabricate(:expectation, id: 111, requirement: is_online)
+    Fabricate(:expectation, id: 888, requirement: is_online)
+  end
+
 
   describe 'sends' do
-    before(:each) do
-      @proj       = Fabricate(:project)
-      api         = Fabricate(:app, project: @proj)
-      is_online   = Fabricate(:requirement, app: api)
-      Fabricate(:expectation, id: 111, requirement: is_online)
-      Fabricate(:expectation, id: 888, requirement: is_online)
-    end
-
     context 'when a test succeeds repeatedly' do
       it 'no email is sent' do
         # A passing test
@@ -68,15 +68,10 @@ describe UserMailer do
     end
   end
 
+
   describe "#test_failed" do
     before(:each) do
-      @proj       = Fabricate(:project)
-      api         = Fabricate(:app, project: @proj)
-      is_online   = Fabricate(:requirement, app: api)
-      expectation = Fabricate(:expectation, id: 888, requirement: is_online)
-      spec_run    = Fabricate(:spec_run_all_failed, project: @proj)
-
-      @mail = UserMailer.test_failed(spec_run)
+      @mail = UserMailer.test_failed(Fabricate(:spec_run_all_failed, project: @proj))
     end
 
     it "renders the headers" do
@@ -95,20 +90,15 @@ describe UserMailer do
     end
   end
 
+
   describe "#test_is_passing" do
     before (:each) do
-      proj        = Fabricate(:project)
-      api         = Fabricate(:app, project: proj)
-      is_online   = Fabricate(:requirement, app: api)
-      expectation = Fabricate(:expectation, id: 111, requirement: is_online)
-      spec_run    = Fabricate(:spec_run_all_passed, project: proj)
-      @mail = UserMailer.test_is_passing(spec_run)
-      @user = proj.user
+      @mail = UserMailer.test_is_passing(Fabricate(:spec_run_all_passed, project: @proj))
     end
 
     it "renders the headers" do
       @mail.subject.should match(/passing/i)
-      @mail.to.should   eq([@user.email])
+      @mail.to.should   eq([@proj.user.email])
       @mail.from.should eq([CONTACT_EMAIL_SHORT])
     end
 
