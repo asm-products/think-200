@@ -4,14 +4,22 @@ describe UserMailer do
   let(:fail_text) { 'failed' }
   let(:pass_text) { 'passing' }
 
-  before(:each) do
+  before(:all) do    
     @proj     = Fabricate(:project)
     api       = Fabricate(:app, project: @proj)
-    is_online = Fabricate(:requirement, app: api)
-    Fabricate(:expectation, id: 111, requirement: is_online)
-    Fabricate(:expectation, id: 888, requirement: is_online)
+    @is_online = Fabricate(:requirement, app: api)
+    Fabricate(:expectation, id: 111, requirement: @is_online)
+    Fabricate(:expectation, id: 888, requirement: @is_online)
   end
 
+  after(:each) do
+    @proj.most_recent_test = nil
+  end
+
+  after(:all) do
+    Expectation.destroy_all
+  end
+  
 
   describe 'sends' do
     context 'when a test succeeds repeatedly' do
@@ -30,6 +38,8 @@ describe UserMailer do
 
     context 'when a test fails repeatedly' do
       it 'no email is sent' do
+        ActionMailer::Base.deliveries.should be_empty
+
         # A failing test
         Fabricate(:spec_run_all_failed, project: @proj)
 
