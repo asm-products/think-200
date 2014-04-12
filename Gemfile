@@ -46,7 +46,8 @@ group :development do
   gem "binding_of_caller"
   gem 'guard-rspec', require: false
   gem 'terminal-notifier-guard'
-  gem 'spork-rails'
+  gem 'spring'
+  gem "spring-commands-rspec"
 end
 
 group :test do
