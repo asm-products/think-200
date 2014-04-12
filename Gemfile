@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
 ruby '2.1.1'
-gem 'rails', '4.0.4'
-gem 'sprockets', '2.11.0' # 2.12.0 and sass-rails conflict: https://github.com/rails/sass-rails/issues/191
+gem 'rails', '4.1.0'
+gem 'sprockets'
 gem 'sass-rails'
 gem 'uglifier'
 gem 'coffee-rails'
@@ -33,7 +33,6 @@ group :development, :test do
   gem 'debugger'
   gem 'dotenv-rails'
   gem 'rspec-rails'
-  gem 'rails_layout', '~> 0.5'  # Bootstrap 3 layout generator
 end
 
 group :development do
@@ -47,7 +46,8 @@ group :development do
   gem "binding_of_caller"
   gem 'guard-rspec', require: false
   gem 'terminal-notifier-guard'
-  gem 'spork-rails'
+  gem 'spring'
+  gem "spring-commands-rspec"
 end
 
 group :test do
@@ -63,7 +63,7 @@ gem 'kaminari'
 gem 'friendly_id'
 
 # font-awesome
-gem 'font-awesome-sass', '4.0.2'
-gem 'devise', '3.2.2'
+gem 'font-awesome-sass'
+gem 'devise'
 
 gem 'bootstrap-sass'
