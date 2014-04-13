@@ -100,7 +100,7 @@ describe UserMailer do
     it "renders all the necessary information in the body" do
       text = @mail.body.encoded
       test = @proj.most_recent_test
-      error_messages = @proj.failed_expectations.map{|e| e.failure_message}
+      error_messages = @proj.failing_expectations.map{ |e| e.failure_message }
 
       # It failed
       text.should match(/#{fail_text}/i)

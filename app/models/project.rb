@@ -123,7 +123,11 @@ class Project < ActiveRecord::Base
     end
 
     def failing_requirements
-      requirements.select{|r| r.failed?}
+      requirements.select{ |r| r.failed? }
+    end
+
+    def failing_expectations
+      expectations.select{ |e| e.failed? }
     end
 
     def rspec_filename

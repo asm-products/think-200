@@ -85,6 +85,23 @@ describe Project do
   end
 
 
+  describe '#failing_expectations' do
+    it 'is empty if the project is untested' do
+      project = Fabricate(:project)
+      expect( project.failing_expectations ).to be_empty
+    end
+
+    it 'returns the correct expectations' do
+      proj      = Fabricate(:project)
+      api       = Fabricate(:app, project: proj)
+      is_online = Fabricate(:requirement, app: api)
+      [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      Fabricate(:spec_run_mixed_results, project: proj)
+      proj.failing_expectations.should eq [Expectation.find(888)]
+    end
+  end
+
+
   describe "#invalid?" do
     it 'when the user is missing' do
       Project.create(name: 'New Web Startup').should be_invalid
