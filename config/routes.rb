@@ -40,14 +40,14 @@ Think200::Application.routes.draw do
 
   # Resque ######################
 
-  ResqueWeb::Engine.eager_load!
+  # ResqueWeb::Engine.eager_load!
 
-  resque_constraint = lambda do |request|
-    request.env['warden'].authenticate? and request.env['warden'].user.admin?
-  end
+  # resque_constraint = lambda do |request|
+  #   request.env['warden'].authenticate? and request.env['warden'].user.admin?
+  # end
 
-  constraints resque_constraint do
-    # mount Resque::Server, :at => "/admin/resque"
-    mount ResqueWeb::Engine => "/resque"
-  end
+  # constraints resque_constraint do
+  #   # mount Resque::Server, :at => "/admin/resque"
+  #   mount ResqueWeb::Engine => "/resque"
+  # end
 end
