@@ -1,18 +1,23 @@
 %html
   %body
 
-    %ul
+    %p
       = @project_name
 
-      %ul{style: 'list-style-type: none'}
-        - @apps.each do |app|
-          %li
-            = app.name
+      - @apps.each do |app|
+        %br
+        &nbsp;
+        &nbsp;
+        = app.name
 
-            %ul{style: 'list-style-type: none'}
-              - app.failing_requirements.each do |req|
-                %li{style: 'color: red'}
-                  = req.to_s
+        - app.failing_requirements.each do |req|
+          %br
+          &nbsp;
+          &nbsp;        
+          &nbsp;
+          &nbsp;        
+          %span{style: 'color: red'}
+            = req.to_s
 
       %p
         For details, see the #{@project_name} project page:

@@ -21,6 +21,6 @@ class UserMailer < ActionMailer::Base
   def test_is_passing(spec_run)
     @project_name = spec_run.project.name
     @project_url  = project_url(spec_run.project)
-    mail to: spec_run.contact_email, subject: "#{@project_name}'s apps are all passing their tests"
+    mail to: spec_run.contact_email, subject: "All #{@project_name} tests are passing"
   end
 end
