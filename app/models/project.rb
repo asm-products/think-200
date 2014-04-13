@@ -1,5 +1,6 @@
 require 'think200_jobs'
 require 'think200_libs'
+
 # == Schema Information
 #
 # Table name: projects
@@ -38,12 +39,20 @@ class Project < ActiveRecord::Base
     end
   end
 
-  # Let me know that I was just tested.
+  # Let me know that my test just finished.
   def you_were_tested(spec_run:)
-    self.tested_at        = Time.now
+    previous_test = self.most_recent_test
+
     self.in_progress      = false
+    self.tested_at        = Time.now
     self.most_recent_test = spec_run
     self.save!
+
+    # Notify listeners if this is a change from pass-to-fail or
+    # vice versa.
+    if previous_test && (previous_test.passed? != spec_run.passed?)
+      UserMailer.notify_for(spec_run)
+    end
   end
 
   # Do I have rspec to offer?
@@ -99,7 +108,6 @@ class Project < ActiveRecord::Base
       @expectation_ids ||= expectations.pluck(:id)
     end
 
-
     # True if not runnable; the user needs to
     # add expectations.
     def incomplete?
@@ -114,8 +122,16 @@ class Project < ActiveRecord::Base
       ! tested_at.nil?
     end
 
+    def failing_apps
+      apps.select{ |r| r.failed? }
+    end
+
     def failing_requirements
-      requirements.select{|r| r.failed?}
+      requirements.select{ |r| r.failed? }
+    end
+
+    def failing_expectations
+      expectations.select{ |e| e.failed? }
     end
 
     def rspec_filename

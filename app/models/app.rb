@@ -40,6 +40,14 @@ class App < ActiveRecord::Base
     Think200.aggregate_test_status(collection: requirements)
   end
 
+  def failed?
+    self.passed? == false
+  end
+
+  def failing_requirements
+    requirements.select{ |r| r.failed? }
+  end
+
   def to_s
     name
   end

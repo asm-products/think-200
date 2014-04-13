@@ -28,15 +28,16 @@ class SpecRun < ActiveRecord::Base
   # Return a hash of SpecResults, keyed by
   # Expectation id
   def results
-    result = {}
-    raw_data.each_pair do |expectation_id, structure|
-      next if structure.keys.empty?
-      status   = (structure[:examples][0][:status] != STATUS_FAILED)
-      message  = status ? '' : structure[:examples][0][:exception][:message]
-      duration = structure[:summary][:duration]
-      result[expectation_id] = SpecResult.new(status, message, duration)
+    unless @result
+      @result = {}
+      raw_data.each_pair do |expectation_id, structure|
+        status   = (structure[:examples][0][:status] != STATUS_FAILED)
+        message  = status ? '' : structure[:examples][0][:exception][:message]
+        duration = structure[:summary][:duration]
+        @result[expectation_id] = SpecResult.new(status, message, duration)
+      end
     end
-    result
+    @result
   end
 
   def any_failed?

@@ -56,6 +56,10 @@ class Expectation < ActiveRecord::Base
     spec_run.status?(expectation: self)
   end
 
+  def failed?
+    self.passed? == false
+  end
+
 
   def to_s
     "#{subject} should #{matcher} #{expected}"

@@ -8,7 +8,7 @@ end
 
 Fabricator(:project) do
   id   { (rand * 1000000).to_i }
-  name 'Lewis & Clark College'
+  name 'Little Boxes'
   user
 end
 
