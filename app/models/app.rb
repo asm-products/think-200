@@ -44,6 +44,10 @@ class App < ActiveRecord::Base
     self.passed? == false
   end
 
+  def failing_requirements
+    requirements.select{ |r| r.failed? }
+  end
+
   def to_s
     name
   end

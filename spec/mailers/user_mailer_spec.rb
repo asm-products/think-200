@@ -1,10 +1,10 @@
 require "spec_helper"
 
 describe UserMailer do
-  let(:fail_text) { 'failed' }
+  let(:fail_text) { 'failing' }
   let(:pass_text) { 'passing' }
 
-  before(:all) do    
+  before(:all) do
     @proj     = Fabricate(:project)
     api       = Fabricate(:app, project: @proj)
     @is_online = Fabricate(:requirement, app: api)
@@ -19,7 +19,7 @@ describe UserMailer do
   after(:all) do
     Expectation.destroy_all
   end
-  
+
 
   describe 'sends' do
     context 'when a test succeeds repeatedly' do
@@ -98,12 +98,11 @@ describe UserMailer do
     end
 
     it "renders all the necessary information in the body" do
-      text = @mail.body.encoded
-      # error_messages = @proj.failing_expectations.map{ |e| e.actual_message }
-      reqs = @proj.failing_requirements.map{ |r| r.to_s }
-      apps = @proj.failing_apps.map{ |a| a.to_s }
+      body = @mail.body.encoded
+      reqs = @proj.failing_requirements.map(&:to_s)
+      apps = @proj.failing_apps.map(&:to_s)
 
-      text.should include(fail_text, @proj.name, project_url(@proj), *apps, *reqs)
+      body.should include(@proj.name, project_url(@proj), *apps, *reqs)
     end
 
     it 'sends an email' do
@@ -124,7 +123,10 @@ describe UserMailer do
       @mail.from.should eq([CONTACT_EMAIL_SHORT])
     end
 
-    it "renders all the necessary information in the body"
+    it "renders all the necessary information in the body" do
+      body = @mail.body.encoded
+      body.should include(@proj.name, pass_text, project_url(@proj))
+    end
 
     it 'sends an email' do
       @mail.deliver

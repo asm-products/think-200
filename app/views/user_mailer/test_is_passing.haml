@@ -1,3 +1,19 @@
 %html
   %body
-    %h1 The test is passing.
+
+    %p
+      Congrats,
+      %span{style: 'color: green'}
+        = @project_name
+      is passing all its tests.
+
+    %p
+      The #{@project_name} project page is at:
+      %a{href: @project_url}
+        = @project_url
+
+    %p
+      %br
+      Cordially,
+      %br
+      Think 200

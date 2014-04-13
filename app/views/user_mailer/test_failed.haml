@@ -1,3 +1,26 @@
 %html
   %body
-    %h1 A test failed
+
+    %ul
+      = @project_name
+
+      %ul{style: 'list-style-type: none'}
+        - @apps.each do |app|
+          %li
+            = app.name
+
+            %ul{style: 'list-style-type: none'}
+              - app.failing_requirements.each do |req|
+                %li{style: 'color: red'}
+                  = req.to_s
+
+      %p
+        For details, see the #{@project_name} project page:
+        %a{href: @project_url}
+          = @project_url
+
+      %p
+        %br
+        Cordially,
+        %br
+        Think 200
