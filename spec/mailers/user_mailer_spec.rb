@@ -97,8 +97,22 @@ describe UserMailer do
       @mail.from.should    eq([CONTACT_EMAIL_SHORT])
     end
 
-    it "renders the body" do
-      @mail.body.encoded.should match(/#{fail_text}/i)
+    it "renders all the necessary information in the body" do
+      text = @mail.body.encoded
+      test = @proj.most_recent_test
+      error_messages = @proj.failed_expectations.map{|e| e.failure_message}
+
+      # It failed
+      text.should match(/#{fail_text}/i)
+
+      # The project name
+      text.should match(/@proj.name/)
+
+      # All of the errors
+      error_messages.each { |msg| text.should match(/#{msg}/) }
+
+      # The link back to the project
+      text.should contain project_url(@proj)
     end
 
     it 'sends an email' do
