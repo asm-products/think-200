@@ -1,7 +1,8 @@
 class UserMailer < ActionMailer::Base
   default from: CONTACT_EMAIL
 
-  # Send email about this test.
+  # Send email about this test. Decides
+  # which actual mailer method to invoke.
   def self.notify_for(spec_run)
     if spec_run.passed?
       UserMailer.test_is_passing(spec_run).deliver
