@@ -122,6 +122,10 @@ class Project < ActiveRecord::Base
       ! tested_at.nil?
     end
 
+    def failing_apps
+      apps.select{ |r| r.failed? }
+    end
+
     def failing_requirements
       requirements.select{ |r| r.failed? }
     end
