@@ -12,15 +12,17 @@ class UserMailer < ActionMailer::Base
   end
 
   def test_failed(spec_run)
-    @project_name = spec_run.project.name
-    @project_url  = project_url(spec_run.project)
-    @apps         = spec_run.project.failing_apps
-    mail to: spec_run.contact_email, subject: "#{@project_name} has #{@apps.count} failing #{'app'.pluralize(@apps.count)}"
+    proj = spec_run.project
+    @project_name = proj.name
+    @project_url  = project_url(proj)
+    @apps         = proj.failing_apps
+    fail_count    = proj.failing_requirements.count
+    mail to: spec_run.contact_email, subject: "#{@project_name} has #{fail_count} failing #{'requirement'.pluralize(fail_count)}"
   end
 
   def test_is_passing(spec_run)
     @project_name = spec_run.project.name
     @project_url  = project_url(spec_run.project)
-    mail to: spec_run.contact_email, subject: "All #{@project_name} tests are passing"
+    mail to: spec_run.contact_email, subject: "All #{@project_name} requirements are passing"
   end
 end

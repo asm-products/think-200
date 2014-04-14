@@ -92,7 +92,7 @@ describe UserMailer do
     end
 
     it "renders the headers" do
-      @mail.subject.should match(/#{fail_text}/i)
+      @mail.subject.should include(fail_text, 'requirement')
       @mail.to.should      eq([@proj.user.email])
       @mail.from.should    eq([CONTACT_EMAIL_SHORT])
     end
