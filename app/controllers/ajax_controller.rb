@@ -1,4 +1,5 @@
 require 'think200_jobs'
+require 'think200_libs'
 include Think200
 
 class AjaxController < ApplicationController
@@ -8,29 +9,11 @@ class AjaxController < ApplicationController
   # it's invoked frequently by polling clients.
   def queue_status
     data = {}
-    project_data = {}
-
-    current_user.projects.each do |project|
-      p = project.id
-      # In the queue or being worked on?
-      # queued  = Resque.enqueued?(ScheduledTest, p, current_user.id) ? 'true' : 'false'
-      project_data[p] = {}
-      project_data[p]['queued']    = project.in_progress? ? 'true' : 'false'
-      project_data[p]['tested_at'] = project.tested_at.to_i
-    end
-
-    # Percentage complete for all projects
-    if current_user.projects.empty?
-      data['percent_complete'] = 100
-    else
-      total    = current_user.projects.count.to_f
-      complete = project_data.values.map{|h| h['queued']}.select{ |v| v == 'false' }.count
-      data['percent_complete'] = (complete / total * 100).round
-    end
-
-    data['projects'] = project_data
+    data['projects']         = project_data
+    data['percent_complete'] = Think200.compute_percent_complete(data['projects'])
     render json: data.to_json
   end
+
 
   def project_tile
     @project = current_user.projects.find params[:project_id]
@@ -39,12 +22,32 @@ class AjaxController < ApplicationController
     render partial: 'projects/tile', layout: nil, locals: {tile: @project}
   end
 
+
   def project_page
     # TODO: Remove duplication between here and ProjectsController
     @project = current_user.projects.find params[:project_id]
     @api_query = 'queue_status'
     @apps = @project.apps.includes(requirements: [:expectations])
-    render 'projects/show', layout: nil    
+    render 'projects/show', layout: nil
   end
+
+
+  private
+
+  # Return a hash of the user's projects; for each one
+  # indicating if it's currently queued, and when it was
+  # last tested.
+  def project_data
+    current_user.projects.each do |project|
+      # In the queue or being worked on?
+      # queued  = Resque.enqueued?(ScheduledTest, p, current_user.id) ? 'true' : 'false'
+      info = {}
+      info['queued']    = project.in_progress? ? 'true' : 'false'
+      info['tested_at'] = project.tested_at.to_i
+      project_data[project.id] = info
+    end
+    return project_data
+  end
+
 
 end
