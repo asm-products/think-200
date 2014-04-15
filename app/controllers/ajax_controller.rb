@@ -38,15 +38,16 @@ class AjaxController < ApplicationController
   # indicating if it's currently queued, and when it was
   # last tested.
   def project_data
+    result = {}
     current_user.projects.each do |project|
       # In the queue or being worked on?
       # queued  = Resque.enqueued?(ScheduledTest, p, current_user.id) ? 'true' : 'false'
       info = {}
       info['queued']    = project.in_progress? ? 'true' : 'false'
       info['tested_at'] = project.tested_at.to_i
-      project_data[project.id] = info
+      result[project.id] = info
     end
-    return project_data
+    return result
   end
 
 

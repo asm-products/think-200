@@ -4,7 +4,7 @@ require 'think200_libs'
 describe Think200 do
 
   describe '#compute_percent_complete' do
-    it 'scores no projects as 100%' do
+    it 'scores zero projects as 100%' do
       expect(Think200.compute_percent_complete({})).to eq 100
     end
 
@@ -47,7 +47,6 @@ describe Think200 do
       }
       expect( Think200.compute_percent_complete(info) ).to eq 25
     end
-
   end
 
 
