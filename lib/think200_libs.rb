@@ -1,5 +1,19 @@
 module Think200
 
+  # Percentage complete, including all projects. Return an integer. This
+  # is redundant data in the JSON return value; computing it here to make
+  # the client code simpler.
+  def self.compute_percent_complete(project_data)
+    if project_data.empty?
+      100
+    else
+      total    = project_data.count.to_f
+      complete = project_data.values.map{|h| h['queued']}.select{ |v| v == 'false' }.count
+      (complete / total * 100).round
+    end
+  end
+
+
   # true  = judged to be passed
   # false = judged to be failed
   # nil   = untested, at least in part
