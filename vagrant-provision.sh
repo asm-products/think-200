@@ -33,7 +33,6 @@ export DEBIAN_FRONTEND=noninteractive
 # Updated Postgres Repository
 echo 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' > /etc/apt/sources.list.d/pgdg.list
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
-
 aptitude -q -y update
 aptitude -q -y install curl git libpq-dev locales nodejs postgresql-9.3 vim 
 
@@ -50,4 +49,6 @@ v "gem update --system; gem update"
 #
 # Set up the app
 #
+echo "CREATE ROLE think200_dev  WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql
+echo "CREATE ROLE think200_test WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql
 v "cd /vagrant; bundle install && rake db:setup && rspec"
