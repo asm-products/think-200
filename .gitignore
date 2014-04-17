@@ -25,3 +25,4 @@ doc/
 /config/database.yml
 .env.local
 .rspec
+.vagrant
