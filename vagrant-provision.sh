@@ -39,10 +39,15 @@ aptitude -q -y install curl git libpq-dev locales nodejs postgresql-9.3 vim
 #
 # RVM and Ruby 2.1.1
 #
-v "echo 'gem: --no-rdoc --no-ri' > /home/vagrant/.gemrc"
+echo 'gem: --no-rdoc --no-ri' > /home/vagrant/.gemrc
+echo '--color' > /home/vagrant/.rspec
 v "curl -L https://get.rvm.io | bash"
 v "source ~/.rvm/scripts/rvm" 
 v "rvm install 2.1.1" 
+# RVM + Spring setup
+hook_file="$rvm_path/hooks/after_use_spring_project"
+echo '[[ -f "$PWD/.spring-project" && -d "$PWD/bin" ]] && PATH=$PWD/bin:$PATH' > "$hook_file"
+chmod +x "$hook_file"
 v "rvm rvmrc warning ignore allGemfiles"
 v "gem update --system; gem update" 
 
