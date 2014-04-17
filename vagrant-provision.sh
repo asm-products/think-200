@@ -44,10 +44,7 @@ echo '--color' > /home/vagrant/.rspec
 v "curl -L https://get.rvm.io | bash"
 v "source ~/.rvm/scripts/rvm" 
 v "rvm install 2.1.1" 
-# RVM + Spring setup
-hook_file="$rvm_path/hooks/after_use_spring_project"
-echo '[[ -f "$PWD/.spring-project" && -d "$PWD/bin" ]] && PATH=$PWD/bin:$PATH' > "$hook_file"
-chmod +x "$hook_file"
+cp /vagrant/script/after_use_spring_project /home/vagrant/.rvm/hooks/
 v "rvm rvmrc warning ignore allGemfiles"
 v "gem update --system; gem update" 
 
@@ -56,4 +53,5 @@ v "gem update --system; gem update"
 #
 echo "CREATE ROLE think200_dev  WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql
 echo "CREATE ROLE think200_test WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql
-v "cd /vagrant; bundle install && rake db:setup && rspec"
+v "cd /vagrant; bundle install && rake db:setup"
+v "RAILS_ENV=test rake db:migrate && rspec"
