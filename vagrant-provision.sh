@@ -53,5 +53,4 @@ v "gem update --system; gem update"
 #
 echo "CREATE ROLE think200_dev  WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql
 echo "CREATE ROLE think200_test WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql
-v "cd /vagrant; bundle install && rake db:setup"
-v "RAILS_ENV=test rake db:migrate && rspec"
+v "cd /vagrant; bundle install && rake db:setup && RAILS_ENV=test rake db:setup && rspec"
