@@ -48,6 +48,8 @@ cp /vagrant/script/after_use_spring_project /home/vagrant/.rvm/hooks/
 v "rvm rvmrc warning ignore allGemfiles"
 v "gem update --system; gem update" 
 
+cp /vagrant/script/gitconfig /home/vagrant/.gitconfig
+
 #
 # Set up the app
 #
