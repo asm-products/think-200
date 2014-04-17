@@ -1,0 +1,1 @@
+[[ -f "$PWD/.spring-project" && -d "$PWD/bin" ]] && PATH=$PWD/bin:$PATH
