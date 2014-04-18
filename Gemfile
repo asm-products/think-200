@@ -1,15 +1,14 @@
 source 'https://rubygems.org'
 
 ruby '2.1.1'
-gem 'rails', '4.1.0'
-gem 'sprockets'
-gem 'sass-rails'
-gem 'uglifier'
-gem 'coffee-rails'
+gem 'rails',        '4.1.0'
+gem 'sass-rails',   '~> 4.0.3' 
+gem 'uglifier',     '>= 1.3.0'
+gem 'coffee-rails', '~> 4.0.0' 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'turbolinks'
-gem 'jbuilder'
+gem 'jbuilder',     '~> 2.0'
 gem 'bcrypt-ruby'
 gem 'resque'
 # gem 'resque-web', require: 'resque_web'
@@ -23,7 +22,11 @@ gem 'rspec'
 gem 'rspec-webservice_matchers'
 gem 'annotate'
 gem 'haml'
-
+gem 'kaminari'
+gem 'friendly_id'
+gem 'font-awesome-sass'
+gem 'devise'
+gem 'bootstrap-sass'
 
 group :doc do
   gem 'sdoc', require: false
@@ -55,15 +58,3 @@ group :test do
   gem 'faker'
   gem 'timecop'
 end
-
-# Paging
-gem 'kaminari'
-
-# Slugs and friendly id's
-gem 'friendly_id'
-
-# font-awesome
-gem 'font-awesome-sass'
-gem 'devise'
-
-gem 'bootstrap-sass'

@@ -28,7 +28,7 @@ describe Project do
       expect(proj.passed?).to be nil
     end
 
-    it "is nil when the project's expecations are all untested" do
+    it "is nil when the project's expectations are all untested" do
       proj      = Fabricate(:project)
       api       = Fabricate(:app, project: proj)
       is_online = Fabricate(:requirement, app: api)
