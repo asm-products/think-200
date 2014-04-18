@@ -3,6 +3,7 @@
 # Table name: matchers
 #
 #  code        :string(255)      not null
+#  coming_soon :boolean
 #  created_at  :datetime
 #  description :text
 #  icon        :string(255)
@@ -18,6 +19,11 @@ class Matcher < ActiveRecord::Base
   has_many :expectations, dependent: :restrict_with_exception
   validates :code, :summary, uniqueness: true
   validates :code, :max_args, :min_args, :summary, :description, presence: true
+
+  # Default scope is the production matchers only
+  default_scope { where(coming_soon: [false, nil]) }
+  scope :coming_soon, -> { unscoped.where(coming_soon: true) }
+
 
   def self.for(code)
     Matcher.find_by(code: code)
@@ -89,6 +95,18 @@ class Matcher < ActiveRecord::Base
         description: 'Uses curl_lib.',
         icon: 'fa-share',
         placeholder: 'somewhere.else.com'
+      },
+
+      ############## COMING SOON ##############
+      {
+        code: 'render_quickly',
+        min_args: 1, 
+        max_args: 1,
+        summary: 'Checks for a Google PageSpeed score of 90 or above.',
+        description: 'Helps ensure that a web app is running as quickly as it should.',
+        icon: 'fa-bolt',
+        placeholder: 'somewhere.com',
+        coming_soon: true
       }
     ].each do |m|
       matcher = Matcher.new
@@ -99,6 +117,9 @@ class Matcher < ActiveRecord::Base
       matcher.description = m[:description]
       matcher.icon        = m[:icon]
       matcher.placeholder = m[:placeholder]
+      if m.has_key? :coming_soon
+        matcher.coming_soon = m[:coming_soon]
+      end
       matcher.save
     end
   end

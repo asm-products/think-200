@@ -34,7 +34,7 @@ export DEBIAN_FRONTEND=noninteractive
 echo 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' > /etc/apt/sources.list.d/pgdg.list
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 aptitude -q -y update
-aptitude -q -y install curl git libpq-dev locales nodejs postgresql-9.3 vim 
+aptitude -q -y install curl emacs23-nox git libpq-dev locales nodejs postgresql-9.3 vim 
 
 #
 # RVM and Ruby 2.1.1
@@ -47,6 +47,8 @@ v "rvm install 2.1.1"
 cp /vagrant/script/after_use_spring_project /home/vagrant/.rvm/hooks/
 v "rvm rvmrc warning ignore allGemfiles"
 v "gem update --system; gem update" 
+
+cp /vagrant/script/gitconfig /home/vagrant/.gitconfig
 
 #
 # Set up the app
