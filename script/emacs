@@ -1,0 +1,51 @@
+;; My custom things I download
+(add-to-list 'load-path "~/.emacs.d")
+
+;; Enable extras
+(require 'yaml-mode)
+(require 'markdown-mode)
+(require 'coffee-mode)
+
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-names-vector ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
+ '(custom-enabled-themes (quote (wheatgrass)))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil)
+ '(uniquify-buffer-name-style (quote forward) nil (uniquify))
+)
+
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Source Code Pro" :foundry "adobe" :slant normal :weight normal :height 143 :width normal)))))
+
+;; (setq inhibit-splash-screen t)         ;; Hide welcome screen
+(menu-bar-mode 0)
+
+(setq auto-mode-alist (cons '("Gemfile" . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.rake$" . ruby-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.erb$" . html-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.scss$" . css-mode) auto-mode-alist))
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+
+;; Like Sublime text
+(global-auto-revert-mode t)
+
+
+;; coffeescript
+(custom-set-variables
+ '(coffee-tab-width 2)
+ '(coffee-args-compile '("-c" "--bare")))
+
+(eval-after-load "coffee-mode"
+  '(progn
+     (define-key coffee-mode-map [(meta r)] 'coffee-compile-buffer)
+     (define-key coffee-mode-map (kbd "C-j") 'coffee-newline-and-indent)))

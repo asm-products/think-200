@@ -29,12 +29,19 @@ export DEBIAN_FRONTEND=noninteractive
 # echo 'ubuntu' > /etc/hostname
 # echo '127.0.0.1 ubuntu' > /etc/hosts
 # hostname ubuntu
+aptitude -q -y update
+aptitude -q -y install curl git locales nodejs python-software-properties software-properties-common vim
 
-# Updated Postgres Repository
+# Postgres 9.3
 echo 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' > /etc/apt/sources.list.d/pgdg.list
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 aptitude -q -y update
-aptitude -q -y install curl emacs23-nox git libpq-dev locales nodejs postgresql-9.3 vim 
+aptitude -q -y install libpq-dev postgresql-9.3
+
+# Emacs 24
+add-apt-repository ppa:cassou/emacs
+aptitude -q -y update
+aptitude -q -y install emacs24
 
 #
 # RVM and Ruby 2.1.1
@@ -48,7 +55,9 @@ cp /vagrant/script/after_use_spring_project /home/vagrant/.rvm/hooks/
 v "rvm rvmrc warning ignore allGemfiles"
 v "gem update --system; gem update" 
 
-cp /vagrant/script/gitconfig /home/vagrant/.gitconfig
+cp /vagrant/script/gitconfig   /home/vagrant/.gitconfig
+cp /vagrant/script/emacs       /home/vagrant/.emacs
+cp -r /vagrant/script/emacs.d  /home/vagrant/.emacs.d
 
 #
 # Set up the app
