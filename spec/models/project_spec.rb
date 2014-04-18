@@ -16,6 +16,12 @@
 require 'spec_helper'
 
 describe Project do
+  before(:each) do
+    @proj      = Fabricate(:project)
+    @api       = Fabricate(:app, project: @proj)
+    @is_online = Fabricate(:requirement, app: @api)
+  end
+
   describe '#passed?' do
     it "is nil when the project is not finished" do
       proj = Fabricate(:project)
@@ -29,58 +35,40 @@ describe Project do
     end
 
     it "is nil when the project's expectations are all untested" do
-      proj      = Fabricate(:project)
-      api       = Fabricate(:app, project: proj)
-      is_online = Fabricate(:requirement, app: api)
-      (1..5).each { Fabricate(:expectation, requirement: is_online) }
-      # No spec runs
-      expect(proj.passed?).to be nil
+      (1..5).each { Fabricate(:expectation, requirement: @is_online) }
+      # Not creating any spec runs
+      expect(@proj.passed?).to be nil
     end
 
     it 'is false if all tests failed' do
-      proj        = Fabricate(:project)
-      api         = Fabricate(:app, project: proj)
-      is_online   = Fabricate(:requirement, app: api)
-      expectation = Fabricate(:expectation, id: 888, requirement: is_online)
-      Fabricate(:spec_run_all_failed, project: proj)
-      proj.passed?.should be false
+      Fabricate(:expectation, id: 888, requirement: @is_online)
+      Fabricate(:spec_run_all_failed, project: @proj)
+      @proj.passed?.should be false
     end
 
     it 'is false if the tests are a mix of pass and fail' do
-      proj      = Fabricate(:project)
-      api       = Fabricate(:app, project: proj)
-      is_online = Fabricate(:requirement, app: api)
-      [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
-      Fabricate(:spec_run_mixed_results, project: proj)
-      proj.passed?.should be false
+      [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: @is_online) }
+      Fabricate(:spec_run_mixed_results, project: @proj)
+      @proj.passed?.should be false
     end
 
     it 'is nil if the tests are a mix of pass and fail, and untested expectations' do
-      proj      = Fabricate(:project)
-      api       = Fabricate(:app, project: proj)
-      is_online = Fabricate(:requirement, app: api)
-      [111, 222, 333, 444, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
+      [111, 222, 333, 444, 888].each { |n| Fabricate(:expectation, id: n, requirement: @is_online) }
       # Intentionally untested: No SpecRun data for #444 in models.rb
-      Fabricate(:spec_run_mixed_results, project: proj)
-      proj.passed?.should be_nil
+      Fabricate(:spec_run_mixed_results, project: @proj)
+      @proj.passed?.should be_nil
     end
 
     it 'is true when all expectations have been tested and passed' do
-      proj      = Fabricate(:project, id: (rand * 1000000).to_i)
-      api       = Fabricate(:app, project: proj)
-      is_online = Fabricate(:requirement, app: api)
-      [111, 222, 333].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
-      Fabricate(:spec_run_all_passed, project: proj)
-      proj.passed?.should be_true
+      [111, 222, 333].each { |n| Fabricate(:expectation, id: n, requirement: @is_online) }
+      Fabricate(:spec_run_all_passed, project: @proj)
+      @proj.passed?.should be_true
     end
 
     it 'is nil when all tested expectations have passed but some are untested' do
-      proj      = Fabricate(:project)
-      api       = Fabricate(:app, project: proj)
-      is_online = Fabricate(:requirement, app: api)
-      [111, 222, 333, 444].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
-      Fabricate(:spec_run_all_passed, project: proj)
-      proj.passed?.should be_nil
+      [111, 222, 333, 444].each { |n| Fabricate(:expectation, id: n, requirement: @is_online) }
+      Fabricate(:spec_run_all_passed, project: @proj)
+      @proj.passed?.should be_nil
     end
   end
 
@@ -92,12 +80,9 @@ describe Project do
     end
 
     it 'returns the correct expectations' do
-      proj      = Fabricate(:project)
-      api       = Fabricate(:app, project: proj)
-      is_online = Fabricate(:requirement, app: api)
-      [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: is_online) }
-      Fabricate(:spec_run_mixed_results, project: proj)
-      proj.failing_expectations.should eq [Expectation.find(888)]
+      [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: @is_online) }
+      Fabricate(:spec_run_mixed_results, project: @proj)
+      @proj.failing_expectations.should eq [Expectation.find(888)]
     end
   end
 
@@ -123,16 +108,13 @@ describe Project do
     end
 
     it 'returns the last spec_run' do
-      project     = Fabricate(:project)
-      api         = Fabricate(:app, project: project)
-      is_online   = Fabricate(:requirement, app: api)
-      expectation = Fabricate(:expectation, id: 888, requirement: is_online)
+      Fabricate(:expectation, id: 888, requirement: @is_online)
 
-      spec_run_1  = Fabricate(:spec_run_all_failed, project: project)
-      spec_run_2  = Fabricate(:spec_run_all_failed, project: project)
-      spec_run_3  = Fabricate(:spec_run_all_failed, project: project)
+      spec_run_1  = Fabricate(:spec_run_all_failed, project: @proj)
+      spec_run_2  = Fabricate(:spec_run_all_failed, project: @proj)
+      spec_run_3  = Fabricate(:spec_run_all_failed, project: @proj)
 
-      expect( project.most_recent_test ).to eq spec_run_3
+      expect( @proj.most_recent_test ).to eq spec_run_3
     end
   end
 end
