@@ -16,8 +16,7 @@ class UserMailer < ActionMailer::Base
     @project_name = proj.name
     @project_url  = project_url(proj)
     @apps         = proj.failing_apps
-    fail_count    = proj.failing_requirements.count
-    mail to: spec_run.contact_email, subject: "#{@project_name} has #{fail_count} failing #{'requirement'.pluralize(fail_count)}"
+    mail to: spec_run.contact_email, subject: "#{@project_name} has #{@apps.count} failing #{'app'.pluralize(@apps.count)}"
   end
 
   def test_is_passing(spec_run)
