@@ -13,7 +13,7 @@ require 'think200_libs'
 
 class App < ActiveRecord::Base
   belongs_to :project
-  has_many   :requirements, dependent: :destroy
+  has_many :requirements, dependent: :destroy
 
   validates :name, presence: true
   validates :project_id, presence: true
@@ -29,7 +29,7 @@ class App < ActiveRecord::Base
 
   def to_plaintext
     result = "App \"#{name}\":\n"
-    requirements.each { |e| result += e.to_plaintext.indent(2)}
+    requirements.each { |e| result += e.to_plaintext.indent(2) }
     result
   end
 

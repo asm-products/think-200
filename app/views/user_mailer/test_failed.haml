@@ -2,6 +2,10 @@
   %body
 
     %p
+      Timestamp
+      = Time.zone.now
+
+    %p
       = @project_name
 
       - @apps.each do |app|
@@ -13,11 +17,21 @@
         - app.failing_requirements.each do |req|
           %br
           &nbsp;
-          &nbsp;        
           &nbsp;
-          &nbsp;        
+          &nbsp;
+          &nbsp;
           %span{style: 'color: red'}
             = req.to_s
+
+    %p
+      Failing expectations:
+      - @expectations.each do |e|
+        %br
+        &nbsp;
+        &nbsp;
+        = e.id
+        = e.to_s
+
 
     %p
       For details, see the #{@project_name} project page:

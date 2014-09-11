@@ -16,6 +16,7 @@ class UserMailer < ActionMailer::Base
     @project_name = proj.name
     @project_url  = project_url(proj)
     @apps         = proj.failing_apps
+    @expectations = proj.failing_expectations
     mail to: spec_run.contact_email, subject: "#{@project_name} has #{@apps.count} failing #{'app'.pluralize(@apps.count)}"
   end
 
