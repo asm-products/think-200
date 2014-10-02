@@ -1,7 +1,6 @@
 Think200::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
-  config.relative_url_root = '/beta'
-  
+
   # Code is not reloaded between requests.
   config.cache_classes = true
 
@@ -78,10 +77,10 @@ Think200::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-  
+
   # Mailer
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'think200.com' }  
+  config.action_mailer.default_url_options = { :host => 'think200.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     address:   'smtp.mandrillapp.com',

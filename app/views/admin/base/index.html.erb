@@ -3,10 +3,10 @@
   <div class="col-sm-4">
     <h3>Menu</h3>
     <h4><%= link_to "Users", admin_users_path %> <small>- <%= "#{@count} users" %></small></h4>
-    <h4><%= link_to "Queue", '/beta/resque' %></h4>
+    <h4><%= link_to "Queue", '/resque' %></h4>
     <hr/>
   </div>
-  
+
   <div class="col-sm-4">
     <h3>Last Sign Ups</h3>
     <ul class="list-unstyled">
@@ -18,7 +18,7 @@
       <% end %>
     </ul>
   </div>
-  
+
   <div class="col-sm-4">
     <h3>Last Sign Ins</h3>
     <ul class="list-unstyled">
@@ -36,5 +36,5 @@
       <% end %>
     </ul>
   </div>
-  
+
 </div>
