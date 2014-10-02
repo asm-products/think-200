@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'spec_helper'
 
 describe UserMailer do
   let(:fail_text) { 'failing' }
@@ -19,7 +19,6 @@ describe UserMailer do
   after(:all) do
     Expectation.destroy_all
   end
-
 
   describe 'sends' do
     context 'when a test succeeds repeatedly' do
@@ -85,19 +84,18 @@ describe UserMailer do
     end
   end
 
-
-  describe "#test_failed" do
+  describe '#test_failed' do
     before(:each) do
       @mail = UserMailer.test_failed(Fabricate(:spec_run_all_failed, project: @proj))
     end
 
-    it "renders the headers" do
-      @mail.subject.should include(fail_text, 'requirement')
-      @mail.to.should      eq([@proj.user.email])
-      @mail.from.should    eq([CONTACT_EMAIL_SHORT])
+    it 'renders the headers' do
+      @mail.subject.should include(fail_text, 'app')
+      @mail.to.should eq([@proj.user.email])
+      @mail.from.should eq([CONTACT_EMAIL_SHORT])
     end
 
-    it "renders all the necessary information in the body" do
+    it 'renders all the necessary information in the body' do
       body = @mail.body.encoded
       reqs = @proj.failing_requirements.map(&:to_s)
       apps = @proj.failing_apps.map(&:to_s)
@@ -111,19 +109,18 @@ describe UserMailer do
     end
   end
 
-
-  describe "#test_is_passing" do
-    before (:each) do
+  describe '#test_is_passing' do
+    before :each do
       @mail = UserMailer.test_is_passing(Fabricate(:spec_run_all_passed, project: @proj))
     end
 
-    it "renders the headers" do
+    it 'renders the headers' do
       @mail.subject.should match(/#{pass_text}/i)
-      @mail.to.should   eq([@proj.user.email])
+      @mail.to.should eq([@proj.user.email])
       @mail.from.should eq([CONTACT_EMAIL_SHORT])
     end
 
-    it "renders all the necessary information in the body" do
+    it 'renders all the necessary information in the body' do
       body = @mail.body.encoded
       body.should include(@proj.name, pass_text, project_url(@proj))
     end

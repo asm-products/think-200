@@ -12,7 +12,7 @@
 #  updated_at     :datetime
 #
 
-# Very important: Expectations are immutable. 
+# Very important: Expectations are immutable.
 # In the future, if we allow users to "edit" an expectation, then
 # we must actually create a new instance in the old one's place.
 # This immutability allows for many optimizations.
@@ -20,11 +20,11 @@ class Expectation < ActiveRecord::Base
   belongs_to :matcher
   belongs_to :requirement
   belongs_to :project
-  validates  :project, :matcher, :requirement, :subject, presence: true
+  validates :project, :matcher, :requirement, :subject, presence: true
 
   # Set the redundant project attribute automatically
   before_validation(on: :create) do
-    self.project = self.requirement.project
+    self.project = requirement.project
   end
 
   def project
@@ -35,8 +35,6 @@ class Expectation < ActiveRecord::Base
     end
   end
 
-
-
   # Following the Law of Demeter:
   def type_icon
     matcher.icon
@@ -45,7 +43,6 @@ class Expectation < ActiveRecord::Base
   def summary
     matcher.summary
   end
-
 
   # true  = passed
   # false = failed
@@ -60,22 +57,18 @@ class Expectation < ActiveRecord::Base
     self.passed? == false
   end
 
-
   def to_s
     "#{subject} should #{matcher} #{expected}"
   end
-
 
   def to_rspec
     expected_text = expected.blank? ? '' : "'#{expected}'"
     "expect('#{subject}').to #{matcher.code} #{expected_text}\n"
   end
 
-
   def to_plaintext
     "Expectation: " + self.to_s + "\n"
   end
-
 
   def to_encapsulated_rspec
     <<-here
@@ -97,7 +90,7 @@ end
   def actual_message
     spec_run = my_spec_run
     return '' if spec_run.nil? # No tests run yet
-    
+
     message = spec_run.exception_message_for(expectation: self)
 
     # Do some de-geekifying

@@ -2,12 +2,9 @@ require 'tempfile'
 require 'rspec'
 require 'rspec/core/formatters/json_formatter'
 
-
 module Think200
-
   STANDARD_QUEUE = :standard
   PREMIUM_QUEUE  = :premium
-
 
   # Run a project's specs. Use like this:
   # `Resque.enqueue_to(STANDARD_QUEUE, ManualTest, project_id: 1, user_id: 2)`
@@ -16,10 +13,9 @@ module Think200
     @queue = STANDARD_QUEUE
 
     def self.perform(project_id, user_id)
-      Think200::run_test(project_id: project_id, user_id: user_id, manual: true)
+      Think200.run_test(project_id: project_id, user_id: user_id, manual: true)
     end
   end
-
 
   # Also run a project's tests, but intended to be done from a cron job.
   class ScheduledTest
@@ -27,13 +23,15 @@ module Think200
     @queue = PREMIUM_QUEUE
 
     def self.perform(project_id, user_id)
-      Think200::run_test(project_id: project_id, user_id: user_id, manual: false)
+      Think200.run_test(
+        project_id: project_id,
+        user_id: user_id,
+        manual: false)
     end
   end
 
-
-  # Enqueue all projects for testing in the premium queue. This is intended to be                             
-  # executed from a cron job / rake task.                                                                     
+  # Enqueue all projects for testing in the premium queue.
+  # Intended to be executed from a cron job / rake task.
   def self.test_all_projects
     Project.find_each do |p|
       proj_desc = "project #{p.id} / #{p.name}"
@@ -45,7 +43,6 @@ module Think200
       end
     end
   end
-
 
   private
 
@@ -79,7 +76,7 @@ module Think200
       # Clean up the data: Delete the backtrace if present
       begin
         hash_structure[:examples][0][:exception].delete(:backtrace)
-      rescue NoMethodError => e
+      rescue NoMethodError
       end
       collected_results[expectation.id] = hash_structure
     end

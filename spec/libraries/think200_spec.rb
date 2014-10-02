@@ -23,7 +23,7 @@ describe Think200 do
           'tested_at' =>  3
          }
       }
-      expect( Think200.compute_percent_complete(info) ).to eq 0
+      expect(Think200.compute_percent_complete(info)).to eq 0
     end
 
     it 'scores 3/4 queued as 25%' do
@@ -45,10 +45,9 @@ describe Think200 do
           'tested_at' =>  4
          }
       }
-      expect( Think200.compute_percent_complete(info) ).to eq 25
+      expect(Think200.compute_percent_complete(info)).to eq 25
     end
   end
-
 
   describe 'Think200#aggregate_test_status(collection)' do
 
@@ -58,28 +57,28 @@ describe Think200 do
 
     it 'is false if any of the items returns false for #passed?' do
       expect(Think200.aggregate_test_status(collection: [
-        double(:passed? => false), 
+        double(:passed? => false),
         double(:passed? => true),
         double(:passed? => true),
-        double(:passed? => true),
+        double(:passed? => true)
         ])).to be false
     end
 
     it 'is false if #passed? returns all three values' do
       expect(Think200.aggregate_test_status(collection: [
-        double(:passed? => false), 
+        double(:passed? => false),
         double(:passed? => true),
         double(:passed? => nil),
-        double(:passed? => true),
+        double(:passed? => true)
         ])).to be false
     end
 
     it 'is nil if the collection is a mix of nil and true for #passed?' do
       expect(Think200.aggregate_test_status(collection: [
-        double(:passed? => true), 
+        double(:passed? => true),
         double(:passed? => nil),
-        double(:passed? => true), 
-        double(:passed? => nil),
+        double(:passed? => true),
+        double(:passed? => nil)
         ])).to be nil
     end
 
@@ -89,16 +88,16 @@ describe Think200 do
         double(:passed? => nil),
         double(:passed? => nil),
         double(:passed? => nil),
-        double(:passed? => nil),
-        ])).to be nil      
+        double(:passed? => nil)
+        ])).to be nil
     end
 
     it 'is true if all the items return true for #passed?' do
       expect(Think200.aggregate_test_status(collection: [
-        double(:passed? => true), 
         double(:passed? => true),
         double(:passed? => true),
         double(:passed? => true),
+        double(:passed? => true)
         ])).to be true
     end
   end

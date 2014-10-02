@@ -9,6 +9,6 @@ describe 'Think200 library' do
   end
 
   describe Think200::ManualTest do
-    #it 'runs a test marked "manual"'
+    # it 'runs a test marked "manual"'
   end
 end

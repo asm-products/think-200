@@ -14,14 +14,13 @@ require 'think200_libs'
 
 class Requirement < ActiveRecord::Base
   belongs_to :app
-  has_many   :expectations, dependent: :destroy
+  has_many :expectations, dependent: :destroy
 
   validates :app_id, :name, presence: true
   validates :name, uniqueness: { scope: :app_id }
-  
 
   default_scope { order(:name) }
-  
+
   def project
     app.project
   end
@@ -39,7 +38,7 @@ class Requirement < ActiveRecord::Base
   end
 
   def name_negated
-    name.sub(/^is /, 'is not ')    
+    name.sub(/^is /, 'is not ')
   end
 
   def full_name_without_project_negated
@@ -58,14 +57,12 @@ class Requirement < ActiveRecord::Base
     result + "\n"
   end
 
-
   # true  = passed
   # false = failed
   # nil   = untested, at least in part
   def passed?
     Think200.aggregate_test_status(collection: expectations)
   end
-
 
   def failed?
     passed? == false

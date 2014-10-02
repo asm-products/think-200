@@ -18,7 +18,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # VM Ware:
   config.vm.box_url = "http://shopify-vagrant.s3.amazonaws.com/ubuntu-13.10_vmware.box"
 
-
   config.vm.provision :shell, :path => "vagrant-provision.sh"
   # Fix for vagrant bug
   # https://github.com/mitchellh/vagrant/issues/1673
@@ -28,7 +27,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # Configure cached packages to be shared between instances of the same base box.
     # More info on http://fgrehm.viewdocs.io/vagrant-cachier/usage
     config.cache.scope = :box
-    synced_folder_opts = { type: :nfs }    
+    synced_folder_opts = { type: :nfs }
     config.vm.network "private_network", ip: "192.168.33.10"
 
     # If you are using VirtualBox, you might want to use that to enable NFS for
@@ -45,13 +44,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     # For more information please check http://docs.vagrantup.com/v2/synced-folders/basic_usage.html
   end
 
-
-
-
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
-  # config.vm.network "forwarded_port", guest: 80, host: 8080
+  config.vm.network "forwarded_port", guest: 3000, host: 3001
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
