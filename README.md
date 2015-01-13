@@ -1,4 +1,4 @@
-<a href="https://assembly.com/think-200/bounties"><img src="https://asm-badger.herokuapp.com/think-200/badges/tasks.svg" height="24px" alt="Open Tasks" /></a>
+<a href="https://assembly.com/think-200/bounties"><img src="https://asm-badger.herokuapp.com/think-200/badges/tasks.svg" height="24px" alt="Open Tasks" /></a>&nbsp;&nbsp;[![Code Climate](https://codeclimate.com/github/asm-products/think-200/badges/gpa.svg)](https://codeclimate.com/github/asm-products/think-200)
 
 ## Monitor your web services with TDD
 
