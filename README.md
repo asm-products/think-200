@@ -17,7 +17,7 @@ Visit [https://assembly.com](https://assembly.com) to learn more.
 
 ### Development Setup
 
-A Vagrant-based development environment is ready to use:
+Vagrant-based development is set up:
 
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 2. Install [Vagrant](https://www.vagrantup.com/)
@@ -25,7 +25,11 @@ A Vagrant-based development environment is ready to use:
 4. copy `config/secrets.yml-default` to `config/secrets.yml`
 5. Run the command `vagrant up`
 
-The virtual machine will be set up and the rspec tests executed. They should all pass. Log into the VM with the `vagrant ssh` command. The VM mounts the source directory at `/vagrant`. The VM's internal port 3000 is passed through to your host machine at 3000. So, to run the app in development mode:
+Vagrant will download Ubuntu, set it up, run the rspec tests. They should all pass. The first time you do this, it may take 5–10 minutes.
+
+The VM can be logged in to with the `vagrant ssh` command. The VM mounts the source directory at `/vagrant` in standard Vagrant style. The VM's internal port 3000 is passed through to your host machine at 3000. This all means that you can edit the source and test with a web browser on your ("host") computer, while running ruby and rspec from within the VM.
+
+So, to run the web app in development mode:
 
 ```bash
 $ vagrant ssh
