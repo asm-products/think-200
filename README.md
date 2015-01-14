@@ -3,6 +3,8 @@
 
 ## Monitor your web services with TDD
 
+The blog post, [Test Driven Devops](http://robb.weblaws.org/2014/01/16/new-open-source-library-for-test-driven-devops/) explains it in a nutshell.
+
 This is a product being built by the Assembly community. You can help push this idea forward by visiting [https://assembly.com/think-200](https://assembly.com/think-200).
 
 
