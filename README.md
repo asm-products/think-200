@@ -25,7 +25,7 @@ Vagrant-based development is set up:
 4. copy `config/secrets.yml-default` to `config/secrets.yml`
 5. Run the command `vagrant up`
 
-Vagrant will download Ubuntu, set it up, run the rspec tests. They should all pass. The first time you do this, it may take 5–10 minutes.
+Vagrant will download Ubuntu, set it up, and run the rspec tests. They should all pass. The first time you do this, it may take 5–10 minutes.
 
 The VM can be logged in to with the `vagrant ssh` command. The VM mounts the source directory at `/vagrant` in standard Vagrant style. The VM's internal port 3000 is passed through to your host machine at 3000. This all means that you can edit the source and test with a web browser on your ("host") computer, while running ruby and rspec from within the VM.
 
