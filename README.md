@@ -11,14 +11,19 @@ Assembly products are like open-source and made with contributions from the comm
 Visit [https://assembly.com](https://assembly.com) to learn more.
 
 
-
-
 ### Development Setup
 
-Create development and test users in Postgresql.
+A Vagrant-based development environment is ready to use:
+
+1. Install Virtual Box
+2. Install Vagrant
+3. copy `config/database.yml-default` to `config/database.yml`
+4. Run the command `vagrant up`
 
 
-This is the server json response to the queue-status request:
+### Notes
+
+This is a sample server json response to the queue-status request:
 
 ```json
 {
