@@ -20,7 +20,8 @@ A Vagrant-based development environment is ready to use:
 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
 2. Install [Vagrant](https://www.vagrantup.com/)
 3. copy `config/database.yml-default` to `config/database.yml`
-4. Run the command `vagrant up`
+4. copy `config/secrets.yml-default` to `config/secrets.yml`
+5. Run the command `vagrant up`
 
 
 ### Notes
