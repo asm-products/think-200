@@ -31,6 +31,7 @@ $ cd /vagrant
 $ bundle exec rails s
 ```
 
+See the `seeds.rb` file for the initial development users and data.
 
 ### Notes
 
