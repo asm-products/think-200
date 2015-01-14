@@ -23,6 +23,14 @@ A Vagrant-based development environment is ready to use:
 4. copy `config/secrets.yml-default` to `config/secrets.yml`
 5. Run the command `vagrant up`
 
+The virtual machine will be set up and the rspec tests executed. They should all pass. Log into the VM with the `vagrant ssh` command. The VM mounts the source directory at `/vagrant`. The VM's internal port 3000 is passed through to your host machine at 3000. So, to run the app in development mode:
+
+```bash
+$ vagrant ssh
+$ cd /vagrant
+$ bundle exec rails s
+```
+
 
 ### Notes
 
