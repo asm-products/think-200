@@ -2,8 +2,6 @@
 
 ##############################################################
 # vagrant-provision.sh
-#
-# Rails 4.1.0 on Ubuntu 12.04.4
 ##############################################################
 
 
@@ -21,6 +19,7 @@ function v() {
 # Set up Ubuntu
 #
 export LC_ALL=en_US.UTF-8  # Set the locale correctly
+echo 'LC_ALL="en_US.UTF-8"' > /etc/default/locale
 export LC_CTYPE=$LC_ALL
 export LANG=$LC_ALL
 export LANGUAGE=$LC_ALL
@@ -44,23 +43,24 @@ aptitude -q -y update
 aptitude -q -y install emacs24
 
 #
-# RVM and Ruby 2.1.1
+# RVM and Ruby
 #
 echo 'gem: --no-rdoc --no-ri' > /home/vagrant/.gemrc
 echo '--color' > /home/vagrant/.rspec
 v "curl -L https://get.rvm.io | bash"
-v "source ~/.rvm/scripts/rvm" 
-v "rvm install 2.1.1" 
+v "source ~/.rvm/scripts/rvm"
+v "rvm install 2.1.3"
 cp /vagrant/script/after_use_spring_project /home/vagrant/.rvm/hooks/
 v "rvm rvmrc warning ignore allGemfiles"
-v "gem update --system; gem update" 
+v "gem update --system; gem update"
 
 cp /vagrant/script/gitconfig   /home/vagrant/.gitconfig
 cp /vagrant/script/emacs       /home/vagrant/.emacs
 cp -r /vagrant/script/emacs.d  /home/vagrant/.emacs.d
 
 #
-# Set up the app
+# Set up the app and run the tests, which should
+# all pass.
 #
 echo "CREATE ROLE think200_dev  WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql
 echo "CREATE ROLE think200_test WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql

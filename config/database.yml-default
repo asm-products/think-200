@@ -3,7 +3,7 @@ development:
   encoding: unicode
   database: think200_development
   pool: 5
-  username: think200
+  username: think200_dev
   password: think200
   host: localhost
   port: 5432
@@ -13,7 +13,7 @@ test:
   encoding: unicode
   database: think200_test
   pool: 5
-  username: think200
+  username: think200_test
   password: think200
   host: localhost
   port: 5432
