@@ -19,6 +19,7 @@ function v() {
 # Set up Ubuntu
 #
 export LC_ALL=en_US.UTF-8  # Set the locale correctly
+echo 'LC_ALL="en_US.UTF-8"' > /etc/default/locale
 export LC_CTYPE=$LC_ALL
 export LANG=$LC_ALL
 export LANGUAGE=$LC_ALL

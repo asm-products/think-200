@@ -15,8 +15,8 @@ Visit [https://assembly.com](https://assembly.com) to learn more.
 
 A Vagrant-based development environment is ready to use:
 
-1. Install Virtual Box
-2. Install Vagrant
+1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+2. Install [Vagrant](https://www.vagrantup.com/)
 3. copy `config/database.yml-default` to `config/database.yml`
 4. Run the command `vagrant up`
 
