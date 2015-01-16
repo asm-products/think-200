@@ -4,5 +4,5 @@ rvm:
 env:
 - RAILS_ENV=test
 before_script:
-- psql -c 'CREATE ROLE think200_test WITH PASSWORD "think200" CREATEDB LOGIN' -U postgres
+- psql -c "CREATE ROLE think200_test WITH PASSWORD 'think200' CREATEDB LOGIN" -U postgres
 - bundle exec rake db:setup
