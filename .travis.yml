@@ -7,3 +7,4 @@ before_script:
 - psql -c "CREATE ROLE think200_test WITH PASSWORD 'think200' CREATEDB LOGIN" -U postgres
 - cp config/database.yml-default config/database.yml
 - bundle exec rake db:setup
+- cp config/secrets.yml-default config/secrets.yml
