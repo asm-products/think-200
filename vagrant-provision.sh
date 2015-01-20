@@ -49,7 +49,7 @@ echo 'gem: --no-rdoc --no-ri' > /home/vagrant/.gemrc
 echo '--color' > /home/vagrant/.rspec
 v "curl -L https://get.rvm.io | bash"
 v "source ~/.rvm/scripts/rvm"
-v "rvm install 2.1.3"
+v "rvm install 2.1.5"
 cp /vagrant/script/after_use_spring_project /home/vagrant/.rvm/hooks/
 v "rvm rvmrc warning ignore allGemfiles"
 v "gem update --system; gem update"
