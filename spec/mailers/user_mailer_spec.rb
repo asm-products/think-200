@@ -31,13 +31,13 @@ describe UserMailer do
           Fabricate(:spec_run_all_passed, project: @proj)
         end
 
-        ActionMailer::Base.deliveries.should be_empty
+        expect(ActionMailer::Base.deliveries).to be_empty
       end
     end
 
     context 'when a test fails repeatedly' do
       it 'no email is sent' do
-        ActionMailer::Base.deliveries.should be_empty
+        expect(ActionMailer::Base.deliveries).to be_empty
 
         # A failing test
         Fabricate(:spec_run_all_failed, project: @proj)
@@ -51,7 +51,7 @@ describe UserMailer do
           Fabricate(:spec_run_all_failed, project: @proj)
         end
 
-        ActionMailer::Base.deliveries.should be_empty
+        expect(ActionMailer::Base.deliveries).to be_empty
       end
     end
 
@@ -65,7 +65,7 @@ describe UserMailer do
           Fabricate(:spec_run_all_failed, project: @proj)
         end
 
-        ActionMailer::Base.deliveries[0].subject.should match(/#{fail_text}/i)
+        expect(ActionMailer::Base.deliveries[0].subject).to match(/#{fail_text}/i)
       end
     end
 
@@ -79,7 +79,7 @@ describe UserMailer do
           Fabricate(:spec_run_all_passed, project: @proj)
         end
 
-        ActionMailer::Base.deliveries[0].subject.should match(/#{pass_text}/i)
+        expect(ActionMailer::Base.deliveries[0].subject).to match(/#{pass_text}/i)
       end
     end
   end
@@ -90,9 +90,9 @@ describe UserMailer do
     end
 
     it 'renders the headers' do
-      @mail.subject.should include(fail_text, 'app')
-      @mail.to.should eq([@proj.user.email])
-      @mail.from.should eq([CONTACT_EMAIL_SHORT])
+      expect(@mail.subject).to include(fail_text, 'app')
+      expect(@mail.to).to eq([@proj.user.email])
+      expect(@mail.from).to eq([CONTACT_EMAIL_SHORT])
     end
 
     it 'renders all the necessary information in the body' do
@@ -100,12 +100,12 @@ describe UserMailer do
       reqs = @proj.failing_requirements.map(&:to_s)
       apps = @proj.failing_apps.map(&:to_s)
 
-      body.should include(@proj.name, project_url(@proj), *apps, *reqs)
+      expect(body).to include(@proj.name, project_url(@proj), *apps, *reqs)
     end
 
     it 'sends an email' do
       @mail.deliver
-      ActionMailer::Base.deliveries.should_not be_empty
+      expect(ActionMailer::Base.deliveries).to_not be_empty
     end
   end
 
@@ -115,19 +115,19 @@ describe UserMailer do
     end
 
     it 'renders the headers' do
-      @mail.subject.should match(/#{pass_text}/i)
-      @mail.to.should eq([@proj.user.email])
-      @mail.from.should eq([CONTACT_EMAIL_SHORT])
+      expect(@mail.subject).to match(/#{pass_text}/i)
+      expect(@mail.to).to eq([@proj.user.email])
+      expect(@mail.from).to eq([CONTACT_EMAIL_SHORT])
     end
 
     it 'renders all the necessary information in the body' do
       body = @mail.body.encoded
-      body.should include(@proj.name, pass_text, project_url(@proj))
+      expect(body).to include(@proj.name, pass_text, project_url(@proj))
     end
 
     it 'sends an email' do
       @mail.deliver
-      ActionMailer::Base.deliveries.should_not be_empty
+      expect(ActionMailer::Base.deliveries).to_not be_empty
     end
   end
 

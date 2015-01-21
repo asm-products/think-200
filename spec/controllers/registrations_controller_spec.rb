@@ -5,8 +5,8 @@ describe Users::RegistrationsController, '#new' do
     it 'redirects to the home page' do
       @request.env["devise.mapping"] = Devise.mappings[:user]
       get :new
-      response.status.should eq 302
-      response.location.should eq root_url
+      expect(response.status).to eq 302
+      expect(response.location).to eq root_url
     end
   end
 end
@@ -16,9 +16,9 @@ describe Users::RegistrationsController, '#create' do
   let(:valid_user_form_params) do
     {
       user: {
-        username:              "snacky", 
-        email:                 "me@email.com", 
-        password:              'my Password %@#{^&!}123', 
+        username:              "snacky",
+        email:                 "me@email.com",
+        password:              'my Password %@#{^&!}123',
         password_confirmation: 'my Password %@#{^&!}123'
       }
     }

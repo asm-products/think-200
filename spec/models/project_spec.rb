@@ -43,32 +43,32 @@ describe Project do
     it 'is false if all tests failed' do
       Fabricate(:expectation, id: 888, requirement: @is_online)
       Fabricate(:spec_run_all_failed, project: @proj)
-      @proj.passed?.should be false
+      expect(@proj.passed?).to be false
     end
 
     it 'is false if the tests are a mix of pass and fail' do
       [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: @is_online) }
       Fabricate(:spec_run_mixed_results, project: @proj)
-      @proj.passed?.should be false
+      expect(@proj.passed?).to be false
     end
 
     it 'is nil if the tests are a mix of pass and fail, and untested expectations' do
       [111, 222, 333, 444, 888].each { |n| Fabricate(:expectation, id: n, requirement: @is_online) }
       # Intentionally untested: No SpecRun data for #444 in models.rb
       Fabricate(:spec_run_mixed_results, project: @proj)
-      @proj.passed?.should be_nil
+      expect(@proj.passed?).to be_nil
     end
 
     it 'is true when all expectations have been tested and passed' do
       [111, 222, 333].each { |n| Fabricate(:expectation, id: n, requirement: @is_online) }
       Fabricate(:spec_run_all_passed, project: @proj)
-      @proj.passed?.should be_truthy
+      expect(@proj.passed?).to be_truthy
     end
 
     it 'is nil when all tested expectations have passed but some are untested' do
       [111, 222, 333, 444].each { |n| Fabricate(:expectation, id: n, requirement: @is_online) }
       Fabricate(:spec_run_all_passed, project: @proj)
-      @proj.passed?.should be_nil
+      expect(@proj.passed?).to be_nil
     end
   end
 
@@ -82,14 +82,14 @@ describe Project do
     it 'returns the correct expectations' do
       [111, 222, 333, 888].each { |n| Fabricate(:expectation, id: n, requirement: @is_online) }
       Fabricate(:spec_run_mixed_results, project: @proj)
-      @proj.failing_expectations.should eq [Expectation.find(888)]
+      expect(@proj.failing_expectations).to eq [Expectation.find(888)]
     end
   end
 
 
   describe "#invalid?" do
     it 'when the user is missing' do
-      Project.create(name: 'New Web Startup').should be_invalid
+      expect(Project.create(name: 'New Web Startup')).to be_invalid
     end
 
     it 'when the user is present but invalid' do
