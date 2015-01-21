@@ -62,7 +62,7 @@ describe Project do
     it 'is true when all expectations have been tested and passed' do
       [111, 222, 333].each { |n| Fabricate(:expectation, id: n, requirement: @is_online) }
       Fabricate(:spec_run_all_passed, project: @proj)
-      @proj.passed?.should be_true
+      @proj.passed?.should be_truthy
     end
 
     it 'is nil when all tested expectations have passed but some are untested' do
