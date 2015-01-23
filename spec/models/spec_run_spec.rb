@@ -50,21 +50,21 @@ describe SpecRun do
     end
 
     it 'is false if all tests passed' do
-      all_passed.any_failed?.should be false
+      expect(all_passed.any_failed?).to be false
     end
 
     it 'is true if some tests passed and some failed' do
-      Fabricate.build(:spec_run_mixed_results).any_failed?.should be true
+      expect(Fabricate.build(:spec_run_mixed_results).any_failed?).to be true
     end
   end
 
   describe '#passed?' do
     it 'is true when all tests passed' do
-      all_passed.passed?.should be true
+      expect(all_passed.passed?).to be true
     end
 
     it 'is false if any test failed' do
-      Fabricate.build(:spec_run_mixed_results).passed?.should be false
+      expect(Fabricate.build(:spec_run_mixed_results).passed?).to be false
     end
   end
 

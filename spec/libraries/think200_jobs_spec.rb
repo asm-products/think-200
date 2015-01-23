@@ -5,7 +5,7 @@ require 'think200_jobs'
 
 describe 'Think200 library' do
   describe Think200::STANDARD_QUEUE do
-    it { should be_a String }
+    it { should be_a Symbol }
   end
 
   describe Think200::ManualTest do

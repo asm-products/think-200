@@ -18,8 +18,8 @@ gem 'figaro'
 gem 'pg'
 gem 'pry-rails'
 gem 'whenever', '0.9.0', require: false  # 0.9.1 fails in capistrano
-gem 'rspec'
-gem 'rspec-webservice_matchers'
+gem 'rspec', '~> 3.0'
+gem 'rspec-webservice_matchers', '~> 4.0.0'
 gem 'annotate'
 gem 'haml'
 gem 'kaminari'
@@ -35,7 +35,7 @@ end
 group :development, :test do
   # gem 'debugger'
   gem 'dotenv-rails'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.0'
 end
 
 group :development do
