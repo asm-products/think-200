@@ -19,9 +19,7 @@ gem 'pg'
 gem 'pry-rails'
 gem 'whenever', '0.9.0', require: false  # 0.9.1 fails in capistrano
 gem 'rspec', '~> 3.0'
-gem 'rspec-webservice_matchers',
-  github: 'tfausak/rspec-webservice_matchers',
-  branch: 'bounty-17'
+gem 'rspec-webservice_matchers', '~> 4.0.0'
 gem 'annotate'
 gem 'haml'
 gem 'kaminari'
