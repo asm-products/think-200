@@ -5,7 +5,7 @@ This is the new development fork for Think 200; maintainted by the original auth
 
 ## Cloud-based web service monitoring
 
-The post, [Test Driven Devops](http://robb.weblaws.org/2014/01/16/new-open-source-library-for-test-driven-devops/), explains the custom RSPec matchers in a nutshell. This repo is a hosted platform for running RSpec.
+The post, [Test Driven Devops](http://robb.weblaws.org/2014/01/16/new-open-source-library-for-test-driven-devops/), describes the custom RSpec matchers which underly this app. This repo is essentially a hosted platform for running RSpec.
 
 
 ### Development Setup
