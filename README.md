@@ -1,6 +1,11 @@
-## Monitor your web services with TDD
+[![Code Climate](https://codeclimate.com/github/dogweather/think-200/badges/gpa.svg)](https://codeclimate.com/github/dogweather/think-200)
 
-The blog post, [Test Driven Devops](http://robb.weblaws.org/2014/01/16/new-open-source-library-for-test-driven-devops/), explains it in a nutshell.
+This is the new development fork for Think 200; maintainted by the original author of the code. [Assembly has shut their doors](https://assembly.com/), and so I'm continuing development here.
+
+
+## Cloud-based web service monitoring
+
+The post, [Test Driven Devops](http://robb.weblaws.org/2014/01/16/new-open-source-library-for-test-driven-devops/), explains the custom RSPec matchers in a nutshell. This repo is a hosted platform for running RSpec.
 
 
 ### Development Setup
