@@ -10,7 +10,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :shell, path: 'vagrant-provision.sh'
   config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
   config.vm.provider 'virtualbox' do |vb|
-    vb.memory = '1024'
+    vb.memory = '2048'
   end
 
   # Create a forwarded port mapping which allows access to a specific port

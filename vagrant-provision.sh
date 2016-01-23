@@ -55,4 +55,4 @@ cp /vagrant/script/gitconfig   /home/vagrant/.gitconfig
 #
 echo "CREATE ROLE think200_dev  WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql
 echo "CREATE ROLE think200_test WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql
-v "cd /vagrant; bundle install && bin/rakerake db:reset && bin/rspec"
+v "cd /vagrant; bundle install && bin/rake db:reset && RAILS_ENV=test bin/rake db:setup && bin/rspec"
