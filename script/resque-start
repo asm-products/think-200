@@ -1,13 +1,15 @@
 #!/bin/bash
 
+rails_env=${RAILS_ENV:-development}
+
 #
 # 3 workers: premium queue
 #
-echo "Starting premium queue worker..."
-env RAILS_ENV=production INTERVAL=0.5 BACKGROUND=yes QUEUES=premium COUNT=2 TERM_CHILD=1 RESQUE_TERM_TIMEOUT=7 ~/.rvm/bin/rvm default do bundle exec rake resque:workers
+echo "Starting premium queue worker in $rails_env mode..."
+env RAILS_ENV=$rails_env INTERVAL=0.5 BACKGROUND=yes QUEUES=premium COUNT=2 TERM_CHILD=1 RESQUE_TERM_TIMEOUT=7 ~/.rvm/bin/rvm default do bundle exec rake resque:workers
 
 #
 # 1 worker: premium and standard queues
 #
-echo "Starting standard queue worker..."
-env RAILS_ENV=production INTERVAL=0.5 BACKGROUND=yes QUEUES=premium,standard TERM_CHILD=1 RESQUE_TERM_TIMEOUT=7 ~/.rvm/bin/rvm default do bundle exec rake resque:work
+echo "Starting standard queue worker in $rails_env mode..."
+env RAILS_ENV=$rails_env INTERVAL=0.5 BACKGROUND=yes QUEUES=premium,standard TERM_CHILD=1 RESQUE_TERM_TIMEOUT=7 ~/.rvm/bin/rvm default do bundle exec rake resque:work

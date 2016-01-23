@@ -25,22 +25,15 @@ export LANG=$LC_ALL
 export LANGUAGE=$LC_ALL
 export TZ=America/Los_Angeles
 export DEBIAN_FRONTEND=noninteractive
-# echo 'ubuntu' > /etc/hostname
-# echo '127.0.0.1 ubuntu' > /etc/hosts
-# hostname ubuntu
 aptitude -q -y update
-aptitude -q -y install curl git locales nodejs python-software-properties software-properties-common vim
+aptitude -q -y install curl git locales nodejs python-software-properties \
+                       redis-server software-properties-common vim
 
 # Postgres 9.3
 echo 'deb http://apt.postgresql.org/pub/repos/apt/ precise-pgdg main' > /etc/apt/sources.list.d/pgdg.list
 wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 aptitude -q -y update
 aptitude -q -y install libpq-dev postgresql-9.3
-
-# Emacs 24
-add-apt-repository ppa:cassou/emacs
-aptitude -q -y update
-aptitude -q -y install emacs24
 
 #
 # RVM and Ruby
@@ -55,8 +48,6 @@ v "rvm rvmrc warning ignore allGemfiles"
 v "gem update --system; gem update"
 
 cp /vagrant/script/gitconfig   /home/vagrant/.gitconfig
-cp /vagrant/script/emacs       /home/vagrant/.emacs
-cp -r /vagrant/script/emacs.d  /home/vagrant/.emacs.d
 
 #
 # Set up the app and run the tests, which should
@@ -64,4 +55,4 @@ cp -r /vagrant/script/emacs.d  /home/vagrant/.emacs.d
 #
 echo "CREATE ROLE think200_dev  WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql
 echo "CREATE ROLE think200_test WITH PASSWORD 'think200' CREATEDB LOGIN;" |  sudo -u postgres psql
-v "cd /vagrant; bundle install && rake db:setup && RAILS_ENV=test rake db:setup && rspec"
+v "cd /vagrant; bundle install && bin/rakerake db:reset && bin/rspec"
